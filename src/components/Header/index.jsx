@@ -4,7 +4,7 @@ const Header = () => {
   return (
     <div id="header-wrapper" className="flex justify-between">
       <div className="flex items-center">
-        <img id="header-lion" src={logo} alt="logo" />
+        <img id="header-logo" src={logo} alt="logo" />
       </div>
     </div>
   );
