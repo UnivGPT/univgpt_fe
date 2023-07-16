@@ -9,7 +9,7 @@ import PromptDetailPage from "./routes/PromptDetailPage";
 import PromptEditPage from "./routes/PromptEditPage";
 import PromptMakePage from "./routes/PromptMakePage";
 
-import './App.css';
+import "./App.css";
 
 function App() {
   return (
@@ -17,17 +17,16 @@ function App() {
       <BrowserRouter>
         <Header />
         <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/infoedit" element={<InfoEditPage />} />
-        <Route path="/mypage" element={<MyPage />} />
-        <Route path="/signin" element={<SignInPage />} />
-        <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/:promptId" element={<PromptDetailPage />} />
-        <Route path="/:promptId/edit" element={<PromptEditPage />} />
-        <Route path="/:promptId/make" element={<PromptMakePage/>} />
-        </Routes>  
+          <Route path="/" element={<HomePage />} />
+          <Route path="/infoedit" element={<InfoEditPage />} />
+          <Route path="/mypage" element={<MyPage />} />
+          <Route path="/signin" element={<SignInPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/:promptId" element={<PromptDetailPage />} />
+          <Route path="/:promptId/edit" element={<PromptEditPage />} />
+          <Route path="/:promptId/make" element={<PromptMakePage />} />
+        </Routes>
       </BrowserRouter>
-        
     </div>
   );
 }
