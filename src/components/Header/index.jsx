@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 const Header = () => {
-  const [isUser, setIsUser] = useState(" ");
+  const [isUser, setIsUser] = useState("");
 
   return (
     <div id="header-wrapper" className="flex justify-between">
@@ -14,13 +14,13 @@ const Header = () => {
       <div className="flex flex-row space-x-5 m-5">
         {isUser ? (
           <>
-          <Link to="">마이페이지</Link>
-          <Link to="">로그아웃</Link>
+            <Link to="">마이페이지</Link>
+            <Link to="">로그아웃</Link>
           </>
-        ):(
+        ) : (
           <>
-          <Link to="">회원가입</Link>
-          <Link to="">로그인</Link>
+            <Link to="">회원가입</Link>
+            <Link to="">로그인</Link>
           </>
         )}
       </div>

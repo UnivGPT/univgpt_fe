@@ -5,13 +5,13 @@ import { Comment } from "../Comments";
 
 export const HomeSideBar = ( {user, prompt}) => {
   return (
-    <div className="flex flex-col space-y-2">
-      <Link to="" className="button">내 프롬프트 만들기</Link>
+    <div className="flex flex-col space-y-4 align-middle items-center">
+      <Link to="" className="button w-11/12">내 프롬프트 만들기</Link>
       <div>
         <HiUserCircle size="150" />
-        <div>{user.email} 님 반갑습니다!</div>
+        <div>{user.name} 님 반갑습니다!</div>
       </div>
-      <div>
+      <div className="w-52 bg-slate-100 rounded-3xl border-solid border-slate-300 border-2 text-black p-3">
         <div>오늘의 프롬프트</div>
         <SmallPrompt rank="🥇" prompt={prompt} />
         <SmallPrompt rank="🥈" prompt={prompt} />

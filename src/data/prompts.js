@@ -15,7 +15,7 @@ const prompts = [
     id: 2,
     title: "여행 계획",
     description:
-      "여행 장소와 숙박 일정 등을 입력하면 여행 계획을 짜주는 프롬프트(과제용)",
+      "여행 장소와 숙박 일정 등을 입력하면 여행 계획을 짜주는 프롬프트(여행용)",
     content: "#장소에 #숙박일정으로 놀러갈거야, 여행 계획 짜줘",
     author: { id: 1, username: "yoojin" },
     like_user: [1, 2],
