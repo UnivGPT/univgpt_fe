@@ -6,7 +6,7 @@ const InfoCheck = () => {
 			<br></br>
 			회원정보를 안전하게 보호하기 위해
 			<br></br>
-			비밀번호를 한 번 더 확인해주세요!
+			비밀번호를 한 번 더 확인해주세요
 			<br></br>
 			<form className="form-b">
        
