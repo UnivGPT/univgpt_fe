@@ -8,6 +8,7 @@ import SignInPage from "./routes/SignInPage";
 import PromptDetailPage from "./routes/PromptDetailPage";
 import PromptEditPage from "./routes/PromptEditPage";
 import PromptMakePage from "./routes/PromptMakePage";
+import KakaoCallback from "./routes/KakaoCallBack";
 
 import './App.css';
 
@@ -25,6 +26,7 @@ function App() {
         <Route path="/:promptId" element={<PromptDetailPage />} />
         <Route path="/:promptId/edit" element={<PromptEditPage />} />
         <Route path="/:promptId/make" element={<PromptMakePage/>} />
+        <Route path="api/auth/callback/kakao" element={<KakaoCallback/>} />
         </Routes>  
       </BrowserRouter>
         
