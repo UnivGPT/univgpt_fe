@@ -2,7 +2,9 @@ const users = [
   {
     id: 1,
     email: "yoojin@naver.com",
-    name: "yoojin",
+    username: "yoojin",
+    is_superuser: false,
+    passward: "starbucks",
   },
 ];
 
