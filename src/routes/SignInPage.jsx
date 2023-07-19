@@ -8,6 +8,18 @@ import { useEffect } from "react";
 
 const SignInPage = () => {
 	
+	useEffect(() => {
+		const fetchData = async () => {
+		  try {
+			const response = await axios.get(kakaoURL);
+			console.log(response.data);
+		  } catch (error) {
+			console.error(error);
+		  }
+		};
+	
+		fetchData();
+	  }, []);
 	
 	const [formData, setFormData] = useState({
 		email: "",
@@ -23,15 +35,14 @@ const SignInPage = () => {
 		e.preventDefault();
 		signIn(formData);
     	alert("로그인이 완료되었습니다!");
-	};
 
 	const KakaoLogin = () => {
 		const CLIENT_ID = process.env.REACT_APP_KAKAO_CLIENT_ID;
 		const REDIRECT_URI = process.env.REACT_APP_KAKAO_REDIRECT_URI;
-		const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+		const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`
 
 		window.location.href = kakaoURL;
-	
+	}
   };
 	
 
