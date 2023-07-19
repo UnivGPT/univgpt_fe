@@ -1,5 +1,6 @@
 import { signUp } from "../api/api";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const SignUpPage = () => {
   const [formData, setFormData] = useState({
@@ -64,7 +65,8 @@ const SignUpPage = () => {
           회원가입
         </button>
         <br></br>
-        <h3 className=" text-l">이미 계정이 있으신가요? 로그인 하러가기</h3>
+        <br></br>
+        <h3 className=" text-l">이미 계정이 있으신가요?  <Link to="/signin" className="font-bold text-teal-300"> 로그인</Link>하러 가기</h3>
       </form>
     </div>
   );
