@@ -17,16 +17,16 @@ const MyPage = () => {
           <div className="flex flex-col space-y-10 mx-10">
             <div className="text-2xl">{user[0].username} 님 환영합니다!</div>
             <div className="flex flex-row space-x-5">
-              <div className="button">나의 프롬프트 {prompts.length}개</div>
-              <div className="button">스크랩한 프롬프트 {prompts.length}개</div>
+              <div className="button-a">나의 프롬프트 {prompts.length}개</div>
+              <div className="button-a">스크랩한 프롬프트 {prompts.length}개</div>
             </div>
           </div>
         </div>
         <div className="flex flex-col space-y-5 text-center justify-self-end">
-          <Link to="/" className="button">
+          <Link to="/" className="button-b">
             로그아웃
           </Link>
-          <Link to="/infocheck" className="button">
+          <Link to="/infocheck" className="button-b">
             회원정보 수정
           </Link>
         </div>

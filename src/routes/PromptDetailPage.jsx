@@ -24,6 +24,7 @@ const PromptDetailPage = () => {
         comment={comments[0]}
       />
     </div>
+    
   );
 };
 

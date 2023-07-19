@@ -10,7 +10,7 @@ export const HomeSideBar = ({ user, prompt }) => {
 
   return (
     <div className="flex flex-col space-y-4 align-middle items-center">
-      <Link to="/:promptId/make" className="button w-11/12">
+      <Link to="/:promptId/make" className="button-b w-11/12 flex flex-col items-center">
         내 프롬프트 만들기
       </Link>
       <div>

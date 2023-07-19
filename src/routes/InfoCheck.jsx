@@ -15,9 +15,6 @@ const InfoCheck = () => {
 			 <br></br>
 			 </h1>
 			 <form className="form-b">
-			 {/*<label htmlFor="password" className="label font-bold text-xl text-black">
-				비밀번호
-			 </label> */}
 			 <input required type="password" id="password" className="input-b"/>
 			 <br></br>
 			 <div className="flex flex-col items-center w=1/2">
