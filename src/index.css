@@ -19,6 +19,16 @@
   @apply bg-gpt-green text-white font-bold hover:text-black rounded-xl text-lg p-3.5;
 }
 
+/* 태그 */
+.button-c {
+  @apply bg-gpt-green text-white font-bold rounded-xl text-lg p-3.5 relative;
+}
+
+/* 파란색 버튼 */
+.button-d {
+  @apply bg-gpt-blue text-white font-bold hover:text-black rounded-xl text-lg py-3.5 px-10;
+}
+
 /* form-a: 로그인, 회원가입, 회원정보 수정에 쓰이는 폼 */
 .form-a {
   @apply w-3/5 flex flex-col items-center;

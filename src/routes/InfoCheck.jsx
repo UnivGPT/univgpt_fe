@@ -18,7 +18,7 @@ const InfoCheck = () => {
 			 <input required type="password" id="password" className="input-b"/>
 			 <br></br>
 			 <div className="flex flex-col items-center w=1/2">
-			   <button type="submit" className="items-center button mt-7">
+			   <button type="submit" className="items-center button-b mt-7">
 				 회원정보 수정
 			   </button>
 			 </div>

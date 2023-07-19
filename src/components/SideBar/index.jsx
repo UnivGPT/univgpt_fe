@@ -15,10 +15,10 @@ export const HomeSideBar = ({ user, prompt }) => {
       </Link>
       <div>
         <HiUserCircle size="150" />
-        <div>{user[0].username} 님 반갑습니다!</div>
+        <div className="font-semibold">{user[0].username}님 반갑습니다!</div>
       </div>
       <div className="w-52 bg-slate-100 rounded-3xl border-solid border-slate-300 border-2 text-black p-3 space-y-2 pb-10">
-        <div className="ml-3 mb-3">오늘의 프롬프트</div>
+        <div className="rounded-xl p-3.5 mb-3 text-center font-bold text-lg text-white bg-gpt-blue">오늘의 프롬프트</div>
         <SmallPrompt rank="🥇" prompt={prompt[0]} />
         <SmallPrompt rank="🥈" prompt={prompt[1]} />
         <SmallPrompt rank="🥉" prompt={prompt[2]} />

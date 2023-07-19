@@ -5,7 +5,7 @@ export const SmallPrompt = ({ rank, prompt }) => {
     <div className="flex flex-row rounded-xl bg-white shadow p-3 m-1">
       <div className="m-1 pt-2 pr-2">{rank}</div>
       <div className="flex flex-col">
-        <div className="text-sm">{prompt.title}</div>
+        <div className="text-sm font-semibold">{prompt.title}</div>
         <div className="flex flex-ro text-sm justify-end">
           <div>❤️ {prompt.like}</div>
           <div className="pl-2">👀 {prompt.view}</div>

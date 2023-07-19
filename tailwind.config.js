@@ -16,6 +16,7 @@ module.exports = {
     extend: {
       colors: {
         'gpt-green': '#6FCACD',
+        'gpt-blue': '#5082A5',
       },
     },
   },
