@@ -34,6 +34,14 @@ const SignInPage = () => {
     // console.log("code", code);
   };
 
+  const GoogleLogin = () => {
+    const googleClient = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+    const redirectUrl = process.env.REACT_APP_GOOGLE_REDIRECT_URI;
+    const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${googleClient}&redirect_uri=${redirectUrl}&response_type=code&scope=email%20profile`;
+
+    window.location.href = googleAuthUrl;
+  };
+
   return (
     <div className="flex flex-col items-center w-1/2">
       <br></br>
@@ -71,7 +79,7 @@ const SignInPage = () => {
         <div className="flex flex-row items-center space-x-14">
           <RiKakaoTalkFill size="60" />
           <SiNaver size="50" onClick={NaverLogin} />
-          <BsGithub size="60" />{" "}
+          <BsGithub size="60" onClick={GoogleLogin} />
         </div>
         <br></br>
         <h3 className="text-l">UnivGPT 계정이 없으신가요? 회원가입 하러가기</h3>
