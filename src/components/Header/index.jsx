@@ -15,13 +15,13 @@ const Header = () => {
       <div className="flex flex-row space-x-5 m-5">
         {isUser ? (
           <>
-            <Link to="/mypage">마이페이지</Link>
-            <Link to="/">로그아웃</Link>
+            <Link to="/mypage" className="text-m font-semibold">마이페이지</Link>
+            <Link to="/" className="text-m font-semibold">로그아웃</Link>
           </>
         ) : (
           <>
-            <Link to="/signup">회원가입</Link>
-            <Link to="/signin">로그인</Link>
+            <Link to="/signup" className="text-m font-semibold">회원가입</Link>
+            <Link to="/signin" className="text-m font-semibold">로그인</Link>
           </>
         )}
       </div>
