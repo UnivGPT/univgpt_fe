@@ -7,20 +7,50 @@ import Select from "react-select";
 import { MidPrompt } from "../components/Prompts";
 
 const HomePage = () => {
-  const [user, setUser] = useState(users);
+  const [isUser, setIsUser] = useState(users);
   const [promptList, setPromptList] = useState(prompts);
   const [searchValue, setSearchValue] = useState("");
   // console.log(users);
   // console.log(prompts);
-  console.log(user);
-  console.log(promptList);
-  const handlechange = (e) => {
-    setSearchValue(e.target.toLowerCase());
+  //console.log(isUser);
+  //console.log(promptList);
+  console.log(
+    promptList.filter((prompt) => prompt.title.includes(searchValue))
+  );
+  const handleChange = (e) => {
+    setSearchValue(e.target.value);
+    console.log(searchValue);
+  };
+
+  const changeNameOrder = () => {
+    setPromptList(
+      [...prompt].sort(function (a, b) {
+        return a.title < b.title ? -1 : a.title > b.title ? 1 : 0;
+      })
+    );
+  };
+
+  const changeLikeOrder = () => {
+    setPromptList(
+      [...prompt].sort(function (a, b) {
+        return a.like < b.like ? -1 : a.like > b.like ? 1 : 0;
+      })
+    );
+  };
+
+  const changeViewOrder = () => {
+    setPromptList(
+      [...prompt].sort(function (a, b) {
+        return a.view < b.view ? -1 : a.view > b.view ? 1 : 0;
+      })
+    );
   };
 
   return (
     <div className="w-full flex flex-row space-x-1">
-      <div  className="m-5 w-60"><HomeSideBar user={user} prompt={prompts} /></div>
+      <div className="m-5 w-60">
+        <HomeSideBar key={isUser.id} user={isUser} prompt={prompts} />
+      </div>
       <div className="w-full bg-white text-black p-11">
         <div className="flex felx-row justify-between space-x-5 p-5">
           <Select
@@ -29,28 +59,34 @@ const HomePage = () => {
           />
           <input
             type="text"
-            placeholder="    검색어를 입력해주세요"
-            onChange={handlechange}
+            placeholder="검색어를 입력해주세요"
+            onChange={handleChange}
+            className="w-6/12 rounded-full border bg-slate-200 pl-5"
             value={searchValue}
-            className="w-6/12 rounded-full border bg-slate-200"
           />
         </div>
-        <div className="rounded-3xl border-solid border-slate-300 border-2 m-5">
+        <div className="rounded-3xl border-solid border-slate-300 border-2 m-5 px-5 pb-5">
           <div className="flex flex-row w-full justify-between mt-5 p-5">
             <div className="text-xl font-semibold">프롬프트</div>
-            <Select options={order} />
+            <Select 
+            options={order} 
+            //onClick={() => {category.value === "like" ? changeLikeOrder : category.value === "view" ? changeViewOrder : changeNameOrder}}
+            //value={category.value}
+            />
           </div>
-          <divs>
+          <div className="h-96 grid grid-cols-3 overflow-y-scroll">
             {promptList
               .filter((prompt) =>
                 searchValue
-                  ? prompt.title.find((title) => title.content === searchValue)
+                  ? prompt.title
+                      .toLowerCase()
+                      .includes(searchValue.toLowerCase())
                   : prompt
               )
               .map((prompt) => (
                 <MidPrompt key={prompt.id} prompt={prompt} />
               ))}
-          </divs>
+          </div>
         </div>
       </div>
     </div>
