@@ -26,7 +26,7 @@ const MyPage = () => {
           <Link to="/" className="button">
             로그아웃
           </Link>
-          <Link to="/infoedit" className="button">
+          <Link to="/infocheck" className="button">
             회원정보 수정
           </Link>
         </div>
