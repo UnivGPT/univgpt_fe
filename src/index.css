@@ -29,6 +29,12 @@
   @apply bg-gpt-blue text-white font-bold hover:text-black rounded-xl text-lg py-3.5 px-10;
 }
 
+/* 빨간색 버튼 */
+.button-e {
+  @apply bg-gpt-red text-white font-bold hover:text-black rounded-xl text-lg py-3.5 px-10;
+}
+
+
 /* form-a: 로그인, 회원가입, 회원정보 수정에 쓰이는 폼 */
 .form-a {
   @apply w-3/5 flex flex-col items-center;

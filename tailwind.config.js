@@ -17,10 +17,11 @@ module.exports = {
       colors: {
         'gpt-green': '#6FCACD',
         'gpt-blue': '#5082A5',
+        'gpt-red': '#E3625A',
       },
     },
   },
   plugins: [],
 };
 
-export default colors
+export default colors;

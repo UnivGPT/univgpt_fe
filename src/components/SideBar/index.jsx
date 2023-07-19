@@ -31,11 +31,11 @@ export const HomeSideBar = ({ user, prompt }) => {
 
 export const PromptSideBar = (user, prompt, comment) => {
   return (
-    <div className="flex flex-col space-y-5">
-      <Link to="/:promptId/make" className="w-full button">내 프롬프트 만들기</Link>
+    <div className="flex flex-col space-y-5 bg-white text-black">
+      <Link to="/:promptId/make" className="w-full button-b flex flex-col items-center">내 프롬프트 만들기</Link>
       <div>
         <HiUserCircle size="150" />
-        <div>{user.username} 님에 의해 생성된 프롬프트</div>
+        <div className="font-semibold">{user.username}님에 의해 생성된 프롬프트</div>
       </div>
       <div>
         <div>프롬프트 정보</div>
