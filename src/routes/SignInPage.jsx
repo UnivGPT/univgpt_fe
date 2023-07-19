@@ -4,6 +4,7 @@ import { BsGithub } from "react-icons/bs";
 import { useState, useEffect } from "react";
 import { signIn } from "../api/api";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const SignInPage = () => {
   const [formData, setFormData] = useState({
@@ -33,6 +34,22 @@ const SignInPage = () => {
     // const url = new URL(window.location.href);
     // const code = url.searchParams.get("code");
     // console.log("code", code);
+  };
+
+  const GoogleLogin = () => {
+    const googleClient = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+    const redirectUrl = process.env.REACT_APP_GOOGLE_REDIRECT_URI;
+    const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${googleClient}&redirect_uri=${redirectUrl}&response_type=code&scope=email%20profile`;
+
+    window.location.href = googleAuthUrl;
+  };
+
+  const KakaoLogin = () => {
+    const CLIENT_ID = process.env.REACT_APP_KAKAO_CLIENT_ID;
+    const REDIRECT_URI = process.env.REACT_APP_KAKAO_REDIRECT_URI;
+    const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+
+    window.location.href = kakaoURL;
   };
 
   return (
@@ -71,9 +88,9 @@ const SignInPage = () => {
         <br></br>
         <br></br>
         <div className="flex flex-row items-center space-x-14">
-          <RiKakaoTalkFill size="60" />
+          <RiKakaoTalkFill size="60" onClick={KakaoLogin} />
           <SiNaver size="50" onClick={NaverLogin} />
-          <BsGithub size="60" />{" "}
+          <BsGithub size="60" onClick={GoogleLogin} />
         </div>
         <br></br>
         <br></br>
