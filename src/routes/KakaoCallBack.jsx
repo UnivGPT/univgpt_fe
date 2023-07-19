@@ -9,7 +9,7 @@ const KakaoCallback = () => {
         // const REST_API_KEY = `${process.env.REACT_APP_REST_API_KEY}`;
         // const REDIRECT_URI = `${process.env.REACT_APP_REDIRECT_URL}`;
         
-        const url = "http://127.0.0.1:8000/api/account/socials";
+        const url = "http://127.0.0.1:8000/api/account/kakao";
         const data = {
             code: code,
         };
