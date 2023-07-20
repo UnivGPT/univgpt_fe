@@ -51,8 +51,9 @@ const HomePage = () => {
       <div className="m-5 w-60">
         <HomeSideBar key={isUser.id} user={isUser} prompt={prompts} />
       </div>
+
       <div className="w-full bg-white text-black p-11">
-        <div className="flex felx-row justify-between space-x-5 p-5">
+        <div className="flex flex-row justify-between space-x-5 p-5">
           <Select
             options={category}
             className="w-6/12 rounded-full bg-slate-200"
