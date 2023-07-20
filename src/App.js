@@ -12,6 +12,7 @@ import KakaoCallback from "./routes/KakaoCallBack";
 import InfoCheck from "./routes/InfoCheck";
 import NaverCallBack from "./routes/NaverCallBack";
 import GoogleCallBack from "./routes/GoogleCallBack";
+import PromptResult from "./routes/PromptResultPage";
 
 import "./App.css";
 
@@ -33,9 +34,10 @@ function App() {
           <Route path="api/auth/callback/naver" element={<NaverCallBack />} />
           <Route path="api/auth/callback/google" element={<GoogleCallBack />} />
           <Route path="api/auth/callback/kakao" element={<KakaoCallback/>} />
+          <Route path="/promptresult" element={<PromptResult/>} />
         </Routes>
       </BrowserRouter>
-      {/*InfoPassword랑 InfoEdit는 나중에 url userId별로 바꿔야 함! 지금은 그냥 디자인 들어가서 보려고 이렇게 해놨어유*/}
+      {/*InfoPassword랑 InfoEdit, promptresult, prompt edit 등등은 나중에 url userId별로 바꿔야 함! 지금은 그냥 디자인 들어가서 보려고 이렇게 해놨어유*/}
     </div>
   );
 }
