@@ -82,7 +82,7 @@ const SignInPage = () => {
           value={formData.password}
         />
         <br></br>
-        <button type="submit" className="button mt-7">
+        <button type="submit" className="button-a mt-7">
           로그인
         </button>
         <br></br>

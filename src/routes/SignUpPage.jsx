@@ -61,7 +61,7 @@ const SignUpPage = () => {
           value={formData.confirm_password}
         />
         <br></br>
-        <button type="submit" className="button mt-7">
+        <button type="submit" className="button-a mt-7">
           회원가입
         </button>
         <br></br>

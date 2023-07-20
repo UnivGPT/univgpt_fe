@@ -10,15 +10,15 @@ export const HomeSideBar = ({ user, prompt }) => {
 
   return (
     <div className="flex flex-col space-y-4 align-middle items-center">
-      <Link to="/:promptId/make" className="button w-11/12">
+      <Link to="/:promptId/make" className="button-b w-11/12 flex flex-col items-center">
         내 프롬프트 만들기
       </Link>
       <div>
         <HiUserCircle size="150" />
-        <div>{user[0].username} 님 반갑습니다!</div>
+        <div className="font-semibold">{user[0].username}님 반갑습니다!</div>
       </div>
-      <div className="w-52 bg-slate-100 rounded-3xl border-solid border-slate-300 border-2 text-black p-3 space-y-2 pb-10">
-        <div className="ml-3 mb-3">오늘의 프롬프트</div>
+      <div className="w-52 bg-slate-100 rounded-3xl border-solid border-slate-300 border-2 text-black p-3 space-y-2">
+        <div className="rounded-xl p-3.5 mb-3 text-center font-bold text-lg text-white bg-gpt-blue">오늘의 프롬프트</div>
         <SmallPrompt rank="🥇" prompt={prompt[0]} />
         <SmallPrompt rank="🥈" prompt={prompt[1]} />
         <SmallPrompt rank="🥉" prompt={prompt[2]} />
@@ -31,11 +31,11 @@ export const HomeSideBar = ({ user, prompt }) => {
 
 export const PromptSideBar = (user, prompt, comment) => {
   return (
-    <div className="flex flex-col space-y-5">
-      <Link to="/:promptId/make" className="w-full button">내 프롬프트 만들기</Link>
+    <div className="flex flex-col space-y-5 bg-white text-black">
+      <Link to="/:promptId/make" className="w-full button-b flex flex-col items-center">내 프롬프트 만들기</Link>
       <div>
         <HiUserCircle size="150" />
-        <div>{user.username} 님에 의해 생성된 프롬프트</div>
+        <div className="font-semibold">{user.username}님에 의해 생성된 프롬프트</div>
       </div>
       <div>
         <div>프롬프트 정보</div>
