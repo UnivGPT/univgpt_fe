@@ -39,6 +39,9 @@
   @apply rounded-l py-2 px-1 mt-6 text-center font-bold text-lg text-white bg-gpt-green w-28 mx-1 ;
 }
 
+.button-plus {
+  @apply bg-gpt-green text-white hover:text-black rounded-xl py-2 px-24 text-4xl font-bold flex flex-col items-center;
+}
 /* form-a: 로그인, 회원가입, 회원정보 수정에 쓰이는 폼 */
 .form-a {
   @apply w-3/5 flex flex-col items-center;
