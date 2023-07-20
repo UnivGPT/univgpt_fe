@@ -63,18 +63,18 @@ const HomePage = () => {
             onChange={handleChange}
             className="w-6/12 rounded-full border bg-slate-200 pl-5"
             value={searchValue}
-          />
+          />  
         </div>
-        <div className="rounded-3xl border-solid border-slate-300 border-2 m-5 px-5 pb-5">
+        <div className="rounded-3xl border-solid border-slate-300 border-2 m-5 px-5 pb-5 h-3/5">
           <div className="flex flex-row w-full justify-between mt-5 p-5">
-            <div className="text-xl font-semibold">프롬프트</div>
+            <div className="rounded-xl p-3.5 text-center font-bold text-xl text-white bg-gpt-green px-14">프롬프트</div>
             <Select 
             options={order} 
             //onClick={() => {category.value === "like" ? changeLikeOrder : category.value === "view" ? changeViewOrder : changeNameOrder}}
             //value={category.value}
             />
           </div>
-          <div className="h-96 grid grid-cols-3 overflow-y-scroll">
+          <div className="h-4/5 grid grid-cols-3 overflow-y-scroll">
             {promptList
               .filter((prompt) =>
                 searchValue
