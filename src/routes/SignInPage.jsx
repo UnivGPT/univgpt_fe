@@ -1,6 +1,6 @@
 import { RiKakaoTalkFill } from "react-icons/ri";
 import { SiNaver } from "react-icons/si";
-import { BsGithub } from "react-icons/bs";
+import { AiOutlineGoogle } from "react-icons/ai";
 import { useState, useEffect } from "react";
 import { signIn } from "../api/api";
 import { Link } from "react-router-dom";
@@ -90,11 +90,18 @@ const SignInPage = () => {
         <div className="flex flex-row items-center space-x-14">
           <RiKakaoTalkFill size="60" onClick={KakaoLogin} />
           <SiNaver size="50" onClick={NaverLogin} />
-          <BsGithub size="60" onClick={GoogleLogin} />
+          <AiOutlineGoogle size="70" onClick={GoogleLogin} />
         </div>
         <br></br>
         <br></br>
-        <h3 className="text-l">UnivGPT 계정이 없으신가요? <Link to="/signup" className="font-bold text-teal-300"> 회원가입</Link>하러 가기</h3>
+        <h3 className="text-l">
+          UnivGPT 계정이 없으신가요?{" "}
+          <Link to="/signup" className="font-bold text-teal-300">
+            {" "}
+            회원가입
+          </Link>
+          하러 가기
+        </h3>
       </form>
     </div>
   );

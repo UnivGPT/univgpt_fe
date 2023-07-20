@@ -5,8 +5,8 @@ import Comment from "../Comments";
 import comments from "../../data/comments";
 
 export const HomeSideBar = ({ user, prompt }) => {
-  console.log(user);
-  console.log(user[0].username);
+  // console.log(user);
+  // console.log(user[0].username);
 
   return (
     <div className="flex flex-col space-y-4 align-middle items-center">
@@ -30,11 +30,13 @@ export const HomeSideBar = ({ user, prompt }) => {
 };
 
 export const PromptSideBar = (user, prompt, comment) => {
+  console.log(user);
+  // console.log(user[0].username);
   return (
-    <div className="flex flex-col space-y-5 bg-white text-black">
+    <div className="flex flex-col space-y-5 bg-white text-black rounded-tr-3xl p-5">
       <Link to="/:promptId/make" className="w-full button-b flex flex-col items-center">내 프롬프트 만들기</Link>
       <div>
-        <HiUserCircle size="150" />
+        <HiUserCircle size="150" className="self-center"/>
         <div className="font-semibold">{user.username}님에 의해 생성된 프롬프트</div>
       </div>
       <div>
@@ -43,7 +45,6 @@ export const PromptSideBar = (user, prompt, comment) => {
         <div>❤️ {prompt.like}</div>
       </div>
       <div>
-        <div>{comments.length}개의 댓글</div>
         <Comment />
       </div>
     </div>

@@ -7,6 +7,7 @@ import Select from "react-select";
 
 const PromptDetailPage = () => {
   const [isUser, setIsUser] = useState(users);
+	// console.log(isUser);
   // 	const [newPrompt, setNewPrompt] = useState({
   //     title: "",
   //     content: "",
@@ -19,8 +20,8 @@ const PromptDetailPage = () => {
 
   
   return (
-    <div className="w-full flex flex-row space-x-2">
-    <div className="w-60 m-5">
+    <div className="w-full flex flex-row space-between">
+    <div className="w-60">
       <PromptSideBar
         key={isUser.id}
         user={isUser}
