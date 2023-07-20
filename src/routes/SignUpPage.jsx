@@ -66,7 +66,14 @@ const SignUpPage = () => {
         </button>
         <br></br>
         <br></br>
-        <h3 className=" text-l">이미 계정이 있으신가요?  <Link to="/signin" className="font-bold text-teal-300"> 로그인</Link>하러 가기</h3>
+        <h3 className=" text-l">
+          이미 계정이 있으신가요?{" "}
+          <Link to="/signin" className="font-bold text-teal-300">
+            {" "}
+            로그인
+          </Link>
+          하러 가기
+        </h3>
       </form>
     </div>
   );
