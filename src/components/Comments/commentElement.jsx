@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { HiUserCircle } from "react-icons/hi";
 //import { getCookie } from "../../utils/cookie";
 
 const CommentElement = (props) => {
@@ -29,11 +30,12 @@ const CommentElement = (props) => {
 
   return (
     <div className="w-full flex justify-between gap-1 mb-2">
-      <div className="w-3/4">
+      <div className="flex flex-row w-3/4 space-x-2">
+        <HiUserCircle/>
         <p className="text-lg mr-4">{comment.content}</p>
-        <span className="text-base mr-1 text-gray-300">
+        {/* <span className="text-base mr-1 text-gray-300">
           {year}.{month}.{day}
-        </span>
+        </span> */}
       </div>
       {user?.id === comment.author ? (
         <div className="w-1/4 flex flex-row-reverse items-center">
