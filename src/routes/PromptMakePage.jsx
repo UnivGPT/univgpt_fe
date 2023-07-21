@@ -1,52 +1,70 @@
 import { useState } from "react";
 import prompts from "../data/prompts";
-import { PromptSideBar } from "../components/SideBar";
-import comments from "../data/comments";
 import users from "../data/users";
+import { useEffect } from "react";
 
 const PromptMakePage = () => {
-	const [isUser, setIsUser] = useState(users);
-  // 	const [newPrompt, setNewPrompt] = useState({
-  //     title: "",
-  //     content: "",
-  //     category: [],
-  //     description: "",
-  //   });
-  // 	const handlechange = (e) => {
-  //     setNewPrompt
-  //   };
-   	return (
-			<div className="w-60 m-5">
-				<PromptSideBar
-				key={isUser.id} 
-				user={isUser} 
-				prompt={prompts}
-				comment={comments[0]}
-				/>
-			</div>
-  // 		<div>
-  // 			<div>
-  // 				<div>제목</div>
-  // 				<input
-  // 					type="text"
-  // 					placeholder="제목을 입력하세요            (0/20)"
-  // 					// 글자수 카운트 필요
-  // 					onChange={handlechange}
-  // 					value={newPrompt.title}
-  // 					className="w-6/12 rounded-full border bg-slate-200"/>
-  // 			</div>
-  // 			<div>
-  // 				<div>설명</div>
-  // 				<input
-  // 					type="text"
-  // 					placeholder="프롬프트에 대한 간단한 설명을 작성하세요            (0/30)"
-  // 					// 글자수 카운트 필요
-  // 					onChange={handlechange}
-  // 					value={promptTitle}
-  // 					className="w-6/12 rounded-full border bg-slate-200"/>
-  // 			</div>
-  // 		</div>
-   	);
+
+  {/*+버튼 누르면 폼 생성*/}
+  
+const [title, setTitle] = useState("");
+const [description, setDescription] = useState("");
+const [form, setForm] = useState([]); {/*나중에 prompt에 넣어야*/}
+const [content, setContent] = useState("");
+//console.log(title);
+//console.log(description);
+//console.log(content);
+const [prompt, setPrompt] = useState({title:"", description:"", content:""})
+useEffect(() => {setPrompt({title:title, description:description, content:content})}, [title, description, content])
+//console.log(prompt);
+
+  return (
+    <div className="w-screen h-screen flex justify-evenly">
+    {/*왼쪽 절반*/}
+    <div className="bg-gpt-indigo w-1/2 h-full px-20 pb-6 pt-12">
+    <h1 className="text-3xl font-bold mb-2.5">제목</h1>
+    <input required type="text" className="input-b" placeholder="제작하실 프롬프트의 제목을 20자 이내로 입력해주세요." value={title} onChange={(e) => {setTitle(e.target.value)}}/>
+    <br></br>
+    <br></br>
+    <h1 className="text-3xl font-bold mb-2.5">설명</h1>
+    <input required type="text" className="input-b" placeholder="프롬프트에 대한 간단한 설명을 작성하세요." value={description} onChange={(e) => {setDescription(e.target.value)}}/>
+    <h1 className="text-2xl font-bold mb-2.5 flex flex-col items-center">
+    ____________________________________________________________________
+    </h1>
+    {/*input입력기*/}
+    <h1 className="text-3xl font-bold mt-6 mb-2.5">입력값</h1>
+    <div className="h-2/5 flex flex-col items-center overflow-y-auto">
+      {form.map(el=>el)} </div>
+    <div className="flex flex-col items-center"><button type="submit" className="button-plus" onClick={() => {
+      setForm([...form, <input className="input-b my-4"/>])
+      }}>+</button></div>
+   
+
+    </div>
+
+ {/*오른쪽 절반*/}
+    <div className="bg-white text-black w-1/2 h-full p-10 pr-20">
+    <h1 className="text-5xl font-bold mx-6 mb-8">프롬프트</h1>
+    <div className="rounded-3xl bg-gray-200  mx-6 h-3/5 w-full flex flex-col" >
+      <textarea 
+      className="w-auto h-5/6 bg-gray-200 overflow-y-auto focus:border-transparent m-4 p-6 resize-none outline-none" 
+      placeholder=" ChatGPT에게 전달될 프롬프트를 작성해주세요.
+      &#13;&#10;사용자의 입력값이 들어갔으면 하는 부분에 #을 입력하세요.
+      &#13;&#10; [예시]
+      &#13;&#10; 미팅 회의록을 요약해줘. 회의 주제는 #회의주제 이고,
+      &#13;&#10; 요약할 때 말투는 #말투 로 해줘."
+      value = {content} onChange={(e) => {setContent(e.target.value)}}></textarea>
+      <button className="button-c self-end m-8">미리보기</button>
+    </div>
+    {/*버튼*/}
+    <div className="mt-12 flex justify-around">
+    <button className="button-e" type="reset">삭제하기</button>
+    <button className="button-d" /*onClick=서버로 프롬프트 덩어리를 보내는 함수*/>게시하기</button>
+</div>
+
+    </div>
+    </div>
+  );
 };
 
 export default PromptMakePage;

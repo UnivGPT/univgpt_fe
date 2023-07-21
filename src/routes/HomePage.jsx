@@ -5,20 +5,34 @@ import { useState, useEffect } from "react";
 import { category, order } from "../data/category";
 import Select from "react-select";
 import { MidPrompt } from "../components/Prompts";
+import { getPromptList } from "../api/api";
 
 const HomePage = () => {
   const [isUser, setIsUser] = useState(users);
-  const [promptList, setPromptList] = useState(prompts);
+  // const [promptList, setPromptList] = useState(prompts);
   const [searchValue, setSearchValue] = useState("");
+
   const [selectedSort, setSelectedSort] = useState("");
   const [sortPromptList, setSortPromptList] = useState(prompts);
+
   // console.log(users);
   // console.log(prompts);
   //console.log(isUser);
   //console.log(promptList);
-  // console.log(
-  //   promptList.filter((prompt) => prompt.title.includes(searchValue))
-  // );
+
+
+  useEffect(() => {
+    const getPromptListAPI = async () => {
+      const prompts = await getPromptList();
+      setPromptList(prompts);
+    };
+    getPromptListAPI();
+  }, []);
+
+  console.log(
+    promptList.filter((prompt) => prompt.title.includes(searchValue))
+  );
+
   const handleChange = (e) => {
     setSearchValue(e.target.value);
     console.log(searchValue);
@@ -101,11 +115,13 @@ const HomePage = () => {
             className="w-7/12 h-11 rounded-full border bg-slate-200 pl-5 "
             value={searchValue}
           />
+
           <div className="w-1/3 flex flex-row space-x-5 border-2 rounded-3xl p-2 ">
             {category.map((category) => (
               <div className="w-20 text-sm text-center">{category.label}</div>
             ))}
           </div>
+
         </div>
 
         <div className="rounded-3xl border-solid border-slate-300 border-2 m-5 px-5 pb-5 h-3/5">
@@ -115,6 +131,7 @@ const HomePage = () => {
             </div>
             <Select
               options={order}
+
               onChange={handleSortChange}
               onClick={() => {
                 if (selectedSort === "like") {
@@ -132,6 +149,7 @@ const HomePage = () => {
               //     ? changeViewOrder()
               //     : changeDateOrder();
               // }}
+
             />
           </div>
           <div className="h-4/5 grid grid-cols-3 overflow-y-scroll">

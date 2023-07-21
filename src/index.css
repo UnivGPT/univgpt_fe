@@ -39,6 +39,9 @@
   @apply rounded-l py-2 px-1 mt-6 text-center font-bold text-lg text-white bg-gpt-green w-28 mx-1;
 }
 
+.button-plus {
+  @apply bg-gpt-green text-white hover:text-black rounded-xl py-2 px-24 text-4xl font-bold flex flex-col items-center;
+}
 /* form-a: 로그인, 회원가입, 회원정보 수정에 쓰이는 폼 */
 .form-a {
   @apply w-3/5 flex flex-col items-center;
@@ -108,3 +111,60 @@ code {
     width: 100px;
   }
 }*/
+
+
+{/*오른쪽에 팔이 있는 말풍선*/}
+  .bubble-a {
+position: relative;
+width: 655px;
+height: 160px;
+padding: 30px;
+margin:20px;
+background: #FFFFFF;
+-webkit-border-radius: 27px;
+-moz-border-radius: 27px;
+border-radius: 27px;
+
+}
+
+.bubble-a:after {
+content: '';
+position: absolute;
+border-style: solid;
+border-width: 19px 0 19px 45px;
+border-color: transparent #FFFFFF;
+display: block;
+width: 0;
+z-index: 1;
+right: -45px;
+top: 61px;
+}
+
+{/*왼쪽에 팔이 있는 말풍선*/}
+.bubble-b
+{
+position: relative;
+width: 655px;
+height: 160px;
+padding: 0px;
+margin:20px;
+background: #FFFFFF;
+-webkit-border-radius: 27px;
+-moz-border-radius: 27px;
+border-radius: 27px;
+}
+
+.bubble-b:after
+{
+content: '';
+position: absolute;
+border-style: solid;
+border-width: 19px 45px 19px 0;
+border-color: transparent #FFFFFF;
+display: block;
+width: 0;
+z-index: 1;
+left: -45px;
+top: 61px;
+}
+
