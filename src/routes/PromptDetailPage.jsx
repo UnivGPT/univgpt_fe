@@ -20,13 +20,15 @@ const PromptDetailPage = () => {
 
   return (
     <div className="w-full flex flex-row space-between">
-      <div className="w-60">
-        <PromptSideBar
-          key={isUser.id}
-          user={isUser}
-          prompt={prompts}
-          comment={comments[0]}
-        />
+
+    <div className="w-60">
+      <PromptSideBar key={isUser.id}        
+			  user={isUser[0]}
+        prompt={prompts[0]}
+        comment={comments[0]} />
+    </div>
+
+
       </div>
 
       {/*프롬프트 내용 작성 박스/하드코딩된 거 내일 다 바꿔야*/}
