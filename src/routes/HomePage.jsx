@@ -1,19 +1,30 @@
 import { HomeSideBar } from "../components/SideBar";
 import users from "../data/users";
 import prompts from "../data/prompts";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { category, order } from "../data/category";
 import Select from "react-select";
 import { MidPrompt } from "../components/Prompts";
+import { getPromptList } from "../api/api";
 
 const HomePage = () => {
   const [isUser, setIsUser] = useState(users);
-  const [promptList, setPromptList] = useState(prompts);
+  // const [promptList, setPromptList] = useState(prompts);
   const [searchValue, setSearchValue] = useState("");
+  const [promptList, setPromptList] = useState([]);
   // console.log(users);
   // console.log(prompts);
   //console.log(isUser);
   //console.log(promptList);
+
+  useEffect(() => {
+    const getPromptListAPI = async () => {
+      const prompts = await getPromptList();
+      setPromptList(prompts);
+    };
+    getPromptListAPI();
+  }, []);
+
   console.log(
     promptList.filter((prompt) => prompt.title.includes(searchValue))
   );
@@ -64,15 +75,17 @@ const HomePage = () => {
             onChange={handleChange}
             className="w-6/12 rounded-full border bg-slate-200 pl-5"
             value={searchValue}
-          />  
+          />
         </div>
         <div className="rounded-3xl border-solid border-slate-300 border-2 m-5 px-5 pb-5 h-3/5">
           <div className="flex flex-row w-full justify-between mt-5 p-5">
-            <div className="rounded-xl p-3.5 text-center font-bold text-xl text-white bg-gpt-green px-14">프롬프트</div>
-            <Select 
-            options={order} 
-            //onClick={() => {category.value === "like" ? changeLikeOrder : category.value === "view" ? changeViewOrder : changeNameOrder}}
-            //value={category.value}
+            <div className="rounded-xl p-3.5 text-center font-bold text-xl text-white bg-gpt-green px-14">
+              프롬프트
+            </div>
+            <Select
+              options={order}
+              //onClick={() => {category.value === "like" ? changeLikeOrder : category.value === "view" ? changeViewOrder : changeNameOrder}}
+              //value={category.value}
             />
           </div>
           <div className="h-4/5 grid grid-cols-3 overflow-y-scroll">

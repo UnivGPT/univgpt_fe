@@ -14,6 +14,7 @@ const NaverCallBack = () => {
     const data = {
       code: code,
       state: state,
+      socials: 1,
     };
 
     axios
