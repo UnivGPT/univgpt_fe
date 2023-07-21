@@ -22,10 +22,9 @@ const PromptDetailPage = () => {
   return (
     <div className="w-full flex flex-row space-between">
     <div className="w-60">
-      <PromptSideBar
-        key={isUser.id}
-        user={isUser}
-        prompt={prompts}
+      <PromptSideBar key={isUser.id}        
+			  user={isUser[0]}
+        prompt={prompts[0]}
         comment={comments[0]} />
     </div>
 

@@ -2,6 +2,8 @@ export const category = [
   { value: "assignment", label: "과제" },
   { value: "music", label: "음악" },
   { value: "travel", label: "여행" },
+  { value: "contact", label: "연락" },
+  { value: "money", label: "돈" },
 ];
 
 export const order = [
