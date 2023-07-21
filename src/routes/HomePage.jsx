@@ -9,7 +9,7 @@ import { getPromptList } from "../api/api";
 
 const HomePage = () => {
   const [isUser, setIsUser] = useState(users);
-  // const [promptList, setPromptList] = useState(prompts);
+  const [promptList, setPromptList] = useState(prompts);
   const [searchValue, setSearchValue] = useState("");
 
   const [selectedSort, setSelectedSort] = useState("");
