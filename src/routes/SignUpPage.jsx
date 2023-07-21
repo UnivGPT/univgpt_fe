@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 const SignUpPage = () => {
   const [formData, setFormData] = useState({
     email: "",
+    username: "",
     password: "",
     confirm_password: "",
   });
@@ -37,6 +38,17 @@ const SignUpPage = () => {
           className="input"
           onChange={handleFormData}
           value={formData.email}
+        />
+        <label className="label font-bold text-l" htmlFor="username">
+          아이디
+        </label>
+        <input
+          required
+          type="text"
+          id="id"
+          className="input"
+          onChange={handleFormData}
+          value={formData.username}
         />
         <label htmlFor="password" className="label font-bold text-l">
           비밀번호
