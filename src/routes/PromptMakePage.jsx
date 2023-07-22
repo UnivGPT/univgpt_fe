@@ -68,13 +68,13 @@ const PromptMakePage = () => {
           {form.map((el) => el)}{" "}
         </div>
         <div className="flex flex-col items-center">
+          {/*입력값 input창을 추가해주는 버튼*/}
           <button
             type="submit"
             className="button-plus"
             onClick={() => {
-              setForm([...form, <input className="input-b my-4" />]);
-            }}
-          >
+              setForm([...form, <input className="input-b my-4"/>]);
+            }}>
             +
           </button>
         </div>
@@ -95,7 +95,7 @@ const PromptMakePage = () => {
       value = {content} onChange={(e) => {setContent(e.target.value)}}></textarea>
       <button className="button-a self-end m-8">미리보기</button>
     </div>
-    {/*버튼*/}
+    {/*삭제&게시 버튼*/}
     <div className="mt-12 flex justify-center">
     <button className="button-e mr-16" type="reset">삭제하기</button>
     <button className="button-d ml-16" /*onClick=서버로 프롬프트 덩어리를 보내는 함수*/>게시하기</button>
