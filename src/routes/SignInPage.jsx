@@ -8,7 +8,7 @@ import axios from "axios";
 
 const SignInPage = () => {
   const [formData, setFormData] = useState({
-    email: "",
+    username: "",
     password: "",
   });
 
@@ -59,16 +59,16 @@ const SignInPage = () => {
       <h3 className="font-semibold text-5xl">UnivGPT 로그인</h3>
       <br></br>
       <form className="form-a" onSubmit={handleSignInSubmit}>
-        <label className="label font-bold text-l" htmlFor="email">
-          이메일
+        <label className="label font-bold text-l" htmlFor="username">
+          아이디
         </label>
         <input
           required
-          type="email"
-          id="email"
+          type="text"
+          id="username"
           className="input"
           onChange={handleFormData}
-          value={formData.email}
+          value={formData.username}
         />
         <label htmlFor="password" className="label font-bold text-l">
           비밀번호

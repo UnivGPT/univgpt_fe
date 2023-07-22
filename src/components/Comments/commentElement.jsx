@@ -13,9 +13,7 @@ const CommentElement = (props) => {
   let day = date.getDate();
   day = day < 10 ? `0${day}` : day;
 
-
   const [user, setUser] = useState(null);
-
 
   // useEffect(() => {
   //   // access_token이 있으면 유저 정보 가져옴
@@ -29,20 +27,20 @@ const CommentElement = (props) => {
   // }, []);
 
   return (
-    <div className="w-full flex justify-between gap-1 mb-2">
-      <div className="flex flex-row w-3/4 space-x-2">
-        <HiUserCircle/>
-        <p className="text-lg mr-4">{comment.content}</p>
-        {/* <span className="text-base mr-1 text-gray-300">
+    <div className="w-full flex justify-between gap-1 mb-2 ">
+      <div className="flex flex-row w-full space-x-2 items-center">
+        <HiUserCircle className="w-10 h-10 mr-2" />
+        <div className="commentbubble">
+          <p className="text-sm mr-5 pt-1 pl-3 align-middle">{comment.content}</p>
+          {/* <span className="text-base mr-1 text-gray-300">
           {year}.{month}.{day}
         </span> */}
+        </div>
       </div>
       {user?.id === comment.author ? (
         <div className="w-1/4 flex flex-row-reverse items-center">
           <>
-            <button onClick={() => handleCommentDelete(comment.id)}>
-              Del
-            </button>
+            <button onClick={() => handleCommentDelete(comment.id)}>Del</button>
           </>
         </div>
       ) : null}

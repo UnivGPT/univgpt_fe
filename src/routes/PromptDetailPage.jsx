@@ -22,10 +22,9 @@ console.log(prompts[1].title);
   return (
     <div className="w-full flex flex-row space-between">
     <div className="w-60">
-      <PromptSideBar
-        key={isUser.id}
-        user={isUser}
-        prompt={prompts}
+      <PromptSideBar key={isUser.id}        
+			  user={isUser[0]}
+        prompt={prompts[0]}
         comment={comments[0]} />
     </div>
 
@@ -43,8 +42,7 @@ console.log(prompts[1].title);
           <div className="button-f">발표 목적</div>
           <input required type="text" placeholder="발표의 목적을 작성해주세요" className="input-c"/>
           <div className="button-f">답변 언어</div>
-          <input required type="text" placeholder="답변을 작성할 언어를 지정해주세요" className="input-c"/>
-          
+          <input required type="text" placeholder="답변을 작성할 언어를 지정해주세요" className="input-c"/> 
         </div> 
       </div>
       <br></br>
@@ -54,8 +52,6 @@ console.log(prompts[1].title);
       </button>
   </form>
   </div>
-      
-  
   );
 };
 

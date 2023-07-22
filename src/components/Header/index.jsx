@@ -1,27 +1,55 @@
 import logo from "../../assets/images/logo_horizontal.png";
 import "./Header.css";
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import users from "../../data/users";
+import { getCookie, removeCookie } from "../../utils/cookie";
+import { useState, useEffect } from "react";
+// import users from "../../data/users";
 
 const Header = () => {
-  const [isUser, setIsUser] = useState(users);
+  // const [isUser, setIsUser] = useState(users);
+  const [isLoggedIn, setIsLoggedIn] = useState("");
+
+  useEffect(() => {
+    const loggedIn = getCookie("access_token") ? true : false;
+    setIsLoggedIn(loggedIn);
+  }, []);
+
+  const handleLogout = () => {
+    removeCookie("access_token");
+    removeCookie("refresh_token");
+    window.location.href = "/";
+  };
 
   return (
     <div id="header-wrapper" className="flex justify-between">
       <div className="flex items-center">
-        <Link to="/"><img id="header-logo" src={logo} alt="logo" /></Link>
+        <Link to="/">
+          <img id="header-logo" src={logo} alt="logo" />
+        </Link>
       </div>
       <div className="flex flex-row space-x-5 m-5">
-        {isUser ? (
+        {/* {isUser ? ( */}
+        {isLoggedIn ? (
           <>
-            <Link to="/mypage" className="text-m font-semibold">마이페이지</Link>
-            <Link to="/" className="text-m font-semibold">로그아웃</Link>
+            <Link to="/mypage" className="text-m font-semibold">
+              마이페이지
+            </Link>
+            <Link
+              to="/"
+              onClick={handleLogout}
+              className="text-m font-semibold"
+            >
+              로그아웃
+            </Link>
           </>
         ) : (
           <>
-            <Link to="/signup" className="text-m font-semibold">회원가입</Link>
-            <Link to="/signin" className="text-m font-semibold">로그인</Link>
+            <Link to="/signup" className="text-m font-semibold">
+              회원가입
+            </Link>
+            <Link to="/signin" className="text-m font-semibold">
+              로그인
+            </Link>
           </>
         )}
       </div>

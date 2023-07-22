@@ -8,9 +8,10 @@ const GoogleCallBack = () => {
 
     console.log("code", code);
 
-    const url = "http://127.0.0.1:8000/api/account/google";
+    const url = "http://127.0.0.1:8000/api/account/socials";
     const data = {
       code: code,
+      socials: 3,
     };
 
     axios
