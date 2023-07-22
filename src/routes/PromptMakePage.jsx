@@ -27,7 +27,7 @@ useEffect(() => {setPrompt({title:title, description:description, content:conten
     <br></br>
     <br></br>
     <h1 className="text-3xl font-bold mb-2.5">설명</h1>
-    <input required type="text" className="input-b" placeholder="프롬프트에 대한 간단한 설명을 작성하세요." value={description} onChange={(e) => {setDescription(e.target.value)}}/>
+    <input required type="text" className="input-b" placeholder="프롬프트에 대한 30자 내의 간단한 설명을 작성하세요." value={description} onChange={(e) => {setDescription(e.target.value)}}/>
     <h1 className="text-2xl font-bold mb-2.5 flex flex-col items-center">
     ____________________________________________________________________
     </h1>

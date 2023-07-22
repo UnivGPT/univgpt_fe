@@ -3,22 +3,22 @@ import prompts from "../data/prompts";
 import { PromptSideBar } from "../components/SideBar";
 import comments from "../data/comments";
 import users from "../data/users";
-import Select from "react-select";
+import Select from "react-select"
 
 const PromptDetailPage = () => {
   const [isUser, setIsUser] = useState(users);
-	// console.log(isUser);
-  // 	const [newPrompt, setNewPrompt] = useState({
-  //     title: "",
-  //     content: "",
-  //     category: [],
-  //     description: "",
-  //   });
-  // 	const handlechange = (e) => {
-  //     setNewPrompt
-  //   };
-
+	console.log(isUser);
+  const [prompt, setPrompt] = useState({
+    title: "",
+    content: "",
+    category: [],
+    description: "",
+  });
   
+  /*const handlechange = (e) => {
+    setNewPrompt
+  };*/
+console.log(prompts[1].title);
   return (
     <div className="w-full flex flex-row space-between">
     <div className="w-60">
@@ -31,8 +31,8 @@ const PromptDetailPage = () => {
 
     {/*프롬프트 내용 작성 박스/하드코딩된 거 내일 다 바꿔야*/}
     <form className="w-4/6 flex flex-col items-center bg-white text-black p-11 ml-20 pl rounded-3xl ">
-      <h1 className="font-bold text-7xl text-gpt-indigo"> 발표 대본 만들기 </h1>
-      <h1 className="font-extrabold text-xl text-gpt-indigo mt-4">자료조사 내용을 발표 대본 형태로 변환해주는 프롬프트 (과제용)</h1>
+      <h1 className="font-bold text-7xl text-gpt-indigo"> {prompts[2].title} </h1>
+      <h1 className="font-extrabold text-xl text-gpt-indigo mt-4">{prompts[2].description}</h1>
       <br></br>
       <div className="rounded-3xl bg-gray-200 px-8 pb-5 mx-6 h-96 w-5/6 overflow-y-scroll">
         <div className="flex flex-col w-full justify-between">
