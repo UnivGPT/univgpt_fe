@@ -104,12 +104,12 @@ const HomePage = () => {
   useEffect(() => filterCategory(), [selectedCategory]);
 
   return (
-    <div className="w-full flex flex-row space-x-1">
+    <div className="w-screen h-screen flex flex-row space-x-1">
       <div className="m-5 w-60">
         <HomeSideBar key={isUser.id} user={isUser} prompt={promptList} />
       </div>
 
-      <div className="w-full bg-white text-black p-11 items-center">
+      <div className="w-full bg-white text-black p-11 ">
         <div className="flex flex-row justify-around space-x-5 p-5">
           <Select
             options={category}
@@ -121,7 +121,7 @@ const HomePage = () => {
             type="text"
             placeholder="검색어를 입력해주세요"
             onChange={handleChange}
-            className="w-7/12 h-11 rounded-full border bg-slate-200 pl-5 "
+            className="w-7/12 h-11 rounded-full border bg-slate-200 pl-5"
             value={searchValue}
           />
 
@@ -131,8 +131,8 @@ const HomePage = () => {
             ))}
           </div> */}
         </div>
-
-        <div className="rounded-3xl border-solid border-slate-300 border-2 m-5 px-5 pb-5 h-3/5">
+    
+        <div className="rounded-3xl border-solid border-slate-300 border-2 m-5 px-5 pb-5 w-11/12 h-3/4 justify-self-center">
           <div className="flex flex-row w-full justify-between mt-5 p-5">
             <div className="rounded-xl p-3.5 text-center font-bold text-xl text-white bg-gpt-green px-14">
               프롬프트
@@ -153,8 +153,9 @@ const HomePage = () => {
               ))}
           </div>
         </div>
+        </div>
       </div>
-    </div>
+    
   );
 };
 
