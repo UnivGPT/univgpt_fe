@@ -14,6 +14,7 @@ const HomePage = () => {
   const [searchCategory, setSearchCategory] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const [promptList, setPromptList] = useState([]);
+  const [promptList, setPromptList] = useState(prompts);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedSort, setSelectedSort] = useState("");
   const [sortPromptList, setSortPromptList] = useState(prompts);
@@ -22,8 +23,10 @@ const HomePage = () => {
     const getPromptListAPI = async () => {
       const prompts = await getPromptList();
       setPromptList(prompts);
+      setSortPromptList(prompts);
     };
     getPromptListAPI();
+  }, []);
 
     const getCategoryListAPI = async () => {
       const categories = await getCategoryList();
@@ -36,15 +39,15 @@ const HomePage = () => {
     getCategoryListAPI();
   }, []);
 
-  const handleCategoryFilter = (e) => {
-    const { innerText } = e.target;
-    if (searchValue === innerText.substring(1)) {
-      setSearchValue("");
-    } else {
-      const activeCategory = innerText.substring(1);
-      setSearchValue(activeCategory);
-    }
-  };
+  // const handleCategoryFilter = (e) => {
+  //   const { innerText } = e.target;
+  //   if (searchValue === innerText.substring(1)) {
+  //     setSearchValue("");
+  //   } else {
+  //     const activeCategory = innerText.substring(1);
+  //     setSearchValue(activeCategory);
+  //   }
+  // };
 
   const handleChange = (e) => {
     setSearchValue(e.target.value);
@@ -57,19 +60,10 @@ const HomePage = () => {
   };
 
   const handleCategoryChange = (e) => {
-    setSelectedCategory(e.value);
+    setSelectedCategory(e.label);
     console.log(selectedCategory);
   };
 
-  const filterCategory = () => {
-    const filteredList = [...sortPromptList].filter((prompt) =>
-      prompt.category.map((category) =>
-        category.name.includes(selectedCategory)
-      )
-    );
-    console.log(filteredList);
-    setSortPromptList(filteredList);
-  };
 
   const changeLikeOrder = () => {
     const sortedList = [...sortPromptList].sort((a, b) => {
@@ -120,7 +114,6 @@ const HomePage = () => {
 
   // console.log(prompts);
   // console.log(promptList);
-  useEffect(() => filterCategory(), [selectedCategory]);
 
   return (
     <div className="w-screen h-screen flex flex-row space-x-1">
@@ -134,7 +127,6 @@ const HomePage = () => {
             options={category}
             className="w-5/12"
             onChange={handleCategoryChange}
-            onClick={filterCategory}
           />
           <input
             type="text"
@@ -156,14 +148,21 @@ const HomePage = () => {
             <div className="rounded-xl p-3.5 text-center font-bold text-xl text-white bg-gpt-green px-14">
               프롬프트
             </div>
-            <Select options={order} />
+            <Select options={order} onChange={handleSortChange} />
           </div>
           <div className="h-4/5 grid grid-cols-3 overflow-y-scroll">
-            {promptList
+            {sortPromptList
               .filter((prompt) =>
                 searchValue
-                  ? prompt.categories.find(
-                      (category) => category.name === searchValue
+                  ? prompt.title
+                      .toLowerCase()
+                      .includes(searchValue.toLowerCase())
+                  : prompt
+              )
+              .filter((prompt) =>
+                selectedCategory
+                  ? prompt.category.find((category) =>
+                      category.name.includes(selectedCategory)
                     )
                   : prompt
               )
