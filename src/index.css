@@ -39,9 +39,14 @@
   @apply rounded-l py-2 px-1 mt-6 text-center font-bold text-lg text-white bg-gpt-green w-28 mx-1;
 }
 
-.button-plus {
-  @apply bg-gpt-green text-white hover:text-black rounded-xl py-2 px-24 text-4xl font-bold flex flex-col items-center;
+.button-plus-blue {
+  @apply bg-blue-500 text-white hover:text-black rounded-xl py-2 px-4 text-2xl font-bold flex flex-col items-center;
 }
+
+.button-plus-red {
+  @apply bg-red-500 text-white hover:text-black rounded-xl py-2 px-4 text-2xl font-bold flex flex-col items-center;
+}
+
 /* form-a: 로그인, 회원가입, 회원정보 수정에 쓰이는 폼 */
 .form-a {
   @apply w-3/5 flex flex-col items-center;
@@ -60,8 +65,23 @@
   @apply border-2 border-gray-300 shadow-2xl w-full px-6 py-3 rounded-2xl bg-gray-300 text-black placeholder-opacity-50 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-transparent;
 }
 
+/*promptMakepage에서 단문형, 장문형 placeholder 만들 때*/
+.input-b-1 {
+  @apply placeholder-gray-800  shadow-2xl w-full px-6 py-3 rounded-2xl bg-blue-200 text-black placeholder-opacity-50 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-transparent;
+}
+
 .input-c {
   @apply w-full shadow px-6 py-3 mt-1 rounded-2xl bg-white text-black placeholder-opacity-50 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-transparent grid grid-cols-3 overflow-y-scroll;
+}
+
+/*promptMakePage 좌측*/
+.input-d {
+  @apply border-2 border-gray-300 shadow-2xl w-11/12 px-6 py-3 rounded-2xl bg-gray-300 text-black placeholder-opacity-50 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-transparent;
+}
+
+/*promptMakePage에서 객관식 세부 항목 폼*/
+.input-e {
+  @apply placeholder-gray-800 shadow-2xl w-full px-6 py-3 rounded-2xl bg-blue-100 text-black placeholder-opacity-50 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-transparent;
 }
 
 body {
@@ -112,59 +132,67 @@ code {
   }
 }*/
 
-
-{/*오른쪽에 팔이 있는 말풍선*/}
-  .bubble-a {
-position: relative;
-width: 655px;
-height: 200px;
-padding: 30px;
-margin:20px;
-background: #FFFFFF;
--webkit-border-radius: 27px;
--moz-border-radius: 27px;
-border-radius: 27px;
-
+ {
+  /*오른쪽에 팔이 있는 말풍선*/
+}
+.bubble-a {
+  position: relative;
+  width: 655px;
+  height: 200px;
+  padding: 30px;
+  margin: 20px;
+  background: #ffffff;
+  -webkit-border-radius: 27px;
+  -moz-border-radius: 27px;
+  border-radius: 27px;
 }
 
 .bubble-a:after {
-content: '';
-position: absolute;
-border-style: solid;
-border-width: 19px 0 19px 45px;
-border-color: transparent #FFFFFF;
-display: block;
-width: 0;
-z-index: 1;
-right: -45px;
-top: 61px;
+  content: "";
+  position: absolute;
+  border-style: solid;
+  border-width: 19px 0 19px 45px;
+  border-color: transparent #ffffff;
+  display: block;
+  width: 0;
+  z-index: 1;
+  right: -45px;
+  top: 61px;
 }
 
-{/*왼쪽에 팔이 있는 말풍선*/}
-.bubble-b
-{
-position: relative;
-width: 655px;
-height: 200px;
-padding: 0px;
-margin:20px;
-background: #FFFFFF;
--webkit-border-radius: 27px;
--moz-border-radius: 27px;
-border-radius: 27px;
+ {
+  /*왼쪽에 팔이 있는 말풍선*/
+}
+.bubble-b {
+  position: relative;
+  width: 655px;
+  height: 100px;
+  padding: 0px;
+  margin: 20px;
+  background: #ffffff;
+  -webkit-border-radius: 27px;
+  -moz-border-radius: 27px;
+  border-radius: 27px;
 }
 
-.bubble-b:after
-{
-content: '';
-position: absolute;
-border-style: solid;
-border-width: 19px 45px 19px 0;
-border-color: transparent #FFFFFF;
-display: block;
-width: 0;
-z-index: 1;
-left: -45px;
-top: 61px;
+.bubble-b:after {
+  content: "";
+  position: absolute;
+  border-style: solid;
+  border-width: 19px 45px 19px 0;
+  border-color: transparent #ffffff;
+  display: block;
+  width: 0;
+  z-index: 1;
+  left: -45px;
+  top: 61px;
 }
 
+ {
+  /*회원가입 비밀번호 확인용 체크*/
+}
+.checkIcon {
+  position: relative;
+  bottom: 40px;
+  left: 370px;
+}

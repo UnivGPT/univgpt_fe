@@ -13,7 +13,7 @@ const prompts = [
         name: "과제",
       },
     ],
-    created_at: "2023-07-14T04:19:50.658501Z",
+    created_at: "2023-07-14T04:18:50.658501Z",
     like: 73,
     view: 113,
   },
@@ -28,7 +28,7 @@ const prompts = [
     category: [
       {
         id: 2,
-        name: "여행",
+        name: "여가",
       },
     ],
     created_at: "2023-07-13T04:16:50.658501Z",
@@ -62,7 +62,7 @@ const prompts = [
     category: [
       {
         id: 1,
-        name: "음악",
+        name: "여가",
       },
     ],
     created_at: "2023-07-14T04:19:50.658501Z",
@@ -79,6 +79,10 @@ const prompts = [
     category: [
       {
         id: 1,
+        name: "발표",
+      },
+      {
+        id: 2,
         name: "과제",
       },
     ],
