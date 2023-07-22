@@ -27,7 +27,8 @@ const HomePage = () => {
 
     const getCategoryListAPI = async () => {
       const categories = await getCategoryList();
-      const categoryName = categories.map((category) => {
+      console.log(categories);
+      const categoryName = categories.data.map((category) => {
         return category.name;
       });
       setCategoryList(categoryName);
