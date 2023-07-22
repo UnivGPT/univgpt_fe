@@ -27,7 +27,6 @@ const PromptMakePage = () => {
       category: category,
     });
   }, [title, description, content, form, category]);
-  const target = document.getElementById("deleteBtn");
 
   // const promptInputAdd = () => {
   //   if () {
@@ -152,7 +151,7 @@ const PromptMakePage = () => {
                     value={el2}
                     placeholder="객관식 선택지"
                     style={{
-                      width: "200px",
+                      width: "250px",
                     }}
                   ></input>
                   <button
