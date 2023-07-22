@@ -13,7 +13,7 @@ const prompts = [
         name: "과제",
       },
     ],
-    created_at: "2023-07-14T04:19:50.658501Z",
+    created_at: "2023-07-14T04:18:50.658501Z",
     like: 73,
     view: 113,
   },
