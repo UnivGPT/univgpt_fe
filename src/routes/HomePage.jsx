@@ -5,21 +5,18 @@ import { useState, useEffect } from "react";
 import { category, order } from "../data/category";
 import Select from "react-select";
 import { MidPrompt } from "../components/Prompts";
-import { getPromptList } from "../api/api";
+import { getCategoryList, getPromptList } from "../api/api";
 
 const HomePage = () => {
   const [isUser, setIsUser] = useState(users);
-  const [promptList, setPromptList] = useState(prompts);
+
+  const [categoryList, setCategoryList] = useState([]);
+  const [searchCategory, setSearchCategory] = useState([]);
   const [searchValue, setSearchValue] = useState("");
+  const [promptList, setPromptList] = useState([]);
 
   const [selectedSort, setSelectedSort] = useState("");
   const [sortPromptList, setSortPromptList] = useState(prompts);
-
-  // console.log(users);
-  // console.log(prompts);
-  //console.log(isUser);
-  //console.log(promptList);
-
 
   useEffect(() => {
     const getPromptListAPI = async () => {
@@ -27,16 +24,36 @@ const HomePage = () => {
       setPromptList(prompts);
     };
     getPromptListAPI();
+
+    const getCategoryListAPI = async () => {
+      const categories = await getCategoryList();
+      const categoryName = categories.map((category) => {
+        return category.name;
+      });
+      setCategoryList(categoryName);
+      setSearchCategory(categoryName);
+    };
+    getCategoryListAPI();
   }, []);
 
-  console.log(
-    promptList.filter((prompt) => prompt.title.includes(searchValue))
-  );
+  const handleCategoryFilter = (e) => {
+    const { innerText } = e.target;
+    if (searchValue === innerText.substring(1)) {
+      setSearchValue("");
+    } else {
+      const activeCategory = innerText.substring(1);
+      setSearchValue(activeCategory);
+    }
+  };
 
   const handleChange = (e) => {
-    setSearchValue(e.target.value);
-    console.log(searchValue);
+    const { value } = e.target;
+    const newCategories = categories.filter((category) =>
+      category.includes(value)
+    );
+    setSearchCategory(newCategories);
   };
+
   const handleSortChange = (e) => {
     setSelectedSort(e.value);
     console.log(selectedSort);
@@ -113,7 +130,7 @@ const HomePage = () => {
             placeholder="검색어를 입력해주세요"
             onChange={handleChange}
             className="w-7/12 h-11 rounded-full border bg-slate-200 pl-5 "
-            value={searchValue}
+            value={searchCategory}
           />
 
           <div className="w-1/3 flex flex-row space-x-5 border-2 rounded-3xl p-2 ">
@@ -121,7 +138,6 @@ const HomePage = () => {
               <div className="w-20 text-sm text-center">{category.label}</div>
             ))}
           </div>
-
         </div>
 
         <div className="rounded-3xl border-solid border-slate-300 border-2 m-5 px-5 pb-5 h-3/5">
@@ -131,7 +147,6 @@ const HomePage = () => {
             </div>
             <Select
               options={order}
-
               onChange={handleSortChange}
               onClick={() => {
                 if (selectedSort === "like") {
@@ -149,40 +164,19 @@ const HomePage = () => {
               //     ? changeViewOrder()
               //     : changeDateOrder();
               // }}
-
             />
           </div>
           <div className="h-4/5 grid grid-cols-3 overflow-y-scroll">
-            {sortPromptList
+            {promptList
               .filter((prompt) =>
                 searchValue
-                  ? prompt.title
-                      .toLowerCase()
-                      .includes(searchValue.toLowerCase())
+                  ? prompt.categories.find(
+                      (category) => category.name === searchValue
+                    )
                   : prompt
               )
-
-              // .sort((a, b) => {
-              //   if (a.like > b.like) {
-              //     return 1;
-              //   } else if (a.like < b.like) {
-              //     return -1;
-              //   } else {
-              //     return 0;
-              //   }
-              // })
-              // .sort((a, b) => {
-              //   if (a.view > b.view) {
-              //     return 1;
-              //   } else if (a.view < b.view) {
-              //     return -1;
-              //   } else {
-              //     return 0;
-              //   }
-              // })
-              // .sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
               .map((prompt) => (
-                <MidPrompt key={prompt.id} prompt={prompt} />
+                <MidPrompt key={prompt.id} post={prompt} />
               ))}
           </div>
         </div>
