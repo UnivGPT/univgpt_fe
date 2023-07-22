@@ -29,6 +29,12 @@ const PromptMakePage = () => {
   }, [title, description, content, form, category]);
   const target = document.getElementById("deleteBtn");
 
+  // const promptInputAdd = () => {
+  //   if () {
+
+  //   }
+  // }
+
   return (
     <div className="w-screen h-screen flex justify-evenly">
       {/*왼쪽 절반*/}

@@ -1,28 +1,28 @@
 import { useEffect } from "react";
 import axios from "axios";
+import { socialSignIn } from "../api/api";
 
 const GoogleCallBack = () => {
   useEffect(() => {
-    const params = new URL(document.location.toString()).searchParams;
-    const code = params.get("code");
+    const fetchData = async () => {
+      const params = new URL(document.location.toString()).searchParams;
+      const code = params.get("code");
 
-    console.log("code", code);
+      const data = {
+        code: code,
+        state: "google",
+        socials: 3,
+      };
 
-    const url = "http://127.0.0.1:8000/api/account/socials";
-    const data = {
-      code: code,
-      socials: 3,
+      try {
+        await socialSignIn(data);
+      } catch (error) {
+        console.log("error", error);
+      }
     };
 
-    axios
-      .get(url, { params: data })
-      .then((response) => {
-        console.log("Response", response.data);
-      })
-      .catch((error) => {
-        console.log("error", error);
-      });
-  });
+    fetchData();
+  }, []);
 };
 
 export default GoogleCallBack;
