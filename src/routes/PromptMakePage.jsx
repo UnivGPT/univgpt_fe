@@ -25,12 +25,6 @@ const PromptMakePage = () => {
     });
   }, [title, description, content, form, category]);
 
-  // const promptInputAdd = () => {
-  //   if () {
-
-  //   }
-  // }
-
   return (
     <div className="w-screen h-screen flex justify-evenly">
       {/*왼쪽 절반*/}
@@ -49,6 +43,7 @@ const PromptMakePage = () => {
         />
         <br></br>
         <br></br>
+
         <h1 className="text-3xl font-bold mb-2.5">설명</h1>
         <input
           required
@@ -61,9 +56,11 @@ const PromptMakePage = () => {
             setDescription(e.target.value);
           }}
         />
+
         <h1 className="text-2xl font-bold mb-2.5 flex flex-col items-center">
           ____________________________________________________________________
         </h1>
+
         {/*{#입력값} 생성기*/}
         <h1 className="text-3xl font-bold mt-6 mb-2.5">입력값</h1>
         <div className="h-2/5 flex flex-col items-center overflow-y-auto">
@@ -128,6 +125,7 @@ const PromptMakePage = () => {
                   }}
                 ></input>
               </div>
+
               {/*객관식 선지 입력기: 객관식에서만 떠야*/}
               {el["options"].map((el2, idx2) => (
                 <div
@@ -141,16 +139,15 @@ const PromptMakePage = () => {
                     id={"options" + idx}
                     className="input-e mr-8"
                     onChange={(e) => {
-                      const newOptions = [...form[idx].options];
-                      const newOptionValue = e.target.value;
-                      newOptions.splice(idx2, 1, newOptionValue);
-                      const newOptionForm = {
-                        ...form[idx],
-                        options: newOptions,
-                      };
-                      const newForm = [...form];
-                      newForm.splice(idx, 1, newOptionForm);
-                      setForm(newForm);
+                      const newForm = [...form]; // Create a copy of the form array
+
+                      // Extract the index from the input element's id (e.g., "options1" -> 1)
+                      const idx = Number(e.target.id.replace("options", ""));
+
+                      // Update the value of the corresponding option in the copied form array
+                      newForm[idx].options[idx2] = e.target.value;
+
+                      setForm(newForm); // Update the state with the modified copy
                     }}
                     value={el2}
                     placeholder="객관식 선택지"
@@ -158,10 +155,12 @@ const PromptMakePage = () => {
                       width: "250px",
                     }}
                   ></input>
+
                   <button
                     className="button-plus-blue mr-2"
                     onClick={() => {
                       const newOptions = [...form[idx].options];
+                      newOptions.push(""); // Add a new empty option
                       const newOptionForm = {
                         ...form[idx],
                         options: newOptions,
@@ -173,6 +172,7 @@ const PromptMakePage = () => {
                   >
                     +
                   </button>
+
                   <button
                     type="button"
                     className="button-plus-red mr-2"
@@ -202,9 +202,16 @@ const PromptMakePage = () => {
                 type="button"
                 className="button-e items-center mb-8"
                 onClick={() => {
-                  const deletedForm = [...form];
-                  deletedForm.splice(idx, 1);
-                  setForm(deletedForm);
+                  if (activatedChoices.includes(idx)) {
+                    const updatedActivatedChoices = activatedChoices.filter(
+                      (item) => item !== idx
+                    );
+                    setActivatedChoices(updatedActivatedChoices);
+                  }
+
+                  const newForm = [...form];
+                  newForm.splice(idx, 1);
+                  setForm(newForm);
                 }}
               >
                 <img src={trashBin} className="w-4 h-4"></img>
@@ -212,6 +219,7 @@ const PromptMakePage = () => {
             </>
           ))}{" "}
         </div>
+
         <div className="flex flex-col items-center">
           {/*입력값 추가(누르면 폼이 하나씩 추가됨)*/}
           <button
@@ -224,7 +232,7 @@ const PromptMakePage = () => {
                   label: "",
                   type: "단문형",
                   placeholding: "",
-                  options: [],
+                  options: [""],
                 },
               ]);
             }}
@@ -252,6 +260,7 @@ const PromptMakePage = () => {
           ></textarea>
           <button className="button-a self-end m-8">미리보기</button>
         </div>
+
         {/*카테고리*/}
         <h1 className="text-2xl font-bold mx-6 mt-8">카테고리</h1>
         <select
@@ -269,6 +278,7 @@ const PromptMakePage = () => {
           <option>커뮤니케이션(연락)</option>
           <option>일정</option>
         </select>
+
         {/*삭제&게시 버튼*/}
         <div className="mt-12 flex justify-center">
           <button className="button-e mr-16" type="reset">
