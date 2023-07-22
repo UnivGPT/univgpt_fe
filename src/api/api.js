@@ -13,7 +13,7 @@ export const signIn = async (data) => {
 export const signUp = async (data) => {
   const response = await instance.post("/account/signup/", data);
   if (response.status === 200) {
-    // window.location.href = "/";
+    window.location.href = "/";
   }
   return response;
 };
