@@ -26,12 +26,12 @@
 
 /* 파란색 버튼 */
 .button-d {
-  @apply bg-gpt-blue text-white font-bold hover:text-black rounded-xl text-lg py-3.5 px-10;
+  @apply bg-gpt-blue text-white font-bold hover:text-black rounded-xl text-lg py-3.5 px-14;
 }
 
 /* 빨간색 버튼 */
 .button-e {
-  @apply bg-gpt-red text-white font-bold hover:text-black rounded-xl text-lg py-3.5 px-10;
+  @apply bg-gpt-red text-white font-bold hover:text-black rounded-xl text-lg py-3.5 px-14;
 }
 
 /*프롬프트 생성기 내의 태그*/
@@ -117,19 +117,19 @@ code {
   }
 }*/
 
- {
-  /*오른쪽에 팔이 있는 말풍선*/
-}
-.bubble-a {
-  position: relative;
-  width: 655px;
-  height: 160px;
-  padding: 30px;
-  margin: 20px;
-  background: #ffffff;
-  -webkit-border-radius: 27px;
-  -moz-border-radius: 27px;
-  border-radius: 27px;
+
+{/*오른쪽에 팔이 있는 말풍선*/}
+  .bubble-a {
+position: relative;
+width: 655px;
+height: 200px;
+padding: 30px;
+margin:20px;
+background: #FFFFFF;
+-webkit-border-radius: 27px;
+-moz-border-radius: 27px;
+border-radius: 27px;
+
 }
 
 .bubble-a:after {
@@ -145,19 +145,18 @@ code {
   top: 61px;
 }
 
- {
-  /*왼쪽에 팔이 있는 말풍선*/
-}
-.bubble-b {
-  position: relative;
-  width: 655px;
-  height: 160px;
-  padding: 0px;
-  margin: 20px;
-  background: #ffffff;
-  -webkit-border-radius: 27px;
-  -moz-border-radius: 27px;
-  border-radius: 27px;
+{/*왼쪽에 팔이 있는 말풍선*/}
+.bubble-b
+{
+position: relative;
+width: 655px;
+height: 200px;
+padding: 0px;
+margin:20px;
+background: #FFFFFF;
+-webkit-border-radius: 27px;
+-moz-border-radius: 27px;
+border-radius: 27px;
 }
 
 .bubble-b:after {
