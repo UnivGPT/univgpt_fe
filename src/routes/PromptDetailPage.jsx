@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react";
 import { getPromptDetail } from "../api/api";
 import { PromptSideBar } from "../components/SideBar";
-// import comments from "../data/comments";
-// import prompts from "../data/prompts";
-// import users from "../data/users";
+import comments from "../data/comments";
+import prompts from "../data/prompts";
+import users from "../data/users";
 import Select from "react-select";
 import { useParams } from "react-router-dom";
 
 const PromptDetailPage = () => {
   const { promptId } = useParams;
   const [prompt, setPrompt] = useState();
-  const [user, setUser] = useState(users);
+  const [isUser, setIsUser] = useState(users);
 
   useEffect(() => {
     const getPromptDetailAPI = async () => {

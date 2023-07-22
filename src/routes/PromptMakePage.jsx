@@ -1,7 +1,4 @@
-import { useState } from "react";
-import prompts from "../data/prompts";
-import users from "../data/users";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import trashBin from "../assets/images/trashbin.png";
 
 const PromptMakePage = () => {
@@ -9,7 +6,7 @@ const PromptMakePage = () => {
   const [description, setDescription] = useState("");
   const [form, setForm] = useState([]);
   const [activatedChoices, setActivatedChoices] = useState([]);
-  const [category, setCategory] = useState("과제");
+  const [category, setCategory] = useState("");
   const [content, setContent] = useState("");
   const [prompt, setPrompt] = useState({
     title: "",
@@ -122,6 +119,13 @@ const PromptMakePage = () => {
                   style={{
                     display: activatedChoices.includes(idx) ? "none" : "block",
                   }}
+                  onChange={(e) => {
+                    const editedForm = [...form][idx];
+                    editedForm["placeholding"] = e.target.value;
+                    const newForm = [...form];
+                    newForm.splice(idx, 1, editedForm);
+                    setForm(newForm);
+                  }}
                 ></input>
               </div>
               {/*객관식 선지 입력기: 객관식에서만 떠야*/}
@@ -157,7 +161,7 @@ const PromptMakePage = () => {
                   <button
                     className="button-plus-blue mr-2"
                     onClick={() => {
-                      const newOptions = [...form[idx].options, ""];
+                      const newOptions = [...form[idx].options];
                       const newOptionForm = {
                         ...form[idx],
                         options: newOptions,
@@ -220,7 +224,7 @@ const PromptMakePage = () => {
                   label: "",
                   type: "단문형",
                   placeholding: "",
-                  options: [""],
+                  options: [],
                 },
               ]);
             }}
