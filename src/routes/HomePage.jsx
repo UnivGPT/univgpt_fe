@@ -28,10 +28,6 @@ const HomePage = () => {
   //   getPromptListAPI();
   // }, []);
 
-  console.log(
-    promptList.filter((prompt) => prompt.title.includes(searchValue))
-  );
-
   const handleChange = (e) => {
     setSearchValue(e.target.value);
     // console.log(searchValue);
@@ -43,15 +39,25 @@ const HomePage = () => {
 
   const handleCategoryChange = (e) => {
     setSelectedCategory(e.value);
-    // console.log(selectedCategory);
+    console.log(selectedCategory);
+  };
+
+  const filterCategory = () => {
+    const filteredList = [...sortPromptList].filter((prompt) =>
+      prompt.category.map((category) =>
+        category.name.includes(selectedCategory)
+      )
+    );
+    console.log(filteredList);
+    setSortPromptList(filteredList);
   };
 
   const changeLikeOrder = () => {
     const sortedList = [...sortPromptList].sort((a, b) => {
       if (a.like > b.like) {
-        return 1;
-      } else if (a.like < b.like) {
         return -1;
+      } else if (a.like < b.like) {
+        return 1;
       } else {
         return 0;
       }
@@ -62,9 +68,9 @@ const HomePage = () => {
   const changeViewOrder = () => {
     const sortedList = [...sortPromptList].sort((a, b) => {
       if (a.view > b.view) {
-        return 1;
-      } else if (a.view < b.view) {
         return -1;
+      } else if (a.view < b.view) {
+        return 1;
       } else {
         return 0;
       }
@@ -95,6 +101,7 @@ const HomePage = () => {
 
   // console.log(prompts);
   // console.log(promptList);
+  useEffect(() => filterCategory(), [selectedCategory]);
 
   return (
     <div className="w-full flex flex-row space-x-1">
@@ -108,6 +115,7 @@ const HomePage = () => {
             options={category}
             className="w-5/12"
             onChange={handleCategoryChange}
+            onClick={filterCategory}
           />
           <input
             type="text"
@@ -129,26 +137,7 @@ const HomePage = () => {
             <div className="rounded-xl p-3.5 text-center font-bold text-xl text-white bg-gpt-green px-14">
               프롬프트
             </div>
-            <Select
-              options={order}
-              onChange={handleSortChange}
-              onClick={() => {
-                if (selectedSort === "like") {
-                  changeLikeOrder();
-                } else if (selectedSort === "view") {
-                  changeViewOrder();
-                } else {
-                  changeDateOrder();
-                }
-              }}
-              // onClick={() => {
-              //   selectedSort === "like"
-              //     ? changeLikeOrder()
-              //     : selectedSort === "view"
-              //     ? changeViewOrder()
-              //     : changeDateOrder();
-              // }}
-            />
+            <Select options={order} />
           </div>
           <div className="h-4/5 grid grid-cols-3 overflow-y-scroll">
             {sortPromptList
