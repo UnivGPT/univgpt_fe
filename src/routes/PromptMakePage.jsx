@@ -15,6 +15,8 @@ const PromptMakePage = () => {
     title: "",
     description: "",
     content: "",
+    form: [],
+    category: "",
   });
   useEffect(() => {
     setPrompt({
@@ -25,6 +27,7 @@ const PromptMakePage = () => {
       category: category,
     });
   }, [title, description, content, form, category]);
+  const target = document.getElementById("deleteBtn");
 
   return (
     <div className="w-screen h-screen flex justify-evenly">
@@ -80,7 +83,7 @@ const PromptMakePage = () => {
                   value={el.label}
                 ></input>
                 <select
-                  className="text-black w-28 h-13 ml-2 mb-2 rounded-xl font-medium text-l text-center shadow"
+                  className="text-black w-28 h-13 ml-2 mb-2 rounded-xl font-medium text-center shadow"
                   key={"type" + idx}
                   id={"type" + idx}
                   onChange={(e) => {
@@ -142,6 +145,9 @@ const PromptMakePage = () => {
                     }}
                     value={el2}
                     placeholder="객관식 선택지"
+                    style={{
+                      width: "200px",
+                    }}
                   ></input>
                   <button
                     className="button-plus-blue mr-2"
@@ -161,6 +167,9 @@ const PromptMakePage = () => {
                   <button
                     type="button"
                     className="button-plus-red mr-2"
+                    style={{
+                      visibility: idx2 === 0 ? "hidden" : "visible",
+                    }}
                     onClick={() => {
                       const deletedOption = [...form[idx].options];
                       const deletedOptionForm = {
@@ -195,7 +204,7 @@ const PromptMakePage = () => {
           ))}{" "}
         </div>
         <div className="flex flex-col items-center">
-          {/*입력값 추가(아래 버튼을 누르면 폼이 하나씩 추가됨)*/}
+          {/*입력값 추가(누르면 폼이 하나씩 추가됨)*/}
           <button
             type="submit"
             className="button-a mt-4"
