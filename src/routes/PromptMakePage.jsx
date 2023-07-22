@@ -74,10 +74,12 @@ const PromptMakePage = () => {
           {form.map((el) => el)}{" "}
         </div>
         <div className="flex flex-col items-center">
+          {/*입력값 input창을 추가해주는 버튼*/}
           <button
             type="submit"
             className="button-plus"
             onClick={() => {
+
               setForm([
                 ...form,
                 <div className="flex flex-row">
@@ -87,6 +89,7 @@ const PromptMakePage = () => {
               ]);
             }}
           >
+
             +
           </button>
         </div>
@@ -103,25 +106,17 @@ const PromptMakePage = () => {
       &#13;&#10; [예시]
       &#13;&#10; 미팅 회의록을 요약해줘. 회의 주제는 #회의주제 이고,
       &#13;&#10; 요약할 때 말투는 #말투 로 해줘."
-            value={content}
-            onChange={(e) => {
-              setContent(e.target.value);
-            }}
-          ></textarea>
-          <button className="button-a self-end m-8">미리보기</button>
-        </div>
-        {/*버튼*/}
-        <div className="mt-12 flex justify-center">
-          <button className="button-e mr-16" type="reset">
-            삭제하기
-          </button>
-          <button
-            className="button-d ml-16" /*onClick=서버로 프롬프트 덩어리를 보내는 함수*/
-          >
-            게시하기
-          </button>
-        </div>
-      </div>
+
+
+      value = {content} onChange={(e) => {setContent(e.target.value)}}></textarea>
+      <button className="button-a self-end m-8">미리보기</button>
+    </div>
+    {/*삭제&게시 버튼*/}
+    <div className="mt-12 flex justify-center">
+    <button className="button-e mr-16" type="reset">삭제하기</button>
+    <button className="button-d ml-16" /*onClick=서버로 프롬프트 덩어리를 보내는 함수*/>게시하기</button>
+</div>
+    </div>
     </div>
   );
 };
