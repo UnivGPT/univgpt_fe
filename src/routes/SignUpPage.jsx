@@ -45,7 +45,7 @@ const SignUpPage = () => {
         <input
           required
           type="text"
-          id="id"
+          id="username"
           className="input"
           onChange={handleFormData}
           value={formData.username}
