@@ -1,6 +1,7 @@
 import { signUp } from "../api/api";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { BsCheckAll } from "react-icons/bs";
 
 const SignUpPage = () => {
   const [formData, setFormData] = useState({
@@ -64,15 +65,24 @@ const SignUpPage = () => {
         <label htmlFor="confirm_password" className="label font-bold text-l">
           비밀번호 확인{" "}
         </label>
-        <input
-          required
-          type="password"
-          id="confirm_password"
-          className="input"
-          onChange={handleFormData}
-          value={formData.confirm_password}
-        />
-        <br></br>
+        <div className="w-full">
+          <input
+            required
+            type="password"
+            id="confirm_password"
+            className="input "
+            onChange={handleFormData}
+            value={formData.confirm_password}
+          />
+          {formData.confirm_password === "" ? (
+            <><br></br>
+            <br></br></>
+          ) : formData.password === formData.confirm_password ? (
+            <BsCheckAll className="checkIcon" size={25} />
+          ) : <><br></br>
+            <br></br></>}
+        </div>
+
         <button type="submit" className="button-a mt-7">
           회원가입
         </button>
