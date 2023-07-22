@@ -54,12 +54,12 @@ useEffect(() => {setPrompt({title:title, description:description, content:conten
       &#13;&#10; 미팅 회의록을 요약해줘. 회의 주제는 #회의주제 이고,
       &#13;&#10; 요약할 때 말투는 #말투 로 해줘."
       value = {content} onChange={(e) => {setContent(e.target.value)}}></textarea>
-      <button className="button-c self-end m-8">미리보기</button>
+      <button className="button-a self-end m-8">미리보기</button>
     </div>
     {/*버튼*/}
-    <div className="mt-12 flex justify-around">
-    <button className="button-e" type="reset">삭제하기</button>
-    <button className="button-d" /*onClick=서버로 프롬프트 덩어리를 보내는 함수*/>게시하기</button>
+    <div className="mt-12 flex justify-center">
+    <button className="button-e mr-16" type="reset">삭제하기</button>
+    <button className="button-d ml-16" /*onClick=서버로 프롬프트 덩어리를 보내는 함수*/>게시하기</button>
 </div>
 
     </div>
