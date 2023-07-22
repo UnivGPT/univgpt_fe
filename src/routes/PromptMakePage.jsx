@@ -2,6 +2,7 @@ import { useState } from "react";
 import prompts from "../data/prompts";
 import users from "../data/users";
 import { useEffect } from "react";
+import { inputType } from "../data/category";
 
 const PromptMakePage = () => {
   {
@@ -28,9 +29,14 @@ const PromptMakePage = () => {
   }, [title, description, content]);
   //console.log(prompt);
 
+  // const promptInputAdd = () => {
+  //   if () {
+
+  //   }
+  // }
+
   return (
     <div className="w-screen h-screen flex justify-evenly">
-    
       {/*왼쪽 절반*/}
       <div className="bg-gpt-indigo w-1/2 h-full px-20 pb-6 pt-12">
         <h1 className="text-3xl font-bold mb-2.5">제목</h1>
@@ -73,8 +79,17 @@ const PromptMakePage = () => {
             type="submit"
             className="button-plus"
             onClick={() => {
-              setForm([...form, <input className="input-b my-4"/>]);
-            }}>
+
+              setForm([
+                ...form,
+                <div className="flex flex-row">
+                  <input className="input-b my-4" />
+                  <select className="w-full" options={inputType} />
+                </div>,
+              ]);
+            }}
+          >
+
             +
           </button>
         </div>
@@ -91,6 +106,7 @@ const PromptMakePage = () => {
       &#13;&#10; [예시]
       &#13;&#10; 미팅 회의록을 요약해줘. 회의 주제는 #회의주제 이고,
       &#13;&#10; 요약할 때 말투는 #말투 로 해줘."
+
 
       value = {content} onChange={(e) => {setContent(e.target.value)}}></textarea>
       <button className="button-a self-end m-8">미리보기</button>
