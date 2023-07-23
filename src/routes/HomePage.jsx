@@ -13,7 +13,7 @@ const HomePage = () => {
   const [categoryList, setCategoryList] = useState([]);
   const [searchCategory, setSearchCategory] = useState([]);
   const [searchValue, setSearchValue] = useState("");
-  const [promptList, setPromptList] = useState([]);
+  //const [promptList, setPromptList] = useState([]);
   const [promptList, setPromptList] = useState(prompts);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedSort, setSelectedSort] = useState("");
@@ -28,7 +28,7 @@ const HomePage = () => {
     getPromptListAPI();
   }, []);
 
-    const getCategoryListAPI = async () => {
+    /*const getCategoryListAPI = async () => {
       const categories = await getCategoryList();
       console.log(categories);
       const categoryName = categories.data.map((category) => {
@@ -38,7 +38,7 @@ const HomePage = () => {
       setSearchCategory(categoryName);
     };
     getCategoryListAPI();
-  }, []);
+  }, []);*/
 
   // const handleCategoryFilter = (e) => {
   //   const { innerText } = e.target;
