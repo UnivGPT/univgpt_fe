@@ -1,7 +1,4 @@
-import { useState } from "react";
-import prompts from "../data/prompts";
-import users from "../data/users";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import trashBin from "../assets/images/trashbin.png";
 import { BsQuestionCircle } from "react-icons/bs";
 
@@ -10,7 +7,7 @@ const PromptMakePage = () => {
   const [description, setDescription] = useState("");
   const [form, setForm] = useState([]);
   const [activatedChoices, setActivatedChoices] = useState([]);
-  const [category, setCategory] = useState("과제");
+  const [category, setCategory] = useState("");
   const [content, setContent] = useState("");
   const [prompt, setPrompt] = useState({
     title: "",
@@ -43,12 +40,6 @@ const PromptMakePage = () => {
     });
   }, [title, description, content, form, selectedCategories]);
 
-  // const promptInputAdd = () => {
-  //   if () {
-
-  //   }
-  // }
-
   return (
     <div className="w-screen h-screen flex justify-evenly">
       {/*왼쪽 절반*/}
@@ -67,6 +58,7 @@ const PromptMakePage = () => {
         />
         <br></br>
         <br></br>
+
         <h1 className="text-3xl font-bold mb-2.5">설명</h1>
         <input
           required
@@ -79,9 +71,11 @@ const PromptMakePage = () => {
             setDescription(e.target.value);
           }}
         />
+
         <h1 className="text-2xl font-bold mb-2.5 flex flex-col items-center">
           ________________________________________________________________________
         </h1>
+
         {/*{#입력값} 생성기*/}
         <div className="flex flex-row justify-between items-bottom mt-6 mb-1.5">
           <h1 className="text-3xl font-bold mr-10">입력값</h1>
@@ -169,8 +163,16 @@ const PromptMakePage = () => {
                   style={{
                     display: activatedChoices.includes(idx) ? "none" : "block",
                   }}
+                  onChange={(e) => {
+                    const editedForm = [...form][idx];
+                    editedForm["placeholding"] = e.target.value;
+                    const newForm = [...form];
+                    newForm.splice(idx, 1, editedForm);
+                    setForm(newForm);
+                  }}
                 ></input>
               </div>
+
               {/*객관식 선지 입력기: 객관식에서만 떠야*/}
               {el["options"].map((el2, idx2) => (
                 <div
@@ -184,16 +186,15 @@ const PromptMakePage = () => {
                     id={"options" + idx}
                     className="input-e mr-8"
                     onChange={(e) => {
-                      const newOptions = [...form[idx].options];
-                      const newOptionValue = e.target.value;
-                      newOptions.splice(idx2, 1, newOptionValue);
-                      const newOptionForm = {
-                        ...form[idx],
-                        options: newOptions,
-                      };
-                      const newForm = [...form];
-                      newForm.splice(idx, 1, newOptionForm);
-                      setForm(newForm);
+                      const newForm = [...form]; // Create a copy of the form array
+
+                      // Extract the index from the input element's id (e.g., "options1" -> 1)
+                      const idx = Number(e.target.id.replace("options", ""));
+
+                      // Update the value of the corresponding option in the copied form array
+                      newForm[idx].options[idx2] = e.target.value;
+
+                      setForm(newForm); // Update the state with the modified copy
                     }}
                     value={el2}
                     placeholder="객관식 선택지"
@@ -201,10 +202,12 @@ const PromptMakePage = () => {
                       width: "250px",
                     }}
                   ></input>
+
                   <button
                     className="button-plus-blue mr-2"
                     onClick={() => {
-                      const newOptions = [...form[idx].options, ""];
+                      const newOptions = [...form[idx].options];
+                      newOptions.push(""); // Add a new empty option
                       const newOptionForm = {
                         ...form[idx],
                         options: newOptions,
@@ -216,6 +219,7 @@ const PromptMakePage = () => {
                   >
                     +
                   </button>
+
                   <button
                     type="button"
                     className="button-plus-red mr-2"
@@ -239,11 +243,10 @@ const PromptMakePage = () => {
                   </button>
                 </div>
               ))}
+
             </>
           ))}{" "}
         </div>
-        {/*<div className="flex flex-col items-center">*/}
-        {/*입력값 추가(누르면 폼이 하나씩 추가됨)*/}
       </div>
 
       {/*오른쪽 절반*/}
@@ -267,24 +270,8 @@ const PromptMakePage = () => {
           ></textarea>
           <button className="button-b self-end m-8">미리보기</button>
         </div>
-        {/*카테고리*/}
-        {/*<h1 className="text-2xl font-bold mx-6 mt-8">카테고리</h1>
-        <select
-          onChange={(e) => {
-            setCategory(e.target.value);
-          }}
-          className="text-black w-32 h-12 mt-4 mx-6 border-gpt-green border-2 rounded-xl font-medium text-center shadow"
-        >
-          <option>과제</option>
-          <option>발표</option>
-          <option>여가</option>
-          <option>대외활동</option>
-          <option>컴퓨팅</option>
-          <option>진로</option>
-          <option>커뮤니케이션(연락)</option>
-          <option>일정</option>
-        </select>*/}
 
+        {/*카테고리*/}
         <div className="mx-6 mt-6 ml-8 flex justify-start items-baseline">
           <h1 className="text-2xl font-bold">카테고리</h1>
           <h2 className="flex font-semibold text-sm text-gray-700 ml-1">
@@ -373,6 +360,7 @@ const PromptMakePage = () => {
             ))}
           </ul>
             </div>*/}
+
 
         {/*삭제&게시 버튼*/}
         <div className="mt-14 flex justify-center">

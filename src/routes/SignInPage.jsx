@@ -20,7 +20,6 @@ const SignInPage = () => {
   const handleSignInSubmit = (e) => {
     e.preventDefault();
     signIn(formData);
-    alert("로그인이 완료되었습니다!");
   };
 
   const NaverLogin = () => {

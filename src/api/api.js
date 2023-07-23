@@ -27,6 +27,25 @@ export const signUp = async (data) => {
   return response;
 };
 
+export const checkPassword = async (data) => {
+  let response;
+  try {
+    response = await instanceWithToken.post("/account/info/", data);
+    if (response.status === 200) {
+      alert("비밀번호가 일치하네용");
+      window.location.href = "/infoedit";
+    }
+  } catch (error) {
+    if (error.response.status === 400) {
+      alert("비밀번호가 일치하지 않네용");
+    } else if (error.response.status === 401) {
+      alert("소셜 간편 로그인은 안됩니다");
+    }
+    console.error(error);
+  }
+  return response;
+};
+
 export const getPromptList = async () => {
   const response = await instance.get("/prompt/");
   return response.data;
