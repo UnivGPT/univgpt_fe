@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import trashBin from "../assets/images/trashbin.png";
+import { createPrompt } from "../api/api";
 import { BsQuestionCircle } from "react-icons/bs";
 
 const PromptMakePage = () => {
@@ -39,6 +40,31 @@ const PromptMakePage = () => {
       category: selectedCategories,
     });
   }, [title, description, content, form, selectedCategories]);
+
+  const handleCreate = async (prompt) => {
+    let { form, ...data } = prompt;
+    const response = await createPrompt(data);
+    // prompt id 받아와서 변수에 저장
+    const promptId = response.data.id;
+    console.log("FORM", form);
+    form = form.map((element) => {
+      if (element.type === "객관식") {
+        return { ...element, type: 0 };
+      } else if (element.type === "단문형") {
+        return { ...element, type: 1 };
+      } else if (element.type === "장문형") {
+        return { ...element, type: 2 };
+      } else {
+        return element; // 다른 경우에는 요소를 그대로 반환
+      }
+    });
+
+    console.log("CHANGED FORM", form);
+    // input 데이터 가공
+    // api 호출 (for문돌아야할듯)
+    // label이 name, placeholding이 placeholder, type이 type (근데 숫자로 바꿔야 함)
+    console.log("RESPONSE", response);
+  };
 
   return (
     <div className="w-screen h-screen flex justify-evenly">
@@ -103,18 +129,18 @@ const PromptMakePage = () => {
             <>
               <div className="w-full flex flex-row justify-between items-stretch mt-4">
                 <input
-                  key={"label" + idx}
-                  id={"label" + idx}
+                  key={"name" + idx}
+                  id={"name" + idx}
                   className="input-b mb-2"
                   onChange={(e) => {
                     const editedForm = [...form][idx];
-                    editedForm["label"] = e.target.value;
+                    editedForm["name"] = e.target.value;
                     const newForm = [...form];
                     newForm.splice(idx, 1, editedForm);
                     setForm(newForm);
                   }}
                   placeholder="입력값 명칭"
-                  value={el.label}
+                  value={el.name}
                 ></input>
                 <select
                   className="text-black w-28 h-13 mx-2 mb-2 rounded-xl font-medium text-center shadow"
@@ -247,6 +273,28 @@ const PromptMakePage = () => {
             </>
           ))}{" "}
         </div>
+
+        <div className="flex flex-col items-center">
+          {/*입력값 추가(누르면 폼이 하나씩 추가됨)*/}
+          <button
+            type="submit"
+            className="button-a mt-4"
+            onClick={() => {
+              setForm([
+                ...form,
+                {
+                  name: "",
+                  type: "단문형",
+                  placeholding: "",
+                  options: [""],
+                },
+              ]);
+            }}
+          >
+            입력값 추가
+          </button>
+        </div>
+
       </div>
 
       {/*오른쪽 절반*/}
@@ -375,14 +423,15 @@ const PromptMakePage = () => {
             삭제하기
           </button>
           <button
-            className="button-dt ml-16"
+
+            className="button-d ml-16"
             onClick={() => {
-              console.log(prompt);
-              //axios 통해 서버로 프롬프트 덩어리를 보내는 함수가 있어야!
-              //지금은 잘 들어왔는지 확인하기 위해 콘솔로그 찍는 기능 넣어놨어유
+              handleCreate(prompt);
               window.alert("프롬프트가 성공적으로 만들어졌습니다!");
-              //공란이 있을 시 'ㅇㅇ을 입력해주세요' alert가 뜨고 프롬프트 저장이 안되는 기능도 있어야
             }}
+            //axios 통해 서버로 프롬프트 덩어리를 보내는 함수가 있어야!
+            //지금은 잘 들어왔는지 확인하기 위해 콘솔로그 찍는 기능 넣어놨어유
+            //공란이 있을 시 'ㅇㅇ을 입력해주세요' alert가 뜨고 프롬프트 저장이 안되는 기능도 있어야
           >
             게시하기
           </button>
