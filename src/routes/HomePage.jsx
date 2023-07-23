@@ -13,7 +13,7 @@ const HomePage = () => {
   const [categoryList, setCategoryList] = useState([]);
   const [searchCategory, setSearchCategory] = useState([]);
   const [searchValue, setSearchValue] = useState("");
-  //const [promptList, setPromptList] = useState([]);
+  const [promptList, setPromptList] = useState([]);
   const [promptList, setPromptList] = useState(prompts);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedSort, setSelectedSort] = useState("");
@@ -28,17 +28,16 @@ const HomePage = () => {
     getPromptListAPI();
   }, []);
 
-    /*const getCategoryListAPI = async () => {
-      const categories = await getCategoryList();
-      console.log(categories);
-      const categoryName = categories.data.map((category) => {
-        return category.name;
-      });
-      setCategoryList(categoryName);
-      setSearchCategory(categoryName);
-    };
-    getCategoryListAPI();
-  }, []);*/
+  const getCategoryListAPI = async () => {
+    const categories = await getCategoryList();
+    console.log(categories);
+    const categoryName = categories.data.map((category) => {
+      return category.name;
+    });
+    setCategoryList(categoryName);
+    setSearchCategory(categoryName);
+  };
+  getCategoryListAPI();
 
   // const handleCategoryFilter = (e) => {
   //   const { innerText } = e.target;
@@ -64,7 +63,6 @@ const HomePage = () => {
     setSelectedCategory(e.label);
     console.log(selectedCategory);
   };
-
 
   const changeLikeOrder = () => {
     const sortedList = [...sortPromptList].sort((a, b) => {
@@ -161,11 +159,13 @@ const HomePage = () => {
                   : prompt
               )
               .filter((prompt) =>
-                selectedCategory
-                  ? prompt.category.find((category) =>
+                selectedCategory === "전체"
+                  ? prompt
+                  : selectedCategory === ""
+                  ? prompt
+                  : prompt.category.find((category) =>
                       category.name.includes(selectedCategory)
                     )
-                  : prompt
               )
               .map((prompt) => (
                 <MidPrompt key={prompt.id} prompt={prompt} />

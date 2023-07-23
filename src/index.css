@@ -124,13 +124,15 @@ code {
 
 .commentbubble {
   position: relative;
-  width: 200px;
-  height: 40px;
+  width: 130px;
+  min-height: max-content;
   padding: 3px;
+  padding-top: 10px;
+  padding-bottom: 12px;
   background: #73a8e9;
   -webkit-border-radius: 27px;
   -moz-border-radius: 27px;
-  border-radius: 27px;
+  border-radius: 20px;
 }
 
 .commentbubble:after {
@@ -143,7 +145,7 @@ code {
   width: 0;
   z-index: 1;
   left: -10px;
-  top: 8px;
+  top: 10px;
 }
 
 /*@media screen and (max-width: 1024px) {
