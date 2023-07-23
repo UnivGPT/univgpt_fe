@@ -1,20 +1,24 @@
 <h2>UnivGPT FrontEnd</h2>
 
-<h3>7/13 현재까지 Routes 페이지 명칭</h3>
-- HomePage
+<h3>7/23 현재까지 Routes 페이지 명칭</h3>
 <br>
-- InfoEditPage (/infoedit)
+/infoedit => InfoEditPage 
 <br>
-- MyPage (/mypage)
+/mypage => MyPage
 <br>
-- PromptDetailPage (/:promptId)
+/signin => SignInPage
 <br>
-- PromptEditPage (/:promptId/edit)
+/signup => SignUpPage 
 <br>
-- PromptMakePage (/:promptId/make)
+/promptdetail => PromptDetailPage
 <br>
-- SignInPage (/signin)
+/promptedit => PromptEditPage
 <br>
-- SignUpPage (/signup)
+/promptmake => PromptMakePage
+<br>
+/promptresult => PromptResult 
+<br>
+/infocheck => InfoCheck 
+<br>
 <br>
 화이탱~~~~~

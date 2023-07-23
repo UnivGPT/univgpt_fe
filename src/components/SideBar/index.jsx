@@ -11,7 +11,7 @@ export const HomeSideBar = ({ user, prompt }) => {
   return (
     <div className="flex flex-col space-y-4 align-middle items-center">
       <Link
-        to="/:promptId/make"
+        to="/promptmake"
         className="button-b w-11/12 flex flex-col items-center"
       >
         내 프롬프트 만들기
