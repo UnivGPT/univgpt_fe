@@ -141,10 +141,11 @@ export const getInputList = async () => {
 export const createInput = async (data) => {
   const response = await instanceWithToken.post("/input/", data);
   if (response.status === 201) {
-    console.log("POST SUCCESS");
+    // console.log("POST SUCCESS");
   } else {
     console.log("[ERROR] error while creating input");
   }
+  return response;
 };
 
 export const deleteInput = async (id) => {
@@ -165,10 +166,12 @@ export const getOptionList = async (data) => {
 export const createOption = async (data) => {
   const response = await instanceWithToken.post("/option/", data);
   if (response.status === 201) {
-    console.log("POST SUCCESS");
+    console.log("OPTION SUCCESS");
   } else {
     console.log("[ERROR] error while creating option");
   }
+
+  return response;
 };
 
 export const deleteOption = async (id) => {

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import trashBin from "../assets/images/trashbin.png";
-import { createPrompt } from "../api/api";
+import { createPrompt, createInput, createOption } from "../api/api";
 import { BsQuestionCircle } from "react-icons/bs";
 
 const PromptMakePage = () => {
@@ -62,7 +62,26 @@ const PromptMakePage = () => {
     console.log("CHANGED FORM", form);
     // input 데이터 가공
     // api 호출 (for문돌아야할듯)
-    // label이 name, placeholding이 placeholder, type이 type (근데 숫자로 바꿔야 함)
+    for (let i in form) {
+      const data = form[i];
+      data.prompt = promptId;
+      const inputResponse = await createInput(data);
+      if (data.type === 0) {
+        const inputId = inputResponse.data.id;
+        const options = data.options;
+        for (let j in options) {
+          const option = options[j];
+          console.log("OPTION CONTENT", option);
+          const optionData = {
+            name: option,
+            input: inputId,
+          };
+          const optionResponse = await createOption(optionData);
+          console.log("option created", optionResponse);
+        }
+      }
+      console.log("inputResponse", inputResponse);
+    }
     console.log("RESPONSE", response);
   };
 
@@ -112,7 +131,7 @@ const PromptMakePage = () => {
               setForm([
                 ...form,
                 {
-                  label: "",
+                  name: "",
                   type: "단문형",
                   placeholding: "",
                   options: [""],
@@ -269,7 +288,6 @@ const PromptMakePage = () => {
                   </button>
                 </div>
               ))}
-
             </>
           ))}{" "}
         </div>
@@ -294,7 +312,6 @@ const PromptMakePage = () => {
             입력값 추가
           </button>
         </div>
-
       </div>
 
       {/*오른쪽 절반*/}
@@ -409,7 +426,6 @@ const PromptMakePage = () => {
           </ul>
             </div>*/}
 
-
         {/*삭제&게시 버튼*/}
         <div className="mt-14 flex justify-center">
           <button
@@ -423,7 +439,6 @@ const PromptMakePage = () => {
             삭제하기
           </button>
           <button
-
             className="button-d ml-16"
             onClick={() => {
               handleCreate(prompt);
