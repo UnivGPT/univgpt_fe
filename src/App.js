@@ -27,17 +27,16 @@ function App() {
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/signin" element={<SignInPage />} />
           <Route path="/signup" element={<SignUpPage />} />
-          <Route path="/:promptId" element={<PromptDetailPage />} />
-          <Route path="/:promptId/edit" element={<PromptEditPage />} />
-          <Route path="/:promptId/make" element={<PromptMakePage />} />
-          <Route path="/infocheck" element={<InfoCheck />} />
+          <Route path="/promptdetail" element={<PromptDetailPage />} />
+          <Route path="/promptedit" element={<PromptEditPage />} />
+          <Route path="/promptmake" element={<PromptMakePage />} />
+          <Route path="/promptresult" element={<PromptResult />} />
+          <Route path="/infocheck" element={<InfoCheck />} /> 
           <Route path="api/auth/callback/naver" element={<NaverCallBack />} />
           <Route path="api/auth/callback/google" element={<GoogleCallBack />} />
-          <Route path="api/auth/callback/kakao" element={<KakaoCallback/>} />
-          <Route path="/promptresult" element={<PromptResult/>} />
+          <Route path="api/auth/callback/kakao" element={<KakaoCallback />} />
         </Routes>
       </BrowserRouter>
-      {/*InfoPassword랑 InfoEdit, promptresult, prompt edit 등등은 나중에 url userId별로 바꿔야 함! 지금은 그냥 디자인 들어가서 보려고 이렇게 해놨어유*/}
     </div>
   );
 }
