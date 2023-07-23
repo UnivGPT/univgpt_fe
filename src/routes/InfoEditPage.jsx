@@ -8,7 +8,7 @@ const InfoEditPage = () => {
   };
 
   return (
-    <div className="flex flex-col items-center w-1/2">
+    <div className="flex flex-col items-center h-screen w-1/2">
       <br></br>
       <br></br>
       <h3 className="font-semibold text-5xl">회원정보 수정</h3>
@@ -37,11 +37,11 @@ const InfoEditPage = () => {
 
         <br></br>
         <div className="flex flex-row items-center space-x-14">
-          <button type="submit" className="button mt-7">
+          <button type="submit" className="button-a mt-7">
             저장하기
           </button>
           {/*취소 버튼은 type을 뭘로 해야 할지?*/}
-          <button type="submit" className="button mt-7">
+          <button type="submit" className="button-a mt-7">
             취소하기
           </button>
         </div>
