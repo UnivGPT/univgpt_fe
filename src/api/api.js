@@ -170,6 +170,8 @@ export const createOption = async (data) => {
   } else {
     console.log("[ERROR] error while creating option");
   }
+
+  return response;
 };
 
 export const deleteOption = async (id) => {

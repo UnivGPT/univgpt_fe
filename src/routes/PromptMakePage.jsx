@@ -66,6 +66,20 @@ const PromptMakePage = () => {
       const data = form[i];
       data.prompt = promptId;
       const inputResponse = await createInput(data);
+      if (data.type === 0) {
+        const inputId = inputResponse.data.id;
+        const options = data.options;
+        for (let j in options) {
+          const option = options[j];
+          console.log("OPTION CONTENT", option);
+          const optionData = {
+            name: option,
+            input: inputId,
+          };
+          const optionResponse = await createOption(optionData);
+          console.log("option created", optionResponse);
+        }
+      }
       console.log("inputResponse", inputResponse);
     }
     console.log("RESPONSE", response);
@@ -117,7 +131,7 @@ const PromptMakePage = () => {
               setForm([
                 ...form,
                 {
-                  label: "",
+                  name: "",
                   type: "단문형",
                   placeholding: "",
                   options: [""],
