@@ -1,4 +1,22 @@
+import { checkPassword } from "../api/api";
+import { useState, useEffect } from "react";
+
 const InfoCheck = () => {
+  const [password, setPassword] = useState("");
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handlePasswordSubmit = async (e) => {
+    e.preventDefault();
+    console.log("password input", password);
+    const data = {
+      password: password,
+    };
+    await checkPassword(data);
+  };
+
   return (
     <div className="w-100% h-100% py-20 mx-10">
       <div className="border-box border-white bg-white rounded-3xl px-20 py-10 m-12">
@@ -13,12 +31,13 @@ const InfoCheck = () => {
               <br></br>
               <br></br>
             </h1>
-            <form className="form-b">
+            <form className="form-b" onSubmit={handlePasswordSubmit}>
               <input
                 required
                 type="password"
                 id="password"
                 className="input-b"
+                onChange={handlePasswordChange}
               />
               <br></br>
               <div className="flex flex-col items-center w=1/2">
