@@ -61,10 +61,11 @@ export const createPrompt = async (data, navigate) => {
   if (response.status === 201) {
     console.log("POST SUCCESS");
     const prompt_id = response.id;
-    navigate(`/${prompt_id}/`);
+    // navigate(`/${prompt_id}/`);
   } else {
     console.log("[ERROR] error while creating prompt");
   }
+  return response;
 };
 
 export const updatePrompt = async (id, data, navigate) => {
