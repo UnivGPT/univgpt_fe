@@ -3,6 +3,7 @@ import prompts from "../data/prompts";
 import users from "../data/users";
 import { useEffect } from "react";
 import trashBin from "../assets/images/trashbin.png";
+import { BsQuestionCircle } from "react-icons/bs";
 
 const PromptMakePage = () => {
   const [title, setTitle] = useState("");
@@ -18,15 +19,29 @@ const PromptMakePage = () => {
     form: [],
     category: "",
   });
+
+  const [selectedCategories, setSelectedCategories] = useState([]);
+
+  const handleCategoryChange = (e) => {
+    const { value, checked } = e.target;
+    if (checked) {
+      setSelectedCategories((prevSelected) => [...prevSelected, value]);
+    } else {
+      setSelectedCategories((prevSelected) =>
+        prevSelected.filter((category) => category !== value)
+      );
+    }
+  };
+
   useEffect(() => {
     setPrompt({
       title: title,
       description: description,
       form: form,
       content: content,
-      category: category,
+      category: selectedCategories,
     });
-  }, [title, description, content, form, category]);
+  }, [title, description, content, form, selectedCategories]);
 
   // const promptInputAdd = () => {
   //   if () {
@@ -37,7 +52,7 @@ const PromptMakePage = () => {
   return (
     <div className="w-screen h-screen flex justify-evenly">
       {/*왼쪽 절반*/}
-      <div className="bg-gpt-indigo w-1/2 h-full px-20 pb-6 pt-12">
+      <div className="bg-gpt-indigo w-1/2 h-full pl-20 pr-20 pb-6 pt-8">
         <h1 className="text-3xl font-bold mb-2.5">제목</h1>
         <input
           required
@@ -65,14 +80,34 @@ const PromptMakePage = () => {
           }}
         />
         <h1 className="text-2xl font-bold mb-2.5 flex flex-col items-center">
-          ____________________________________________________________________
+          ________________________________________________________________________
         </h1>
         {/*{#입력값} 생성기*/}
-        <h1 className="text-3xl font-bold mt-6 mb-2.5">입력값</h1>
-        <div className="h-2/5 flex flex-col items-center overflow-y-auto">
+        <div className="flex flex-row justify-between items-bottom mt-6 mb-1.5">
+          <h1 className="text-3xl font-bold mr-10">입력값</h1>
+          <button
+            type="submit"
+            className="button-a-2 ml-8"
+            onClick={() => {
+              setForm([
+                ...form,
+                {
+                  label: "",
+                  type: "단문형",
+                  placeholding: "",
+                  options: [""],
+                },
+              ]);
+            }}
+          >
+            입력값 추가
+          </button>
+        </div>
+
+        <div className="h-96 flex flex-col items-center overflow-y-auto">
           {form.map((el, idx) => (
             <>
-              <div className="w-full flex flex-row justify-between">
+              <div className="w-full flex flex-row justify-between items-stretch mt-4">
                 <input
                   key={"label" + idx}
                   id={"label" + idx}
@@ -88,7 +123,7 @@ const PromptMakePage = () => {
                   value={el.label}
                 ></input>
                 <select
-                  className="text-black w-28 h-13 ml-2 mb-2 rounded-xl font-medium text-center shadow"
+                  className="text-black w-28 h-13 mx-2 mb-2 rounded-xl font-medium text-center shadow"
                   key={"type" + idx}
                   id={"type" + idx}
                   onChange={(e) => {
@@ -111,6 +146,18 @@ const PromptMakePage = () => {
                   <option>장문형</option>
                   <option>객관식</option>
                 </select>
+                {/*삭제버튼(누르면 입력값 한 세트가 삭제됨)*/}
+                <button
+                  type="button"
+                  className="button-e-2 mb-2 "
+                  onClick={() => {
+                    const deletedForm = [...form];
+                    deletedForm.splice(idx, 1);
+                    setForm(deletedForm);
+                  }}
+                >
+                  <img src={trashBin} className="w-5 h-5"></img>
+                </button>
               </div>
 
               {/*placeholder 입력기: 단문형과 장문형에서만 떠야*/}
@@ -192,50 +239,22 @@ const PromptMakePage = () => {
                   </button>
                 </div>
               ))}
-
-              {/*삭제버튼(누르면 입력값 한 세트가 삭제됨)*/}
-              <button
-                type="button"
-                className="button-e items-center mb-8"
-                onClick={() => {
-                  const deletedForm = [...form];
-                  deletedForm.splice(idx, 1);
-                  setForm(deletedForm);
-                }}
-              >
-                <img src={trashBin} className="w-4 h-4"></img>
-              </button>
             </>
           ))}{" "}
         </div>
-        <div className="flex flex-col items-center">
-          {/*입력값 추가(누르면 폼이 하나씩 추가됨)*/}
-          <button
-            type="submit"
-            className="button-a mt-4"
-            onClick={() => {
-              setForm([
-                ...form,
-                {
-                  label: "",
-                  type: "단문형",
-                  placeholding: "",
-                  options: [""],
-                },
-              ]);
-            }}
-          >
-            입력값 추가
-          </button>
-        </div>
+        {/*<div className="flex flex-col items-center">*/}
+        {/*입력값 추가(누르면 폼이 하나씩 추가됨)*/}
       </div>
 
       {/*오른쪽 절반*/}
-      <div className="bg-white text-black w-1/2 h-full p-10 pr-20">
-        <h1 className="text-5xl font-bold mx-6 mb-8">프롬프트</h1>
+      <div className="bg-white text-black w-1/2 h-full p-8 pl-10 pr-20">
+        <div className="flex justify-between mt-4">
+          <h1 className="text-5xl font-bold mx-6 mb-8">프롬프트</h1>
+          <BsQuestionCircle size={45} className="qmark ml-4" />
+        </div>
         <div className="rounded-3xl bg-gray-200  mx-6 h-1/2 w-full flex flex-col">
           <textarea
-            className="w-auto h-5/6 bg-gray-200 overflow-y-auto focus:border-transparent m-4 p-6 resize-none outline-none"
+            className="w-auto h-5/6 bg-gray-200 overflow-y-auto focus:border-transparent mx-4 p-6 resize-none outline-none"
             placeholder=" ChatGPT에게 전달될 프롬프트를 작성해주세요.
       &#13;&#10;사용자의 입력값이 들어갔으면 하는 부분에 #을 입력하세요.
       &#13;&#10; [예시]
@@ -246,10 +265,10 @@ const PromptMakePage = () => {
               setContent(e.target.value);
             }}
           ></textarea>
-          <button className="button-a self-end m-8">미리보기</button>
+          <button className="button-b self-end m-8">미리보기</button>
         </div>
         {/*카테고리*/}
-        <h1 className="text-2xl font-bold mx-6 mt-8">카테고리</h1>
+        {/*<h1 className="text-2xl font-bold mx-6 mt-8">카테고리</h1>
         <select
           onChange={(e) => {
             setCategory(e.target.value);
@@ -264,17 +283,118 @@ const PromptMakePage = () => {
           <option>진로</option>
           <option>커뮤니케이션(연락)</option>
           <option>일정</option>
-        </select>
+        </select>*/}
+
+        <div className="mx-6 mt-6 ml-8 flex justify-start items-baseline">
+          <h1 className="text-2xl font-bold">카테고리</h1>
+          <h2 className="flex font-semibold text-sm text-gray-700 ml-1">
+            카테고리는 중복 선택이 가능합니다.
+          </h2>
+        </div>
+        <div className="flex justify-items mx-10 mt-3">
+          <label
+            className={`button-checkbox ${
+              selectedCategories.includes("과제") ? "active" : ""
+            } button-check`}
+          >
+            과제
+            <input
+              type="checkbox"
+              value="과제"
+              checked={selectedCategories.includes("과제")}
+              onChange={handleCategoryChange}
+              style={{ display: "none" }}
+            />
+          </label>
+
+          <label
+            className={`button-checkbox ${
+              selectedCategories.includes("발표") ? "active" : ""
+            } button-check`}
+          >
+            발표
+            <input
+              type="checkbox"
+              value="발표"
+              checked={selectedCategories.includes("발표")}
+              onChange={handleCategoryChange}
+              style={{ display: "none" }}
+            />
+          </label>
+          <label
+            className={`button-checkbox ${
+              selectedCategories.includes("취준") ? "active" : ""
+            } button-check`}
+          >
+            취준
+            <input
+              type="checkbox"
+              value="취준"
+              checked={selectedCategories.includes("취준")}
+              onChange={handleCategoryChange}
+              style={{ display: "none" }}
+            />
+          </label>
+          <label
+            className={`button-checkbox ${
+              selectedCategories.includes("여가") ? "active" : ""
+            } button-check`}
+          >
+            여가
+            <input
+              type="checkbox"
+              value="여가"
+              checked={selectedCategories.includes("여가")}
+              onChange={handleCategoryChange}
+              style={{ display: "none" }}
+            />
+          </label>
+          <label
+            className={`button-checkbox ${
+              selectedCategories.includes("연락") ? "active" : ""
+            } button-check`}
+          >
+            연락
+            <input
+              type="checkbox"
+              value="연락"
+              checked={selectedCategories.includes("연락")}
+              onChange={handleCategoryChange}
+              style={{ display: "none" }}
+            />
+          </label>
+        </div>
+
+        {/*내가 볼라고 만든 기능
+          <div><h3>선택된 카테고리</h3>
+          <ul>
+            {selectedCategories.map((category) => (
+              <li key={category}>{category}</li>
+            ))}
+          </ul>
+            </div>*/}
+
         {/*삭제&게시 버튼*/}
-        <div className="mt-12 flex justify-center">
-          <button className="button-e mr-16" type="reset">
+        <div className="mt-14 flex justify-center">
+          <button
+            className="button-et ml-4 mr-16"
+            type="reset"
+            onClick={() => {
+              window.location.reload();
+              window.alert("프롬프트가 삭제되었습니다!");
+            }}
+          >
             삭제하기
           </button>
           <button
-            className="button-d ml-16"
-            onClick={() => console.log(prompt)}
-            //axios 통해 서버로 프롬프트 덩어리를 보내는 함수가 있어야!
-            //지금은 잘 들어왔는지 확인하기 위해 콘솔로그 찍는 기능 넣어놨어유
+            className="button-dt ml-16"
+            onClick={() => {
+              console.log(prompt);
+              //axios 통해 서버로 프롬프트 덩어리를 보내는 함수가 있어야!
+              //지금은 잘 들어왔는지 확인하기 위해 콘솔로그 찍는 기능 넣어놨어유
+              window.alert("프롬프트가 성공적으로 만들어졌습니다!");
+              //공란이 있을 시 'ㅇㅇ을 입력해주세요' alert가 뜨고 프롬프트 저장이 안되는 기능도 있어야
+            }}
           >
             게시하기
           </button>

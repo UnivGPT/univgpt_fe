@@ -11,7 +11,7 @@ export const HomeSideBar = ({ user, prompt }) => {
   return (
     <div className="flex flex-col space-y-4 align-middle items-center">
       <Link
-        to="/:promptId/make"
+        to="/promptmake"
         className="button-b w-11/12 flex flex-col items-center"
       >
         내 프롬프트 만들기
@@ -24,17 +24,17 @@ export const HomeSideBar = ({ user, prompt }) => {
         <div className="rounded-xl p-3.5 mb-3 text-center font-bold text-lg text-white bg-gpt-blue">
           오늘의 프롬프트
         </div>
-        <SmallPrompt rank="🥇" prompt={prompt[0]} />
+        {/* <SmallPrompt rank="🥇" prompt={prompt[0]} />
         <SmallPrompt rank="🥈" prompt={prompt[1]} />
         <SmallPrompt rank="🥉" prompt={prompt[2]} />
         <SmallPrompt rank="4" prompt={prompt[3]} />
-        <SmallPrompt rank="5" prompt={prompt[4]} />
+        <SmallPrompt rank="5" prompt={prompt[4]} /> */}
       </div>
     </div>
   );
 };
 
-export const PromptSideBar = ( {user, prompt, comment}) => {
+export const PromptSideBar = ({ user, prompt, comment }) => {
   console.log(user);
   // console.log(prompt);
   //console.log(user[0].username);

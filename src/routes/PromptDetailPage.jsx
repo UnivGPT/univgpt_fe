@@ -1,24 +1,24 @@
 import { useState, useEffect } from "react";
 import { getPromptDetail } from "../api/api";
 import { PromptSideBar } from "../components/SideBar";
-// import comments from "../data/comments";
-// import prompts from "../data/prompts";
-// import users from "../data/users";
+import comments from "../data/comments";
+import prompts from "../data/prompts";
+import users from "../data/users";
 import Select from "react-select";
 import { useParams } from "react-router-dom";
 
 const PromptDetailPage = () => {
   const { promptId } = useParams;
   const [prompt, setPrompt] = useState();
-  const [user, setUser] = useState(users);
+  const [isUser, setIsUser] = useState(users);
 
-  useEffect(() => {
-    const getPromptDetailAPI = async () => {
-      const prompt = await getPromptDetail(promptId);
-      setPrompt(prompt);
-    };
-    getPromptDetailAPI();
-  }, [promptId]);
+  // useEffect(() => {
+  //   const getPromptDetailAPI = async () => {
+  //     const prompt = await getPromptDetail(promptId);
+  //     setPrompt(prompt);
+  //   };
+  //   getPromptDetailAPI();
+  // }, [promptId]);
 
   // console.log(isUser);
   // 	const [newPrompt, setNewPrompt] = useState({
@@ -41,8 +41,7 @@ const PromptDetailPage = () => {
           comment={comments[0]}
         />
       </div>
-
-      {/*프롬프트 내용 작성 박스/하드코딩된 거 내일 다 바꿔야*/}
+      
       <form className="w-4/6 flex flex-col items-center bg-white text-black p-11 ml-20 pl rounded-3xl ">
         <h1 className="font-bold text-7xl text-gpt-indigo">
           {" "}
