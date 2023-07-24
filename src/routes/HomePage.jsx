@@ -1,6 +1,6 @@
 import { HomeSideBar } from "../components/SideBar";
 import users from "../data/users";
-import prompts from "../data/prompts";
+// import prompts from "../data/prompts";
 import { useState, useEffect } from "react";
 import { category, order } from "../data/category";
 import Select from "react-select";
@@ -13,11 +13,10 @@ const HomePage = () => {
   const [categoryList, setCategoryList] = useState([]);
   const [searchCategory, setSearchCategory] = useState([]);
   const [searchValue, setSearchValue] = useState("");
-  //const [promptList, setPromptList] = useState([]);
-  const [promptList, setPromptList] = useState(prompts);
+  const [promptList, setPromptList] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedSort, setSelectedSort] = useState("");
-  const [sortPromptList, setSortPromptList] = useState(prompts);
+  const [sortPromptList, setSortPromptList] = useState([]);
 
   useEffect(() => {
     const getPromptListAPI = async () => {
@@ -28,7 +27,7 @@ const HomePage = () => {
     getPromptListAPI();
   }, []);
 
-    /*const getCategoryListAPI = async () => {
+  /*const getCategoryListAPI = async () => {
       const categories = await getCategoryList();
       console.log(categories);
       const categoryName = categories.data.map((category) => {
@@ -64,7 +63,6 @@ const HomePage = () => {
     setSelectedCategory(e.label);
     console.log(selectedCategory);
   };
-
 
   const changeLikeOrder = () => {
     const sortedList = [...sortPromptList].sort((a, b) => {
