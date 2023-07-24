@@ -319,10 +319,10 @@ const PromptMakePage = () => {
           <textarea
             className="w-auto h-5/6 bg-gray-200 overflow-y-auto focus:border-transparent mx-4 p-6 resize-none outline-none"
             placeholder=" ChatGPT에게 전달될 프롬프트를 작성해주세요.
-      &#13;&#10;사용자의 입력값이 들어갔으면 하는 부분에 #을 입력하세요.
-      &#13;&#10; [예시]
-      &#13;&#10; 미팅 회의록을 요약해줘. 회의 주제는 #회의주제 이고,
-      &#13;&#10; 요약할 때 말투는 #말투 로 해줘."
+      &#13;&#10;사용자의 입력값이 들어갔으면 하는 부분을 [입력값] 형태로 지정하세요.
+      &#13;&#10; <예시>
+      &#13;&#10; 미팅 회의록을 요약해줘. 회의 주제는 [회의주제] 이고,
+      &#13;&#10; 요약할 때 말투는 [말투]로, 총 길이는 [글자 수]로 해줘."
             value={content}
             onChange={(e) => {
               setContent(e.target.value);
