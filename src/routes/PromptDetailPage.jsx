@@ -95,7 +95,7 @@ const PromptDetailPage = () => {
   //   };
 
   return (
-    <div className="w-full flex flex-row space-between">
+    <div className="w-screen h-screen flex flex-row ">
       <div className="w-60">
         <PromptSideBar
           key={isUser.id}
@@ -105,8 +105,11 @@ const PromptDetailPage = () => {
         />
       </div>
 
-      <form className="w-4/6 flex flex-col items-center bg-white text-black p-11 ml-20 pl rounded-3xl ">
-        <h1 className="font-bold text-7xl text-gpt-indigo"> {prompt.title} </h1>
+      <form className="flex-grow flex flex-col items-center justify-center h-4/5 w-2/3 bg-white text-black p-11 mx-20 rounded-3xl">
+        <h1 className="font-bold text-7xl text-gpt-indigo">
+          {prompt.title}
+        </h1>
+
         <h1 className="font-extrabold text-xl text-gpt-indigo mt-4">
           {prompt.description}
         </h1>
