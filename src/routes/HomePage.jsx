@@ -16,11 +16,11 @@ const HomePage = () => {
   const [categoryList, setCategoryList] = useState([]);
   const [searchCategory, setSearchCategory] = useState([]);
   const [searchValue, setSearchValue] = useState("");
-  //const [promptList, setPromptList] = useState([]);
-  const [promptList, setPromptList] = useState(prompts);
-//const [selectedCategory, setSelectedCategory] = useState("");
-  //const [selectedSort, setSelectedSort] = useState("");
-  //const [sortPromptList, setSortPromptList] = useState([]);
+  const [promptList, setPromptList] = useState([]);
+  // const [promptList, setPromptList] = useState(prompts);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedSort, setSelectedSort] = useState("");
+  const [sortPromptList, setSortPromptList] = useState([]);
 
   //useEffect(() => {
   //const getPromptListAPI = async () => {

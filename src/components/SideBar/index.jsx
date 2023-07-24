@@ -3,10 +3,16 @@ import { HiUserCircle } from "react-icons/hi";
 import { SmallPrompt } from "../Prompts";
 import Comment from "../Comments";
 import comments from "../../data/comments";
+import emptyheart from "../../assets/images/emptyheart.png";
+import redheart from "../../assets/images/redheart.png";
+import { likePrompt, getSecureUser } from "../../api/api";
+import { useState, useEffect } from "react";
+import { getCookie } from "../../utils/cookie";
 
 export const HomeSideBar = ({ user, prompt }) => {
   // console.log(user);
   // console.log(user[0].username);
+ 
 
   return (
     <div className="flex flex-col space-y-4 align-middle items-center">
@@ -38,6 +44,41 @@ export const PromptSideBar = ({ user, prompt, comment }) => {
   console.log(user);
   // console.log(prompt);
   console.log(user.username);
+ const [likeCount, setLikeCount] = useState(0);
+  const [isLike, setIsLike] = useState(false);
+  // const [user, setUser] = useState();
+
+  useEffect(() => {
+    // access_token이 있으면 유저 정보 가져옴
+    if (getCookie("access_token")) {
+      const getSecureUserAPI = async () => {
+        const like_list = prompt.like_users;
+        const user = await getSecureUser();
+
+        if (like_list.includes(user.id)) {
+          setIsLike(true);
+        }
+
+        // setUser(user);
+      };
+      getSecureUserAPI();
+    }
+    if (prompt.like_users) {
+      setLikeCount(prompt.like_users.length);
+    }
+  }, [prompt.like_users]);
+
+  const onClickLike = async () => {
+    try {
+      const response = await likePrompt(prompt.id);
+      setLikeCount(response.like_users.length);
+      setIsLike(!isLike);
+    } catch (error) {
+      console.log("[ERROR] failed to like prompt");
+    }
+  };
+
+
   return (
     <div className="h-full flex flex-col space-y-5 bg-white text-black rounded-tr-3xl p-5">
       <Link
@@ -55,7 +96,19 @@ export const PromptSideBar = ({ user, prompt, comment }) => {
       <div>
         <div>프롬프트 정보</div>
         <div>👀 {prompt.view}</div>
-        <div>❤️ {prompt.like_users.length}</div>
+        <div>{isLike ? (
+              <div className="w-5 h-5">
+                <img src={redheart} onClick={onClickLike}></img>
+              </div>
+            ) : (
+              <div className="w-5 h-5">
+                <img
+                  src={emptyheart}
+                  onClick={onClickLike}
+                  className="cursor-pointer"
+                ></img>
+              </div>
+            )}</div>
       </div>
       <div>
         <Comment />
