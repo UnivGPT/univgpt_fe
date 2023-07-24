@@ -5,10 +5,10 @@ import comments from "../data/comments";
 // import prompts from "../data/prompts";
 import users from "../data/users";
 import Select from "react-select";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import emptyheart from "../assets/images/emptyheart.png";
+import redheart from "../assets/images/redheart.png";
 
-import { HiUserCircle } from "react-icons/hi";
-import gpt_logo from "../assets/images/logo_gpt.png";
 
 const PromptDetailPage = () => {
   const { promptId } = useParams();
@@ -113,8 +113,10 @@ const PromptDetailPage = () => {
         />
       </div>
 
+      <form className="flex-grow flex flex-col items-center justify-center h-4/5 w-2/3 bg-white text-black p-11 mx-20 rounded-3xl">
+        <h1 className="font-bold text-7xl text-gpt-indigo">{prompt.title}</h1>
 
-      {resultPage ? (
+          {/* {resultPage ? (
         <div className="w-screen h-screen flex flex-col items-center">
           <form className="w-4/5 h-3/4 flex flex-col items-center bg-gray-200 text-black p-11 rounded-3xl ">
             {/*사용자 측 프롬프트 질문*/}
@@ -170,7 +172,7 @@ const PromptDetailPage = () => {
         <form className="flex-grow flex flex-col items-center justify-center h-4/5 w-2/3 bg-white text-black p-11 mx-20 rounded-3xl">
         <h1 className="font-bold text-7xl text-gpt-indigo">
           {prompt.title}
-        </h1>
+        </h1>*/}
 
         <h1 className="font-extrabold text-xl text-gpt-indigo mt-4">
           {prompt.description}

@@ -1,6 +1,6 @@
 import { HomeSideBar } from "../components/SideBar";
 import users from "../data/users";
-import prompts from "../data/prompts";
+// import prompts from "../data/prompts";
 import { useState, useEffect } from "react";
 import { category, order } from "../data/category";
 import Select from "react-select";
@@ -15,29 +15,32 @@ const HomePage = () => {
   const [searchValue, setSearchValue] = useState("");
   const [promptList, setPromptList] = useState([]);
   const [promptList, setPromptList] = useState(prompts);
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [selectedSort, setSelectedSort] = useState("");
-  const [sortPromptList, setSortPromptList] = useState(prompts);
+//const [selectedCategory, setSelectedCategory] = useState("");
+  //const [selectedSort, setSelectedSort] = useState("");
+  //const [sortPromptList, setSortPromptList] = useState([]);
 
-  useEffect(() => {
-    const getPromptListAPI = async () => {
-      const prompts = await getPromptList();
-      setPromptList(prompts);
-      setSortPromptList(prompts);
+  //useEffect(() => {
+  //const getPromptListAPI = async () => {
+  //const prompts = await getPromptList();
+  //setPromptList(prompts);
+  //setSortPromptList(prompts);
+   //};
+   //getPromptListAPI();
+  //}, []);
+
+
+  /*const getCategoryListAPI = async () => {
+      const categories = await getCategoryList();
+      console.log(categories);
+      const categoryName = categories.data.map((category) => {
+        return category.name;
+      });
+      setCategoryList(categoryName);
+      setSearchCategory(categoryName);
     };
-    getPromptListAPI();
-  }, []);
+    getCategoryListAPI();
+  }, []);*/
 
-  const getCategoryListAPI = async () => {
-    const categories = await getCategoryList();
-    console.log(categories);
-    const categoryName = categories.data.map((category) => {
-      return category.name;
-    });
-    setCategoryList(categoryName);
-    setSearchCategory(categoryName);
-  };
-  getCategoryListAPI();
 
   // const handleCategoryFilter = (e) => {
   //   const { innerText } = e.target;
