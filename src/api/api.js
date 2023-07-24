@@ -103,7 +103,7 @@ export const likePrompt = async (promptId) => {
   const response = await instanceWithToken.post(`/prompt/${promptId}/like/`);
   if (response.status === 200) {
     console.log("PROMPT LIKE SUCCESS");
-    window.location.reload();
+    return response.data;
   } else {
     console.log("[ERROR] error while liking post");
   }
@@ -199,4 +199,24 @@ export const updateOption = async (id, data) => {
   } else {
     console.log("[ERROR] error while updating option");
   }
+};
+
+export const getUser = async () => {
+  const response = await instanceWithToken.get("/account/info/");
+  if (response.status === 200) {
+    console.log("GET USER SUCCESS");
+  } else {
+    console.log("[ERROR] error while getting user");
+  }
+  return response.data;
+};
+
+export const getSecureUser = async () => {
+  const response = await instanceWithToken.get("/account/secureinfo/");
+  if (response.status === 200) {
+    console.log("GET SECUREUSER SUCCESS");
+  } else {
+    console.log("[ERROR] error while getting secureuser");
+  }
+  return response.data;
 };

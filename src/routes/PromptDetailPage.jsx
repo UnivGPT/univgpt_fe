@@ -5,19 +5,20 @@ import comments from "../data/comments";
 // import prompts from "../data/prompts";
 import users from "../data/users";
 import Select from "react-select";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import emptyheart from "../assets/images/emptyheart.png";
+import redheart from "../assets/images/redheart.png";
 
-import { HiUserCircle } from "react-icons/hi";
-import gpt_logo from "../assets/images/logo_gpt.png";
 
 const PromptDetailPage = () => {
   const { promptId } = useParams();
   const [prompt, setPrompt] = useState([]);
 
-  const [resultPage, setResultPage] = useState(false);
-  const navigate = useNavigate();
   const [input, setInput] = useState([]);
   const [option, setOption] = useState([]);
+  const [resultPage, setResultPage] = useState(false);
+  //const navigate = useNavigate();
+
 
   useEffect(() => {
     const getPromptDetailAPI = async () => {
@@ -87,6 +88,7 @@ const PromptDetailPage = () => {
   //   const randomString = Math.random().toString(36).substring(7);
   //   return `Random Label - ${randomString}`;
   // }
+
 
   // console.log(isUser);
   // 	const [newPrompt, setNewPrompt] = useState({
@@ -220,7 +222,7 @@ const PromptDetailPage = () => {
             보내기
           </button>
         </form>
-      )}
+
     </div>
   );
 };

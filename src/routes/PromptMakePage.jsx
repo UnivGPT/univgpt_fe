@@ -231,15 +231,10 @@ const PromptMakePage = () => {
                     id={"options" + idx}
                     className="input-e mr-8"
                     onChange={(e) => {
-                      const newForm = [...form]; // Create a copy of the form array
-
-                      // Extract the index from the input element's id (e.g., "options1" -> 1)
+                      const newForm = [...form];
                       const idx = Number(e.target.id.replace("options", ""));
-
-                      // Update the value of the corresponding option in the copied form array
                       newForm[idx].options[idx2] = e.target.value;
-
-                      setForm(newForm); // Update the state with the modified copy
+                      setForm(newForm);
                     }}
                     value={el2}
                     placeholder="객관식 선택지"
@@ -252,7 +247,7 @@ const PromptMakePage = () => {
                     className="button-plus-blue mr-2"
                     onClick={() => {
                       const newOptions = [...form[idx].options];
-                      newOptions.push(""); // Add a new empty option
+                      newOptions.push("");
                       const newOptionForm = {
                         ...form[idx],
                         options: newOptions,
