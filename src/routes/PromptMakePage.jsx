@@ -232,15 +232,10 @@ const PromptMakePage = () => {
                     id={"options" + idx}
                     className="input-e mr-8"
                     onChange={(e) => {
-                      const newForm = [...form]; // Create a copy of the form array
-
-                      // Extract the index from the input element's id (e.g., "options1" -> 1)
+                      const newForm = [...form];
                       const idx = Number(e.target.id.replace("options", ""));
-
-                      // Update the value of the corresponding option in the copied form array
                       newForm[idx].options[idx2] = e.target.value;
-
-                      setForm(newForm); // Update the state with the modified copy
+                      setForm(newForm);
                     }}
                     value={el2}
                     placeholder="객관식 선택지"
@@ -253,7 +248,7 @@ const PromptMakePage = () => {
                     className="button-plus-blue mr-2"
                     onClick={() => {
                       const newOptions = [...form[idx].options];
-                      newOptions.push(""); // Add a new empty option
+                      newOptions.push("");
                       const newOptionForm = {
                         ...form[idx],
                         options: newOptions,
@@ -325,10 +320,10 @@ const PromptMakePage = () => {
           {/* <textarea
             className="w-auto h-5/6 bg-gray-200 overflow-y-auto focus:border-transparent mx-4 p-6 resize-none outline-none"
             placeholder=" ChatGPT에게 전달될 프롬프트를 작성해주세요.
-      &#13;&#10;사용자의 입력값이 들어갔으면 하는 부분에 #을 입력하세요.
-      &#13;&#10; [예시]
-      &#13;&#10; 미팅 회의록을 요약해줘. 회의 주제는 #회의주제 이고,
-      &#13;&#10; 요약할 때 말투는 #말투 로 해줘."
+      &#13;&#10;사용자의 입력값이 들어갔으면 하는 부분을 [입력값] 형태로 지정하세요.
+      &#13;&#10; <예시>
+      &#13;&#10; 미팅 회의록을 요약해줘. 회의 주제는 [회의주제] 이고,
+      &#13;&#10; 요약할 때 말투는 [말투]로, 총 길이는 [글자 수]로 해줘."
             value={content}
             onChange={(e) => {
               setContent(e.target.value);

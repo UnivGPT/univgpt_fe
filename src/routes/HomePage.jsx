@@ -5,18 +5,32 @@ import { useState, useEffect } from "react";
 import { category, order } from "../data/category";
 import Select from "react-select";
 import { MidPrompt } from "../components/Prompts";
-import { getCategoryList, getPromptList } from "../api/api";
+import { getCategoryList, getPromptList, getUserProfile } from "../api/api";
 
 const HomePage = () => {
-  const [isUser, setIsUser] = useState(users);
+  const [profile, setProfile] = useState({
+    email: "",
+    username: "",
+  });
 
   const [categoryList, setCategoryList] = useState([]);
   const [searchCategory, setSearchCategory] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const [promptList, setPromptList] = useState([]);
+  //const [promptList, setPromptList] = useState(prompts);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedSort, setSelectedSort] = useState("");
   const [sortPromptList, setSortPromptList] = useState([]);
+
+
+  //useEffect(() => {
+  //const getPromptListAPI = async () => {
+  //const prompts = await getPromptList();
+  //setPromptList(prompts);
+  //setSortPromptList(prompts);
+  //};
+  //getPromptListAPI();
+  //}, []);
 
   useEffect(() => {
     const getPromptListAPI = async () => {
@@ -25,11 +39,10 @@ const HomePage = () => {
       setSortPromptList(prompts);
     };
     getPromptListAPI();
-  }, []);
 
-  /*const getCategoryListAPI = async () => {
+    const getCategoryListAPI = async () => {
       const categories = await getCategoryList();
-      console.log(categories);
+      // console.log(categories);
       const categoryName = categories.data.map((category) => {
         return category.name;
       });
@@ -37,7 +50,19 @@ const HomePage = () => {
       setSearchCategory(categoryName);
     };
     getCategoryListAPI();
-  }, []);*/
+
+    const getUserProfileAPI = async () => {
+      const profile = await getUserProfile();
+      setProfile({
+        email: profile.email,
+        username: profile.username,
+        id: profile.id,
+      });
+    };
+    getUserProfileAPI();
+    console.log(profile);
+  }, []);
+
 
   // const handleCategoryFilter = (e) => {
   //   const { innerText } = e.target;
@@ -117,7 +142,7 @@ const HomePage = () => {
   return (
     <div className="w-screen h-screen flex flex-row space-x-1">
       <div className="m-5 w-60">
-        <HomeSideBar key={isUser.id} user={isUser} prompt={promptList} />
+        <HomeSideBar key={profile.id} user={profile} prompt={promptList} />
       </div>
 
       <div className="w-full bg-white text-black p-11 ">
@@ -159,11 +184,13 @@ const HomePage = () => {
                   : prompt
               )
               .filter((prompt) =>
-                selectedCategory
-                  ? prompt.category.find((category) =>
+                selectedCategory === "전체"
+                  ? prompt
+                  : selectedCategory === ""
+                  ? prompt
+                  : prompt.category.find((category) =>
                       category.name.includes(selectedCategory)
                     )
-                  : prompt
               )
               .map((prompt) => (
                 <MidPrompt key={prompt.id} prompt={prompt} />

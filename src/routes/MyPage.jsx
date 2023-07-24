@@ -2,11 +2,28 @@ import users from "../data/users";
 import prompts from "../data/prompts";
 import { HiUserCircle } from "react-icons/hi";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MyPagePrompt } from "../components/Prompts";
+import { getUserProfile } from "../api/api";
 
 const MyPage = () => {
-  const [user, setUser] = useState(users);
+  const [profile, setProfile] = useState({
+    email: "",
+    username: "",
+  });
+
+  useEffect(() => {
+    const getUserProfileAPI = async () => {
+      const profile = await getUserProfile();
+      setProfile({
+        email: profile.email,
+        username: profile.username,
+      });
+    };
+    getUserProfileAPI();
+    console.log(profile);
+  }, []);
+
   const [promptList, setPromptList] = useState(prompts);
 
   return (
@@ -17,7 +34,7 @@ const MyPage = () => {
             <HiUserCircle size="150" />
             <div className="flex flex-col space-y-10 mx-10">
               <div className="text-3xl font-semibold">
-                {user[0].username}님 환영합니다!
+                {profile.username}님 환영합니다!
               </div>
               <div className="flex flex-row space-x-5">
                 <div className="button-a">나의 프롬프트 {prompts.length}개</div>

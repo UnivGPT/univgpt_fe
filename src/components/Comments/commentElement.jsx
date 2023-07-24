@@ -31,7 +31,9 @@ const CommentElement = (props) => {
       <div className="flex flex-row w-full space-x-2 items-center">
         <HiUserCircle className="w-10 h-10 mr-2" />
         <div className="commentbubble">
-          <p className="text-sm mr-5 pt-1 pl-3 align-middle">{comment.content}</p>
+          <p className="text-xs mr-5 pt-1 pl-3 align-middle">
+            {comment.content}
+          </p>
           {/* <span className="text-base mr-1 text-gray-300">
           {year}.{month}.{day}
         </span> */}
