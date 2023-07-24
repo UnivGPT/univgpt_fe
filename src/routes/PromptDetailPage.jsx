@@ -8,7 +8,8 @@ import Select from "react-select";
 import { useParams } from "react-router-dom";
 import emptyheart from "../assets/images/emptyheart.png";
 import redheart from "../assets/images/redheart.png";
-
+import { HiUserCircle } from "react-icons/hi";
+import gpt_logo from "../assets/images/logo_gpt.png";
 
 const PromptDetailPage = () => {
   const { promptId } = useParams();
@@ -18,7 +19,6 @@ const PromptDetailPage = () => {
   const [option, setOption] = useState([]);
   const [resultPage, setResultPage] = useState(false);
   //const navigate = useNavigate();
-
 
   useEffect(() => {
     const getPromptDetailAPI = async () => {
@@ -89,7 +89,6 @@ const PromptDetailPage = () => {
   //   return `Random Label - ${randomString}`;
   // }
 
-
   // console.log(isUser);
   // 	const [newPrompt, setNewPrompt] = useState({
   //     title: "",
@@ -112,7 +111,6 @@ const PromptDetailPage = () => {
           comment={comments[0]}
         />
       </div>
-
       {resultPage ? (
         <div className="w-screen h-screen flex flex-col items-center">
           <form className="w-4/5 h-3/4 flex flex-col items-center bg-gray-200 text-black p-11 rounded-3xl ">
@@ -222,7 +220,8 @@ const PromptDetailPage = () => {
             보내기
           </button>
         </form>
-
+      )}
+      ;
     </div>
   );
 };
