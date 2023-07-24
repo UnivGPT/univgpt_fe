@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
-import { getPromptDetail, getOptionList } from "../api/api";
+import { getPromptDetail, getOptionList, getCommentList } from "../api/api";
 import { PromptSideBar } from "../components/SideBar";
-import comments from "../data/comments";
+// import comments from "../data/comments";
 // import prompts from "../data/prompts";
 import users from "../data/users";
 import Select from "react-select";
 import { useParams } from "react-router-dom";
 import emptyheart from "../assets/images/emptyheart.png";
 import redheart from "../assets/images/redheart.png";
-
 
 const PromptDetailPage = () => {
   const { promptId } = useParams();
@@ -19,6 +18,7 @@ const PromptDetailPage = () => {
   const [resultPage, setResultPage] = useState(false);
   //const navigate = useNavigate();
 
+  const [comments, setComments] = useState([]);
 
   useEffect(() => {
     const getPromptDetailAPI = async () => {
@@ -28,67 +28,30 @@ const PromptDetailPage = () => {
       const inputIds = response.inputs
         .filter((item) => item.type === 0)
         .map((item) => item.id);
-      console.log("INPUTID", inputIds);
-
       const results = await Promise.all(
         inputIds.map(async (id) => {
           const response = await getOptionList({ input: id });
           return response;
         })
       );
-
       const OptionResult = results.flat();
-
-      console.log("RSRAERQ", OptionResult);
-
       setOption(OptionResult);
-
-      // const filteredResults = results.filter(
-      //   (result) =>
-      //     result.data !== null &&
-      //     result.data !== undefined &&
-      //     Object.keys(result.data).length > 0
-      // );
-      // console.log("FILTERED RESULTS", filteredResults);
       setOption(results);
     };
+
+    const getCommentsAPI = async () => {
+      const comments = await getCommentList(promptId);
+      setComments(comments);
+    };
+
+    getCommentsAPI();
     getPromptDetailAPI();
   }, [promptId]);
 
   useEffect(() => {
-    console.log("prompt", prompt.title);
+    console.log("prompt", prompt);
     console.log("INPUT", input);
   }, [prompt, input]);
-
-  // const getOptions = async (inputId) => {
-  //   try {
-  //     const data = {
-  //       input: inputId,
-  //     };
-  //     const response = await getOptionList(data);
-
-  //     if (response && response.data) {
-  //       const originalOptions = response.data;
-  //       const processedOptions = originalOptions.map((option) => ({
-  //         value: option.name,
-  //         label: generateRandomLabel(), // 랜덤한 문자열 생성 함수를 호출하여 label에 할당
-  //       }));
-  //       return processedOptions;
-  //     }
-
-  //     return ""; // 서버 응답이 없거나 비어있는 경우 빈 배열 반환
-  //   } catch (error) {
-  //     console.error("Error fetching options:", error);
-  //     return []; // 에러가 발생한 경우 빈 배열 반환 또는 에러 처리를 원하는 방식으로 처리
-  //   }
-  // };
-
-  // function generateRandomLabel() {
-  //   // 랜덤한 문자열을 생성하여 반환하는 함수 구현 (예시)
-  //   const randomString = Math.random().toString(36).substring(7);
-  //   return `Random Label - ${randomString}`;
-  // }
-
 
   // console.log(isUser);
   // 	const [newPrompt, setNewPrompt] = useState({
@@ -109,7 +72,7 @@ const PromptDetailPage = () => {
           key={prompt.id}
           user={prompt.author}
           prompt={prompt}
-          comment={comments[0]}
+          comment={comments}
         />
       </div>
 
@@ -222,7 +185,7 @@ const PromptDetailPage = () => {
             보내기
           </button>
         </form>
-
+      )}
     </div>
   );
 };
