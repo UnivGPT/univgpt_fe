@@ -39,9 +39,9 @@ export const PromptSideBar = ({ user, prompt, comment }) => {
   // console.log(prompt);
   //console.log(user[0].username);
   return (
-    <div className="flex flex-col space-y-5 bg-white text-black rounded-tr-3xl p-5">
+    <div className="h-full flex flex-col space-y-5 bg-white text-black rounded-tr-3xl p-5">
       <Link
-        to="/:promptId/make"
+        to="/:promptmake"
         className="w-full button-b flex flex-col items-center"
       >
         내 프롬프트 만들기

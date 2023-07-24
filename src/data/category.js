@@ -1,4 +1,5 @@
 export const category = [
+  { value: "All", label: "전체" },
   { value: "assignment", label: "과제" },
   { value: "presentation", label: "발표" },
   { value: "leisure", label: "여가" },

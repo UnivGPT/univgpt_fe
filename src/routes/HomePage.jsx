@@ -14,18 +14,20 @@ const HomePage = () => {
   const [searchCategory, setSearchCategory] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const [promptList, setPromptList] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [selectedSort, setSelectedSort] = useState("");
-  const [sortPromptList, setSortPromptList] = useState([]);
+  const [promptList, setPromptList] = useState(prompts);
+//const [selectedCategory, setSelectedCategory] = useState("");
+  //const [selectedSort, setSelectedSort] = useState("");
+  //const [sortPromptList, setSortPromptList] = useState([]);
 
-  useEffect(() => {
-    const getPromptListAPI = async () => {
-      const prompts = await getPromptList();
-      setPromptList(prompts);
-      setSortPromptList(prompts);
-    };
-    getPromptListAPI();
-  }, []);
+  //useEffect(() => {
+  //const getPromptListAPI = async () => {
+  //const prompts = await getPromptList();
+  //setPromptList(prompts);
+  //setSortPromptList(prompts);
+   //};
+   //getPromptListAPI();
+  //}, []);
+
 
   /*const getCategoryListAPI = async () => {
       const categories = await getCategoryList();
@@ -38,6 +40,7 @@ const HomePage = () => {
     };
     getCategoryListAPI();
   }, []);*/
+
 
   // const handleCategoryFilter = (e) => {
   //   const { innerText } = e.target;
@@ -159,11 +162,13 @@ const HomePage = () => {
                   : prompt
               )
               .filter((prompt) =>
-                selectedCategory
-                  ? prompt.category.find((category) =>
+                selectedCategory === "전체"
+                  ? prompt
+                  : selectedCategory === ""
+                  ? prompt
+                  : prompt.category.find((category) =>
                       category.name.includes(selectedCategory)
                     )
-                  : prompt
               )
               .map((prompt) => (
                 <MidPrompt key={prompt.id} prompt={prompt} />

@@ -5,6 +5,7 @@ import { likePrompt, getUser, getSecureUser } from "../../api/api";
 import { useState, useEffect } from "react";
 import { getCookie } from "../../utils/cookie";
 
+
 export const SmallPrompt = ({ rank, prompt }) => {
   return (
     <div className="flex flex-row rounded-xl bg-white  border-gray-300 shadow p-3 m-1">
@@ -75,7 +76,6 @@ export const MidPrompt = ({ prompt }) => {
 
         <div className="font-bold">👀 {prompt.view}</div>
       </div>
-      {/* <Link to="">이 프롬프트 사용하기</Link> */}
     </div>
   );
 };
@@ -85,16 +85,16 @@ export const MyPagePrompt = ({ prompt }) => {
     <div className="flex flex-col w-75 h-60 space-y-8 p-5 shadow-xl m-3 rounded-3xl  border-gray-300 bg-white">
       <div className="font-semibold text-lg">{prompt.title}</div>
       <div className="font-medium">{prompt.description}</div>
-      <div className="flex flex-row space-x-2 align-start">
+      <div className="flex flex-row space-x-2 self-end pb-10">
         <div className="font-bold">❤️ {prompt.like}</div>
         <div className="font-bold">👀 {prompt.view}</div>
       </div>
-      {/* <Link to="">이 프롬프트 사용하기</Link> */}
+      <Link to="/promptdetail">프롬프트 사용하기</Link>
     </div>
   );
 };
 
-export const BigPrompt = (prompt) => {
+export const BigPrompt = ({ prompt }) => {
   return (
     <div>
       <div>{prompt.title}</div>
