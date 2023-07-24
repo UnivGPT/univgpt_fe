@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import trashBin from "../assets/images/trashbin.png";
 import { createPrompt, createInput, createOption } from "../api/api";
 import { BsQuestionCircle } from "react-icons/bs";
+import { Mentions } from "../components/Mentions";
 
 const PromptMakePage = () => {
   const [title, setTitle] = useState("");
@@ -321,7 +322,7 @@ const PromptMakePage = () => {
           <BsQuestionCircle size={45} className="qmark ml-4" />
         </div>
         <div className="rounded-3xl bg-gray-200  mx-6 h-1/2 w-full flex flex-col">
-          <textarea
+          {/* <textarea
             className="w-auto h-5/6 bg-gray-200 overflow-y-auto focus:border-transparent mx-4 p-6 resize-none outline-none"
             placeholder=" ChatGPT에게 전달될 프롬프트를 작성해주세요.
       &#13;&#10;사용자의 입력값이 들어갔으면 하는 부분에 #을 입력하세요.
@@ -332,7 +333,8 @@ const PromptMakePage = () => {
             onChange={(e) => {
               setContent(e.target.value);
             }}
-          ></textarea>
+          ></textarea> */}
+          <Mentions />
           <button className="button-b self-end m-8">미리보기</button>
         </div>
 
