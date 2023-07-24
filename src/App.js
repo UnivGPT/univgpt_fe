@@ -27,11 +27,14 @@ function App() {
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/signin" element={<SignInPage />} />
           <Route path="/signup" element={<SignUpPage />} />
-          <Route path="/promptdetail" element={<PromptDetailPage />} />
+          <Route
+            path="/promptdetail/:promptId"
+            element={<PromptDetailPage />}
+          />
           <Route path="/promptedit" element={<PromptEditPage />} />
           <Route path="/promptmake" element={<PromptMakePage />} />
           <Route path="/promptresult" element={<PromptResult />} />
-          <Route path="/infocheck" element={<InfoCheck />} /> 
+          <Route path="/infocheck" element={<InfoCheck />} />
           <Route path="api/auth/callback/naver" element={<NaverCallBack />} />
           <Route path="api/auth/callback/google" element={<GoogleCallBack />} />
           <Route path="api/auth/callback/kakao" element={<KakaoCallback />} />

@@ -53,6 +53,7 @@ export const getPromptList = async () => {
 
 export const getPromptDetail = async (id) => {
   const response = await instance.get(`/prompt/${id}/`);
+  console.log("RESPONSE", response.data);
   return response.data;
 };
 
@@ -133,11 +134,6 @@ export const deleteComment = async (id) => {
   }
 };
 
-export const getInputList = async () => {
-  const response = await instance.get("/input/");
-  return response;
-};
-
 export const createInput = async (data) => {
   const response = await instanceWithToken.post("/input/", data);
   if (response.status === 201) {
@@ -159,8 +155,10 @@ export const deleteInput = async (id) => {
 };
 
 export const getOptionList = async (data) => {
-  const response = await instanceWithToken.get("/option/", data);
-  return response;
+  console.log("method called");
+  const response = await instanceWithToken.post("/option/frominput/", data);
+  // console.log("RESPONSERESPONSE", response.data);
+  return response.data;
 };
 
 export const createOption = async (data) => {
