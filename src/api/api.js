@@ -27,6 +27,16 @@ export const signUp = async (data) => {
   return response;
 };
 
+export const getUserProfile = async () => {
+  const response = await instanceWithToken.get("/account/info/");
+  if (response.status === 200) {
+    console.log("GET USER SUCCESS");
+  } else {
+    console.log("[ERROR] error while getting profile");
+  }
+  return response.data;
+};
+
 export const checkPassword = async (data) => {
   let response;
   try {
