@@ -13,7 +13,7 @@ export const SmallPrompt = ({ rank, prompt }) => {
       <div className="flex flex-col">
         <div className="text-sm font-semibold">{prompt.title}</div>
         <div className="flex flex-ro text-sm justify-end">
-          <div className="font-bold">❤️ {prompt.like}</div>
+          <div className="font-bold">❤️ {prompt.like_users.length}</div>
           <div className="pl-2 font-bold">👀 {prompt.view}</div>
         </div>
       </div>
@@ -60,7 +60,8 @@ export const MidPrompt = ({ prompt }) => {
     <div className="flex flex-col w-80 h-60 space-y-8 p-5 shadow-xl m-3 rounded-3xl border-gray-300 border bg-white">
       <div className="font-semibold text-lg">{prompt.title}</div>
       <div className="font-medium">{prompt.description}</div>
-      <div className="flex flex-row space-x-2">
+      <div className="flex flex-row justify-between">
+        <div className="flex flex-row space-x-2">
         <div className="flex flex-row font-bold">
           {isLike ? (
             <div className="w-5 h-5">
@@ -72,6 +73,16 @@ export const MidPrompt = ({ prompt }) => {
             </div>
           )}
           {likeCount}
+        </div>
+          <div className="font-bold">👀 {prompt.view}</div>
+        </div>
+        <div>
+          <Link
+            to={`/promptdetail/${prompt.id}`}
+            className="rounded-xl p-3 mb-3 font-semibold text-center text-sm text-white bg-gpt-blue"
+          >
+            프롬프트 사용하기
+          </Link>
         </div>
 
         <div className="font-bold">👀 {prompt.view}</div>
@@ -86,10 +97,10 @@ export const MyPagePrompt = ({ prompt }) => {
       <div className="font-semibold text-lg">{prompt.title}</div>
       <div className="font-medium">{prompt.description}</div>
       <div className="flex flex-row space-x-2 self-end pb-10">
-        <div className="font-bold">❤️ {prompt.like}</div>
+        <div className="font-bold">❤️ {prompt.like_users.length}</div>
         <div className="font-bold">👀 {prompt.view}</div>
       </div>
-      <Link to="/promptdetail">프롬프트 사용하기</Link>
+      <Link to={`/promptdetail/${prompt.id}`}>프롬프트 사용하기</Link>
     </div>
   );
 };
