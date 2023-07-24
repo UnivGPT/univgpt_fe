@@ -41,9 +41,9 @@ export const HomeSideBar = ({ user, prompt }) => {
 };
 
 export const PromptSideBar = ({ user, prompt, comment }) => {
-  console.log(user);
-  // console.log(prompt);
-  console.log(user.username);
+  // console.log(user);
+  // // console.log(prompt);
+  // console.log(user.username);
  const [likeCount, setLikeCount] = useState(0);
   const [isLike, setIsLike] = useState(false);
   // const [user, setUser] = useState();

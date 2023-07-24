@@ -22,15 +22,15 @@ const HomePage = () => {
   const [selectedSort, setSelectedSort] = useState("");
   const [sortPromptList, setSortPromptList] = useState([]);
 
-
-  //useEffect(() => {
-  //const getPromptListAPI = async () => {
-  //const prompts = await getPromptList();
-  //setPromptList(prompts);
-  //setSortPromptList(prompts);
-  //};
-  //getPromptListAPI();
-  //}, []);
+  
+  // useEffect(() => {
+  //   const getPromptListAPI = async () => {
+  //     const prompts = await getPromptList();
+  //     setPromptList(prompts);
+  //     setSortPromptList(prompts);
+  //   };
+  //   getPromptListAPI();
+  // }, []);
 
   useEffect(() => {
     const getPromptListAPI = async () => {
@@ -62,7 +62,6 @@ const HomePage = () => {
     getUserProfileAPI();
     console.log(profile);
   }, []);
-
 
   // const handleCategoryFilter = (e) => {
   //   const { innerText } = e.target;
