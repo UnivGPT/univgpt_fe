@@ -29,7 +29,7 @@ const Comment = ({ postId }) => {
   };
 
   return (
-    <div className="flex flex-col w-full mt-5 self-start h-72">
+    <div className="flex flex-col w-full self-start h-72">
       <h1 className="text-base font-semibold mt-5 mb-3">
         {commentList.length}개의 댓글
       </h1>
@@ -47,7 +47,7 @@ const Comment = ({ postId }) => {
       </div>
       {/* comment form component */}
       <form
-        className="flex items-center justify-center mt-10"
+        className="flex items-center justify-center mt-1"
         onSubmit={handleCommentSubmit}
       >
         <input

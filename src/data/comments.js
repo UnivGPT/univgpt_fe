@@ -15,8 +15,8 @@ const comments = [
   },
   {
     id: 3,
-    content: "우리팀 최고 야호",
-    like_users: [],
+    content:
+      "우리팀 최고 야호!!!!!!!이번주도 파이팅",
     author: { id: 2, username: "지우" },
     created_at: "2022-11-22T08:09:54.233976Z",
   },
