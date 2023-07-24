@@ -1,10 +1,9 @@
-import { Link } from "react";
+import { Link } from "react-router-dom";
 import emptyheart from "../../assets/images/emptyheart.png";
 import redheart from "../../assets/images/redheart.png";
 import { likePrompt, getUser, getSecureUser } from "../../api/api";
 import { useState, useEffect } from "react";
 import { getCookie } from "../../utils/cookie";
-
 
 export const SmallPrompt = ({ rank, prompt }) => {
   return (
@@ -62,18 +61,22 @@ export const MidPrompt = ({ prompt }) => {
       <div className="font-medium">{prompt.description}</div>
       <div className="flex flex-row justify-between">
         <div className="flex flex-row space-x-2">
-        <div className="flex flex-row font-bold">
-          {isLike ? (
-            <div className="w-5 h-5">
-              <img src={redheart} onClick={onClickLike}></img>
-            </div>
-          ) : (
-            <div className="w-5 h-5">
-              <img src={emptyheart} onClick={onClickLike}></img>
-            </div>
-          )}
-          {likeCount}
-        </div>
+          <div className="flex flex-row font-bold">
+            {isLike ? (
+              <div className="w-5 h-5">
+                <img src={redheart} onClick={onClickLike}></img>
+              </div>
+            ) : (
+              <div className="w-5 h-5">
+                <img
+                  src={emptyheart}
+                  onClick={onClickLike}
+                  className="cursor-pointer"
+                ></img>
+              </div>
+            )}
+            {likeCount}
+          </div>
           <div className="font-bold">👀 {prompt.view}</div>
         </div>
         <div>
@@ -84,8 +87,6 @@ export const MidPrompt = ({ prompt }) => {
             프롬프트 사용하기
           </Link>
         </div>
-
-        <div className="font-bold">👀 {prompt.view}</div>
       </div>
     </div>
   );
