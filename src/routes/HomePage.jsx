@@ -14,20 +14,19 @@ const HomePage = () => {
   const [searchCategory, setSearchCategory] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const [promptList, setPromptList] = useState([]);
-  const [promptList, setPromptList] = useState(prompts);
-//const [selectedCategory, setSelectedCategory] = useState("");
-  //const [selectedSort, setSelectedSort] = useState("");
-  //const [sortPromptList, setSortPromptList] = useState([]);
+  //const [promptList, setPromptList] = useState(prompts);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedSort, setSelectedSort] = useState("");
+  const [sortPromptList, setSortPromptList] = useState([]);
 
   //useEffect(() => {
   //const getPromptListAPI = async () => {
   //const prompts = await getPromptList();
   //setPromptList(prompts);
   //setSortPromptList(prompts);
-   //};
-   //getPromptListAPI();
+  //};
+  //getPromptListAPI();
   //}, []);
-
 
   /*const getCategoryListAPI = async () => {
       const categories = await getCategoryList();
@@ -40,7 +39,6 @@ const HomePage = () => {
     };
     getCategoryListAPI();
   }, []);*/
-
 
   // const handleCategoryFilter = (e) => {
   //   const { innerText } = e.target;
