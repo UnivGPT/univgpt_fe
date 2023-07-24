@@ -18,7 +18,7 @@ export const HomeSideBar = ({ user, prompt }) => {
       </Link>
       <div>
         <HiUserCircle size="150" />
-        <div className="font-semibold">{user[0].username}님 반갑습니다!</div>
+        <div className="font-semibold">{user.username}님 반갑습니다!</div>
       </div>
       <div className="w-52 bg-slate-100 rounded-3xl border-solid border-slate-300 border-2 text-black p-3 space-y-2">
         <div className="rounded-xl p-3.5 mb-3 text-center font-bold text-lg text-white bg-gpt-blue">
@@ -37,7 +37,7 @@ export const HomeSideBar = ({ user, prompt }) => {
 export const PromptSideBar = ({ user, prompt, comment }) => {
   console.log(user);
   // console.log(prompt);
-  //console.log(user[0].username);
+  console.log(user.username);
   return (
     <div className="h-full flex flex-col space-y-5 bg-white text-black rounded-tr-3xl p-5">
       <Link
@@ -55,7 +55,7 @@ export const PromptSideBar = ({ user, prompt, comment }) => {
       <div>
         <div>프롬프트 정보</div>
         <div>👀 {prompt.view}</div>
-        <div>❤️ {prompt.like}</div>
+        <div>❤️ {prompt.like_users.length}</div>
       </div>
       <div>
         <Comment />

@@ -13,7 +13,6 @@ import gpt_logo from "../assets/images/logo_gpt.png";
 const PromptDetailPage = () => {
   const { promptId } = useParams();
   const [prompt, setPrompt] = useState([]);
-  const [isUser, setIsUser] = useState(users);
 
   const [resultPage, setResultPage] = useState(false);
   const navigate = useNavigate();
@@ -99,13 +98,14 @@ const PromptDetailPage = () => {
   // 	const handlechange = (e) => {
   //     setNewPrompt
   //   };
+  console.log(prompt);
 
   return (
     <div className="w-screen h-screen flex flex-row ">
       <div className="w-60">
         <PromptSideBar
-          key={isUser.id}
-          user={isUser[0]}
+          key={prompt.id}
+          user={prompt.author}
           prompt={prompt}
           comment={comments[0]}
         />
@@ -165,50 +165,48 @@ const PromptDetailPage = () => {
         </div>
       ) : (
         <form className="flex-grow flex flex-col items-center justify-center h-4/5 w-2/3 bg-white text-black p-11 mx-20 rounded-3xl">
-        <h1 className="font-bold text-7xl text-gpt-indigo">
-          {prompt.title}
-        </h1>
+          <h1 className="font-bold text-7xl text-gpt-indigo">{prompt.title}</h1>
 
-        <h1 className="font-extrabold text-xl text-gpt-indigo mt-4">
-          {prompt.description}
-        </h1>
-        <br></br>
-        <div className="rounded-3xl bg-gray-200 px-8 pb-5 mx-6 h-96 w-5/6 overflow-y-scroll">
-          <div className="flex flex-col w-full justify-between">
-            {input.map((item, index) => {
-              if (item.type === 0) {
-                const options = option
-                  .flat()
-                  .filter((opt) => opt.input === item.id)
-                  .map((opt) => {
-                    return {
-                      value: opt.name,
-                      label: opt.name,
-                    };
-                  });
-                return (
-                  <div key={index}>
-                    <div className="button-f">{item.name}</div>
-                    <Select key={index} options={options} />
-                  </div>
-                );
-              } else {
-                return (
-                  <div key={index}>
-                    <div className="button-f">{item.name}</div>
-                    <input
-                      required
-                      type="text"
-                      placeholder="요약을 원하는 자료 조사 내용을 작성해주세요"
-                      className="input-c"
-                    />
-                  </div>
-                );
-              }
-            })}
+          <h1 className="font-extrabold text-xl text-gpt-indigo mt-4">
+            {prompt.description}
+          </h1>
+          <br></br>
+          <div className="rounded-3xl bg-gray-200 px-8 pb-5 mx-6 h-96 w-5/6 overflow-y-scroll">
+            <div className="flex flex-col w-full justify-between">
+              {input.map((item, index) => {
+                if (item.type === 0) {
+                  const options = option
+                    .flat()
+                    .filter((opt) => opt.input === item.id)
+                    .map((opt) => {
+                      return {
+                        value: opt.name,
+                        label: opt.name,
+                      };
+                    });
+                  return (
+                    <div key={index}>
+                      <div className="button-f">{item.name}</div>
+                      <Select key={index} options={options} />
+                    </div>
+                  );
+                } else {
+                  return (
+                    <div key={index}>
+                      <div className="button-f">{item.name}</div>
+                      <input
+                        required
+                        type="text"
+                        placeholder="요약을 원하는 자료 조사 내용을 작성해주세요"
+                        className="input-c"
+                      />
+                    </div>
+                  );
+                }
+              })}
+            </div>
           </div>
-        </div>
-        <br></br>
+          <br></br>
           <br></br>
           {/*버튼*/}
           <button
