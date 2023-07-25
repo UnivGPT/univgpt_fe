@@ -222,3 +222,13 @@ export const getSecureUser = async () => {
   }
   return response.data;
 };
+
+export const gptCallBack = async (data) => {
+  const response = await instance.post("/prompt/gpt/", data);
+  if (response.status === 200) {
+    console.log("GPT CALLBACK SUCCESS");
+  } else {
+    console.log("[ERROR] error while gpt callback");
+  }
+  return response.data;
+};
