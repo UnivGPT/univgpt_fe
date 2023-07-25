@@ -64,7 +64,7 @@
 
 /*PromptMake Category*/
 .button-check {
-  @apply bg-gray-300 text-zinc-500 font-bold active:bg-gpt-green active:text-white rounded-xl shadow p-3.5 px-5 mr-7;
+  @apply bg-gray-300 text-zinc-500 font-bold active:bg-gpt-green active:text-white rounded-xl shadow p-3.5 px-5 mr-9;
 }
 
 /* form-a: 로그인, 회원가입, 회원정보 수정에 쓰이는 폼 */
@@ -117,10 +117,10 @@ body {
   color: white;
 }
 
-code {
+/*code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     "Noto Sans" monospace;
-}
+} */
 
 .commentbubble {
   position: relative;
@@ -161,7 +161,7 @@ code {
   position: relative;
   width: 655px;
   height: 200px;
-  padding: 30px;
+  padding: 0px;
   margin: 20px;
   background: #ffffff;
   -webkit-border-radius: 27px;
@@ -188,7 +188,7 @@ code {
 .bubble-b {
   position: relative;
   width: 655px;
-  height: 100px;
+  height: 200px;
   padding: 0px;
   margin: 20px;
   background: #ffffff;
@@ -236,7 +236,6 @@ code {
 .modalContainer {
   /* 모달창 크기 */
 
-
   /* 최상단 위치 */
   z-index: 999;
 
@@ -257,5 +256,5 @@ code {
   position: absolute;
   right: 200px;
   top: 10px;
-  color: #000000
+  color: #000000;
 }

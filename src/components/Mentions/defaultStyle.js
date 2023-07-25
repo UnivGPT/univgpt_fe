@@ -4,11 +4,12 @@ export default {
     fontSize: 14,
     fontWeight: "normal",
     borderRadius: "1.5rem",
+    border: "2px solid transparent",
   },
   "&multiLine": {
     control: {
       fontSize: 16,
-      minHeight: 270,
+      minHeight: 300,
     },
     highlighter: {
       padding: 9,
@@ -22,10 +23,10 @@ export default {
   },
   "&singleLine": {
     display: "inline-block",
-    width: 180,
+    width: 200,
     highlighter: {
       padding: 1,
-      border: "2px inset transparent",
+      border: "2px solid transparent",
     },
     input: {
       padding: 1,
