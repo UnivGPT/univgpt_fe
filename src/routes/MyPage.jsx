@@ -14,35 +14,29 @@ const MyPage = () => {
     username: "",
   });
   const [promptList, setPromptList] = useState([]);
+  const [authorPromptList, setAuthorPromptList] = useState([]);
+  const [scrapPromptList, setScrapPromptList] = useState([]);
   const [sortPromptList, setSortPromptList] = useState([]);
 
-  useEffect(() => {
-    const getPromptListAPI = async () => {
+useEffect(() => {
+  const fetchData = async () => {
+    if (getCookie("access_token")) {
+      const response = await getUserProfile();
+      const profile = response.data;
+      setProfile({
+        id: profile.id,
+        email: profile.email,
+        username: profile.username,
+      });
       const prompts = await getPromptList();
       setPromptList(prompts);
-      setSortPromptList(prompts)
-    };
-    getPromptListAPI();
-  }, []);
-
-  useEffect(() => {
-    if (getCookie("access_token")) {
-      const getUserProfileAPI = async () => {
-        const response = await getUserProfile();
-        console.log("RESPONSE", response);
-        const profile = response.data;
-        console.log("RRRRRRR", profile);
-        setProfile({
-          id: profile.id,
-          email: profile.email,
-          username: profile.username,
-        });
-      };
-      getUserProfileAPI();
+      setSortPromptList(prompts);
+      setScrapPromptList(prompts.filter((prompt) => prompt.like_users.includes(profile.id)));
+      setAuthorPromptList(prompts.filter((prompt) => prompt.author.id === profile.id));
     }
-  }, []);
-  // const [promptList, setPromptList] = useState(prompts);
-console.log(promptList)
+  };
+  fetchData();
+}, []);
 
   return (
     <div className="h-screen w-screen">
@@ -56,10 +50,10 @@ console.log(promptList)
               </div>
               <div className="flex flex-row space-x-5">
                 <div className="button-a">
-                  나의 프롬프트 {promptList.length}개
+                  나의 프롬프트 {scrapPromptList.length}개
                 </div>
                 <div className="button-a">
-                  스크랩한 프롬프트 {promptList.length}개
+                  스크랩한 프롬프트 {authorPromptList.length}개
                 </div>
               </div>
             </div>
