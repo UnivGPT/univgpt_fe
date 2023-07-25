@@ -56,6 +56,18 @@ export const checkPassword = async (data) => {
   return response;
 };
 
+export const editUserProfile = async (formData) => {
+  const response = await instanceWithToken.patch("/account/info/", formData);
+  if (response.status === 200) {
+    console.log("EDIT USER SUCCESS");
+    window.location.reload();
+  } else {
+    console.log("[ERROR] error while editting profile");
+  }
+  return response.data;
+};
+
+
 export const getPromptList = async () => {
   const response = await instance.get("/prompt/");
   return response.data;
