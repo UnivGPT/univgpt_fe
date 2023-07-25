@@ -320,7 +320,7 @@ const PromptMakePage = () => {
             카테고리는 중복 선택이 가능합니다.
           </h2>
         </div>
-        <div className="flex justify-items ml-12 mt-4">
+        <div className="flex justify-items ml-16 mt-4">
           <label
             className={`button-checkbox ${
               selectedCategories.includes("과제") ? "active" : ""

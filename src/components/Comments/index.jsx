@@ -1,25 +1,34 @@
 import { useEffect, useState } from "react";
 import CommentElement from "./commentElement";
-import comments from "../../data/comments";
+import { getCommentList, createComment } from "../../api/api";
 import { LuSend } from "react-icons/lu";
-// import { createComment, deleteComment, getComments } from "../../apis/api";
 
-const Comment = ({ postId }) => {
-  const [commentList, setCommentList] = useState(comments); // state for comments
+const Comment = ({ promptId }) => {
+  const [commentList, setCommentList] = useState([]); // state for comments
   const [newContent, setNewContent] = useState(""); // state for new comment
 
-  // useEffect(() => {
-  //   const getCommentsAPI = async () => {
-  //     const comments = await getComments(postId);
-  //     setCommentList(comments);
-  //   };
-  //   getCommentsAPI();
-  // }, [postId]);
+  useEffect(() => {
+    const getCommentsAPI = async () => {
+      const response = await getCommentList(promptId);
+      const comments = response.data;
+      setCommentList(comments);
+    };
+    getCommentsAPI();
+  }, [promptId]);
 
-  const handleCommentSubmit = (e) => {
+  useEffect(() => {
+    console.log("COMMENTLIST", commentList);
+  }, [commentList]);
+
+  const handleCommentSubmit = async (e) => {
     e.preventDefault();
     setNewContent("");
-    //createComment({ post: postId, content: newContent });
+    const response = await createComment({
+      prompt: promptId,
+      content: newContent,
+    });
+    const newComment = response.data;
+    setCommentList((prevCommentList) => [...prevCommentList, newComment]);
   };
 
   const handleCommentDelete = (targetId) => {
@@ -54,7 +63,7 @@ const Comment = ({ postId }) => {
           type="text"
           value={newContent}
           placeholder="댓글을 입력해주세요"
-          className="input h-14 text-sm"
+          className="input h-14 text-sm !text-black"
           onChange={(e) => setNewContent(e.target.value)}
         />
         <LuSend type="submit" className="button w-30" />
