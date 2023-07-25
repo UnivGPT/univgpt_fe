@@ -47,6 +47,27 @@ export const PromptSideBar = ({ prompt }) => {
   console.log("PROMPT INFO", prompt);
   const [likeCount, setLikeCount] = useState(0);
   const [isLike, setIsLike] = useState(false);
+  const [user, setUser] = useState();
+
+  useEffect(() => {
+    // access_token이 있으면 유저 정보 가져옴
+    if (getCookie("access_token")) {
+      const getSecureUserAPI = async () => {
+        const like_list = prompt.like_users;
+        const user = await getSecureUser();
+
+        if (like_list.includes(user.id)) {
+          setIsLike(true);
+        }
+
+        setUser(user);
+      };
+      getSecureUserAPI();
+    }
+    if (prompt.like_users) {
+      setLikeCount(prompt.like_users.length);
+    }
+  }, [prompt.like_users]);
 
   const onClickLike = async () => {
     try {

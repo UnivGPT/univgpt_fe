@@ -1,11 +1,18 @@
 import { useEffect, useState } from "react";
 import CommentElement from "./commentElement";
-import { getCommentList, createComment } from "../../api/api";
+import {
+  getCommentList,
+  createComment,
+  getSecureUser,
+  deleteComment,
+} from "../../api/api";
 import { LuSend } from "react-icons/lu";
+import { getCookie } from "../../utils/cookie";
 
 const Comment = ({ promptId }) => {
   const [commentList, setCommentList] = useState([]); // state for comments
   const [newContent, setNewContent] = useState(""); // state for new comment
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const getCommentsAPI = async () => {
@@ -15,6 +22,17 @@ const Comment = ({ promptId }) => {
     };
     getCommentsAPI();
   }, [promptId]);
+
+  useEffect(() => {
+    // access_token이 있으면 유저 정보 가져옴
+    if (getCookie("access_token")) {
+      const getSecureUserAPI = async () => {
+        const user = await getSecureUser();
+        setUser(user);
+      };
+      getSecureUserAPI();
+    }
+  }, []);
 
   useEffect(() => {
     console.log("COMMENTLIST", commentList);
@@ -33,7 +51,7 @@ const Comment = ({ promptId }) => {
 
   const handleCommentDelete = (targetId) => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
-      //deleteComment(targetId);
+      deleteComment(targetId);
     }
   };
 
@@ -49,6 +67,7 @@ const Comment = ({ promptId }) => {
               <CommentElement
                 comment={comment}
                 handleCommentDelete={handleCommentDelete}
+                user={user}
               />
             </div>
           );
