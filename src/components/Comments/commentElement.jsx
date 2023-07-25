@@ -3,7 +3,7 @@ import { HiUserCircle } from "react-icons/hi";
 //import { getCookie } from "../../utils/cookie";
 
 const CommentElement = (props) => {
-  const { comment, handleCommentDelete } = props;
+  const { comment, handleCommentDelete, user } = props;
   const [content, setContent] = useState(comment.content);
 
   const date = new Date(comment.created_at);
@@ -13,7 +13,7 @@ const CommentElement = (props) => {
   let day = date.getDate();
   day = day < 10 ? `0${day}` : day;
 
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(null);
 
   // useEffect(() => {
   //   // access_token이 있으면 유저 정보 가져옴
