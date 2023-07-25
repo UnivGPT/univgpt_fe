@@ -53,78 +53,80 @@ const PromptDetailPage = () => {
   return (
     <div className="w-screen h-screen flex flex-row ">
       <div className="w-60">
+
         {prompt.id ? <PromptSideBar prompt={prompt} /> : <div></div>}
+
       </div>
-      *
+      *{/*PromptResult 모달*/}
       {resultPage ? (
-        <div className="w-4/5 h-10/12 flex flex-col items-center">
-          <form className="flex flex-col items-center bg-gray-200 text-black p-11 rounded-3xl ">
-            {/*GPT 답변*/}
-            <div className="flex justify-between mx-20">
-              <div className="flex justify-start">
-                <div className="bubble-a section">
-                  <h1 className="font-medium p-4 overflow-y-auto ">
-                    각 지방의 내일 날씨입니다. 내일은 맑은 뒤 구름이 많이
-                    끼겠고, 제주도와 울릉도 독도에는 한두 차례 눈이 오겠습니다.
-                    아침 최저기온은 니다. 날씨를 전해 드렸습니다.각 지방의 내일
-                    날씨입니다. 내일은 맑은 뒤 구름이 많이 끼겠고, 제주도와
-                    울릉도 독도에는 한두 차례 눈이 오겠습니다. 아침 최저기온은
-                    니다. 날씨를 전해 드렸습니다.각 지방의 내일 날씨입니다.
-                    내일은 맑은 뒤 구름이 많이 끼겠고, 제주도와 울릉도 독도에는
-                    한두 차례 눈이 오겠습니다. 아침 최저기온은 니다. 날씨를 전해
-                    드렸습니다.각 지방의 내일 날씨입니다. 내일은 맑은 뒤 구름이
-                    많이 끼겠고, 제주도와 울릉도 독도에는 한두 차례 눈이
-                    오겠습니다. 아침 최저기온은 니다. 날씨를 전해 드렸습니다.
-                  </h1>
-                </div>
-                <div className="bubble-a-after mt-10"></div>
+        <div className="flex-grow flex flex-col justify-center items-center h-4/5 w-2/3 bg-gray-200 text-black p-20 px-36 mx-20 mt-8 rounded-3xl">
+          {/*프롬프트 통한 질문*/}
+          <div className="flex justify-center items-center mx-24 mt-2">
+            <div className="flex justify-start">
+              <div className="bubble-a section-a">
+                <h1 className="font-medium p-4 pl-6 align-middle overflow-y-auto ">
+                  각 지방의 내일 날씨입니다. 내일은 맑은 뒤 구름이 많이 끼겠고,
+                  제주도와 울릉도 독도에는 한두 차례 눈이 오겠습니다. 아침
+                  최저기온은 니다. 날씨를 전해 드렸습니다.각 지방의 내일
+                  날씨입니다. 내일은 맑은 뒤 구름이 많이 끼겠고, 제주도와 울릉도
+                  독도에는 한두 차례 눈이 오겠습니다. 아침 최저기온은 니다.
+                  날씨를 전해 드렸습니다.각 지방의 내일 날씨입니다. 내일은 맑은
+                  뒤 구름이 많이 끼겠고, 제주도와 울릉도 독도에는 한두 차례 눈이
+                  오겠습니다. 아침 최저기온은 니다. 날씨를 전해 드렸습니다.각
+                  지방의 내일 날씨입니다. 내일은 맑은 뒤 구름이 많이 끼겠고,
+                  제주도와 울릉도 독도에는 한두 차례 눈이 오겠습니다. 아침
+                  최저기온은 니다. 날씨를 전해 드렸습니다.
+                </h1>
               </div>
-              <HiUserCircle size="150" className="flex flex-col" />
+              <div className="bubble-a-after mt-14"></div>
             </div>
-            <br></br>
-            {/*GPT 답변*/}
-            <div className="flex justify-between mx-20">
-              <img
-                id="gpt-logo"
-                src={gpt_logo}
-                alt="gpt_logo"
-                className="flex flex-col items-center mr-10 w-28 h-28"
-              />
-              <div className="bubble-b font-medium overscroll-y-auto">
-                각 지방의 내일 날씨입니다. 내일은 맑은 뒤 구름이 많이 끼겠고,
-                제주도와 울릉도 독도에는 한두 차례 눈이 오겠습니다. 아침
-                최저기온은 중서부 지방이 영하 23도에서 영하 14도, 영동과
-                남부지방은 영하 13도에서 영하 8도로 몹시 추운 날씨가 내일
-                아침까지도 계속되겠습니다. 그렇지만 낮 최고 기온은 영하 6도에서
-                영상 1도의 분포로 오늘보다 3-4도 가량 올라갈 전망입니다. 날씨를
-                전해 드렸습니다.릉도 독도에는 한두 차례 눈이 오겠습니다. 아침
-                최저기온은 중서부 지방이 영하 23도에서 영하 14도, 영동과
-                남부지방은 영하 13도에서 영하 8도로 몹시 추운 날씨가 내일
-                아침까지도 계속되겠습니다. 그렇지만 낮 최고 기온은 영하 6도에서
-                영상 1도의 분포로 오늘보다 3-4도 가량 올라갈 전망입니다. 날씨를
-                전해 드렸습니다.릉도 독도에는 한두 차례 눈이 오겠습니다. 아침
-                최저기온은 중서부 지방이 영하 23도에서 영하 14도, 영동과
-                남부지방은 영하 13도에서 영하 8도로 몹시 추운 날씨가 내일
-                아침까지도 계속되겠습니다. 그렇지만 낮 최고 기온은 영하 6도에서
-                영상 1도의 분포로 오늘보다 3-4도 가량 올라갈 전망입니다. 날씨를
-                전해 드렸습니다.
+            <HiUserCircle size="186" className="profile flex flex-col mr-6" />
+          </div>
+
+          {/*GPT 답변*/}
+          <div className="flex justify-center items-center mx-24 mt-6">
+            <img
+              id="gpt-logo"
+              src={gpt_logo}
+              alt="gpt_logo"
+              className="flex flex-col items-center w-36 h-36 mb-4"
+            />
+            <div className="flex justify-start">
+              <div className="bubble-b-after mt-28"></div>
+              <div className="bubble-b section-a items-center">
+                <h1 className="font-medium p-4 pl-6 inline-block align-middle  overflow-y-auto ">
+                  각 지방의 내일 날씨입니다. 내일은 맑은 뒤 구름이 많이 끼겠고,
+                  제주도와 울릉도 독도에는 한두 차례 눈이 오겠습니다. 아침
+                  최저기온은 니다. 날씨를 전해 드렸습니다.각 지방의 내일
+                  날씨입니다. 내일은 맑은 뒤 구름이 많이 끼겠고, 제주도와 울릉도
+                  독도에는 한두 차례 눈이 오겠습니다. 아침 최저기온은 니다.
+                  날씨를 전해 드렸습니다.각 지방의 내일 날씨입니다. 내일은 맑은
+                  뒤 구름이 많이 끼겠고, 제주도와 울릉도 독도에는 한두 차례 눈이
+                  오겠습니다. 아침 최저기온은 니다. 날씨를 전해 드렸습니다.각
+                  지방의 내일 날씨입니다. 내일은 맑은 뒤 구름이 많이 끼겠고,
+                  제주도와 울릉도 독도에는 한두 차례 눈이 오겠습니다. 아침
+                  최저기온은 니다. 날씨를 전해 드렸습니다.
+                </h1>
               </div>
             </div>
-            {/*버튼*/}
-            <button
-              type="button"
-              onClick={() => {
-                setResultPage(false);
-                // console.log(resultPage);
-              }}
-              className=" bg-gpt-green text-white font-bold hover:text-black rounded-3xl text-lg py-3.5 px-20 shadow-xl"
-            >
-              나가기
-            </button>
-          </form>
+          </div>
+          <br></br>
+          <br></br>
+          {/*버튼*/}
+          <button
+            type="button"
+            onClick={() => {
+              setResultPage(false);
+              // console.log(resultPage);
+            }}
+            className=" bg-gpt-green text-white font-bold hover:text-black rounded-3xl text-lg py-3.5 px-20 mt-18 shadow-xl"
+          >
+            나가기
+          </button>
         </div>
       ) : (
-        <form className="flex-grow flex flex-col items-center justify-center h-4/5 w-2/3 bg-white text-black p-11 mx-20 rounded-3xl">
+        /*프롬프트 작성 폼*/
+        <form className="flex-grow flex flex-col items-center justify-center h-4/5 w-2/3 bg-white text-black p-11 mx-20 mt-8 rounded-3xl">
           <h1 className="font-bold text-7xl text-gpt-indigo">{prompt.title}</h1>
           <h1 className="font-extrabold text-xl text-gpt-indigo mt-4">
             {prompt.description}
