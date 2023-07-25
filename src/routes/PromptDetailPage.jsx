@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import { getPromptDetail, getOptionList, getCommentList } from "../api/api";
 import { PromptSideBar } from "../components/SideBar";
-// import comments from "../data/comments";
-// import prompts from "../data/prompts";
 import users from "../data/users";
 import Select from "react-select";
 import { useParams } from "react-router-dom";
@@ -14,11 +12,10 @@ import gpt_logo from "../assets/images/logo_gpt.png";
 const PromptDetailPage = () => {
   const { promptId } = useParams();
   const [prompt, setPrompt] = useState([]);
-
   const [input, setInput] = useState([]);
   const [option, setOption] = useState([]);
   const [resultPage, setResultPage] = useState(false);
-  //const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const [comments, setComments] = useState([]);
 
@@ -55,33 +52,6 @@ const PromptDetailPage = () => {
     console.log("INPUT", input);
   }, [prompt, input]);
 
-  // const getOptions = async (inputId) => {
-  //   try {
-  //     const data = {
-  //       input: inputId,
-  //     };
-  //     const response = await getOptionList(data);
-
-  //     if (response && response.data) {
-  //       const originalOptions = response.data;
-  //       const processedOptions = originalOptions.map((option) => ({
-  //         value: option.name,
-  //         label: generateRandomLabel(), // 랜덤한 문자열 생성 함수를 호출하여 label에 할당
-  //       }));
-  //       return processedOptions;
-  //     }
-
-  //     return ""; // 서버 응답이 없거나 비어있는 경우 빈 배열 반환
-  //   } catch (error) {
-  //     console.error("Error fetching options:", error);
-  //     return []; // 에러가 발생한 경우 빈 배열 반환 또는 에러 처리를 원하는 방식으로 처리
-  //   }
-  // };
-
-  // function generateRandomLabel() {
-  //   // 랜덤한 문자열을 생성하여 반환하는 함수 구현 (예시)
-  //   const randomString = Math.random().toString(36).substring(7);
-  //   return `Random Label - ${randomString}`;
   // }
   // console.log(isUser);
   // 	const [newPrompt, setNewPrompt] = useState({
@@ -98,12 +68,12 @@ const PromptDetailPage = () => {
   return (
     <div className="w-screen h-screen flex flex-row ">
       <div className="w-60">
-        <PromptSideBar
+        {/*<PromptSideBar
           key={prompt.id}
           user={prompt.author}
           prompt={prompt}
           comment={comments}
-        />
+  /> */}
       </div>
       {resultPage ? (
         <div className="w-screen h-screen flex flex-col items-center">
@@ -118,7 +88,6 @@ const PromptDetailPage = () => {
                 아침까지도 계속되겠습니다. 그렇지만 낮 최고 기온은 영하 6도에서
                 영상 1도의 분포로 오늘보다 3-4도 가량 올라갈 전망입니다.
               </div>
-              <div className="bubble-a:left" />
               <HiUserCircle
                 size="150"
                 className="flex flex-col items-center ml-10"
@@ -133,7 +102,7 @@ const PromptDetailPage = () => {
                 alt="gpt_logo"
                 className="flex flex-col items-center mr-10 w-28 h-28"
               />
-              <div className="bubble-b font-medium overscroll-y-auto line-clamp-4">
+              <div className="bubble-b font-medium overscroll-y-auto">
                 각 지방의 내일 날씨입니다. 내일은 맑은 뒤 구름이 많이 끼겠고,
                 제주도와 울릉도 독도에는 한두 차례 눈이 오겠습니다. 아침
                 최저기온은 중서부 지방이 영하 23도에서 영하 14도, 영동과
@@ -142,7 +111,6 @@ const PromptDetailPage = () => {
                 영상 1도의 분포로 오늘보다 3-4도 가량 올라갈 전망입니다. 날씨를
                 전해 드렸습니다.
               </div>
-              <div className="bubble-b:right" />
             </div>
             {/*버튼*/}
             <button

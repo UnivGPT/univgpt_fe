@@ -5,7 +5,6 @@ import { BsQuestionCircle } from "react-icons/bs";
 import { PromptMakeModal } from "../components/Modal";
 import { Mentions } from "../components/Mentions";
 
-
 const PromptMakePage = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -296,48 +295,16 @@ const PromptMakePage = () => {
             </>
           ))}{" "}
         </div>
-
-        <div className="flex flex-col items-center">
-          {/*입력값 추가(누르면 폼이 하나씩 추가됨)*/}
-          <button
-            type="submit"
-            className="button-a mt-4"
-            onClick={() => {
-              setForm([
-                ...form,
-                {
-                  name: "",
-                  type: "단문형",
-                  placeholding: "",
-                  options: [""],
-                },
-              ]);
-            }}
-          >
-            입력값 추가
-          </button>
-        </div>
       </div>
 
       {/*오른쪽 절반*/}
       <div className="bg-white text-black w-1/2 h-full p-8 pl-10 pr-20">
         <div className="flex justify-between mt-4">
-          <h1 className="text-5xl font-bold mx-6 mb-8">프롬프트</h1>
+          <h1 className="text-5xl font-bold mx-6 mb-6 ">프롬프트</h1>
           <BsQuestionCircle size={45} className="qmark ml-4" />
         </div>
         <div className="rounded-3xl bg-gray-200  mx-6 h-1/2 w-full flex flex-col">
-          {/* <textarea
-            className="w-auto h-5/6 bg-gray-200 overflow-y-auto focus:border-transparent mx-4 p-6 resize-none outline-none"
-            placeholder=" ChatGPT에게 전달될 프롬프트를 작성해주세요.
-      &#13;&#10;사용자의 입력값이 들어갔으면 하는 부분을 [입력값] 형태로 지정하세요.
-      &#13;&#10; <예시>
-      &#13;&#10; 미팅 회의록을 요약해줘. 회의 주제는 [회의주제] 이고,
-      &#13;&#10; 요약할 때 말투는 [말투]로, 총 길이는 [글자 수]로 해줘."
-            value={content}
-            onChange={(e) => {
-              setContent(e.target.value);
-            }}
-          ></textarea>
+          <Mentions />
           <div className="self-end">
             <button className="button-b  m-8" onClick={showModal}>
               미리보기
@@ -345,9 +312,7 @@ const PromptMakePage = () => {
             {modalOpen && <PromptMakeModal setModalOpen={setModalOpen} />}
           </div>
 
-          {/* ></textarea> */}
-          <Mentions />
-          <button className="button-b self-end m-8">미리보기</button> */}
+          <button className="button-b self-end m-8">미리보기</button>
         </div>
 
         {/*카테고리*/}
@@ -357,7 +322,7 @@ const PromptMakePage = () => {
             카테고리는 중복 선택이 가능합니다.
           </h2>
         </div>
-        <div className="flex justify-items mx-10 mt-3">
+        <div className="flex justify-items ml-12 mt-4">
           <label
             className={`button-checkbox ${
               selectedCategories.includes("과제") ? "active" : ""
@@ -429,6 +394,20 @@ const PromptMakePage = () => {
               style={{ display: "none" }}
             />
           </label>
+          <label
+            className={`button-checkbox ${
+              selectedCategories.includes("코딩") ? "active" : ""
+            } button-check`}
+          >
+            코딩
+            <input
+              type="checkbox"
+              value="코딩"
+              checked={selectedCategories.includes("코딩")}
+              onChange={handleCategoryChange}
+              style={{ display: "none" }}
+            />
+          </label>
         </div>
 
         {/*내가 볼라고 만든 기능
@@ -441,7 +420,7 @@ const PromptMakePage = () => {
             </div>*/}
 
         {/*삭제&게시 버튼*/}
-        <div className="mt-14 flex justify-center">
+        <div className="mt-12 flex justify-center">
           <button
             className="button-et ml-4 mr-16"
             type="reset"
@@ -453,7 +432,7 @@ const PromptMakePage = () => {
             삭제하기
           </button>
           <button
-            className="button-d ml-16"
+            className="button-dt ml-16"
             onClick={() => {
               handleCreate(prompt);
               window.alert("프롬프트가 성공적으로 만들어졌습니다!");

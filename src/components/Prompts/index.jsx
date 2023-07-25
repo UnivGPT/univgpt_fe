@@ -101,7 +101,7 @@ export const MyPagePrompt = ({ prompt }) => {
         <div className="font-bold">❤️ {prompt.like_users.length}</div>
         <div className="font-bold">👀 {prompt.view}</div>
       </div>
-      <Link to={`/promptdetail/${prompt.id}`}>프롬프트 사용하기</Link>
+      {/*<Link to={`/promptdetail/${prompt.id}`}>프롬프트 사용하기</Link>*/}
     </div>
   );
 };
