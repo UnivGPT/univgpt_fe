@@ -2,7 +2,7 @@ import { HomeSideBar } from "../components/SideBar";
 import users from "../data/users";
 // import prompts from "../data/prompts";
 import { useState, useEffect } from "react";
-import { category, order } from "../data/category";
+import { order } from "../data/category";
 import Select from "react-select";
 import { MidPrompt } from "../components/Prompts";
 import { getCategoryList, getPromptList, getUserProfile } from "../api/api";
@@ -22,6 +22,10 @@ const HomePage = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedSort, setSelectedSort] = useState("");
   const [sortPromptList, setSortPromptList] = useState([]);
+  const [defaultValue, setdefaultValue] = useState({
+    label: "전체",
+    value: "전체",
+  });
 
   // useEffect(() => {
   //   const getPromptListAPI = async () => {
@@ -44,22 +48,19 @@ const HomePage = () => {
       const categories = await getCategoryList();
       // console.log(categories);
       const categoryName = categories.data.map((category) => {
-        return category.name;
+        return { value: category.name, label: category.name };
       });
       setCategoryList(categoryName);
       setSearchCategory(categoryName);
     };
     getCategoryListAPI();
-    // console.log("USERPROFILE", profile);
   }, []);
 
   useEffect(() => {
     if (getCookie("access_token")) {
       const getUserProfileAPI = async () => {
         const response = await getUserProfile();
-        console.log("RESPONSE", response);
         const profile = response.data;
-        console.log("RRRRRRR", profile);
         setProfile({
           email: profile.email,
           username: profile.username,
@@ -69,6 +70,12 @@ const HomePage = () => {
       getUserProfileAPI();
     }
   }, []);
+
+  useEffect(() => {
+    if (categoryList.length > 0) {
+      setdefaultValue(categoryList[0]);
+    }
+  }, [categoryList]);
 
   // const handleCategoryFilter = (e) => {
   //   const { innerText } = e.target;
@@ -154,9 +161,10 @@ const HomePage = () => {
       <div className="w-full bg-white text-black p-11 ">
         <div className="flex flex-row justify-around space-x-5 p-5">
           <Select
-            options={category}
+            options={categoryList}
             className="w-5/12"
             onChange={handleCategoryChange}
+            defaultValue={defaultValue}
           />
           <input
             type="text"
