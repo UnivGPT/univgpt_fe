@@ -8,14 +8,13 @@ import redheart from "../../assets/images/redheart.png";
 import { HiUserCircle } from "react-icons/hi";
 import gpt_logo from "../../assets/images/logo_gpt.png";
 
-export const PromptMakeModal = ({ setModalOpen }) => {
+export const PromptMakeModal = ({ setModalOpen, prompt }) => {
   const closeModal = () => {
     setModalOpen(false);
   };
 
   const { promptId } = useParams();
-  const [prompt, setPrompt] = useState([]);
-
+ 
   const [input, setInput] = useState([]);
   const [option, setOption] = useState([]);
   const [resultPage, setResultPage] = useState(false);
@@ -24,7 +23,6 @@ export const PromptMakeModal = ({ setModalOpen }) => {
   useEffect(() => {
     const getPromptDetailAPI = async () => {
       const response = await getPromptDetail(promptId);
-      setPrompt(response.prompt);
       setInput(response.inputs);
       const inputIds = response.inputs
         .filter((item) => item.type === 0)

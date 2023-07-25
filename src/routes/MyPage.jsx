@@ -4,27 +4,45 @@ import { HiUserCircle } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { MyPagePrompt } from "../components/Prompts";
-import { getUserProfile } from "../api/api";
+import { getPromptList, getUserProfile } from "../api/api";
+import { getCookie } from "../utils/cookie";
 
 const MyPage = () => {
   const [profile, setProfile] = useState({
+    id: "",
     email: "",
     username: "",
   });
+  const [promptList, setPromptList] = useState([]);
+  const [sortPromptList, setSortPromptList] = useState([]);
 
   useEffect(() => {
-    const getUserProfileAPI = async () => {
-      const profile = await getUserProfile();
-      setProfile({
-        email: profile.email,
-        username: profile.username,
-      });
+    const getPromptListAPI = async () => {
+      const prompts = await getPromptList();
+      setPromptList(prompts);
+      setSortPromptList(prompts)
     };
-    getUserProfileAPI();
-    console.log(profile);
+    getPromptListAPI();
   }, []);
 
-  const [promptList, setPromptList] = useState(prompts);
+  useEffect(() => {
+    if (getCookie("access_token")) {
+      const getUserProfileAPI = async () => {
+        const response = await getUserProfile();
+        console.log("RESPONSE", response);
+        const profile = response.data;
+        console.log("RRRRRRR", profile);
+        setProfile({
+          id: profile.id,
+          email: profile.email,
+          username: profile.username,
+        });
+      };
+      getUserProfileAPI();
+    }
+  }, []);
+  // const [promptList, setPromptList] = useState(prompts);
+console.log(promptList)
 
   return (
     <div className="h-screen w-screen">
@@ -37,9 +55,11 @@ const MyPage = () => {
                 {profile.username}님 환영합니다!
               </div>
               <div className="flex flex-row space-x-5">
-                <div className="button-a">나의 프롬프트 {prompts.length}개</div>
                 <div className="button-a">
-                  스크랩한 프롬프트 {prompts.length}개
+                  나의 프롬프트 {promptList.length}개
+                </div>
+                <div className="button-a">
+                  스크랩한 프롬프트 {promptList.length}개
                 </div>
               </div>
             </div>
@@ -60,7 +80,7 @@ const MyPage = () => {
             </div>
             <br></br>
             <div className="w-full h-80 grid grid-cols-2 overflow-y-scroll">
-              {promptList.map((prompt) => (
+              {promptList.filter((prompt) => prompt.author === profile.id).map((prompt) => (
                 <MyPagePrompt key={prompt.id} prompt={prompt} />
               ))}
             </div>
@@ -71,7 +91,7 @@ const MyPage = () => {
             </div>
             <br></br>
             <div className="w-full h-80 grid grid-cols-2 overflow-y-scroll">
-              {promptList.map((prompt) => (
+              {promptList.filter((prompt) => prompt.like_users.includes(profile.id)).map((prompt) => (
                 <MyPagePrompt key={prompt.id} prompt={prompt} />
               ))}
             </div>

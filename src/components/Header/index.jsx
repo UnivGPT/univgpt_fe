@@ -5,7 +5,7 @@ import { getCookie, removeCookie } from "../../utils/cookie";
 import { useState, useEffect } from "react";
 // import users from "../../data/users";
 
-const Header = () => {
+const Header = ( ) => {
   // const [isUser, setIsUser] = useState(users);
   const [isLoggedIn, setIsLoggedIn] = useState("");
 

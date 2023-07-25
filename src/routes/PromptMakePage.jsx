@@ -309,7 +309,9 @@ const PromptMakePage = () => {
             <button className="button-b  m-8" onClick={showModal}>
               미리보기
             </button>
-            {modalOpen && <PromptMakeModal setModalOpen={setModalOpen} />}
+            {modalOpen && (
+              <PromptMakeModal setModalOpen={setModalOpen} prompt={prompt} />
+            )}
           </div>
         </div>
 
