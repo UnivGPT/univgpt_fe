@@ -9,7 +9,7 @@ export default {
   "&multiLine": {
     control: {
       fontSize: 16,
-      minHeight: 300,
+      minHeight: 270,
     },
     // highlighter: {
     //   padding: 9,

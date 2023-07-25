@@ -29,9 +29,11 @@ const PromptDetailPage = () => {
       const response = await getPromptDetail(promptId);
       setPrompt(response.prompt);
       setInput(response.inputs);
+
       const inputIds = response.inputs
         .filter((item) => item.type === 0)
         .map((item) => item.id);
+
       const results = await Promise.all(
         inputIds.map(async (id) => {
           const response = await getOptionList({ input: id });
@@ -47,15 +49,13 @@ const PromptDetailPage = () => {
   }, [promptId]);
 
   useEffect(() => {
-    console.log("PROMPT INFO AT DETAIL PAGE", prompt);
-  }, [prompt]);
+    console.log("INPUT", input);
+  }, [input]);
 
   return (
     <div className="w-screen h-screen flex flex-row ">
       <div className="w-60">
-
         {prompt.id ? <PromptSideBar prompt={prompt} /> : <div></div>}
-
       </div>
       *{/*PromptResult 모달*/}
       {resultPage ? (
@@ -158,7 +158,7 @@ const PromptDetailPage = () => {
                       <input
                         required
                         type="text"
-                        placeholder={item.placeholder}
+                        placeholder={item.placeholding}
                         className="input-c"
                       />
                     </div>
