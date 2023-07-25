@@ -8,6 +8,8 @@ import Select from "react-select";
 import { useParams } from "react-router-dom";
 import emptyheart from "../assets/images/emptyheart.png";
 import redheart from "../assets/images/redheart.png";
+import { HiUserCircle } from "react-icons/hi";
+import gpt_logo from "../assets/images/logo_gpt.png";
 
 const PromptDetailPage = () => {
   const { promptId } = useParams();
@@ -17,7 +19,6 @@ const PromptDetailPage = () => {
   const [option, setOption] = useState([]);
   const [resultPage, setResultPage] = useState(false);
   //const navigate = useNavigate();
-
 
   const [comments, setComments] = useState([]);
 
@@ -53,7 +54,6 @@ const PromptDetailPage = () => {
     console.log("prompt", prompt);
     console.log("INPUT", input);
   }, [prompt, input]);
-
 
   // const getOptions = async (inputId) => {
   //   try {
