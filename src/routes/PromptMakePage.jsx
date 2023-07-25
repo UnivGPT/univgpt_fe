@@ -303,10 +303,15 @@ const PromptMakePage = () => {
           <h1 className="text-5xl font-bold mx-6 mb-6 ">프롬프트</h1>
           <BsQuestionCircle size={45} className="qmark ml-4" />
         </div>
-        <div className="rounded-3xl bg-gray-200 mx-6 h-1/2 w-full flex flex-col">
-          {/* ></textarea> */}
-          <Mentions className="border-transparent focus:border-transparent focus:ring-0 !outline-none" />
-          {/*으앙 이거 경계가 안 없어져잉ㅠㅠㅠㅠㅠ*/}
+        <div className="rounded-3xl bg-gray-200  mx-6 h-1/2 w-full flex flex-col">
+          <Mentions />
+          <div className="self-end">
+            <button className="button-b  m-8" onClick={showModal}>
+              미리보기
+            </button>
+            {modalOpen && <PromptMakeModal setModalOpen={setModalOpen} />}
+          </div>
+
           <button className="button-b self-end m-8">미리보기</button>
         </div>
 
