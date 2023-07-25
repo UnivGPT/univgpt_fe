@@ -1,16 +1,22 @@
 import { useState, useEffect } from "react";
 import trashBin from "../assets/images/trashbin.png";
-import { createPrompt, createInput, createOption } from "../api/api";
+import {
+  createPrompt,
+  createInput,
+  createOption,
+  getCategoryList,
+} from "../api/api";
 import { BsQuestionCircle } from "react-icons/bs";
 import { PromptMakeModal } from "../components/Modal";
 import { Mentions } from "../components/Mentions";
+import { type } from "@testing-library/user-event/dist/type";
 
 const PromptMakePage = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [form, setForm] = useState([]);
   const [activatedChoices, setActivatedChoices] = useState([]);
-  const [category, setCategory] = useState("");
+  const [categoryList, setCategoryList] = useState([]);
   const [content, setContent] = useState("");
   const [prompt, setPrompt] = useState({
     title: "",
@@ -19,15 +25,31 @@ const PromptMakePage = () => {
     form: [],
     category: "",
   });
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  useEffect(() => {
+    const getCategoryListAPI = async () => {
+      const categories = await getCategoryList();
+      const categoryName = categories.data.map((category) => {
+        return category.name;
+      });
+      setCategoryList(categoryName.slice(1));
+    };
+    getCategoryListAPI();
+  }, []);
+
+  useEffect(() => {
+    console.log("CATEGORY NAMES", categoryList);
+    console.log("TYPEOF", typeof categoryList);
+    console.log(Array.isArray(categoryList));
+  }, [categoryList]);
 
   //미리보기 모달 노출 여부
-  const [modalOpen, setModalOpen] = useState(false);
 
   const showModal = () => {
     setModalOpen(true);
   };
-
-  const [selectedCategories, setSelectedCategories] = useState([]);
 
   const handleCategoryChange = (e) => {
     const { value, checked } = e.target;
@@ -127,7 +149,7 @@ const PromptMakePage = () => {
         />
 
         <h1 className="text-2xl font-bold mb-2.5 flex flex-col items-center">
-          ________________________________________________________________________
+          ______________________________________________________________________
         </h1>
 
         {/*{#입력값} 생성기*/}
@@ -285,7 +307,7 @@ const PromptMakePage = () => {
                       const newForm = [...form];
                       newForm.splice(idx, 1, deletedOptionForm);
                       setForm(newForm);
-                      console.log(newForm);
+                      // console.log(newForm);
                     }}
                   >
                     -
@@ -320,92 +342,28 @@ const PromptMakePage = () => {
             카테고리는 중복 선택이 가능합니다.
           </h2>
         </div>
-        <div className="flex justify-items ml-16 mt-4">
-          <label
-            className={`button-checkbox ${
-              selectedCategories.includes("과제") ? "active" : ""
-            } button-check`}
-          >
-            과제
-            <input
-              type="checkbox"
-              value="과제"
-              checked={selectedCategories.includes("과제")}
-              onChange={handleCategoryChange}
-              style={{ display: "none" }}
-            />
-          </label>
-
-          <label
-            className={`button-checkbox ${
-              selectedCategories.includes("발표") ? "active" : ""
-            } button-check`}
-          >
-            발표
-            <input
-              type="checkbox"
-              value="발표"
-              checked={selectedCategories.includes("발표")}
-              onChange={handleCategoryChange}
-              style={{ display: "none" }}
-            />
-          </label>
-          <label
-            className={`button-checkbox ${
-              selectedCategories.includes("취준") ? "active" : ""
-            } button-check`}
-          >
-            취준
-            <input
-              type="checkbox"
-              value="취준"
-              checked={selectedCategories.includes("취준")}
-              onChange={handleCategoryChange}
-              style={{ display: "none" }}
-            />
-          </label>
-          <label
-            className={`button-checkbox ${
-              selectedCategories.includes("여가") ? "active" : ""
-            } button-check`}
-          >
-            여가
-            <input
-              type="checkbox"
-              value="여가"
-              checked={selectedCategories.includes("여가")}
-              onChange={handleCategoryChange}
-              style={{ display: "none" }}
-            />
-          </label>
-          <label
-            className={`button-checkbox ${
-              selectedCategories.includes("연락") ? "active" : ""
-            } button-check`}
-          >
-            연락
-            <input
-              type="checkbox"
-              value="연락"
-              checked={selectedCategories.includes("연락")}
-              onChange={handleCategoryChange}
-              style={{ display: "none" }}
-            />
-          </label>
-          <label
-            className={`button-checkbox ${
-              selectedCategories.includes("코딩") ? "active" : ""
-            } button-check`}
-          >
-            코딩
-            <input
-              type="checkbox"
-              value="코딩"
-              checked={selectedCategories.includes("코딩")}
-              onChange={handleCategoryChange}
-              style={{ display: "none" }}
-            />
-          </label>
+        <div className="flex justify-items ml-14 mt-4">
+          {/* categories.data.map((category) => {
+        return category.name;
+      }); */}
+          {categoryList.map((category) => {
+            return (
+              <label
+                className={`button-checkbox ${
+                  selectedCategories.includes(category) ? "active" : ""
+                } button-check`}
+              >
+                {category}
+                <input
+                  type="checkbox"
+                  value={category}
+                  checked={selectedCategories.includes(category)}
+                  onChange={handleCategoryChange}
+                  style={{ display: "none" }}
+                />
+              </label>
+            );
+          })}
         </div>
 
         {/*내가 볼라고 만든 기능
