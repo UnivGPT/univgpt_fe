@@ -2,14 +2,14 @@ import { useState } from "react";
 import { MentionsInput, Mention } from "react-mentions";
 import defaultStyle from "./defaultStyle";
 
-const dummyInput = [
-  {
-    id: "젤리를 맛있게 먹는 방법",
-    display: "주제",
-  },
-  { id: ["친절하게", "전문적으로"], display: "말투" },
-  { id: "300", display: "글자수" },
-];
+// const dummyInput = [
+//   {
+//     id: 1, //input id
+//     display: "주제", //input name
+//   },
+//   { id: ["친절하게", "전문적으로"], display: "말투" },
+//   { id: 3, display: "글자수" },
+// ];
 
 const customRenderSuggestion = (suggestion, search, highlightedDisplay) => {
   return (
@@ -20,13 +20,30 @@ const customRenderSuggestion = (suggestion, search, highlightedDisplay) => {
 };
 
 const customDisplayTransform = (id, display) => {
+  console.log("CUSTOM DISPLAY TRANSFORM", id, display);
   return `#${display}`; // Add '#' symbol to the display text
 };
 
-export const Mentions = () => {
-  const [content, setContent] = useState("");
-  console.log(content);
+// const handleMentionSelect = (mention) => {
+//   // Add | before and after the mention value
+//   const transformedValue = `|${mention.id}|`;
+//   console.log("HANDLE MENTION SELECT");
+//   return transformedValue;
+// };
+
+export const Mentions = ({ content, setContent, form }) => {
+  console.log("MENTION CONTENT", content);
   console.log(content.match(/[^(]+(?=\))/g));
+
+  const data = form.map((input, idx) => {
+    console.log("INPUT", input);
+    return {
+      id: idx + 1,
+      display: input.name,
+    };
+  });
+  console.log("MENTION DATA", data);
+
   return (
     <div>
       <MentionsInput
@@ -42,10 +59,11 @@ export const Mentions = () => {
       >
         <Mention
           trigger="#"
-          data={dummyInput}
+          data={data}
           renderSuggestion={customRenderSuggestion}
           displayTransform={customDisplayTransform}
           appendSpaceOnAdd={true}
+          markup="|__id__|$__display__$"
         />
       </MentionsInput>
     </div>
