@@ -295,33 +295,12 @@ const PromptMakePage = () => {
             </>
           ))}{" "}
         </div>
-
-        <div className="flex flex-col items-center">
-          {/*입력값 추가(누르면 폼이 하나씩 추가됨)*/}
-          <button
-            type="submit"
-            className="button-a mt-4"
-            onClick={() => {
-              setForm([
-                ...form,
-                {
-                  name: "",
-                  type: "단문형",
-                  placeholding: "",
-                  options: [""],
-                },
-              ]);
-            }}
-          >
-            입력값 추가
-          </button>
-        </div>
       </div>
 
       {/*오른쪽 절반*/}
       <div className="bg-white text-black w-1/2 h-full p-8 pl-10 pr-20">
         <div className="flex justify-between mt-4">
-          <h1 className="text-5xl font-bold mx-6 mb-8">프롬프트</h1>
+          <h1 className="text-5xl font-bold mx-6 mb-6 ">프롬프트</h1>
           <BsQuestionCircle size={45} className="qmark ml-4" />
         </div>
         <div className="rounded-3xl bg-gray-200  mx-6 h-1/2 w-full flex flex-col">
@@ -355,7 +334,7 @@ const PromptMakePage = () => {
             카테고리는 중복 선택이 가능합니다.
           </h2>
         </div>
-        <div className="flex justify-items mx-10 mt-3">
+        <div className="flex justify-items ml-12 mt-4">
           <label
             className={`button-checkbox ${
               selectedCategories.includes("과제") ? "active" : ""
@@ -427,6 +406,20 @@ const PromptMakePage = () => {
               style={{ display: "none" }}
             />
           </label>
+          <label
+            className={`button-checkbox ${
+              selectedCategories.includes("코딩") ? "active" : ""
+            } button-check`}
+          >
+            코딩
+            <input
+              type="checkbox"
+              value="코딩"
+              checked={selectedCategories.includes("코딩")}
+              onChange={handleCategoryChange}
+              style={{ display: "none" }}
+            />
+          </label>
         </div>
 
         {/*내가 볼라고 만든 기능
@@ -439,7 +432,7 @@ const PromptMakePage = () => {
             </div>*/}
 
         {/*삭제&게시 버튼*/}
-        <div className="mt-14 flex justify-center">
+        <div className="mt-12 flex justify-center">
           <button
             className="button-et ml-4 mr-16"
             type="reset"
@@ -451,7 +444,7 @@ const PromptMakePage = () => {
             삭제하기
           </button>
           <button
-            className="button-d ml-16"
+            className="button-dt ml-16"
             onClick={() => {
               handleCreate(prompt);
               window.alert("프롬프트가 성공적으로 만들어졌습니다!");

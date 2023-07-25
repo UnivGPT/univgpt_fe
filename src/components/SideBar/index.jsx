@@ -12,7 +12,6 @@ import { getCookie } from "../../utils/cookie";
 export const HomeSideBar = ({ user, prompt }) => {
   // console.log(user);
   // console.log(user[0].username);
- 
 
   return (
     <div className="flex flex-col space-y-4 align-middle items-center">
@@ -24,7 +23,11 @@ export const HomeSideBar = ({ user, prompt }) => {
       </Link>
       <div>
         <HiUserCircle size="150" />
-        <div className="font-semibold">{user.username}님 반갑습니다!</div>
+        {user.id ? (
+          <div className="font-semibold">{user.username}님 반갑습니다!</div>
+        ) : (
+          <div className="font-semibold">로그인이 필요합니다</div>
+        )}
       </div>
       <div className="w-52 bg-slate-100 rounded-3xl border-solid border-slate-300 border-2 text-black p-3 space-y-2">
         <div className="rounded-xl p-3.5 mb-3 text-center font-bold text-lg text-white bg-gpt-blue">
@@ -44,7 +47,7 @@ export const PromptSideBar = ({ user, prompt, comment }) => {
   // console.log(user);
   // // console.log(prompt);
   // console.log(user.username);
- const [likeCount, setLikeCount] = useState(0);
+  const [likeCount, setLikeCount] = useState(0);
   const [isLike, setIsLike] = useState(false);
   // const [user, setUser] = useState();
 
@@ -78,7 +81,6 @@ export const PromptSideBar = ({ user, prompt, comment }) => {
     }
   };
 
-
   return (
     <div className="h-full flex flex-col space-y-5 bg-white text-black rounded-tr-3xl p-5">
       <Link
@@ -96,19 +98,21 @@ export const PromptSideBar = ({ user, prompt, comment }) => {
       <div>
         <div>프롬프트 정보</div>
         <div>👀 {prompt.view}</div>
-        <div>{isLike ? (
-              <div className="w-5 h-5">
-                <img src={redheart} onClick={onClickLike}></img>
-              </div>
-            ) : (
-              <div className="w-5 h-5">
-                <img
-                  src={emptyheart}
-                  onClick={onClickLike}
-                  className="cursor-pointer"
-                ></img>
-              </div>
-            )}</div>
+        <div>
+          {isLike ? (
+            <div className="w-5 h-5">
+              <img src={redheart} onClick={onClickLike}></img>
+            </div>
+          ) : (
+            <div className="w-5 h-5">
+              <img
+                src={emptyheart}
+                onClick={onClickLike}
+                className="cursor-pointer"
+              ></img>
+            </div>
+          )}
+        </div>
       </div>
       <div>
         <Comment />

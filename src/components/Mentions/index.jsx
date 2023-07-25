@@ -33,10 +33,11 @@ export const Mentions = () => {
         style={defaultStyle}
         value={content}
         onChange={(e) => setContent(e.target.value)}
-        // forceSuggestionsAboveCursor={true}
-        placeholder={
-          "ChatGPT에게 전달될 프롬프트를 작성해주세요. 사용자의 입력값이 들어갔으면 하는 부분에 #을 입력하세요. [예시]미팅 회의록을 요약해줘. 회의 주제는 #회의주제 이고, 요약할 때 말투는 #말투 로 해줘."
-        }
+        forceSuggestionsAboveCursor={true}
+        placeholder={`ChatGPT에게 전달될 프롬프트를 작성해주세요. 
+사용자의 입력값이 들어갔으면 하는 부분에 #을 입력하세요. 
+
+[예시] 미팅 회의록을 요약해줘. 회의 주제는 #회의주제 이고, 요약할 때 말투는 #말투 로 해줘.`}
       >
         <Mention
           trigger="#"

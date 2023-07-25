@@ -6,23 +6,23 @@ import { category, order } from "../data/category";
 import Select from "react-select";
 import { MidPrompt } from "../components/Prompts";
 import { getCategoryList, getPromptList, getUserProfile } from "../api/api";
+import { getCookie } from "../utils/cookie";
 
 const HomePage = () => {
   const [profile, setProfile] = useState({
     email: "",
     username: "",
+    id: "",
   });
 
   const [categoryList, setCategoryList] = useState([]);
   const [searchCategory, setSearchCategory] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const [promptList, setPromptList] = useState([]);
-  //const [promptList, setPromptList] = useState(prompts);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedSort, setSelectedSort] = useState("");
   const [sortPromptList, setSortPromptList] = useState([]);
 
-  
   // useEffect(() => {
   //   const getPromptListAPI = async () => {
   //     const prompts = await getPromptList();
@@ -50,17 +50,24 @@ const HomePage = () => {
       setSearchCategory(categoryName);
     };
     getCategoryListAPI();
+    // console.log("USERPROFILE", profile);
+  }, []);
 
-    const getUserProfileAPI = async () => {
-      const profile = await getUserProfile();
-      setProfile({
-        email: profile.email,
-        username: profile.username,
-        id: profile.id,
-      });
-    };
-    getUserProfileAPI();
-    console.log(profile);
+  useEffect(() => {
+    if (getCookie("access_token")) {
+      const getUserProfileAPI = async () => {
+        const response = await getUserProfile();
+        console.log("RESPONSE", response);
+        const profile = response.data;
+        console.log("RRRRRRR", profile);
+        setProfile({
+          email: profile.email,
+          username: profile.username,
+          id: profile.id,
+        });
+      };
+      getUserProfileAPI();
+    }
   }, []);
 
   // const handleCategoryFilter = (e) => {
