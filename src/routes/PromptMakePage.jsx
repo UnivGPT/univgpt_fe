@@ -311,8 +311,6 @@ const PromptMakePage = () => {
             </button>
             {modalOpen && <PromptMakeModal setModalOpen={setModalOpen} />}
           </div>
-
-          <button className="button-b self-end m-8">미리보기</button>
         </div>
 
         {/*카테고리*/}
