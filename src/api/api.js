@@ -128,10 +128,11 @@ export const createComment = async (data) => {
   const response = await instanceWithToken.post("/comment/", data);
   if (response.status === 201) {
     console.log("COMMENT SUCCESS");
-    window.location.reload(); // 새로운 코멘트 생성시 새로고침으로 반영
+    // window.location.reload(); // 새로운 코멘트 생성시 새로고침으로 반영
   } else {
     console.log("[ERROR] error while creating comment");
   }
+  return response;
 };
 
 export const deleteComment = async (id) => {
@@ -165,7 +166,7 @@ export const deleteInput = async (id) => {
 };
 
 export const getOptionList = async (data) => {
-  console.log("method called");
+  // console.log("method called");
   const response = await instance.post("/option/frominput/", data);
   // const response = await instanceWithToken.post("/option/frominput/", data);
   // console.log("RESPONSERESPONSE", response.data);

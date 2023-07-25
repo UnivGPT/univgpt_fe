@@ -1,7 +1,14 @@
 import { useState, useEffect } from "react";
-import { getPromptDetail, getOptionList, getCommentList } from "../api/api";
+import {
+  getPromptDetail,
+  getOptionList,
+  getCommentList,
+  getUserProfile,
+} from "../api/api";
 import { PromptSideBar } from "../components/SideBar";
-import users from "../data/users";
+// import comments from "../data/comments";
+// import prompts from "../data/prompts";
+// import users from "../data/users";
 import Select from "react-select";
 import { useParams } from "react-router-dom";
 import emptyheart from "../assets/images/emptyheart.png";
@@ -15,9 +22,7 @@ const PromptDetailPage = () => {
   const [input, setInput] = useState([]);
   const [option, setOption] = useState([]);
   const [resultPage, setResultPage] = useState(false);
-  // const navigate = useNavigate();
-
-  const [comments, setComments] = useState([]);
+  //const navigate = useNavigate();
 
   useEffect(() => {
     const getPromptDetailAPI = async () => {
@@ -33,47 +38,22 @@ const PromptDetailPage = () => {
           return response;
         })
       );
-      const OptionResult = results.flat();
-      setOption(OptionResult);
-      setOption(results);
+      // const OptionResult = results.flat();
+      setOption(results.flat());
+      // setOption(results);
     };
 
-    const getCommentsAPI = async () => {
-      const comments = await getCommentList(promptId);
-      setComments(comments);
-    };
-
-    getCommentsAPI();
     getPromptDetailAPI();
   }, [promptId]);
 
   useEffect(() => {
-    console.log("prompt", prompt);
-    console.log("INPUT", input);
-  }, [prompt, input]);
-
-  // }
-  // console.log(isUser);
-  // 	const [newPrompt, setNewPrompt] = useState({
-  //     title: "",
-  //     content: "",
-  //     category: [],
-  //     description: "",
-  //   });
-  // 	const handlechange = (e) => {
-  //     setNewPrompt
-  //   };
-  console.log(prompt);
+    console.log("PROMPT INFO AT DETAIL PAGE", prompt);
+  }, [prompt]);
 
   return (
     <div className="w-screen h-screen flex flex-row ">
       <div className="w-60">
-        {/*<PromptSideBar
-          key={prompt.id}
-          user={prompt.author}
-          prompt={prompt}
-          comment={comments}
-  /> */}
+        {prompt.id ? <PromptSideBar prompt={prompt} /> : <div></div>}
       </div>
       {resultPage ? (
         <div className="w-screen h-screen flex flex-col items-center">
@@ -159,7 +139,7 @@ const PromptDetailPage = () => {
                       <input
                         required
                         type="text"
-                        placeholder="요약을 원하는 자료 조사 내용을 작성해주세요"
+                        placeholder={item.placeholder}
                         className="input-c"
                       />
                     </div>
