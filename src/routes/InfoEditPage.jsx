@@ -1,10 +1,53 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { HiUserCircle } from "react-icons/hi";
+import { getUserProfile, editUserProfile } from "../api/api";
+import { getCookie } from "../utils/cookie";
+import { BsCheckAll } from "react-icons/bs";
 
 const InfoEditPage = () => {
   const handleChangeInfoSubmit = (e) => {
     e.preventDefault();
-    alert("회원가입이 완료되었습니다!");
+    editUserProfile(formData);
+    alert("정보 수정이 완료되었습니다!");
+  };
+
+  const [formData, setFormData] = useState({
+    email: "",
+    username: "",
+    password: "",
+    confirm_password: "",
+  });
+
+  const handleFormData = (e) => {
+    const { id, value } = e.target;
+    setFormData({ ...formData, [id]: value });
+  };
+
+  useEffect(() => {
+    if (getCookie("access_token")) {
+      const getUserProfileAPI = async () => {
+        const response = await getUserProfile();
+        const profile = response.data;
+        setFormData({
+          email: profile.email,
+          username: profile.username,
+          password: profile.password,
+        });
+      };
+      getUserProfileAPI();
+    }
+  }, []);
+
+  const navigate = useNavigate();
+
+  const navigateMain = (e) => {
+    navigate("/");
+  };
+
+  const navigateMypage = (e) => {
+    e.preventDefault();
+    navigate("/mypage");
   };
 
   return (
@@ -20,28 +63,79 @@ const InfoEditPage = () => {
         <label className="label font-bold text-l" htmlFor="email">
           이메일
         </label>
-        <input required type="email" id="email" className="input" />
+        <input
+          required
+          type="email"
+          id="email"
+          className="input"
+          value={formData.email || ""}
+          readOnly
+        />
+        <label className="label font-bold text-l" htmlFor="username">
+          아이디
+        </label>
+        <input
+          required
+          type="text"
+          id="username"
+          className="input"
+          value={formData.username || ""}
+          onChange={handleFormData}
+          readOnly
+        />
         <label htmlFor="password" className="label font-bold text-l">
           {/*API 등등 다시 다 고쳐야!*/}새 비밀번호
-        </label>
-        <input required type="password" id="password" className="input" />
-        <label htmlFor="confirm_password" className="label font-bold text-l">
-          새 비밀번호 확인{" "}
         </label>
         <input
           required
           type="password"
-          id="confirm_password"
+          id="password"
           className="input"
+          onChange={handleFormData}
+          value={formData.password || ""}
         />
+        <label htmlFor="confirm_password" className="label font-bold text-l">
+          새 비밀번호 확인{" "}
+        </label>
+        <div className="w-full">
+          <input
+            required
+            type="password"
+            id="confirm_password"
+            className="input"
+            onChange={handleFormData}
+            value={formData.confirm_password || ""}
+          />
+          {formData.confirm_password === "" ? (
+            <>
+              <br></br>
+              <br></br>
+            </>
+          ) : formData.confirm_password === formData.password ? (
+            <BsCheckAll className="checkIcon" size={25} />
+          ) : (
+            <>
+              <br></br>
+              <br></br>
+            </>
+          )}
+        </div>
 
         <br></br>
         <div className="flex flex-row items-center space-x-14">
-          <button type="submit" className="button-a mt-7">
+          <button
+            type="submit"
+            className="button-a mt-7"
+            //onClick={navigateMain}
+          >
             저장하기
           </button>
-          {/*취소 버튼은 type을 뭘로 해야 할지?*/}
-          <button type="submit" className="button-a mt-7">
+          {/*취소 버튼은 type을 뭘로 해야 할지? -> button으로 하면 submit 막아준대용*/}
+          <button
+            type="button"
+            className="button-a mt-7"
+            onClick={navigateMypage}
+          >
             취소하기
           </button>
         </div>
