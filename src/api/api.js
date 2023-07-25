@@ -166,7 +166,8 @@ export const deleteInput = async (id) => {
 
 export const getOptionList = async (data) => {
   console.log("method called");
-  const response = await instanceWithToken.post("/option/frominput/", data);
+  const response = await instance.post("/option/frominput/", data);
+  // const response = await instanceWithToken.post("/option/frominput/", data);
   // console.log("RESPONSERESPONSE", response.data);
   return response.data;
 };
