@@ -4,6 +4,7 @@ import {
   getOptionList,
   getCommentList,
   getUserProfile,
+  gptCallBack,
 } from "../api/api";
 import { PromptSideBar } from "../components/SideBar";
 // import comments from "../data/comments";
@@ -11,8 +12,6 @@ import { PromptSideBar } from "../components/SideBar";
 // import users from "../data/users";
 import Select from "react-select";
 import { useParams } from "react-router-dom";
-import emptyheart from "../assets/images/emptyheart.png";
-import redheart from "../assets/images/redheart.png";
 import { HiUserCircle } from "react-icons/hi";
 import gpt_logo from "../assets/images/logo_gpt.png";
 
@@ -22,17 +21,49 @@ const PromptDetailPage = () => {
   const [input, setInput] = useState([]);
   const [option, setOption] = useState([]);
   const [resultPage, setResultPage] = useState(false);
+  const [resultArray, setResultArray] = useState([]);
+  const [inputArray, setInputArray] = useState([]);
   //const navigate = useNavigate();
+
+  const result = resultArray.map((item) => {
+    if (typeof item === "number") {
+      return inputArray[item - 1];
+    } else {
+      return item;
+    }
+  });
+  console.log("~~~~~~~~~~~~~", result);
+
+  useEffect(() => {
+    console.log("INPUT ARRAY", inputArray);
+    console.log("RESULT ARRAY", resultArray);
+  }, [inputArray]);
+
+  function createArrayOfEmptyStrings(count) {
+    if (count <= 0) {
+      return [];
+    }
+
+    return Array.from({ length: count }, () => "");
+  }
 
   useEffect(() => {
     const getPromptDetailAPI = async () => {
       const response = await getPromptDetail(promptId);
       setPrompt(response.prompt);
+      if (response.prompt) {
+        const inputString = response.prompt.content;
+        const result = parseInputString(inputString);
+        console.log(result);
+        setResultArray(result);
+      }
       setInput(response.inputs);
 
       const inputIds = response.inputs
         .filter((item) => item.type === 0)
         .map((item) => item.id);
+      console.log("INPUT LENGTH", response.inputs.length);
+      setInputArray(createArrayOfEmptyStrings(response.inputs.length));
 
       const results = await Promise.all(
         inputIds.map(async (id) => {
@@ -51,6 +82,20 @@ const PromptDetailPage = () => {
   useEffect(() => {
     console.log("INPUT", input);
   }, [input]);
+
+  function parseInputString(inputString) {
+    const resultString = inputString.replace(/\$[^\$]+\$/g, "");
+    const resultArray1 = resultString.split("|").join("").split(" ");
+
+    const resultArray2 = resultArray1.map((item) => {
+      if (!isNaN(item)) {
+        return parseInt(item, 10);
+      }
+      return item;
+    });
+
+    return resultArray2;
+  }
 
   return (
     <div className="w-screen h-screen flex flex-row ">
@@ -145,12 +190,22 @@ const PromptDetailPage = () => {
                         label: opt.name,
                       };
                     });
+                  // 객관식
                   return (
                     <div key={index}>
                       <div className="button-f">{item.name}</div>
-                      <Select key={index} options={options} />
+                      <Select
+                        key={index}
+                        options={options}
+                        onChange={(e) => {
+                          const newArray = [...inputArray];
+                          newArray[index] = e.value;
+                          setInputArray(newArray);
+                        }}
+                      />
                     </div>
                   );
+                  // 주관식
                 } else {
                   return (
                     <div key={index}>
@@ -160,6 +215,11 @@ const PromptDetailPage = () => {
                         type="text"
                         placeholder={item.placeholding}
                         className="input-c"
+                        onChange={(e) => {
+                          const newArray = [...inputArray];
+                          newArray[index] = e.target.value;
+                          setInputArray(newArray);
+                        }}
                       />
                     </div>
                   );

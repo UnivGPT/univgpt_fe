@@ -75,9 +75,11 @@ const PromptMakePage = () => {
   const handleCreate = async (prompt) => {
     let { form, ...data } = prompt;
     const response = await createPrompt(data);
-    // prompt id 받아와서 변수에 저장
+
     const promptId = response.data.id;
+
     console.log("FORM", form);
+
     form = form.map((element) => {
       if (element.type === "객관식") {
         return { ...element, type: 0 };
@@ -96,13 +98,13 @@ const PromptMakePage = () => {
     for (let i in form) {
       const data = form[i];
       data.prompt = promptId;
+
       const inputResponse = await createInput(data);
       if (data.type === 0) {
         const inputId = inputResponse.data.id;
         const options = data.options;
         for (let j in options) {
           const option = options[j];
-          console.log("OPTION CONTENT", option);
           const optionData = {
             name: option,
             input: inputId,
@@ -326,7 +328,7 @@ const PromptMakePage = () => {
           <BsQuestionCircle size={45} className="qmark ml-4" />
         </div>
         <div className="rounded-3xl bg-gray-200  mx-6 h-1/2 w-full flex flex-col">
-          <Mentions />
+          <Mentions content={content} setContent={setContent} form={form} />
           <div className="self-end">
             <button className="button-b  m-8" onClick={showModal}>
               미리보기
@@ -385,7 +387,7 @@ const PromptMakePage = () => {
               window.alert("프롬프트가 삭제되었습니다!");
             }}
           >
-            삭제하기
+            초기화하기
           </button>
           <button
             className="button-dt ml-16"
