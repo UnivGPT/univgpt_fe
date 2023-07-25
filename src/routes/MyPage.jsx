@@ -80,7 +80,7 @@ console.log(promptList)
             </div>
             <br></br>
             <div className="w-full h-80 grid grid-cols-2 overflow-y-scroll">
-              {promptList.filter((prompt) => prompt.author === profile.id).map((prompt) => (
+              {promptList.filter((prompt) => prompt.author.id === profile.id).map((prompt) => (
                 <MyPagePrompt key={prompt.id} prompt={prompt} />
               ))}
             </div>
@@ -91,7 +91,7 @@ console.log(promptList)
             </div>
             <br></br>
             <div className="w-full h-80 grid grid-cols-2 overflow-y-scroll">
-              {promptList.filter((prompt) => prompt.like_users.includes(profile.id)).map((prompt) => (
+              {sortPromptList.filter((prompt) => prompt.like_users.includes(profile.id)).map((prompt) => (
                 <MyPagePrompt key={prompt.id} prompt={prompt} />
               ))}
             </div>
