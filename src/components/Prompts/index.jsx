@@ -64,7 +64,11 @@ export const MidPrompt = ({ prompt }) => {
           <div className="flex flex-row font-bold">
             {isLike ? (
               <div className="w-5 h-5">
-                <img src={redheart} onClick={onClickLike}></img>
+                <img
+                  src={redheart}
+                  onClick={onClickLike}
+                  className="cursor-pointer"
+                ></img>
               </div>
             ) : (
               <div className="w-5 h-5">

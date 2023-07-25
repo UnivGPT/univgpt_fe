@@ -95,21 +95,24 @@ export const PromptSideBar = ({ prompt }) => {
       </div>
       <div>
         <div>프롬프트 정보</div>
-        <div>👀 {prompt.view}</div>
-        <div>
-          {isLike ? (
-            <div className="w-5 h-5">
-              <img src={redheart} onClick={onClickLike}></img>
-            </div>
-          ) : (
-            <div className="w-5 h-5">
-              <img
-                src={emptyheart}
-                onClick={onClickLike}
-                className="cursor-pointer"
-              ></img>
-            </div>
-          )}
+        <div className="flex flex-row space-x-5 items-center">
+          <div>👀 {prompt.view}</div>
+          <div>
+            {isLike ? (
+              <div className="w-5 h-5 mr-2">
+                <img src={redheart} onClick={onClickLike}></img>
+              </div>
+            ) : (
+              <div className="w-5 h-5">
+                <img
+                  src={emptyheart}
+                  onClick={onClickLike}
+                  className="cursor-pointer"
+                ></img>
+              </div>
+            )}
+          </div>
+          {likeCount}
         </div>
       </div>
       <div>
