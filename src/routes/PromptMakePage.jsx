@@ -5,7 +5,6 @@ import { BsQuestionCircle } from "react-icons/bs";
 import { PromptMakeModal } from "../components/Modal";
 import { Mentions } from "../components/Mentions";
 
-
 const PromptMakePage = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -337,7 +336,8 @@ const PromptMakePage = () => {
             onChange={(e) => {
               setContent(e.target.value);
             }}
-          ></textarea>
+          ></textarea>*/}
+          <Mentions />
           <div className="self-end">
             <button className="button-b  m-8" onClick={showModal}>
               미리보기
@@ -345,9 +345,7 @@ const PromptMakePage = () => {
             {modalOpen && <PromptMakeModal setModalOpen={setModalOpen} />}
           </div>
 
-          {/* ></textarea> */}
-          <Mentions />
-          <button className="button-b self-end m-8">미리보기</button> */}
+          <button className="button-b self-end m-8">미리보기</button>
         </div>
 
         {/*카테고리*/}
