@@ -17,7 +17,6 @@ const PromptDetailPage = () => {
   const [resultPage, setResultPage] = useState(false);
   // const navigate = useNavigate();
 
-
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
@@ -53,33 +52,6 @@ const PromptDetailPage = () => {
     console.log("INPUT", input);
   }, [prompt, input]);
 
-  // const getOptions = async (inputId) => {
-  //   try {
-  //     const data = {
-  //       input: inputId,
-  //     };
-  //     const response = await getOptionList(data);
-
-  //     if (response && response.data) {
-  //       const originalOptions = response.data;
-  //       const processedOptions = originalOptions.map((option) => ({
-  //         value: option.name,
-  //         label: generateRandomLabel(), // 랜덤한 문자열 생성 함수를 호출하여 label에 할당
-  //       }));
-  //       return processedOptions;
-  //     }
-
-  //     return ""; // 서버 응답이 없거나 비어있는 경우 빈 배열 반환
-  //   } catch (error) {
-  //     console.error("Error fetching options:", error);
-  //     return []; // 에러가 발생한 경우 빈 배열 반환 또는 에러 처리를 원하는 방식으로 처리
-  //   }
-  // };
-
-  // function generateRandomLabel() {
-  //   // 랜덤한 문자열을 생성하여 반환하는 함수 구현 (예시)
-  //   const randomString = Math.random().toString(36).substring(7);
-  //   return `Random Label - ${randomString}`;
   // }
   // console.log(isUser);
   // 	const [newPrompt, setNewPrompt] = useState({
