@@ -34,7 +34,7 @@ export const getUserProfile = async () => {
   } else {
     console.log("[ERROR] error while getting profile");
   }
-  return response.data;
+  return response;
 };
 
 export const checkPassword = async (data) => {

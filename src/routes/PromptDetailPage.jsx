@@ -17,6 +17,7 @@ const PromptDetailPage = () => {
   const [resultPage, setResultPage] = useState(false);
   // const navigate = useNavigate();
 
+
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
