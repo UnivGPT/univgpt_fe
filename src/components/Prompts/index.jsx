@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import emptyheart from "../../assets/images/emptyheart.png";
 import redheart from "../../assets/images/redheart.png";
-import { likePrompt, getUser, getSecureUser } from "../../api/api";
+import pencil from "../../assets/images/pencil.png";
+import { likePrompt, getUser, getSecureUser, getUserProfile } from "../../api/api";
 import { useState, useEffect } from "react";
 import { getCookie } from "../../utils/cookie";
 
@@ -24,6 +25,7 @@ export const MidPrompt = ({ prompt }) => {
   const [likeCount, setLikeCount] = useState(0);
   const [isLike, setIsLike] = useState(false);
   const [user, setUser] = useState();
+  const [isAuthor, setIsAuthor] = useState(false);
 
   useEffect(() => {
     // access_token이 있으면 유저 정보 가져옴
@@ -37,6 +39,9 @@ export const MidPrompt = ({ prompt }) => {
         }
 
         setUser(user);
+        if (prompt.author.id === user.id) {
+          setIsAuthor(!isAuthor);
+        }
       };
       getSecureUserAPI();
     }
@@ -61,6 +66,21 @@ export const MidPrompt = ({ prompt }) => {
       <div className="font-medium">{prompt.description}</div>
       <div className="flex flex-row justify-between">
         <div className="flex flex-row space-x-2">
+        <div className="flex flex-row font-bold">
+          {isAuthor && (
+            <div className="w-5 h-5">
+              <img
+                src={pencil}
+                className="cursor-pointer"
+                alt="edit"
+                // 클릭 이벤트 핸들러 추가 (author인 경우 연필 클릭 시 편집 페이지로 이동하도록 설정)
+                onClick={() => {
+                  // TODO: 편집 페이지로 이동하는 로직 추가
+                }}
+              />
+            </div>
+          )}
+        </div>
           <div className="flex flex-row font-bold">
             {isLike ? (
               <div className="w-5 h-5">
@@ -100,6 +120,7 @@ export const MyPagePrompt = ({ prompt }) => {
   const [likeCount, setLikeCount] = useState(0);
   const [isLike, setIsLike] = useState(false);
   const [user, setUser] = useState();
+  const [isAuthor, setIsAuthor] = useState(false);
   useEffect(() => {
     // access_token이 있으면 유저 정보 가져옴
     if (getCookie("access_token")) {
@@ -112,6 +133,10 @@ export const MyPagePrompt = ({ prompt }) => {
         }
 
         setUser(user);
+        if (prompt.author.id === user.id) {
+          setIsAuthor(!isAuthor);
+        }
+      
       };
       getSecureUserAPI();
     }
@@ -119,6 +144,8 @@ export const MyPagePrompt = ({ prompt }) => {
       setLikeCount(prompt.like_users.length);
     }
   }, [prompt.like_users]);
+
+  
 
   const onClickLike = async () => {
     try {
@@ -133,9 +160,7 @@ export const MyPagePrompt = ({ prompt }) => {
       //   // 스크랩하지 않은 상태일 경우, 스크랩한 프롬프트 목록에 추가
       //   setSortPromptList((prevPromptList) => [...prevPromptList, prompt]);
       // }
-      // setLikeCount(response.like_users.length);
-      // setIsLike(!isLike);
-  
+      
     
     } catch (error) {
       console.log("[ERROR] failed to like prompt");
@@ -148,6 +173,21 @@ export const MyPagePrompt = ({ prompt }) => {
       <div className="font-medium">{prompt.description}</div>
       <div className="flex flex-row space-x-2 self-end pb-10">
         {/* <div className="font-bold">❤️ {prompt.like_users.length}</div> */}
+        <div className="flex flex-row font-bold">
+          {isAuthor && (
+            <div className="w-5 h-5">
+              <img
+                src={pencil}
+                className="cursor-pointer"
+                alt="edit"
+                // 클릭 이벤트 핸들러 추가 (author인 경우 연필 클릭 시 편집 페이지로 이동하도록 설정)
+                onClick={() => {
+                  // TODO: 편집 페이지로 이동하는 로직 추가
+                }}
+              />
+            </div>
+          )}
+        </div>
         <div className="flex flex-row font-bold">
             {isLike ? (
               <div className="w-5 h-5">
