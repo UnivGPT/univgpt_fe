@@ -5,12 +5,12 @@ import { useState, useEffect } from "react";
 import { order } from "../data/category";
 import Select from "react-select";
 import { MidPrompt } from "../components/Prompts";
-import { getCategoryList, getPromptList, getUserProfile } from "../api/api";
+import { getCategoryList, getPromptList, getSecureUser } from "../api/api";
 import { getCookie } from "../utils/cookie";
 
 const HomePage = () => {
   const [profile, setProfile] = useState({
-    email: "",
+    profile: { id: "", socials_username: "" },
     username: "",
     id: "",
   });
@@ -59,12 +59,14 @@ const HomePage = () => {
   useEffect(() => {
     if (getCookie("access_token")) {
       const getUserProfileAPI = async () => {
-        const response = await getUserProfile();
-        const profile = response.data;
+        const response = await getSecureUser();
         setProfile({
-          email: profile.email,
-          username: profile.username,
-          id: profile.id,
+          profile: {
+            id: response.profile.id,
+            socials_username: response.profile.socials_username,
+          },
+          username: response.username,
+          id: response.id,
         });
       };
       getUserProfileAPI();
