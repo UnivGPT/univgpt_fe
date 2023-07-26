@@ -31,7 +31,7 @@ function App() {
             path="/promptdetail/:promptId"
             element={<PromptDetailPage />}
           />
-          <Route path="/promptedit" element={<PromptEditPage />} />
+          <Route path="/promptedit/:promptId" element={<PromptEditPage />} />
           <Route path="/promptmake" element={<PromptMakePage />} />
           <Route path="/promptresult" element={<PromptResult />} />
           <Route path="/infocheck" element={<InfoCheck />} />

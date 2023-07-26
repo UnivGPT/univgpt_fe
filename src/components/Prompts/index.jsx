@@ -166,6 +166,12 @@ export const MyPagePrompt = ({ prompt }) => {
       console.log("[ERROR] failed to like prompt");
     }
   };
+
+  const onClickEdit = () => {
+
+    history.push(`/promptedit/${prompt.id}`);
+  };
+
   
   return (
     <div className="flex flex-col w-75 h-60 space-y-8 p-5 shadow-xl m-3 rounded-3xl  border-gray-300 bg-white">
@@ -183,6 +189,8 @@ export const MyPagePrompt = ({ prompt }) => {
                 // 클릭 이벤트 핸들러 추가 (author인 경우 연필 클릭 시 편집 페이지로 이동하도록 설정)
                 onClick={() => {
                   // TODO: 편집 페이지로 이동하는 로직 추가
+                  {onClickEdit}
+                  
                 }}
               />
             </div>
