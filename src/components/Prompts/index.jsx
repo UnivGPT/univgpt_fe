@@ -150,15 +150,15 @@ export const MyPagePrompt = ({ prompt }) => {
   const onClickLike = async () => {
     try {
       const response = await likePrompt(prompt.id);
+      console.log("RESSPONSE",response)
+      console.log(response.like_users.length)
       setLikeCount(response.like_users.length);
       setIsLike(!isLike);
-      onScrap(prompt);
+      window.location.reload();
       // if (isLike) {
-      //   // 이미 스크랩한 상태일 경우, 스크랩한 프롬프트 목록에서 제거
-      //   setSortPromptList((prevPromptList) => prevPromptList.filter((p) => p.id !== prompt.id));
+      //   setScrapPromptList((prevList) => prevList.filter((p) => p.id !== prompt.id));
       // } else {
-      //   // 스크랩하지 않은 상태일 경우, 스크랩한 프롬프트 목록에 추가
-      //   setSortPromptList((prevPromptList) => [...prevPromptList, prompt]);
+      //   setScrapPromptList((prevList) => [...prevList, prompt]);
       // }
       
     
