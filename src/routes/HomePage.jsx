@@ -106,9 +106,9 @@ const HomePage = () => {
 
   const changeLikeOrder = () => {
     const sortedList = [...sortPromptList].sort((a, b) => {
-      if (a.like > b.like) {
+      if (a.like_users.length > b.like_users.length) {
         return -1;
-      } else if (a.like < b.like) {
+      } else if (a.like_users.length < b.like_users.length) {
         return 1;
       } else {
         return 0;
@@ -132,7 +132,7 @@ const HomePage = () => {
 
   const changeDateOrder = () => {
     const sortedList = [...sortPromptList].sort(
-      (a, b) => new Date(a.created_at) - new Date(b.created_at)
+      (a, b) => new Date(b.created_at) - new Date(a.created_at)
     );
     setSortPromptList(sortedList);
   };
