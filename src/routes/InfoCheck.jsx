@@ -21,7 +21,7 @@ const InfoCheck = () => {
     <div className="w-100% h-100% py-20 mx-10">
       <div className="border-box border-white bg-white rounded-3xl px-20 py-10 m-12">
         <div className="flex flex-col items-center">
-          <h3 className="font-semibold text-4xl text-black ">비밀번호 확인</h3>
+          <h3 className="font-bold text-4xl text-black ">비밀번호 확인</h3>
           <br></br>
           <div className="items-center">
             <h1 className="font-semibold text-lg text-gray-700">
@@ -31,15 +31,17 @@ const InfoCheck = () => {
               <br></br>
               <br></br>
             </h1>
-            <form className="form-b" onSubmit={handlePasswordSubmit}>
+            <form
+              className="form-b flex flex-col items-center"
+              onSubmit={handlePasswordSubmit}
+            >
               <input
                 required
                 type="password"
                 id="password"
-                className="input-b"
+                className="input-b !w-11/12 !shadow-md"
                 onChange={handlePasswordChange}
               />
-              <br></br>
               <div className="flex flex-col items-center w=1/2">
                 <button type="submit" className="items-center button-b mt-7">
                   회원정보 수정

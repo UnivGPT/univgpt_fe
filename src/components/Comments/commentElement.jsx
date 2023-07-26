@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { HiUserCircle } from "react-icons/hi";
+import { TiDelete } from "react-icons/ti";
 //import { getCookie } from "../../utils/cookie";
 
 const CommentElement = (props) => {
@@ -28,7 +29,7 @@ const CommentElement = (props) => {
 
   return (
     <div className="w-full flex justify-between gap-1 mb-2 ">
-      <div className="flex flex-row w-full space-x-2 items-center">
+      <div className="flex flex-row w-full space-x-2 items-center pl-2">
         <HiUserCircle className="w-10 h-10 mr-2" />
         <div className="commentbubble">
           <p className="text-xs mr-5 pt-1 pl-3 align-middle">
@@ -42,7 +43,9 @@ const CommentElement = (props) => {
       {user?.id === comment.author ? (
         <div className="w-1/4 flex flex-row-reverse items-center">
           <>
-            <button onClick={() => handleCommentDelete(comment.id)}>Del</button>
+            <button onClick={() => handleCommentDelete(comment.id)}>
+              <TiDelete className="w-5 h-5 comment-x" />
+            </button>
           </>
         </div>
       ) : null}

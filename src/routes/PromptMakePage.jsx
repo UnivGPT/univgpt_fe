@@ -176,7 +176,7 @@ const PromptMakePage = () => {
           </button>
         </div>
 
-        <div className="h-96 flex flex-col items-center overflow-y-auto">
+        <div className="h-96 flex flex-col items-center pr-4 overflow-y-auto section-c">
           {form.map((el, idx) => (
             <>
               <div className="w-full flex flex-row justify-between items-stretch mt-4">

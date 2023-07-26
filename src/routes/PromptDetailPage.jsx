@@ -174,7 +174,7 @@ const PromptDetailPage = () => {
             {prompt.description}
           </h1>
           <br></br>
-          <div className="rounded-3xl bg-gray-200 px-8 pb-5 mx-6 h-96 w-5/6 overflow-y-scroll">
+          <div className="rounded-3xl bg-gray-200 px-8 pb-5 mr-8 mx-6 h-96 w-5/6 overflow-y-auto section-d">
             <div className="flex flex-col w-full justify-between">
               {input.map((item, index) => {
                 if (item.type === 0) {

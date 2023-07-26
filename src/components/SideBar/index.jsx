@@ -20,7 +20,7 @@ export const HomeSideBar = ({ user, prompt }) => {
   }, [user]);
 
   return (
-    <div className="flex flex-col space-y-4 align-middle items-center m-5">
+    <div className="flex flex-col space-y-4 align-middle items-center m-4">
       <Link
         to="/promptmake"
         className="button-b w-11/12 flex flex-col items-center"
@@ -89,7 +89,7 @@ export const PromptSideBar = ({ prompt }) => {
   };
 
   return (
-    <div className="h-full flex flex-col space-y-5 m-5 bg-white text-black rounded-tr-3xl p-5">
+    <div className="h-full flex flex-col items-center space-y-5 px-8 my-5 bg-white text-black rounded-tr-3xl py-5">
       <Link
         to="/:promptmake"
         className="w-full button-b flex flex-col items-center"
@@ -97,16 +97,20 @@ export const PromptSideBar = ({ prompt }) => {
         내 프롬프트 만들기
       </Link>
       <div>
+        {/*이 얼굴,,,, 글자로 바꿔야,,,,*/}
         <HiUserCircle size="150" className="self-center" />
-        <div className="font-semibold">{userName}님에 의해 생성된 프롬프트</div>
+        <div className="font-semibold text-lg text-center">
+          {userName}님에 의해<br></br>
+          생성된 프롬프트
+        </div>
       </div>
-      <div>
-        <div>프롬프트 정보</div>
+      <div className="flex flex-col items-center">
+        <div className="tag">프롬프트 정보</div>
         <div className="flex flex-row space-x-5 items-center">
-          <div>👀 {prompt.view}</div>
+          <div className="font-bold">👀 {prompt.view}</div>
           <div>
             {isLike ? (
-              <div className="w-5 h-5 mr-2">
+              <div className="w-5 h-5 mr-2 font-bold">
                 <img src={redheart} onClick={onClickLike}></img>
               </div>
             ) : (
@@ -122,7 +126,7 @@ export const PromptSideBar = ({ prompt }) => {
           {likeCount}
         </div>
       </div>
-      <div>
+      <div className="!flex-grow h-full">
         <Comment promptId={prompt.id} />
       </div>
     </div>

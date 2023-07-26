@@ -56,11 +56,24 @@ const Comment = ({ promptId }) => {
   };
 
   return (
-    <div className="flex flex-col w-full self-start h-72">
-      <h1 className="text-base font-semibold mt-5 mb-3">
+    <div className="flex flex-col w-full self-center h-84 pl-3">
+      <h1 className="text-lg font-extrabold text-gpt-indigo mt-5 ml-4 mb-1">
         {commentList.length}개의 댓글
       </h1>
-      <div className="overflow-y-auto overflow-x-hidden">
+      <form
+        className="flex items-center justify-center mt-1"
+        onSubmit={handleCommentSubmit}
+      >
+        <input
+          type="text"
+          value={newContent}
+          placeholder="댓글을 입력해주세요"
+          className="input !border-gpt-blue text-sm !text-black mx-1 mb-3 h-10/12"
+          onChange={(e) => setNewContent(e.target.value)}
+        />
+        {/*<LuSend type="submit" className="button w-30" />*/}
+      </form>
+      <div className="overflow-y-auto overflow-x-hidden flex-grow">
         {commentList.map((comment) => {
           return (
             <div className="w-full flex flex-row" key={comment.id}>
@@ -74,19 +87,6 @@ const Comment = ({ promptId }) => {
         })}
       </div>
       {/* comment form component */}
-      <form
-        className="flex items-center justify-center mt-1"
-        onSubmit={handleCommentSubmit}
-      >
-        <input
-          type="text"
-          value={newContent}
-          placeholder="댓글을 입력해주세요"
-          className="input h-14 text-sm !text-black"
-          onChange={(e) => setNewContent(e.target.value)}
-        />
-        <LuSend type="submit" className="button w-30" />
-      </form>
     </div>
   );
 };

@@ -107,7 +107,10 @@ const InfoEditPage = () => {
               <br></br>
             </>
           ) : formData.confirm_password === formData.password ? (
-            <BsCheckAll className="checkIcon" size={25} />
+            <BsCheckAll
+              className="checkIcon justify-self-end ml-14"
+              size={25}
+            />
           ) : (
             <>
               <br></br>
