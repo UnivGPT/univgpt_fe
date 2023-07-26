@@ -50,10 +50,10 @@ useEffect(() => {
               </div>
               <div className="flex flex-row space-x-5">
                 <div className="button-a">
-                  나의 프롬프트 {scrapPromptList.length}개
+                  나의 프롬프트 {authorPromptList.length}개
                 </div>
                 <div className="button-a">
-                  스크랩한 프롬프트 {authorPromptList.length}개
+                  스크랩한 프롬프트 {scrapPromptList.length}개
                 </div>
               </div>
             </div>
