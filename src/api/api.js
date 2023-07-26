@@ -1,3 +1,4 @@
+import { removeCookie } from "../utils/cookie";
 import { instance, instanceWithToken } from "./axios";
 // Account 관련 말고 다른 API들 추후 추가해야!
 // Account 관련 API들
@@ -42,14 +43,13 @@ export const checkPassword = async (data) => {
   try {
     response = await instanceWithToken.post("/account/info/", data);
     if (response.status === 200) {
-      alert("비밀번호가 일치하네용");
       window.location.href = "/infoedit";
     }
   } catch (error) {
     if (error.response.status === 400) {
-      alert("비밀번호가 일치하지 않네용");
+      alert("비밀번호가 일치하지 않습니다.");
     } else if (error.response.status === 401) {
-      alert("소셜 간편 로그인은 안됩니다");
+      alert("소셜 간편 로그인은 회원 정보를 변경할 수 없습니다.");
     }
     console.error(error);
   }
@@ -60,13 +60,13 @@ export const editUserProfile = async (formData) => {
   const response = await instanceWithToken.patch("/account/info/", formData);
   if (response.status === 200) {
     console.log("EDIT USER SUCCESS");
-    window.location.reload();
+    window.location.href = "/";
+    removeCookie("access_token");
   } else {
     console.log("[ERROR] error while editting profile");
   }
   return response.data;
 };
-
 
 export const getPromptList = async () => {
   const response = await instance.get("/prompt/");

@@ -2,22 +2,18 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { HiUserCircle } from "react-icons/hi";
 import { getUserProfile, editUserProfile } from "../api/api";
-import { getCookie } from "../utils/cookie";
+import { getCookie, removeCookie } from "../utils/cookie";
 import { BsCheckAll } from "react-icons/bs";
 
 const InfoEditPage = () => {
-  const handleChangeInfoSubmit = (e) => {
-    e.preventDefault();
-    editUserProfile(formData);
-    alert("정보 수정이 완료되었습니다!");
-  };
-
   const [formData, setFormData] = useState({
     email: "",
     username: "",
     password: "",
     confirm_password: "",
   });
+
+  const navigate = useNavigate();
 
   const handleFormData = (e) => {
     const { id, value } = e.target;
@@ -32,22 +28,21 @@ const InfoEditPage = () => {
         setFormData({
           email: profile.email,
           username: profile.username,
-          password: profile.password,
         });
       };
       getUserProfileAPI();
     }
   }, []);
 
-  const navigate = useNavigate();
-
-  const navigateMain = (e) => {
-    navigate("/");
-  };
-
   const navigateMypage = (e) => {
     e.preventDefault();
     navigate("/mypage");
+  };
+
+  const handleChangeInfoSubmit = (e) => {
+    e.preventDefault();
+    editUserProfile(formData);
+    alert("정보 수정이 완료되었습니다.");
   };
 
   return (
@@ -126,11 +121,10 @@ const InfoEditPage = () => {
           <button
             type="submit"
             className="button-a mt-7"
-            //onClick={navigateMain}
+            onClick={handleChangeInfoSubmit}
           >
             저장하기
           </button>
-          {/*취소 버튼은 type을 뭘로 해야 할지? -> button으로 하면 submit 막아준대용*/}
           <button
             type="button"
             className="button-a mt-7"
