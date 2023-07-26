@@ -7,6 +7,9 @@ import {
   getCategoryList,
   getPromptDetail,
   getOptionList,
+  updatePrompt,
+  updateOption,
+  deletePrompt,
 } from "../api/api";
 import { BsQuestionCircle } from "react-icons/bs";
 import { PromptMakeModal } from "../components/Modal";
@@ -15,7 +18,7 @@ import { type } from "@testing-library/user-event/dist/type";
 import { useNavigate, useParams } from "react-router-dom";
 
 const PromptEditPage = () => {
-    const { promptId } = useParams();
+  const { promptId } = useParams();
   const [title, setTitle] = useState("");
   const [input, setInput] = useState([]);
   const [option, setOption] = useState([]);
@@ -24,6 +27,7 @@ const PromptEditPage = () => {
   const [activatedChoices, setActivatedChoices] = useState([]);
   const [categoryList, setCategoryList] = useState([]);
   const [content, setContent] = useState("");
+  const navigate = useNavigate();
 
   //   const [prompt, setPrompt] = useState({
   //     title: "",
@@ -42,11 +46,10 @@ const PromptEditPage = () => {
     form: [],
     category: "",
   });
-  useEffect(()=>{
-	console.log("SELLLLLLLLECTED")
-	console.log(selectedCategories)
-
-  }, [selectedCategories])
+  useEffect(() => {
+    console.log("SELLLLLLLLECTED");
+    console.log(selectedCategories);
+  }, [selectedCategories]);
 
   function createArrayOfEmptyStrings(count) {
     if (count <= 0) {
@@ -56,54 +59,56 @@ const PromptEditPage = () => {
     return Array.from({ length: count }, () => "");
   }
 
-//   useEffect(()=>{
-// 	setForm(formData.form)
-//   },[formData])
+  //   useEffect(()=>{
+  // 	setForm(formData.form)
+  //   },[formData])
   useEffect(() => {
-
     const getPromptAPI = async () => {
       const result = await getPromptDetail(promptId);
       const promptFormData = {
         ...result.prompt,
         category: result.prompt.category.map((c) => c.name),
       };
-	  console.log(result.prompt)
+      console.log(result.prompt);
 
-	  setFormData({
-		title: result.prompt.title,
-		description: result.prompt.description,
-		content: "",
-		form: [],
-		category: "",
-	  });
-	  
-	  setTitle(result.prompt.title)
-	  setDescription(result.prompt.description)
-	  setInput(result.inputs);
-	  setContent(result.prompt.content);
-	  
-	  let formContent = result.inputs.map(item => ({ ...item, options: [""]}));
+      setFormData({
+        title: result.prompt.title,
+        description: result.prompt.description,
+        content: "",
+        form: [],
+        category: "",
+      });
 
-	  formContent = formContent.map((element, index) => {
-		if (element.type === 0) {
-		  console.log("이것은 객관식", formContent.indexOf(element))
-		  setActivatedChoices((prevChoices) => [...prevChoices, index]);
-		  return { ...element, type: "객관식" };
-		} else if (element.type === 1) {
-		  return { ...element, type: "단문형" };
-		} else if (element.type === 2) {
-		  return { ...element, type: "장문형" };
-		} else {
-		  return element; // 다른 경우에는 요소를 그대로 반환
-		}
-	  });	  
-	  setForm(formContent)
-	  
-	  const inputIds = result.inputs
+      setTitle(result.prompt.title);
+      setDescription(result.prompt.description);
+      setInput(result.inputs);
+      setContent(result.prompt.content);
+
+      let formContent = result.inputs.map((item) => ({
+        ...item,
+        options: [""],
+      }));
+
+      formContent = formContent.map((element, index) => {
+        if (element.type === 0) {
+          console.log("이것은 객관식", formContent.indexOf(element));
+          setActivatedChoices((prevChoices) => [...prevChoices, index]);
+          return { ...element, type: "객관식" };
+        } else if (element.type === 1) {
+          return { ...element, type: "단문형" };
+        } else if (element.type === 2) {
+          return { ...element, type: "장문형" };
+        } else {
+          return element; // 다른 경우에는 요소를 그대로 반환
+        }
+      });
+      setForm(formContent);
+
+      const inputIds = result.inputs
         .filter((item) => item.type === 0)
         .map((item) => item.id);
-    //   console.log("IIIIIINNNNNNPPPPPPPPUUUUUUTTT", inputIds);
-    //   setInputArray(createArrayOfEmptyStrings(result.inputs.length));
+      //   console.log("IIIIIINNNNNNPPPPPPPPUUUUUUTTT", inputIds);
+      //   setInputArray(createArrayOfEmptyStrings(result.inputs.length));
 
       const results = await Promise.all(
         inputIds.map(async (id) => {
@@ -111,52 +116,49 @@ const PromptEditPage = () => {
           return response;
         })
       );
-	  
-      function addOptionsToArr2(option, input) {
-		return input.map(item2 => {
-		  const matchingArr1Items = option.filter(item1 => item1.input === item2.id);
-		  const options = matchingArr1Items.map(item => item.name);
-	  
-		  return { ...item2, options };
-		});
-	  }
-	  
-	  // 결과 생성
-	  const resultArr2 = addOptionsToArr2(results.flat(), result.inputs);
-	  console.log("RESULT ARRAY2222222",resultArr2);
-	  setFormData(prevFormData => ({
-		...prevFormData,
-		form: resultArr2,
-	  }));
-	  const optionForm = formData.form
-	  setForm(optionForm)
-	  console.log("FORM IN FORMDATA", formData.form)
 
-	  
-	  // 결과 확인
-	//   console.log("RESULT INPUTS",Object.values(result.inputs));
+      function addOptionsToArr2(option, input) {
+        return input.map((item2) => {
+          const matchingArr1Items = option.filter(
+            (item1) => item1.input === item2.id
+          );
+          const options = matchingArr1Items.map((item) => item.name);
+
+          return { ...item2, options };
+        });
+      }
+
+      // 결과 생성
+      const resultArr2 = addOptionsToArr2(results.flat(), result.inputs);
+      console.log("RESULT ARRAY2222222", resultArr2);
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        form: resultArr2,
+      }));
+      const optionForm = formData.form;
+      setForm(optionForm);
+      console.log("FORM IN FORMDATA", formData.form);
+
+      // 결과 확인
+      //   console.log("RESULT INPUTS",Object.values(result.inputs));
 
       setOption(results.flat());
       // setOption(results);
 
-	  
-	  
-	  const category_content = promptFormData.category;
-	  setSelectedCategories(category_content);
+      const category_content = promptFormData.category;
+      setSelectedCategories(category_content);
     };
     getPromptAPI();
   }, [promptId]);
 
-  useEffect(()=>{
-	console.log("이제 그만",formData)
-  },[formData])
+  useEffect(() => {
+    console.log("이제 그만", formData);
+  }, [formData]);
 
+  //   console.log("INPUT", input)
+  //   console.log("INPUT, OPTION FORM", form)
 
-//   console.log("INPUT", input)
-//   console.log("INPUT, OPTION FORM", form)
-
-//   useEffect(()=>{console.log("OPTION", option)},[option])
-
+  //   useEffect(()=>{console.log("OPTION", option)},[option])
 
   useEffect(() => {
     const getCategoryListAPI = async () => {
@@ -169,11 +171,11 @@ const PromptEditPage = () => {
     getCategoryListAPI();
   }, []);
 
-//   useEffect(() => {
-//     console.log("CATEGORY NAMES", categoryList);
-//     console.log("TYPEOF", typeof categoryList);
-//     console.log(Array.isArray(categoryList));
-//   }, [categoryList]);
+  //   useEffect(() => {
+  //     console.log("CATEGORY NAMES", categoryList);
+  //     console.log("TYPEOF", typeof categoryList);
+  //     console.log(Array.isArray(categoryList));
+  //   }, [categoryList]);
 
   //미리보기 모달 노출 여부
 
@@ -204,7 +206,6 @@ const PromptEditPage = () => {
 
   const handleUpdate = async (prompt) => {
     let { form, ...data } = prompt;
-    const navigate = useNavigate();
     const response = await updatePrompt(
       prompt.id,
       {
@@ -258,7 +259,6 @@ const PromptEditPage = () => {
   };
 
   const handleDelete = async () => {
-    const { promptId } = useParams();
     try {
       await deletePrompt(promptId);
       window.alert("프롬프트가 삭제되었습니다!");
@@ -274,7 +274,7 @@ const PromptEditPage = () => {
   // 	e.preventDefault();
   // 	updatePrompt(promptId, formData, navigate);
   // };
-  console.log("FORMDATA TITLE", formData.title)
+  console.log("FORMDATA TITLE", formData.title);
 
   return (
     <div className="w-screen h-screen flex justify-evenly">
@@ -286,7 +286,7 @@ const PromptEditPage = () => {
           type="text"
           className="input-d"
           maxLength={20}
-        //   placeholder="제작하실 프롬프트의 제목을 20자 이내로 입력해주세요."
+          //   placeholder="제작하실 프롬프트의 제목을 20자 이내로 입력해주세요."
           defaultValue={formData.title}
           onChange={(e) => {
             setTitle(e.target.value);
@@ -349,14 +349,14 @@ const PromptEditPage = () => {
                     newForm.splice(idx, 1, editedForm);
                     setForm(newForm);
                   }}
-                //   placeholder="입력값 명칭"
+                  //   placeholder="입력값 명칭"
                   value={el.name}
                 ></input>
                 <select
                   className="text-black w-28 h-13 mx-2 mb-2 rounded-xl font-medium text-center shadow"
                   key={"type" + idx}
                   id={"type" + idx}
-				  value={el.type}
+                  value={el.type}
                   onChange={(e) => {
                     const editedForm = [...form][idx];
                     editedForm["type"] = e.target.value;
@@ -400,7 +400,7 @@ const PromptEditPage = () => {
                   style={{
                     display: activatedChoices.includes(idx) ? "none" : "block",
                   }}
-				  value={el.placeholding}
+                  value={el.placeholding}
                   onChange={(e) => {
                     const editedForm = [...form][idx];
                     editedForm["placeholding"] = e.target.value;
@@ -545,7 +545,7 @@ const PromptEditPage = () => {
             className="button-et ml-4 mr-16"
             type="reset"
             onClick={() => {
-              onClick = { handleDelete };
+              handleDelete();
               //   window.location.reload();
               window.alert("프롬프트가 삭제되었습니다!");
             }}
