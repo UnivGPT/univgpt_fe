@@ -47,6 +47,7 @@ export const PromptSideBar = ({ prompt }) => {
   const [likeCount, setLikeCount] = useState(0);
   const [isLike, setIsLike] = useState(false);
   const [user, setUser] = useState();
+  const [userName, setUserName] = useState("");
 
   useEffect(() => {
     // access_token이 있으면 유저 정보 가져옴
@@ -54,6 +55,9 @@ export const PromptSideBar = ({ prompt }) => {
       const getSecureUserAPI = async () => {
         const like_list = prompt.like_users;
         const user = await getSecureUser();
+        const newUserName =
+          prompt.author.socials_username || prompt.author.username;
+        setUserName(newUserName);
 
         if (like_list.includes(user.id)) {
           setIsLike(true);
@@ -88,9 +92,7 @@ export const PromptSideBar = ({ prompt }) => {
       </Link>
       <div>
         <HiUserCircle size="150" className="self-center" />
-        <div className="font-semibold">
-          {prompt.author.username}님에 의해 생성된 프롬프트
-        </div>
+        <div className="font-semibold">{userName}님에 의해 생성된 프롬프트</div>
       </div>
       <div>
         <div>프롬프트 정보</div>
