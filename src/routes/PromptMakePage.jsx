@@ -28,6 +28,11 @@ const PromptMakePage = () => {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
 
+  useEffect(()=>{
+    console.log(selectedCategories)
+  
+    }, [selectedCategories])
+
   useEffect(() => {
     const getCategoryListAPI = async () => {
       const categories = await getCategoryList();
@@ -71,6 +76,10 @@ const PromptMakePage = () => {
       category: selectedCategories,
     });
   }, [title, description, content, form, selectedCategories]);
+
+  useEffect(()=>{
+    console.log("FORM",form)
+  },[form])
 
   const handleCreate = async (prompt) => {
     let { form, ...data } = prompt;
