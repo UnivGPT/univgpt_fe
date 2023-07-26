@@ -116,7 +116,7 @@ const PromptDetailPage = () => {
       <div className="w-60">
         {prompt.id ? <PromptSideBar prompt={prompt} /> : <div></div>}
       </div>
-      *{/*PromptResult 모달*/}
+      {/*PromptResult 모달*/}
       {resultPage ? (
         <div className="flex-grow flex flex-col justify-center items-center h-4/5 w-2/3 bg-gray-200 text-black p-20 px-36 mx-20 mt-8 rounded-3xl">
           {/*프롬프트 통한 질문*/}
