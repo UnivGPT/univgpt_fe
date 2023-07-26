@@ -5,6 +5,8 @@ import pencil from "../../assets/images/pencil.png";
 import { likePrompt, getUser, getSecureUser, getUserProfile } from "../../api/api";
 import { useState, useEffect } from "react";
 import { getCookie } from "../../utils/cookie";
+import { useHistory } from "react-router-dom";
+
 
 export const SmallPrompt = ({ rank, prompt }) => {
   return (
@@ -60,6 +62,8 @@ export const MidPrompt = ({ prompt }) => {
     }
   };
 
+
+
   return (
     <div className="flex flex-col w-80 h-60 space-y-8 p-5 shadow-xl m-3 rounded-3xl border-gray-300 border bg-white">
       <div className="font-semibold text-lg">{prompt.title}</div>
@@ -69,15 +73,14 @@ export const MidPrompt = ({ prompt }) => {
         <div className="flex flex-row font-bold">
           {isAuthor && (
             <div className="w-5 h-5">
-              <img
-                src={pencil}
-                className="cursor-pointer"
-                alt="edit"
-                // 클릭 이벤트 핸들러 추가 (author인 경우 연필 클릭 시 편집 페이지로 이동하도록 설정)
-                onClick={() => {
-                  // TODO: 편집 페이지로 이동하는 로직 추가
-                }}
-              />
+              <Link to={`/promptedit/${prompt.id}`}>
+                <img
+                  src={pencil}
+                  className="cursor-pointer"
+                  alt="edit"
+                
+                />
+              </Link>
             </div>
           )}
         </div>
@@ -167,10 +170,7 @@ export const MyPagePrompt = ({ prompt }) => {
     }
   };
 
-  const onClickEdit = () => {
-
-    history.push(`/promptedit/${prompt.id}`);
-  };
+  
 
   
   return (
@@ -182,17 +182,14 @@ export const MyPagePrompt = ({ prompt }) => {
         <div className="flex flex-row font-bold">
           {isAuthor && (
             <div className="w-5 h-5">
-              <img
-                src={pencil}
-                className="cursor-pointer"
-                alt="edit"
-                // 클릭 이벤트 핸들러 추가 (author인 경우 연필 클릭 시 편집 페이지로 이동하도록 설정)
-                onClick={() => {
-                  // TODO: 편집 페이지로 이동하는 로직 추가
-                  {onClickEdit}
-                  
-                }}
-              />
+              <Link to={`/promptedit/${prompt.id}`}>
+                <img
+                  src={pencil}
+                  className="cursor-pointer"
+                  alt="edit"
+                
+                />
+              </Link>
             </div>
           )}
         </div>
