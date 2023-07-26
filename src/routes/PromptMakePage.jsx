@@ -184,6 +184,7 @@ const PromptMakePage = () => {
                   key={"name" + idx}
                   id={"name" + idx}
                   className="input-b mb-2"
+                  maxLength={10}
                   onChange={(e) => {
                     const editedForm = [...form][idx];
                     editedForm["name"] = e.target.value;
@@ -389,7 +390,7 @@ const PromptMakePage = () => {
               window.alert("프롬프트가 초기화되었습니다!");
             }}
           >
-            초기화하기
+            새로고침
           </button>
           <button
             className="button-dt ml-16"

@@ -102,7 +102,7 @@ const PromptDetailPage = () => {
       <div className="w-60">
         {prompt.id ? <PromptSideBar prompt={prompt} /> : <div></div>}
       </div>
-      *{/*PromptResult 모달*/}
+      {/*PromptResult 모달*/}
       {resultPage ? (
         <div className="flex-grow flex flex-col justify-center items-center h-4/5 w-2/3 bg-gray-200 text-black p-20 px-36 mx-20 mt-8 rounded-3xl">
           {/*프롬프트 통한 질문*/}
@@ -172,7 +172,7 @@ const PromptDetailPage = () => {
       ) : (
         /*프롬프트 작성 폼*/
         <form className="flex-grow flex flex-col items-center justify-center h-4/5 w-2/3 bg-white text-black p-11 mx-20 mt-8 rounded-3xl">
-          <h1 className="font-bold text-7xl text-gpt-indigo">{prompt.title}</h1>
+          <h1 className="font-bold text-6xl text-gpt-indigo">{prompt.title}</h1>
           <h1 className="font-extrabold text-xl text-gpt-indigo mt-4">
             {prompt.description}
           </h1>
