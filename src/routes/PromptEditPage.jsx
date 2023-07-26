@@ -1,32 +1,57 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useParams } from "react";
 import trashBin from "../assets/images/trashbin.png";
 import {
   createPrompt,
   createInput,
   createOption,
   getCategoryList,
+  getPromptDetail,
 } from "../api/api";
 import { BsQuestionCircle } from "react-icons/bs";
 import { PromptMakeModal } from "../components/Modal";
 import { Mentions } from "../components/Mentions";
 import { type } from "@testing-library/user-event/dist/type";
+import { useNavigate } from "react-router-dom";
 
 const PromptEditPage = () => {
+//   const { promptId } = useParams();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [form, setForm] = useState([]);
   const [activatedChoices, setActivatedChoices] = useState([]);
   const [categoryList, setCategoryList] = useState([]);
   const [content, setContent] = useState("");
-  const [prompt, setPrompt] = useState({
+  
+//   const [prompt, setPrompt] = useState({
+//     title: "",
+//     description: "",
+//     content: "",
+//     form: [],
+//     category: "",
+//   });
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const [formData, setFormData] = useState({
     title: "",
     description: "",
     content: "",
     form: [],
     category: "",
   });
-  const [selectedCategories, setSelectedCategories] = useState([]);
-  const [modalOpen, setModalOpen] = useState(false);
+
+  useEffect(() => {
+	//promptId에 useParams() 쓰는게 계속 오류.. ㅠ
+    const getPromptAPI = async () => {
+      const prompt = await getPromptDetail(promptId);
+      const promptFormData = {
+        ...prompt,
+        category: prompt.category.map((c) => c.name),
+      };
+      setFormData(promptFormData);
+    };
+    getPromptAPI();
+  }, [promptId]);
 
   useEffect(() => {
     const getCategoryListAPI = async () => {
@@ -63,7 +88,7 @@ const PromptEditPage = () => {
   };
 
   useEffect(() => {
-    setPrompt({
+    setFormData({
       title: title,
       description: description,
       form: form,
@@ -72,11 +97,16 @@ const PromptEditPage = () => {
     });
   }, [title, description, content, form, selectedCategories]);
 
-  const handleCreate = async (prompt) => {
+  const handleUpdate = async (prompt) => {
     let { form, ...data } = prompt;
-    const response = await createPrompt(data);
+	const navigate = useNavigate();
+    const response = await updatePrompt(prompt.id, {
+		...formData,
+		form,
+		category: selectedCategories,
+	  }, navigate);
 
-    const promptId = response.data.id;
+    // const promptId = response.data.id;
 
     console.log("FORM", form);
 
@@ -117,6 +147,24 @@ const PromptEditPage = () => {
     }
     console.log("RESPONSE", response);
   };
+
+  const handleDelete = async () => {
+	const {promptId} = useParams();
+    try {
+      await deletePrompt(promptId);
+      window.alert("프롬프트가 삭제되었습니다!");
+      navigate("/"); 
+    } catch (error) {
+      console.log("[ERROR] 프롬프트 삭제에 실패했습니다.");
+    }
+  };
+
+//   const navigate = useNavigate();
+
+	// const onSubmit = (e) => {
+   	// 	e.preventDefault();
+    // 	updatePrompt(promptId, formData, navigate);
+  	// };
 
   return (
     <div className="w-screen h-screen flex justify-evenly">
@@ -385,8 +433,9 @@ const PromptEditPage = () => {
             className="button-et ml-4 mr-16"
             type="reset"
             onClick={() => {
-              window.location.reload();
-              window.alert("프롬프트가 삭제되었습니다!");
+				onClick={handleDelete}
+            //   window.location.reload();
+              	window.alert("프롬프트가 삭제되었습니다!");
             }}
           >
             삭제하기
@@ -394,7 +443,7 @@ const PromptEditPage = () => {
           <button
             className="button-dt ml-16"
             onClick={() => {
-              handleCreate(prompt);
+              handleUpdate(prompt);
               window.alert("프롬프트가 성공적으로 만들어졌습니다!");
             }}
             //axios 통해 서버로 프롬프트 덩어리를 보내는 함수가 있어야!
