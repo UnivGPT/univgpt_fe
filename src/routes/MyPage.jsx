@@ -50,13 +50,13 @@ const MyPage = () => {
             <HiUserCircle size="150" />
             <div className="flex flex-col space-y-10 mx-10">
               <div className="text-3xl font-semibold">
-                {profile.username}님 환영합니다!
+                {profile.username}님 반갑습니다!
               </div>
               <div className="flex flex-row space-x-5">
-                <div className="button-a">
+                <div className="button-a hover:!text-white">
                   나의 프롬프트 {authorPromptList.length}개
                 </div>
-                <div className="button-a">
+                <div className="button-a hover:!text-white">
                   스크랩한 프롬프트 {scrapPromptList.length}개
                 </div>
               </div>
@@ -77,7 +77,7 @@ const MyPage = () => {
               나의 프롬프트
             </div>
             <br></br>
-            <div className="w-full h-80 grid grid-cols-2 overflow-y-scroll">
+            <div className="w-full h-80 grid grid-cols-2 overflow-y-auto section-b">
               {promptList
                 .filter((prompt) => prompt.author.id === profile.id)
                 .map((prompt) => (
@@ -90,7 +90,7 @@ const MyPage = () => {
               스크랩한 프롬프트
             </div>
             <br></br>
-            <div className="w-full h-80 grid grid-cols-2 overflow-y-scroll">
+            <div className="w-full h-80 grid grid-cols-2 overflow-y-auto section-b">
               {sortPromptList
                 .filter((prompt) => prompt.like_users.includes(profile.id))
                 .map((prompt) => (

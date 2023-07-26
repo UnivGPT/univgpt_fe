@@ -109,7 +109,7 @@ const PromptDetailPage = () => {
           <div className="flex justify-center items-center mx-24 mt-2">
             <div className="flex justify-start">
               <div className="bubble-a section-a">
-                <h1 className="font-medium p-4 pl-6 align-middle overflow-y-auto ">
+                <h1 className="font-medium p-4 pl-6 align-middle overflow-y-auto">
                   각 지방의 내일 날씨입니다. 내일은 맑은 뒤 구름이 많이 끼겠고,
                   제주도와 울릉도 독도에는 한두 차례 눈이 오겠습니다. 아침
                   최저기온은 니다. 날씨를 전해 드렸습니다.각 지방의 내일
@@ -139,7 +139,7 @@ const PromptDetailPage = () => {
             <div className="flex justify-start">
               <div className="bubble-b-after mt-28"></div>
               <div className="bubble-b section-a items-center">
-                <h1 className="font-medium p-4 pl-6 inline-block align-middle  overflow-y-auto ">
+                <h1 className="font-medium p-4 pl-6 inline-block align-middle overflow-y-auto ">
                   각 지방의 내일 날씨입니다. 내일은 맑은 뒤 구름이 많이 끼겠고,
                   제주도와 울릉도 독도에는 한두 차례 눈이 오겠습니다. 아침
                   최저기온은 니다. 날씨를 전해 드렸습니다.각 지방의 내일
@@ -177,7 +177,7 @@ const PromptDetailPage = () => {
             {prompt.description}
           </h1>
           <br></br>
-          <div className="rounded-3xl bg-gray-200 px-8 pb-5 mx-6 h-96 w-5/6 overflow-y-scroll">
+          <div className="rounded-3xl bg-gray-200 px-8 pb-5 mr-8 mx-6 h-96 w-5/6 overflow-y-auto section-d">
             <div className="flex flex-col w-full justify-between">
               {input.map((item, index) => {
                 if (item.type === 0) {
