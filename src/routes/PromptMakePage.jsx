@@ -386,7 +386,7 @@ const PromptMakePage = () => {
             type="reset"
             onClick={() => {
               window.location.reload();
-              window.alert("프롬프트가 삭제되었습니다!");
+              window.alert("프롬프트가 초기화되었습니다!");
             }}
           >
             초기화하기

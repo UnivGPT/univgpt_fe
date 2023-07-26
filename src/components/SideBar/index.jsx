@@ -20,7 +20,7 @@ export const HomeSideBar = ({ user, prompt }) => {
   }, [user]);
 
   return (
-    <div className="flex flex-col space-y-4 align-middle items-center">
+    <div className="flex flex-col space-y-4 align-middle items-center m-5">
       <Link
         to="/promptmake"
         className="button-b w-11/12 flex flex-col items-center"
@@ -89,7 +89,7 @@ export const PromptSideBar = ({ prompt }) => {
   };
 
   return (
-    <div className="h-full flex flex-col space-y-5 bg-white text-black rounded-tr-3xl p-5">
+    <div className="h-full flex flex-col space-y-5 m-5 bg-white text-black rounded-tr-3xl p-5">
       <Link
         to="/:promptmake"
         className="w-full button-b flex flex-col items-center"

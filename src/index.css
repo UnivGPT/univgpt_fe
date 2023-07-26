@@ -2,69 +2,83 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Pretendard-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+    format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+.notosanskr * {
+  font-family: "Noto Sans KR", sans-serif;
+}
+
 /* smallPost 안에 있는 tag */
 .tag {
-  @apply text-white bg-black p-2 text-xs rounded-2xl group-hover:bg-gpt-green group-hover:text-black hover:bg-teal-300 hover:text-black;
+  @apply text-white bg-black p-2 text-xs rounded-2xl font-notosanskr group-hover:bg-gpt-green group-hover:text-black hover:bg-teal-300 hover:text-black;
 }
 .tag.active {
   @apply bg-white text-black;
 }
 /* 길쭉이 기본 버튼 */
 .button-a {
-  @apply bg-gpt-green text-white font-bold hover:text-black rounded-xl text-lg py-3.5 px-16;
+  @apply bg-gpt-green text-white font-semibold font-notosanskr hover:text-black rounded-xl text-lg py-3.5 px-16;
 }
 
 .button-a-2 {
-  @apply bg-gpt-green hover:text-black text-white font-bold rounded-2xl text-lg h-12 py-1.5 px-4 mr-4;
+  @apply bg-gpt-green hover:text-black text-white font-notosanskr font-bold rounded-2xl text-lg h-12 py-1.5 px-4 mr-4;
 }
 
 /* 홀쭉이 기본 버튼 */
 .button-b {
-  @apply bg-gpt-green text-white font-bold hover:text-black rounded-xl text-lg p-3.5;
+  @apply bg-gpt-green text-white font-semibold font-notosanskr hover:text-black rounded-xl text-lg p-3.5;
 }
 
 /* 태그 */
 .button-c {
-  @apply bg-gpt-green text-white font-bold rounded-xl text-lg p-3.5 relative;
+  @apply bg-gpt-green text-white font-semibold font-notosanskr rounded-xl text-lg p-3.5 relative;
 }
 
 /* 파란색 버튼 */
 .button-d {
-  @apply bg-gpt-blue text-white font-bold hover:text-black rounded-xl text-lg py-3.5 px-14;
+  @apply bg-gpt-blue text-white hover:text-black font-notosanskr rounded-xl text-lg py-3.5 px-14;
 }
 .button-dt {
-  @apply bg-gpt-blue text-white font-bold hover:text-black rounded-2xl text-xl py-3.5 px-16 shadow-xl;
+  @apply bg-gpt-blue text-white font-semibold font-notosanskr hover:text-black rounded-2xl text-xl py-3.5 px-16 shadow-xl;
 }
 
 /* 빨간색 버튼 */
 .button-e {
-  @apply bg-gpt-red text-white font-bold hover:text-black rounded-xl text-lg py-3.5 px-14;
+  @apply bg-gpt-red text-white font-semibold font-notosanskr hover:text-black rounded-xl text-lg py-3.5 px-14;
 }
 /*쓰레기통 빨간 버튼*/
 .button-e-2 {
-  @apply bg-gpt-red text-white font-bold hover:bg-gray-400 rounded-xl text-lg px-4 pl-5 mb-2 items-center;
+  @apply bg-gpt-red text-white hover:bg-gray-400 rounded-xl text-lg px-4 pl-5 mb-2 items-center;
 }
 /*대버튼 빨간색*/
 .button-et {
-  @apply bg-gpt-red text-white font-bold hover:text-black rounded-2xl text-xl py-3.5 px-16 shadow-xl;
+  @apply bg-gpt-red text-white font-semibold font-notosanskr hover:text-black rounded-2xl text-xl py-3.5 px-16 shadow-xl;
 }
 
 /*프롬프트 생성기 내의 태그*/
 .button-f {
-  @apply rounded-l py-2 px-1 mt-6 text-center font-bold text-lg text-white bg-gpt-green w-28 mx-1;
+  @apply rounded-l py-2 px-1 mt-6 text-center font-semibold font-notosanskr text-lg text-white bg-gpt-green w-28 mx-1;
 }
 
 .button-plus-blue {
-  @apply bg-blue-500 text-white hover:text-black rounded-xl py-2 px-4 text-2xl font-bold flex flex-col items-center;
+  @apply bg-blue-500 text-white hover:text-black font-notosanskr rounded-xl py-2 px-4 text-2xl font-semibold flex flex-col items-center;
 }
 
 .button-plus-red {
-  @apply bg-red-500 text-white hover:text-black rounded-xl py-2 px-4 text-2xl font-bold flex flex-col items-center;
+  @apply bg-red-500 text-white hover:text-black rounded-xl font-PretendardRegular  py-2 px-4 text-2xl font-semibold flex flex-col items-center;
 }
 
 /*PromptMake Category*/
 .button-check {
-  @apply bg-gray-300 text-zinc-500 font-bold active:bg-gpt-green active:text-white rounded-xl shadow p-3.5 px-5 mr-9;
+  @apply bg-gray-300 text-zinc-500 font-semibold font-notosanskr active:bg-gpt-green active:text-white rounded-xl shadow p-3.5 px-5 mr-9;
 }
 
 /* form-a: 로그인, 회원가입, 회원정보 수정에 쓰이는 폼 */
@@ -87,7 +101,7 @@
 
 /*promptMakepage에서 단문형, 장문형 placeholder 만들 때*/
 .input-b-1 {
-  @apply placeholder-gray-800  shadow-2xl w-full px-6 py-3 rounded-2xl bg-blue-200 text-black placeholder-opacity-50 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-transparent;
+  @apply placeholder-gray-800 font-PretendardRegular shadow-2xl w-full px-6 py-3 rounded-2xl bg-blue-200 text-black placeholder-opacity-50 focus:outline-none focus:ring-2 focus:ring-teal-400 focus:border-transparent;
 }
 
 .input-c {
@@ -106,9 +120,9 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  font-family: "Pretendard-Regular", "Noto Sans"; /*-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    "Noto Sans", sans-serif;
+    , sans-serif;*/
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 

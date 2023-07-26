@@ -18,25 +18,29 @@ const MyPage = () => {
   const [scrapPromptList, setScrapPromptList] = useState([]);
   const [sortPromptList, setSortPromptList] = useState([]);
 
-useEffect(() => {
-  const fetchData = async () => {
-    if (getCookie("access_token")) {
-      const response = await getUserProfile();
-      const profile = response.data;
-      setProfile({
-        id: profile.id,
-        email: profile.email,
-        username: profile.username,
-      });
-      const prompts = await getPromptList();
-      setPromptList(prompts);
-      setSortPromptList(prompts);
-      setScrapPromptList(prompts.filter((prompt) => prompt.like_users.includes(profile.id)));
-      setAuthorPromptList(prompts.filter((prompt) => prompt.author.id === profile.id));
-    }
-  };
-  fetchData();
-}, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      if (getCookie("access_token")) {
+        const response = await getUserProfile();
+        const profile = response.data;
+        setProfile({
+          id: profile.id,
+          email: profile.email,
+          username: profile.username,
+        });
+        const prompts = await getPromptList();
+        setPromptList(prompts);
+        setSortPromptList(prompts);
+        setScrapPromptList(
+          prompts.filter((prompt) => prompt.like_users.includes(profile.id))
+        );
+        setAuthorPromptList(
+          prompts.filter((prompt) => prompt.author.id === profile.id)
+        );
+      }
+    };
+    fetchData();
+  }, []);
 
   return (
     <div className="h-screen w-screen">
@@ -69,25 +73,29 @@ useEffect(() => {
         </div>
         <div className="flex flex-row space-x-5 mx-20 justify-between">
           <div className="w-6/12 h-3/4 bg-slate-200 text-black rounded-3xl p-5 ">
-            <div className="button-d text-center font-bold text-2xl">
+            <div className="button-d text-center font-bold text-2xl hover:!text-white">
               나의 프롬프트
             </div>
             <br></br>
             <div className="w-full h-80 grid grid-cols-2 overflow-y-scroll">
-              {promptList.filter((prompt) => prompt.author.id === profile.id).map((prompt) => (
-                <MyPagePrompt key={prompt.id} prompt={prompt} />
-              ))}
+              {promptList
+                .filter((prompt) => prompt.author.id === profile.id)
+                .map((prompt) => (
+                  <MyPagePrompt key={prompt.id} prompt={prompt} />
+                ))}
             </div>
           </div>
           <div className="w-6/12 h-3/4 bg-slate-200 text-black rounded-3xl p-5">
-            <div className="button-d text-center font-bold text-2xl">
+            <div className="button-d text-center font-bold text-2xl hover:!text-white">
               스크랩한 프롬프트
             </div>
             <br></br>
             <div className="w-full h-80 grid grid-cols-2 overflow-y-scroll">
-              {sortPromptList.filter((prompt) => prompt.like_users.includes(profile.id)).map((prompt) => (
-                <MyPagePrompt key={prompt.id} prompt={prompt} />
-              ))}
+              {sortPromptList
+                .filter((prompt) => prompt.like_users.includes(profile.id))
+                .map((prompt) => (
+                  <MyPagePrompt key={prompt.id} prompt={prompt} />
+                ))}
             </div>
           </div>
         </div>

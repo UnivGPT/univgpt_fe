@@ -5,7 +5,7 @@ import { getCookie, removeCookie } from "../../utils/cookie";
 import { useState, useEffect } from "react";
 // import users from "../../data/users";
 
-const Header = ( ) => {
+const Header = () => {
   // const [isUser, setIsUser] = useState(users);
   const [isLoggedIn, setIsLoggedIn] = useState("");
 
@@ -27,17 +27,17 @@ const Header = ( ) => {
           <img id="header-logo" src={logo} alt="logo" />
         </Link>
       </div>
-      <div className="flex flex-row space-x-5 m-5">
+      <div className="flex flex-row space-x-5 m-5 mx-8">
         {/* {isUser ? ( */}
         {isLoggedIn ? (
           <>
-            <Link to="/mypage" className="text-m font-semibold">
+            <Link to="/mypage" className="text-lg font-semibold mr-2">
               마이페이지
             </Link>
             <Link
               to="/"
               onClick={handleLogout}
-              className="text-m font-semibold"
+              className="text-lg font-semibold"
             >
               로그아웃
             </Link>

@@ -14,6 +14,10 @@ module.exports = {
         "gpt-indigo": "#48466D",
       },
     },
+    fontFamily: {
+      notosanskr: ["Noto Sans KR"],
+      PretendardRegular: ["Pretendard-Regular"],
+    },
   },
   plugins: [],
 };
