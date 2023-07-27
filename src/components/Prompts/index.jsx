@@ -2,11 +2,15 @@ import { Link } from "react-router-dom";
 import emptyheart from "../../assets/images/emptyheart.png";
 import redheart from "../../assets/images/redheart.png";
 import pencil from "../../assets/images/pencil.png";
-import { likePrompt, getUser, getSecureUser, getUserProfile } from "../../api/api";
+import {
+  likePrompt,
+  getUser,
+  getSecureUser,
+  getUserProfile,
+} from "../../api/api";
 import { useState, useEffect } from "react";
 import { getCookie } from "../../utils/cookie";
 import { useHistory } from "react-router-dom";
-
 
 export const SmallPrompt = ({ rank, prompt }) => {
   return (
@@ -62,43 +66,40 @@ export const MidPrompt = ({ prompt }) => {
     }
   };
 
-
-
   return (
     <div className="flex flex-col w-80 h-60 space-y-8 p-5 shadow-xl m-3 rounded-3xl border-gray-300 border bg-white">
       <div className="font-semibold text-lg">{prompt.title}</div>
-      <div className="font-medium">{prompt.description}</div>
+      <div className="font-medium h-1/3">{prompt.description}</div>
       <div className="flex flex-row justify-between">
         <div className="flex flex-row space-x-2">
-        <div className="flex flex-row font-bold">
-          {isAuthor && (
-            <div className="w-5 h-5">
-              <Link to={`/promptedit/${prompt.id}`}>
-                <img
-                  src={pencil}
-                  className="cursor-pointer"
-                  alt="edit"
-                
-                />
-              </Link>
-            </div>
-          )}
-        </div>
+          <div className="flex flex-row font-bold">
+            {isAuthor && (
+              <div className="w-5 h-5">
+                <Link to={`/promptedit/${prompt.id}`}>
+                  <img
+                    src={pencil}
+                    className="cursor-pointer mr-1"
+                    alt="edit"
+                  />
+                </Link>
+              </div>
+            )}
+          </div>
           <div className="flex flex-row font-bold">
             {isLike ? (
-              <div className="w-5 h-5">
+              <div className="w-5 h-5 mr-1">
                 <img
                   src={redheart}
                   onClick={onClickLike}
-                  className="cursor-pointer"
+                  className="cursor-pointer mt-0.5"
                 ></img>
               </div>
             ) : (
-              <div className="w-5 h-5">
+              <div className="w-5 h-5 mr-1">
                 <img
                   src={emptyheart}
                   onClick={onClickLike}
-                  className="cursor-pointer"
+                  className="cursor-pointer mt-0.5"
                 ></img>
               </div>
             )}
@@ -139,7 +140,6 @@ export const MyPagePrompt = ({ prompt }) => {
         if (prompt.author.id === user.id) {
           setIsAuthor(!isAuthor);
         }
-      
       };
       getSecureUserAPI();
     }
@@ -148,13 +148,11 @@ export const MyPagePrompt = ({ prompt }) => {
     }
   }, [prompt.like_users]);
 
-  
-
   const onClickLike = async () => {
     try {
       const response = await likePrompt(prompt.id);
-      console.log("RESSPONSE",response)
-      console.log(response.like_users.length)
+      console.log("RESSPONSE", response);
+      console.log(response.like_users.length);
       setLikeCount(response.like_users.length);
       setIsLike(!isLike);
       window.location.reload();
@@ -163,16 +161,11 @@ export const MyPagePrompt = ({ prompt }) => {
       // } else {
       //   setScrapPromptList((prevList) => [...prevList, prompt]);
       // }
-      
-    
     } catch (error) {
       console.log("[ERROR] failed to like prompt");
     }
   };
 
-  
-
-  
   return (
     <div className="flex flex-col w-75 h-60 space-y-8 p-5 shadow-xl m-3 rounded-3xl  border-gray-300 bg-white">
       <div className="font-semibold text-lg">{prompt.title}</div>
@@ -183,36 +176,31 @@ export const MyPagePrompt = ({ prompt }) => {
           {isAuthor && (
             <div className="w-5 h-5">
               <Link to={`/promptedit/${prompt.id}`}>
-                <img
-                  src={pencil}
-                  className="cursor-pointer"
-                  alt="edit"
-                
-                />
+                <img src={pencil} className="cursor-pointer" alt="edit" />
               </Link>
             </div>
           )}
         </div>
         <div className="flex flex-row font-bold">
-            {isLike ? (
-              <div className="w-5 h-5">
-                <img
-                  src={redheart}
-                  onClick={onClickLike}
-                  className="cursor-pointer"
-                ></img>
-              </div>
-            ) : (
-              <div className="w-5 h-5">
-                <img
-                  src={emptyheart}
-                  onClick={onClickLike}
-                  className="cursor-pointer"
-                ></img>
-              </div>
-            )}
-            {likeCount}
-          </div>
+          {isLike ? (
+            <div className="w-5 h-5">
+              <img
+                src={redheart}
+                onClick={onClickLike}
+                className="cursor-pointer"
+              ></img>
+            </div>
+          ) : (
+            <div className="w-5 h-5">
+              <img
+                src={emptyheart}
+                onClick={onClickLike}
+                className="cursor-pointer"
+              ></img>
+            </div>
+          )}
+          {likeCount}
+        </div>
         <div className="font-bold">👀 {prompt.view}</div>
       </div>
       {/*<Link to={`/promptdetail/${prompt.id}`}>프롬프트 사용하기</Link>*/}

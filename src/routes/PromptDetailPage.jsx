@@ -124,10 +124,10 @@ const PromptDetailPage = () => {
           {/*프롬프트 통한 질문*/}
           <div className="flex justify-center items-center mx-24 mt-2">
             <div className="flex justify-start">
-              <div className="bubble-a section-a">
-                <h1 className="font-medium p-4 pl-6 align-middle overflow-y-auto ">
+              <div className="flex bubble-a section-a items-center overflow-y-auto">
+                <div className="p-4 pl-6 inline-block align-middle whitespace-pre-line !font-bold !my-auto">
                   {message}
-                </h1>
+                </div>
               </div>
               <div className="bubble-a-after mt-14"></div>
             </div>
@@ -144,10 +144,10 @@ const PromptDetailPage = () => {
             />
             <div className="flex justify-start">
               <div className="bubble-b-after mt-28"></div>
-              <div className="bubble-b section-a items-center">
-                <h1 className="font-medium p-4 pl-6 inline-block align-middle overflow-y-auto whitespace-pre-line">
+              <div className="flex bubble-b section-a items-center overflow-y-auto">
+                <div className="font-medium p-4 pl-6 inline-block align-middle whitespace-pre-line !my-auto">
                   {answer}
-                </h1>
+                </div>
               </div>
             </div>
           </div>
@@ -160,7 +160,8 @@ const PromptDetailPage = () => {
               setResultPage(false);
               // console.log(resultPage);
             }}
-            className=" bg-gpt-green text-white font-bold hover:text-black rounded-3xl text-lg py-3.5 px-20 mt-18 shadow-xl"
+            className=" bg-gpt-green text-white font-bold hover:text-black rounded-3xl text-lg py-3.5 px-20 
+            !mt-7 shadow-xl"
           >
             나가기
           </button>

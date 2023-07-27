@@ -183,7 +183,6 @@ body {
   -webkit-border-radius: 27px;
   -moz-border-radius: 27px;
   border-radius: 40px;
-  align-items: center;
 }
 
 .bubble-a-after {
@@ -199,7 +198,8 @@ body {
 .bubble-b {
   position: relative;
   width: 750px;
-  height: 320px;
+  height: 260px;
+  max-height: 400px;
   padding: 5px;
   margin: 0px;
   background: #ffffff;
@@ -207,8 +207,6 @@ body {
   -webkit-border-radius: 27px;
   -moz-border-radius: 27px;
   border-radius: 27px;
-  display: flex;
-  align-items: center;
 }
 .bubble-b-after {
   width: 0;
