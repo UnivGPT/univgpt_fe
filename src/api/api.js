@@ -28,6 +28,31 @@ export const signUp = async (data) => {
   return response;
 };
 
+export const refreshToken = async (token) => {
+  const response = await instance.post("/account/refresh/", { refresh: token });
+  if (response.status === 200) {
+    console.log("REFRESH TOKEN SUCCESS");
+  } else {
+    console.log("[ERROR] error while refreshing token");
+  }
+};
+
+export const logOut = async (token) => {
+  const response = await instanceWithToken.post("/account/logout/", {
+    refresh: token,
+  });
+  if (response.status === 204) {
+    console.log("LOGOUT SUCCESS");
+
+    removeCookie("refresh_token");
+    removeCookie("access_token");
+
+    window.location.href = "/";
+  } else {
+    console.log("[ERROR] error while logging out");
+  }
+};
+
 export const getUserProfile = async () => {
   const response = await instanceWithToken.get("/account/info/");
   if (response.status === 200) {
