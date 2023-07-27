@@ -28,8 +28,14 @@ const PromptMakePage = () => {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
 
+  const [inputId, setInputId] = useState(1);
+
   useEffect(() => {
-    console.log(selectedCategories);
+    console.log(activatedChoices);
+  }, [activatedChoices]);
+
+  useEffect(() => {
+    //console.log(selectedCategories);
   }, [selectedCategories]);
 
   useEffect(() => {
@@ -44,9 +50,9 @@ const PromptMakePage = () => {
   }, []);
 
   useEffect(() => {
-    console.log("CATEGORY NAMES", categoryList);
-    console.log("TYPEOF", typeof categoryList);
-    console.log(Array.isArray(categoryList));
+    //console.log("CATEGORY NAMES", categoryList);
+    //console.log("TYPEOF", typeof categoryList);
+    //console.log(Array.isArray(categoryList));
   }, [categoryList]);
 
   //미리보기 모달 노출 여부
@@ -77,7 +83,7 @@ const PromptMakePage = () => {
   }, [title, description, content, form, selectedCategories]);
 
   useEffect(() => {
-    console.log("FORM", form);
+    //console.log("FORM", form);
   }, [form]);
 
   const handleCreate = async (prompt) => {
@@ -86,7 +92,7 @@ const PromptMakePage = () => {
 
     const promptId = response.data.id;
 
-    console.log("FORM", form);
+    //console.log("FORM", form);
 
     form = form.map((element) => {
       if (element.type === "객관식") {
@@ -100,7 +106,7 @@ const PromptMakePage = () => {
       }
     });
 
-    console.log("CHANGED FORM", form);
+    //console.log("CHANGED FORM", form);
     // input 데이터 가공
     // api 호출 (for문돌아야할듯)
     for (let i in form) {
@@ -121,9 +127,9 @@ const PromptMakePage = () => {
           console.log("option created", optionResponse);
         }
       }
-      console.log("inputResponse", inputResponse);
+      //console.log("inputResponse", inputResponse);
     }
-    console.log("RESPONSE", response);
+    //console.log("RESPONSE", response);
   };
 
   return (
@@ -176,8 +182,10 @@ const PromptMakePage = () => {
                   type: "단문형",
                   placeholding: "",
                   options: [""],
+                  id: { inputId },
                 },
               ]);
+              setInputId(inputId + 1);
             }}
           >
             입력값 추가
@@ -214,12 +222,16 @@ const PromptMakePage = () => {
                     newForm.splice(idx, 1, editedForm);
                     setForm(newForm);
                     if (e.target.value === "객관식") {
-                      setActivatedChoices([...activatedChoices, idx]);
+                      setActivatedChoices([...activatedChoices, el.id]);
                     } else {
-                      const idxIndex = activatedChoices.indexOf(idx);
-                      const deletedAcitvatedChocies = [...activatedChoices];
-                      deletedAcitvatedChocies.splice(idxIndex, 1);
-                      setActivatedChoices(deletedAcitvatedChocies);
+                      if (activatedChoices.includes(el.id)) {
+                        const idDeletedActivatedChoices = [...activatedChoices];
+                        idDeletedActivatedChoices.splice(
+                          activatedChoices.indexOf(el.id),
+                          1
+                        );
+                        setActivatedChoices(idDeletedActivatedChoices);
+                      }
                     }
                   }}
                 >
@@ -248,7 +260,9 @@ const PromptMakePage = () => {
                   className="input-b-1 mb-2 justify-self-center"
                   placeholder="이용자가 입력값 내용을 어떻게 작성하면 좋을지 설명해주세요."
                   style={{
-                    display: activatedChoices.includes(idx) ? "none" : "block",
+                    display: activatedChoices.includes(el.id)
+                      ? "none"
+                      : "block",
                   }}
                   onChange={(e) => {
                     const editedForm = [...form][idx];
@@ -265,7 +279,7 @@ const PromptMakePage = () => {
                 <div
                   className="flex flex-row justify-around mb-2"
                   style={{
-                    display: activatedChoices.includes(idx) ? "flex" : "none",
+                    display: activatedChoices.includes(el.id) ? "flex" : "none",
                   }}
                 >
                   <input
@@ -347,39 +361,39 @@ const PromptMakePage = () => {
             )}
           </div>
         </div>
-
-        {/*카테고리*/}
-        <div className="mx-6 mt-6 ml-8 flex justify-start items-baseline">
-          <h1 className="text-2xl font-bold">카테고리</h1>
-          <h2 className="flex font-semibold text-sm text-gray-700 ml-1">
-            카테고리는 중복 선택이 가능합니다.
-          </h2>
-        </div>
-        <div className="flex flex-row justify-items ml-14 mt-4 overflow-x-scroll">
-          {/* categories.data.map((category) => {
+        <div className="min-w-[800px]">
+          {/*카테고리*/}
+          <div className=" mx-6 mt-6 ml-8 flex justify-start items-baseline">
+            <h1 className="text-2xl font-bold">카테고리</h1>
+            <h2 className="flex font-semibold text-sm text-gray-700 ml-1">
+              카테고리는 중복 선택이 가능합니다.
+            </h2>
+          </div>
+          <div className="min-w-fit flex flex-row justify-center mt-4 ">
+            {/* categories.data.map((category) => {
         return category.name;
       }); */}
-          {categoryList.map((category) => {
-            return (
-              <label
-                className={`button-checkbox ${
-                  selectedCategories.includes(category) ? "active" : ""
-                } button-check`}
-              >
-                {category}
-                <input
-                  type="checkbox"
-                  value={category}
-                  checked={selectedCategories.includes(category)}
-                  onChange={handleCategoryChange}
-                  style={{ display: "none" }}
-                />
-              </label>
-            );
-          })}
-        </div>
+            {categoryList.map((category) => {
+              return (
+                <label
+                  className={`button-checkbox ${
+                    selectedCategories.includes(category) ? "active" : ""
+                  } button-check`}
+                >
+                  {category}
+                  <input
+                    type="checkbox"
+                    value={category}
+                    checked={selectedCategories.includes(category)}
+                    onChange={handleCategoryChange}
+                    style={{ display: "none" }}
+                  />
+                </label>
+              );
+            })}
+          </div>
 
-        {/*내가 볼라고 만든 기능
+          {/*내가 볼라고 만든 기능
           <div><h3>선택된 카테고리</h3>
           <ul>
             {selectedCategories.map((category) => (
@@ -388,30 +402,31 @@ const PromptMakePage = () => {
           </ul>
             </div>*/}
 
-        {/*삭제&게시 버튼*/}
-        <div className="mt-12 flex justify-center">
-          <button
-            className="button-et ml-4 mr-16"
-            type="reset"
-            onClick={() => {
-              window.location.reload();
-              window.alert("프롬프트가 초기화되었습니다!");
-            }}
-          >
-            새로고침
-          </button>
-          <button
-            className="button-dt ml-16"
-            onClick={() => {
-              handleCreate(prompt);
-              window.alert("프롬프트가 성공적으로 만들어졌습니다!");
-            }}
-            //axios 통해 서버로 프롬프트 덩어리를 보내는 함수가 있어야!
-            //지금은 잘 들어왔는지 확인하기 위해 콘솔로그 찍는 기능 넣어놨어유
-            //공란이 있을 시 'ㅇㅇ을 입력해주세요' alert가 뜨고 프롬프트 저장이 안되는 기능도 있어야
-          >
-            게시하기
-          </button>
+          {/*삭제&게시 버튼*/}
+          <div className="mt-12 flex flex-row justify-center">
+            <button
+              className="button-et mr-16"
+              type="reset"
+              onClick={() => {
+                window.location.reload();
+                window.alert("프롬프트가 초기화되었습니다!");
+              }}
+            >
+              새로고침
+            </button>
+            <button
+              className="button-dt ml-16"
+              onClick={() => {
+                handleCreate(prompt);
+                window.alert("프롬프트가 성공적으로 만들어졌습니다!");
+              }}
+              //axios 통해 서버로 프롬프트 덩어리를 보내는 함수가 있어야!
+              //지금은 잘 들어왔는지 확인하기 위해 콘솔로그 찍는 기능 넣어놨어유
+              //공란이 있을 시 'ㅇㅇ을 입력해주세요' alert가 뜨고 프롬프트 저장이 안되는 기능도 있어야
+            >
+              게시하기
+            </button>
+          </div>
         </div>
       </div>
     </div>
