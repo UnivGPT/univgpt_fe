@@ -42,7 +42,17 @@ const HomePage = () => {
       const prompts = await getPromptList();
       setPromptList(prompts);
       setSortPromptList(prompts);
-      setSmallPromptList(prompts);
+      setSmallPromptList(
+        prompts.sort((a, b) => {
+          if (a.view > b.view) {
+            return -1;
+          } else if (a.view < b.view) {
+            return 1;
+          } else {
+            return 0;
+          }
+        })
+      );
     };
     getPromptListAPI();
 
@@ -154,21 +164,21 @@ const HomePage = () => {
     }
   }, [selectedSort]);
 
-  useEffect(() => {
-    const sortedList = [...smallPromptList].sort((a, b) => {
-      if (a.view > b.view) {
-        return -1;
-      } else if (a.view < b.view) {
-        return 1;
-      } else {
-        return 0;
-      }
-    });
+  // useEffect(() => {
+  //   const sortedList = [...smallPromptList].sort((a, b) => {
+  //     if (a.view > b.view) {
+  //       return -1;
+  //     } else if (a.view < b.view) {
+  //       return 1;
+  //     } else {
+  //       return 0;
+  //     }
+  //   });
 
-    setSmallPromptList(sortedList);
-  }, []);
+  //   setSmallPromptList(sortedList);
+  // }, []);
 
-  console.log(smallPromptList);
+  // console.log(smallPromptList);
 
   // console.log(prompts);
   // console.log(promptList);

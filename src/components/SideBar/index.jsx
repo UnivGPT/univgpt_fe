@@ -13,6 +13,7 @@ export const HomeSideBar = ({ user, prompt }) => {
   console.log("유저다 우하하하하하하", user);
   // console.log(user[0].username);
   const [userName, setUserName] = useState("");
+  console.log(prompt);
 
   useEffect(() => {
     const newUserName = user.profile.socials_username || user.username;
@@ -39,11 +40,15 @@ export const HomeSideBar = ({ user, prompt }) => {
         <div className="rounded-xl p-3.5 mb-3 text-center font-bold text-lg text-white bg-gpt-blue">
           오늘의 프롬프트
         </div>
-        {/* <SmallPrompt rank="1" prompt={prompt[0]} />
-        <SmallPrompt rank="2" prompt={prompt[1]} />
-        <SmallPrompt rank="3" prompt={prompt[2]} />
-        <SmallPrompt rank="4" prompt={prompt[3]} />
-        <SmallPrompt rank="5" prompt={prompt[4]} /> */}
+        {prompt.length !== 0 && (
+          <>
+            <SmallPrompt rank="1" prompt={prompt[0]} />
+            <SmallPrompt rank="2" prompt={prompt[1]} />
+            <SmallPrompt rank="3" prompt={prompt[2]} />
+            <SmallPrompt rank="4" prompt={prompt[3]} />
+            <SmallPrompt rank="5" prompt={prompt[4]} />
+          </>
+        )}
       </div>
     </div>
   );

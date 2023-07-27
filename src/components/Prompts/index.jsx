@@ -13,6 +13,7 @@ import { getCookie } from "../../utils/cookie";
 import { useHistory } from "react-router-dom";
 
 export const SmallPrompt = ({ rank, prompt }) => {
+  console.log(prompt);
   return (
     <div className="flex flex-row rounded-xl bg-white  border-gray-300 shadow p-3 m-1">
       <div className="m-1 pt-2 pr-2">{rank}</div>
