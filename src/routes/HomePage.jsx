@@ -219,27 +219,29 @@ const HomePage = () => {
             </div>
             <Select options={order} onChange={handleSortChange} />
           </div>
-          <div className="h-4/6 grid grid-cols-3 overflow-y-auto overflow-x-hidden section-b min-h-[350px]">
-            {sortPromptList
-              .filter((prompt) =>
-                searchValue
-                  ? prompt.title
-                      .toLowerCase()
-                      .includes(searchValue.toLowerCase())
-                  : prompt
-              )
-              .filter((prompt) =>
-                selectedCategory === "전체"
-                  ? prompt
-                  : selectedCategory === ""
-                  ? prompt
-                  : prompt.category.find((category) =>
-                      category.name.includes(selectedCategory)
-                    )
-              )
-              .map((prompt) => (
-                <MidPrompt key={prompt.id} prompt={prompt} />
-              ))}
+          <div className="h-4/6 min-h-[350px] flex justify-center overflow-y-auto overflow-x-hidden">
+            <div className="grid grid-cols-3 section-b">
+              {sortPromptList
+                .filter((prompt) =>
+                  searchValue
+                    ? prompt.title
+                        .toLowerCase()
+                        .includes(searchValue.toLowerCase())
+                    : prompt
+                )
+                .filter((prompt) =>
+                  selectedCategory === "전체"
+                    ? prompt
+                    : selectedCategory === ""
+                    ? prompt
+                    : prompt.category.find((category) =>
+                        category.name.includes(selectedCategory)
+                      )
+                )
+                .map((prompt) => (
+                  <MidPrompt key={prompt.id} prompt={prompt} />
+                ))}
+            </div>
           </div>
         </div>
       </div>
