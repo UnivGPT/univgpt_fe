@@ -190,7 +190,7 @@ const HomePage = () => {
             </div>
             <Select options={order} onChange={handleSortChange} />
           </div>
-          <div className="h-4/5 grid grid-cols-3 overflow-y-auto section-b">
+          <div className="h-4/5 grid grid-cols-3 overflow-y-auto overflow-x-hidden section-b">
             {sortPromptList
               .filter((prompt) =>
                 searchValue
