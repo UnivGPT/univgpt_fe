@@ -14,91 +14,92 @@ export const PromptMakeModal = ({ setModalOpen, prompt }) => {
   };
 
   const { promptId } = useParams();
- 
+
   const [input, setInput] = useState([]);
   const [option, setOption] = useState([]);
   const [resultPage, setResultPage] = useState(false);
+  const [inputArray, setInputArray] = useState([]);
   //const navigate = useNavigate();
 
-  useEffect(() => {
-    const getPromptDetailAPI = async () => {
-      const response = await getPromptDetail(promptId);
-      setInput(response.inputs);
-      const inputIds = response.inputs
-        .filter((item) => item.type === 0)
-        .map((item) => item.id);
-      console.log("INPUTID", inputIds);
+  // useEffect(() => {
+  //   const getPromptDetailAPI = async () => {
+  //     const response = await getPromptDetail(promptId);
+  //     setInput(response.inputs);
+  //     const inputIds = response.inputs
+  //       .filter((item) => item.type === 0)
+  //       .map((item) => item.id);
+  //     console.log("INPUTID", inputIds);
 
-      const results = await Promise.all(
-        inputIds.map(async (id) => {
-          const response = await getOptionList({ input: id });
-          return response;
-        })
-      );
+  //     const results = await Promise.all(
+  //       inputIds.map(async (id) => {
+  //         const response = await getOptionList({ input: id });
+  //         return response;
+  //       })
+  //     );
 
-      const OptionResult = results.flat();
+  //     const OptionResult = results.flat();
 
-      console.log("RSRAERQ", OptionResult);
+  //     console.log("RSRAERQ", OptionResult);
 
-      setOption(OptionResult);
+  //     setOption(OptionResult);
 
-      // const filteredResults = results.filter(
-      //   (result) =>
-      //     result.data !== null &&
-      //     result.data !== undefined &&
-      //     Object.keys(result.data).length > 0
-      // );
-      // console.log("FILTERED RESULTS", filteredResults);
-      setOption(results);
-    };
-    getPromptDetailAPI();
-  }, [promptId]);
-
-  useEffect(() => {
-    console.log("prompt", prompt.title);
-    console.log("INPUT", input);
-  }, [prompt, input]);
-
-  // const getOptions = async (inputId) => {
-  //   try {
-  //     const data = {
-  //       input: inputId,
-  //     };
-  //     const response = await getOptionList(data);
-
-  //     if (response && response.data) {
-  //       const originalOptions = response.data;
-  //       const processedOptions = originalOptions.map((option) => ({
-  //         value: option.name,
-  //         label: generateRandomLabel(), // 랜덤한 문자열 생성 함수를 호출하여 label에 할당
-  //       }));
-  //       return processedOptions;
-  //     }
-
-  //     return ""; // 서버 응답이 없거나 비어있는 경우 빈 배열 반환
-  //   } catch (error) {
-  //     console.error("Error fetching options:", error);
-  //     return []; // 에러가 발생한 경우 빈 배열 반환 또는 에러 처리를 원하는 방식으로 처리
-  //   }
-  // };
-
-  // function generateRandomLabel() {
-  //   // 랜덤한 문자열을 생성하여 반환하는 함수 구현 (예시)
-  //   const randomString = Math.random().toString(36).substring(7);
-  //   return `Random Label - ${randomString}`;
-  // }
-
-  // console.log(isUser);
-  // 	const [newPrompt, setNewPrompt] = useState({
-  //     title: "",
-  //     content: "",
-  //     category: [],
-  //     description: "",
-  //   });
-  // 	const handlechange = (e) => {
-  //     setNewPrompt
+  //     // const filteredResults = results.filter(
+  //     //   (result) =>
+  //     //     result.data !== null &&
+  //     //     result.data !== undefined &&
+  //     //     Object.keys(result.data).length > 0
+  //     // );
+  //     // console.log("FILTERED RESULTS", filteredResults);
+  //     setOption(results);
   //   };
-  console.log(prompt);
+  //   getPromptDetailAPI();
+  // }, [promptId]);
+
+  // useEffect(() => {
+  //   console.log("prompt", prompt.title);
+  //   console.log("INPUT", input);
+  // }, [prompt, input]);
+
+  // // const getOptions = async (inputId) => {
+  // //   try {
+  // //     const data = {
+  // //       input: inputId,
+  // //     };
+  // //     const response = await getOptionList(data);
+
+  // //     if (response && response.data) {
+  // //       const originalOptions = response.data;
+  // //       const processedOptions = originalOptions.map((option) => ({
+  // //         value: option.name,
+  // //         label: generateRandomLabel(), // 랜덤한 문자열 생성 함수를 호출하여 label에 할당
+  // //       }));
+  // //       return processedOptions;
+  // //     }
+
+  // //     return ""; // 서버 응답이 없거나 비어있는 경우 빈 배열 반환
+  // //   } catch (error) {
+  // //     console.error("Error fetching options:", error);
+  // //     return []; // 에러가 발생한 경우 빈 배열 반환 또는 에러 처리를 원하는 방식으로 처리
+  // //   }
+  // // };
+
+  // // function generateRandomLabel() {
+  // //   // 랜덤한 문자열을 생성하여 반환하는 함수 구현 (예시)
+  // //   const randomString = Math.random().toString(36).substring(7);
+  // //   return `Random Label - ${randomString}`;
+  // // }
+
+  // // console.log(isUser);
+  // // 	const [newPrompt, setNewPrompt] = useState({
+  // //     title: "",
+  // //     content: "",
+  // //     category: [],
+  // //     description: "",
+  // //   });
+  // // 	const handlechange = (e) => {
+  // //     setNewPrompt
+  // //   };
+  // console.log(prompt);
 
   return (
     <div className="modalContainer w-screen h-screen">
@@ -169,9 +170,9 @@ export const PromptMakeModal = ({ setModalOpen, prompt }) => {
               {prompt.description}
             </h1>
             <br></br>
-            <div className="rounded-3xl bg-gray-200 px-8 pb-5 mx-6 h-96 w-5/6 overflow-y-scroll">
+            <div className="rounded-3xl bg-gray-200 px-8 pb-5 mr-8 mx-6 h-96 w-5/6 overflow-y-auto section-d">
               <div className="flex flex-col w-full justify-between">
-                {input.map((item, index) => {
+                {prompt.form.map((item, index) => {
                   if (item.type === 0) {
                     const options = option
                       .flat()
@@ -182,12 +183,22 @@ export const PromptMakeModal = ({ setModalOpen, prompt }) => {
                           label: opt.name,
                         };
                       });
+                    // 객관식
                     return (
                       <div key={index}>
                         <div className="button-f">{item.name}</div>
-                        <Select key={index} options={options} />
+                        <Select
+                          key={index}
+                          options={options}
+                          onChange={(e) => {
+                            const newArray = [...inputArray];
+                            newArray[index] = e.value;
+                            setInputArray(newArray);
+                          }}
+                        />
                       </div>
                     );
+                    // 주관식
                   } else {
                     return (
                       <div key={index}>
@@ -195,8 +206,13 @@ export const PromptMakeModal = ({ setModalOpen, prompt }) => {
                         <input
                           required
                           type="text"
-                          placeholder="요약을 원하는 자료 조사 내용을 작성해주세요"
+                          placeholder={item.placeholding}
                           className="input-c"
+                          onChange={(e) => {
+                            const newArray = [...inputArray];
+                            newArray[index] = e.target.value;
+                            setInputArray(newArray);
+                          }}
                         />
                       </div>
                     );
