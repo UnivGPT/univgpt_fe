@@ -333,7 +333,9 @@ body {
 /* 모달창 내부 X버튼 */
 .closeButton {
   position: absolute;
-  right: 200px;
+  right: 260px;
   top: 10px;
-  color: #000000;
+  color: #6fcacd;
+  font-weight: 900;
+  font-size: 30px;
 }
