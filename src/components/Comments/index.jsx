@@ -67,16 +67,17 @@ const Comment = ({ promptId }) => {
         <input
           type="text"
           value={newContent}
-          placeholder="댓글을 입력해주세요"
-          className="input !border-gpt-blue text-sm !text-black mx-1 mb-3 h-10/12"
+          placeholder="입력 시 엔터를 눌러주세요."
+          className="input !w-5/6 !border-gpt-blue text-sm !text-black mx-1 mb-3 h-10/12"
           onChange={(e) => setNewContent(e.target.value)}
         />
         {/*<LuSend type="submit" className="button w-30" />*/}
       </form>
-      <div className="overflow-y-auto overflow-x-hidden flex-grow">
+      {/*댓글 목록*/}
+      <div className="h-48 flex-grow-1 overflow-y-auto overflow-x-hidden section-c">
         {commentList.map((comment) => {
           return (
-            <div className="w-full flex flex-row" key={comment.id}>
+            <div className="flex flex-row ml-3" key={comment.id}>
               <CommentElement
                 comment={comment}
                 handleCommentDelete={handleCommentDelete}
@@ -86,7 +87,6 @@ const Comment = ({ promptId }) => {
           );
         })}
       </div>
-      {/* comment form component */}
     </div>
   );
 };

@@ -44,10 +44,10 @@ const Header = () => {
           </>
         ) : (
           <>
-            <Link to="/signup" className="text-m font-semibold">
+            <Link to="/signup" className="text-lg font-semibold mr-2">
               회원가입
             </Link>
-            <Link to="/signin" className="text-m font-semibold">
+            <Link to="/signin" className="text-lg font-semibold">
               로그인
             </Link>
           </>
