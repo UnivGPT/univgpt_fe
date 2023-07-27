@@ -13,12 +13,13 @@ import { getCookie } from "../../utils/cookie";
 import { useHistory } from "react-router-dom";
 
 export const SmallPrompt = ({ rank, prompt }) => {
+  console.log(prompt);
   return (
-    <div className="flex flex-row rounded-xl bg-white  border-gray-300 shadow p-3 m-1">
+    <div className="flex flex-row w-full rounded-xl bg-white  border-gray-300 shadow p-3 m-1">
       <div className="m-1 pt-2 pr-2">{rank}</div>
-      <div className="flex flex-col">
-        <div className="text-sm font-semibold">{prompt.title}</div>
-        <div className="flex flex-ro text-sm justify-end">
+      <div className="w-full flex flex-col">
+        <div className="text-sm font-semibold pl-2">{prompt.title}</div>
+        <div className="flex flex-ro text-sm justify-end pr-4">
           <div className="font-bold">❤️ {prompt.like_users.length}</div>
           <div className="pl-2 font-bold">👀 {prompt.view}</div>
         </div>
@@ -67,7 +68,7 @@ export const MidPrompt = ({ prompt }) => {
   };
 
   return (
-    <div className="flex flex-col w-80 h-60 space-y-8 p-5 shadow-xl m-3 rounded-3xl border-gray-300 border bg-white">
+    <div className="flex flex-col w-80 h-60 space-y-8 p-5 shadow-xl m-3 mx-6 rounded-3xl border-gray-300 border bg-white">
       <div className="font-semibold text-lg">{prompt.title}</div>
       <div className="font-medium h-1/3">{prompt.description}</div>
       <div className="flex flex-row justify-between">

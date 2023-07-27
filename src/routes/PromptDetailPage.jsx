@@ -120,18 +120,18 @@ const PromptDetailPage = () => {
       </div>
       {/*PromptResult 모달*/}
       {resultPage ? (
-        <div className="flex-grow flex flex-col justify-center items-center h-4/5 w-2/3 bg-gray-200 text-black p-20 px-36 mx-20 mt-8 rounded-3xl">
+        <div className="flex-grow flex flex-col justify-center items-center h-4/5 w-2/3 bg-gray-200 text-black mx-20 mt-8 rounded-3xl">
           {/*프롬프트 통한 질문*/}
-          <div className="flex justify-center items-center mx-24 mt-2">
-            <div className="flex justify-start">
-              <div className="flex bubble-a section-a items-center overflow-y-auto">
-                <div className="p-4 pl-6 inline-block align-middle whitespace-pre-line !font-bold !my-auto">
+          <div className="flex justify-center items-center mx-24 mt-2 w-full h-full">
+            <div className="flex justify-start w-full h-full">
+              <div className="flex bubble-a section-a items-center overflow-y-auto w-3/4 h-1/3">
+                <div className=" inline-block align-middle whitespace-pre-line !font-bold !my-auto">
                   {message}
                 </div>
               </div>
               <div className="bubble-a-after mt-14"></div>
             </div>
-            <HiUserCircle size="186" className="profile flex flex-col mr-6" />
+            <HiUserCircle size="200" className="profile flex flex-col mr-6" />
           </div>
 
           {/*GPT 답변*/}
