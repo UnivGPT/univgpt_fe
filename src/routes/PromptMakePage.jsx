@@ -29,6 +29,7 @@ const PromptMakePage = () => {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
+  const [inputId, setInputId] = useState(1);
 
   useEffect(() => {
     const getCategoryListAPI = async () => {
