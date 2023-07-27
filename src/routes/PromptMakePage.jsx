@@ -347,39 +347,39 @@ const PromptMakePage = () => {
             )}
           </div>
         </div>
-
-        {/*카테고리*/}
-        <div className="mx-6 mt-6 ml-8 flex justify-start items-baseline">
-          <h1 className="text-2xl font-bold">카테고리</h1>
-          <h2 className="flex font-semibold text-sm text-gray-700 ml-1">
-            카테고리는 중복 선택이 가능합니다.
-          </h2>
-        </div>
-        <div className="flex flex-row justify-items ml-14 mt-4 overflow-x-scroll">
-          {/* categories.data.map((category) => {
+        <div className="min-w-[800px]">
+          {/*카테고리*/}
+          <div className=" mx-6 mt-6 ml-8 flex justify-start items-baseline">
+            <h1 className="text-2xl font-bold">카테고리</h1>
+            <h2 className="flex font-semibold text-sm text-gray-700 ml-1">
+              카테고리는 중복 선택이 가능합니다.
+            </h2>
+          </div>
+          <div className=" flex flex-row justify-center mt-4 ">
+            {/* categories.data.map((category) => {
         return category.name;
       }); */}
-          {categoryList.map((category) => {
-            return (
-              <label
-                className={`button-checkbox ${
-                  selectedCategories.includes(category) ? "active" : ""
-                } button-check`}
-              >
-                {category}
-                <input
-                  type="checkbox"
-                  value={category}
-                  checked={selectedCategories.includes(category)}
-                  onChange={handleCategoryChange}
-                  style={{ display: "none" }}
-                />
-              </label>
-            );
-          })}
-        </div>
+            {categoryList.map((category) => {
+              return (
+                <label
+                  className={`button-checkbox ${
+                    selectedCategories.includes(category) ? "active" : ""
+                  } button-check`}
+                >
+                  {category}
+                  <input
+                    type="checkbox"
+                    value={category}
+                    checked={selectedCategories.includes(category)}
+                    onChange={handleCategoryChange}
+                    style={{ display: "none" }}
+                  />
+                </label>
+              );
+            })}
+          </div>
 
-        {/*내가 볼라고 만든 기능
+          {/*내가 볼라고 만든 기능
           <div><h3>선택된 카테고리</h3>
           <ul>
             {selectedCategories.map((category) => (
@@ -388,30 +388,31 @@ const PromptMakePage = () => {
           </ul>
             </div>*/}
 
-        {/*삭제&게시 버튼*/}
-        <div className="mt-12 flex justify-center">
-          <button
-            className="button-et ml-4 mr-16"
-            type="reset"
-            onClick={() => {
-              window.location.reload();
-              window.alert("프롬프트가 초기화되었습니다!");
-            }}
-          >
-            새로고침
-          </button>
-          <button
-            className="button-dt ml-16"
-            onClick={() => {
-              handleCreate(prompt);
-              window.alert("프롬프트가 성공적으로 만들어졌습니다!");
-            }}
-            //axios 통해 서버로 프롬프트 덩어리를 보내는 함수가 있어야!
-            //지금은 잘 들어왔는지 확인하기 위해 콘솔로그 찍는 기능 넣어놨어유
-            //공란이 있을 시 'ㅇㅇ을 입력해주세요' alert가 뜨고 프롬프트 저장이 안되는 기능도 있어야
-          >
-            게시하기
-          </button>
+          {/*삭제&게시 버튼*/}
+          <div className="mt-12 flex flex-row justify-center">
+            <button
+              className="button-et mr-16"
+              type="reset"
+              onClick={() => {
+                window.location.reload();
+                window.alert("프롬프트가 초기화되었습니다!");
+              }}
+            >
+              새로고침
+            </button>
+            <button
+              className="button-dt ml-16"
+              onClick={() => {
+                handleCreate(prompt);
+                window.alert("프롬프트가 성공적으로 만들어졌습니다!");
+              }}
+              //axios 통해 서버로 프롬프트 덩어리를 보내는 함수가 있어야!
+              //지금은 잘 들어왔는지 확인하기 위해 콘솔로그 찍는 기능 넣어놨어유
+              //공란이 있을 시 'ㅇㅇ을 입력해주세요' alert가 뜨고 프롬프트 저장이 안되는 기능도 있어야
+            >
+              게시하기
+            </button>
+          </div>
         </div>
       </div>
     </div>
