@@ -28,7 +28,7 @@ const CommentElement = (props) => {
   // }, []);
 
   return (
-    <div className="w-full flex justify-between gap-1 mb-2 ">
+    <div className="w-40 flex justify-between gap-1 mb-2 ">
       <div className="flex flex-row w-full space-x-2 items-center pl-2">
         <HiUserCircle className="w-10 h-10 mr-2" />
         <div className="commentbubble">
