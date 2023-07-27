@@ -77,6 +77,7 @@ const PromptDetailPage = () => {
         .filter((item) => item.type === 0)
         .map((item) => item.id);
       console.log("INPUT LENGTH", response.inputs.length);
+      console.log(response.inputs);
       setInputArray(createArrayOfEmptyStrings(response.inputs.length));
 
       const results = await Promise.all(
@@ -85,6 +86,7 @@ const PromptDetailPage = () => {
           return response;
         })
       );
+      console.log(results.flat());
       // const OptionResult = results.flat();
       setOption(results.flat());
       // setOption(results);
@@ -178,6 +180,8 @@ const PromptDetailPage = () => {
             <div className="flex flex-col w-full justify-between">
               {input.map((item, index) => {
                 if (item.type === 0) {
+                  console.log(item);
+                  console.log(option);
                   const options = option
                     .flat()
                     .filter((opt) => opt.input === item.id)

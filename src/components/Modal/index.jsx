@@ -173,16 +173,19 @@ export const PromptMakeModal = ({ setModalOpen, prompt }) => {
             <div className="rounded-3xl bg-gray-200 px-8 pb-5 mr-8 mx-6 h-96 w-5/6 overflow-y-auto section-d">
               <div className="flex flex-col w-full justify-between">
                 {prompt.form.map((item, index) => {
-                  if (item.type === 0) {
-                    const options = option
-                      .flat()
-                      .filter((opt) => opt.input === item.id)
+                  console.log(item);
+
+                  if (item.type === "객관식") {
+                    const options = item.options
+                      //.flat()
+                      //.filter((opt) => opt.input === item.id)
                       .map((opt) => {
                         return {
-                          value: opt.name,
-                          label: opt.name,
+                          value: opt,
+                          label: opt,
                         };
                       });
+                    console.log(options);
                     // 객관식
                     return (
                       <div key={index}>
