@@ -42,7 +42,7 @@ const HomePage = () => {
       const prompts = await getPromptList();
       setPromptList(prompts);
       setSortPromptList(prompts);
-      setSmallPromptList(prompts)
+      setSmallPromptList(prompts);
     };
     getPromptListAPI();
 
@@ -57,6 +57,7 @@ const HomePage = () => {
     };
     getCategoryListAPI();
   }, []);
+  console.log(smallPromptList);
 
   useEffect(() => {
     if (getCookie("access_token")) {
@@ -153,7 +154,7 @@ const HomePage = () => {
     }
   }, [selectedSort]);
 
-  useEffect(()=>{
+  useEffect(() => {
     const sortedList = [...smallPromptList].sort((a, b) => {
       if (a.view > b.view) {
         return -1;
@@ -163,8 +164,11 @@ const HomePage = () => {
         return 0;
       }
     });
+
     setSmallPromptList(sortedList);
-  }, [smallPromptList])
+  }, []);
+
+  console.log(smallPromptList);
 
   // console.log(prompts);
   // console.log(promptList);
@@ -175,7 +179,7 @@ const HomePage = () => {
         <HomeSideBar key={profile.id} user={profile} prompt={smallPromptList} />
       </div>
 
-      <div className="w-full bg-white text-black p-11 rounded-lg">
+      <div className="w-full bg-white text-black p-11 rounded-lg min-h-[500px]">
         <div className="flex flex-row justify-around space-x-5 p-5">
           <Select
             options={categoryList}
@@ -198,14 +202,14 @@ const HomePage = () => {
           </div> */}
         </div>
 
-        <div className="rounded-3xl border-solid border-slate-300 border-2 m-5 px-5 pb-5 w-11/12 h-3/4 min-h-max self-center">
-          <div className="flex flex-row w-full justify-between mt-5 p-5">
+        <div className="rounded-3xl border-solid border-slate-300 border-2 m-5 px-5 pb-5 w-11/12 h-3/4 min-h-[500px] self-center">
+          <div className="flex flex-row min-w-full justify-between mt-5 p-5">
             <div className="rounded-xl p-3.5 text-center font-bold text-xl text-white bg-gpt-green px-14">
               프롬프트 목록
             </div>
             <Select options={order} onChange={handleSortChange} />
           </div>
-          <div className="h-4/5 grid grid-cols-3 overflow-y-auto overflow-x-hidden section-b">
+          <div className="h-4/6 grid grid-cols-3 overflow-y-auto overflow-x-hidden section-b min-h-[350px]">
             {sortPromptList
               .filter((prompt) =>
                 searchValue

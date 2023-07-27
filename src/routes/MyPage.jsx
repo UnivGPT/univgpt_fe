@@ -80,6 +80,7 @@ const MyPage = () => {
             <div className="w-full h-80 grid grid-cols-2 overflow-y-auto section-b">
               {promptList
                 .filter((prompt) => prompt.author.id === profile.id)
+                .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
                 .map((prompt) => (
                   <MyPagePrompt key={prompt.id} prompt={prompt} />
                 ))}
@@ -93,6 +94,7 @@ const MyPage = () => {
             <div className="w-full h-80 grid grid-cols-2 overflow-y-auto section-b">
               {sortPromptList
                 .filter((prompt) => prompt.like_users.includes(profile.id))
+                .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
                 .map((prompt) => (
                   <MyPagePrompt key={prompt.id} prompt={prompt} />
                 ))}
