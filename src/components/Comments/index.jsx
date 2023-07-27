@@ -56,7 +56,7 @@ const Comment = ({ promptId }) => {
   };
 
   return (
-    <div className="flex flex-col w-full self-center h-84 pl-3">
+    <div className="flex flex-col w-52 self-center h-84 pl-3">
       <h1 className="text-lg font-extrabold text-gpt-indigo mt-5 ml-4 mb-1">
         {commentList.length}개의 댓글
       </h1>
