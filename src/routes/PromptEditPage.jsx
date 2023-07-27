@@ -8,7 +8,6 @@ import {
   getPromptDetail,
   getOptionList,
   updatePrompt,
-  updateOption,
   deletePrompt,
 } from "../api/api";
 import { BsQuestionCircle } from "react-icons/bs";
@@ -77,8 +76,8 @@ const PromptEditPage = () => {
       }
 
       let resultArr2 = addOptionsToArr2(results.flat(), result.inputs);
+      console.log("RESULTARR2", resultArr2);
       resultArr2 = resultArr2.map((element, index) => {
-        console.log("map시작한다!!!!!!");
         if (element.type === 0) {
           console.log("이것은 객관식", resultArr2.indexOf(element));
           setActivatedChoices((prevChoices) => [...prevChoices, index]);
@@ -91,7 +90,7 @@ const PromptEditPage = () => {
           return element; // 다른 경우에는 요소를 그대로 반환
         }
       });
-      console.log("RESULT ARRAY2222222", resultArr2);
+
       setForm(resultArr2);
       setFormData((prevFormData) => ({
         ...prevFormData,
@@ -145,35 +144,21 @@ const PromptEditPage = () => {
 
   const handleUpdate = async (prompt) => {
     let { form, ...data } = prompt;
-    const response = await updatePrompt(
-      prompt.id,
-      {
-        ...formData,
-        form,
-        category: selectedCategories,
-      },
-      navigate
-    );
 
-    // const promptId = response.data.id;
+    form = form.map((element) => {
+      if (element.type === "객관식") {
+        return { ...element, type: 0 };
+      } else if (element.type === "단문형") {
+        return { ...element, type: 1 };
+      } else if (element.type === "장문형") {
+        return { ...element, type: 2 };
+      } else {
+        return element; // 다른 경우에는 요소를 그대로 반환
+      }
+    });
 
-    console.log("FORM", form);
+    const response = await updatePrompt(promptId, data, navigate); //title, description, content, category만 수정된 것
 
-    // form = form.map((element) => {
-    //   if (element.type === 0) {
-    //     return { ...element, type: "객관식" };
-    //   } else if (element.type === 1) {
-    //     return { ...element, type: "단문형" };
-    //   } else if (element.type === 2) {
-    //     return { ...element, type: "장문형" };
-    //   } else {
-    //     return element; // 다른 경우에는 요소를 그대로 반환
-    //   }
-    // });
-
-    // console.log("CHANGED FORM", form);
-    // input 데이터 가공
-    // api 호출 (for문돌아야할듯)
     for (let i in form) {
       const data = form[i];
       data.prompt = promptId;
@@ -188,32 +173,24 @@ const PromptEditPage = () => {
             name: option,
             input: inputId,
           };
-          const optionResponse = await updateOption();
+          const optionResponse = await createOption(optionData);
           console.log("option created", optionResponse);
         }
       }
       console.log("inputResponse", inputResponse);
     }
+    window.location.href = "/";
     console.log("RESPONSE", response);
   };
 
   const handleDelete = async () => {
     try {
-      await deletePrompt(promptId);
+      await deletePrompt(promptId, navigate);
       window.alert("프롬프트가 삭제되었습니다!");
-      navigate("/");
     } catch (error) {
       console.log("[ERROR] 프롬프트 삭제에 실패했습니다.");
     }
   };
-
-  //   const navigate = useNavigate();
-
-  // const onSubmit = (e) => {
-  // 	e.preventDefault();
-  // 	updatePrompt(promptId, formData, navigate);
-  // };
-  // console.log("FORMDATA TITLE", formData.title);
 
   return (
     <div className="w-screen h-screen flex justify-evenly">
@@ -485,8 +462,6 @@ const PromptEditPage = () => {
             type="reset"
             onClick={() => {
               handleDelete();
-              //   window.location.reload();
-              window.alert("프롬프트가 삭제되었습니다!");
             }}
           >
             삭제하기
@@ -494,8 +469,8 @@ const PromptEditPage = () => {
           <button
             className="button-dt ml-16"
             onClick={() => {
-              handleUpdate(prompt);
-              window.alert("프롬프트가 성공적으로 만들어졌습니다!");
+              handleUpdate(formData);
+              window.alert("프롬프트가 성공적으로 수정되었습니다!");
             }}
             //axios 통해 서버로 프롬프트 덩어리를 보내는 함수가 있어야!
             //지금은 잘 들어왔는지 확인하기 위해 콘솔로그 찍는 기능 넣어놨어유
