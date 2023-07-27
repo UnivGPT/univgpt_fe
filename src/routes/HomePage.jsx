@@ -184,12 +184,12 @@ const HomePage = () => {
   // console.log(promptList);
 
   return (
-    <div className="w-screen h-screen flex flex-row ">
+    <div className="w-screen h-screen flex flex-row">
       <div className="w-60">
         <HomeSideBar key={profile.id} user={profile} prompt={smallPromptList} />
       </div>
 
-      <div className="w-full bg-white text-black p-11 rounded-lg min-h-[500px]">
+      <div className="w-full bg-white text-black p-11 rounded-lg min-h-[700px]">
         <div className="flex flex-row justify-around space-x-5 p-5">
           <Select
             options={categoryList}
@@ -220,7 +220,7 @@ const HomePage = () => {
             <Select options={order} onChange={handleSortChange} />
           </div>
           <div className="h-4/6 min-h-[350px] flex justify-center overflow-y-auto overflow-x-hidden">
-            <div className="grid grid-cols-3 section-b">
+            <div className="flex flex-wrap section-b">
               {sortPromptList
                 .filter((prompt) =>
                   searchValue

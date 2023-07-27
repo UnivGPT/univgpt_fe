@@ -68,7 +68,7 @@ export const MidPrompt = ({ prompt }) => {
   };
 
   return (
-    <div className="flex flex-col w-80 h-60 space-y-8 p-5 shadow-xl m-3 mx-6 rounded-3xl border-gray-300 border bg-white">
+    <div className="flex flex-col w-72 h-60 space-y-8 p-5 shadow-xl m-3 mx-6 rounded-3xl border-gray-300 border bg-white">
       <div className="font-semibold text-lg">{prompt.title}</div>
       <div className="font-medium h-1/3">{prompt.description}</div>
       <div className="flex flex-row justify-between">
@@ -167,9 +167,8 @@ export const MyPagePrompt = ({ prompt }) => {
     }
   };
 
-
   return (
-    <div className="flex flex-col w-80 h-60 space-y-8 p-5 shadow-xl m-3 rounded-3xl border-gray-300 border bg-white">
+    <div className="flex flex-col w-72 h-60 space-y-8 p-5 shadow-xl m-3 rounded-3xl border-gray-300 border bg-white">
       <div className="font-semibold text-lg">{prompt.title}</div>
       <div className="font-medium h-1/3">{prompt.description}</div>
       <div className="flex flex-row justify-between">

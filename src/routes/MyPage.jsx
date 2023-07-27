@@ -45,28 +45,28 @@ const MyPage = () => {
   return (
     <div className="h-screen w-screen">
       <div className="flex flex-col w-full mt-8">
-        <div className="h-48 flex flex-row bg-white rounded-3xl mb-10 mx-20 p-8 text-black align-middle justify-between">
+        <div className="h-48 flex flex-row bg-white rounded-3xl mb-5 mx-20 p-8 text-black align-middle justify-between">
           <div className="flex flex-row">
             <HiUserCircle size="150" />
-            <div className="flex flex-col space-y-10 mx-10">
+            <div className="flex flex-col justify-between mx-10">
               <div className="text-3xl font-semibold">
                 {profile.username}님 반갑습니다!
               </div>
-              <div className="flex flex-row space-x-5">
-                <div className="button-a hover:!text-white">
+              <div className="flex flex-row space-x-5 text-center">
+                <div className="button-a-3 hover:!text-white">
                   나의 프롬프트 {authorPromptList.length}개
                 </div>
-                <div className="button-a hover:!text-white">
+                <div className="button-a-3 hover:!text-white">
                   스크랩한 프롬프트 {scrapPromptList.length}개
                 </div>
               </div>
             </div>
           </div>
-          <div className="flex flex-col space-y-5 text-center justify-self-end">
-            <Link to="/" className="button-d">
+          <div className="flex flex-col space-y-5 text-center justify-self-end justify-center">
+            <Link to="/" className="button-d-1">
               로그아웃
             </Link>
-            <Link to="/infocheck" className="button-d">
+            <Link to="/infocheck" className="button-d-1">
               회원정보 수정
             </Link>
           </div>
@@ -77,7 +77,7 @@ const MyPage = () => {
               나의 프롬프트
             </div>
             <br></br>
-            <div className="w-full h-80 grid grid-cols-2 overflow-y-auto section-b">
+            <div className="w-full h-80 flex flex-wrap overflow-y-auto section-b">
               {promptList
                 .filter((prompt) => prompt.author.id === profile.id)
                 .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
@@ -91,7 +91,7 @@ const MyPage = () => {
               스크랩한 프롬프트
             </div>
             <br></br>
-            <div className="w-full h-80 grid grid-cols-2 overflow-y-auto section-b">
+            <div className="w-full h-80 flex flex-wrap overflow-y-auto section-b">
               {sortPromptList
                 .filter((prompt) => prompt.like_users.includes(profile.id))
                 .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
