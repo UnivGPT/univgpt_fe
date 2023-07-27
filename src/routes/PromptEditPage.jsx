@@ -28,17 +28,8 @@ const PromptEditPage = () => {
   const [categoryList, setCategoryList] = useState([]);
   const [content, setContent] = useState("");
   const navigate = useNavigate();
-
-  //   const [prompt, setPrompt] = useState({
-  //     title: "",
-  //     description: "",
-  //     content: "",
-  //     form: [],
-  //     category: "",
-  //   });
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
-
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -46,22 +37,11 @@ const PromptEditPage = () => {
     form: [],
     category: "",
   });
+
   useEffect(() => {
-    console.log("SELLLLLLLLECTED");
-    console.log(selectedCategories);
-  }, [selectedCategories]);
+    console.log("자고 싶어요", formData);
+  }, [formData]);
 
-  function createArrayOfEmptyStrings(count) {
-    if (count <= 0) {
-      return [];
-    }
-
-    return Array.from({ length: count }, () => "");
-  }
-
-  //   useEffect(()=>{
-  // 	setForm(formData.form)
-  //   },[formData])
   useEffect(() => {
     const getPromptAPI = async () => {
       const result = await getPromptDetail(promptId);
@@ -69,46 +49,14 @@ const PromptEditPage = () => {
         ...result.prompt,
         category: result.prompt.category.map((c) => c.name),
       };
-      console.log(result.prompt);
-
-      setFormData({
-        title: result.prompt.title,
-        description: result.prompt.description,
-        content: "",
-        form: [],
-        category: "",
-      });
-
       setTitle(result.prompt.title);
       setDescription(result.prompt.description);
       setInput(result.inputs);
       setContent(result.prompt.content);
 
-      let formContent = result.inputs.map((item) => ({
-        ...item,
-        options: [""],
-      }));
-
-      formContent = formContent.map((element, index) => {
-        if (element.type === 0) {
-          console.log("이것은 객관식", formContent.indexOf(element));
-          setActivatedChoices((prevChoices) => [...prevChoices, index]);
-          return { ...element, type: "객관식" };
-        } else if (element.type === 1) {
-          return { ...element, type: "단문형" };
-        } else if (element.type === 2) {
-          return { ...element, type: "장문형" };
-        } else {
-          return element; // 다른 경우에는 요소를 그대로 반환
-        }
-      });
-      setForm(formContent);
-
       const inputIds = result.inputs
         .filter((item) => item.type === 0)
         .map((item) => item.id);
-      //   console.log("IIIIIINNNNNNPPPPPPPPUUUUUUTTT", inputIds);
-      //   setInputArray(createArrayOfEmptyStrings(result.inputs.length));
 
       const results = await Promise.all(
         inputIds.map(async (id) => {
@@ -128,37 +76,34 @@ const PromptEditPage = () => {
         });
       }
 
-      // 결과 생성
-      const resultArr2 = addOptionsToArr2(results.flat(), result.inputs);
+      let resultArr2 = addOptionsToArr2(results.flat(), result.inputs);
+      resultArr2 = resultArr2.map((element, index) => {
+        console.log("map시작한다!!!!!!");
+        if (element.type === 0) {
+          console.log("이것은 객관식", resultArr2.indexOf(element));
+          setActivatedChoices((prevChoices) => [...prevChoices, index]);
+          return { ...element, type: "객관식" };
+        } else if (element.type === 1) {
+          return { ...element, type: "단문형" };
+        } else if (element.type === 2) {
+          return { ...element, type: "장문형" };
+        } else {
+          return element; // 다른 경우에는 요소를 그대로 반환
+        }
+      });
       console.log("RESULT ARRAY2222222", resultArr2);
+      setForm(resultArr2);
       setFormData((prevFormData) => ({
         ...prevFormData,
         form: resultArr2,
       }));
-      const optionForm = formData.form;
-      setForm(optionForm);
-      console.log("FORM IN FORMDATA", formData.form);
-
-      // 결과 확인
-      //   console.log("RESULT INPUTS",Object.values(result.inputs));
-
       setOption(results.flat());
-      // setOption(results);
 
       const category_content = promptFormData.category;
       setSelectedCategories(category_content);
     };
     getPromptAPI();
   }, [promptId]);
-
-  useEffect(() => {
-    console.log("이제 그만", formData);
-  }, [formData]);
-
-  //   console.log("INPUT", input)
-  //   console.log("INPUT, OPTION FORM", form)
-
-  //   useEffect(()=>{console.log("OPTION", option)},[option])
 
   useEffect(() => {
     const getCategoryListAPI = async () => {
@@ -170,12 +115,6 @@ const PromptEditPage = () => {
     };
     getCategoryListAPI();
   }, []);
-
-  //   useEffect(() => {
-  //     console.log("CATEGORY NAMES", categoryList);
-  //     console.log("TYPEOF", typeof categoryList);
-  //     console.log(Array.isArray(categoryList));
-  //   }, [categoryList]);
 
   //미리보기 모달 노출 여부
 
@@ -220,17 +159,17 @@ const PromptEditPage = () => {
 
     console.log("FORM", form);
 
-    form = form.map((element) => {
-      if (element.type === 0) {
-        return { ...element, type: "객관식" };
-      } else if (element.type === 1) {
-        return { ...element, type: "단문형" };
-      } else if (element.type === 2) {
-        return { ...element, type: "장문형" };
-      } else {
-        return element; // 다른 경우에는 요소를 그대로 반환
-      }
-    });
+    // form = form.map((element) => {
+    //   if (element.type === 0) {
+    //     return { ...element, type: "객관식" };
+    //   } else if (element.type === 1) {
+    //     return { ...element, type: "단문형" };
+    //   } else if (element.type === 2) {
+    //     return { ...element, type: "장문형" };
+    //   } else {
+    //     return element; // 다른 경우에는 요소를 그대로 반환
+    //   }
+    // });
 
     // console.log("CHANGED FORM", form);
     // input 데이터 가공
@@ -274,7 +213,7 @@ const PromptEditPage = () => {
   // 	e.preventDefault();
   // 	updatePrompt(promptId, formData, navigate);
   // };
-  console.log("FORMDATA TITLE", formData.title);
+  // console.log("FORMDATA TITLE", formData.title);
 
   return (
     <div className="w-screen h-screen flex justify-evenly">
