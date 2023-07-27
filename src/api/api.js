@@ -117,10 +117,9 @@ export const createPrompt = async (data, navigate) => {
 };
 
 export const updatePrompt = async (id, data, navigate) => {
-  const response = await instanceWithToken.patch(`/prompt/${id}/`, data);
+  const response = await instanceWithToken.put(`/prompt/${id}/`, data);
   if (response.status === 200) {
     console.log("PROMPT UPDATE SUCCESS");
-    navigate(-1);
   } else {
     console.log("[ERROR] error while updating prompt");
   }
@@ -231,14 +230,14 @@ export const deleteOption = async (id) => {
   }
 };
 
-export const updateOption = async (id, data) => {
-  const response = await instanceWithToken.patch(`/option/${id}/`, data);
-  if (response.status === 200) {
-    console.log("OPTION UPDATE SUCCESS");
-  } else {
-    console.log("[ERROR] error while updating option");
-  }
-};
+// export const updateOption = async (id, data) => {
+//   const response = await instanceWithToken.patch(`/option/${id}/`, data);
+//   if (response.status === 200) {
+//     console.log("OPTION UPDATE SUCCESS");
+//   } else {
+//     console.log("[ERROR] error while updating option");
+//   }
+// };
 
 export const getUser = async () => {
   const response = await instanceWithToken.get("/account/info/");
