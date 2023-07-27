@@ -10,6 +10,7 @@ import { BsQuestionCircle } from "react-icons/bs";
 import { PromptMakeModal } from "../components/Modal";
 import { Mentions } from "../components/Mentions";
 import { type } from "@testing-library/user-event/dist/type";
+import { useNavigate } from "react-router-dom";
 
 const PromptMakePage = () => {
   const [title, setTitle] = useState("");
@@ -27,11 +28,11 @@ const PromptMakePage = () => {
   });
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
+  const navigate = useNavigate();
 
-  useEffect(()=>{
-    console.log(selectedCategories)
-  
-    }, [selectedCategories])
+  useEffect(() => {
+    console.log(selectedCategories);
+  }, [selectedCategories]);
 
   useEffect(() => {
     const getCategoryListAPI = async () => {
@@ -77,14 +78,13 @@ const PromptMakePage = () => {
     });
   }, [title, description, content, form, selectedCategories]);
 
-  useEffect(()=>{
-    console.log("FORM",form)
-  },[form])
+  useEffect(() => {
+    console.log("FORM", form);
+  }, [form]);
 
   const handleCreate = async (prompt) => {
     let { form, ...data } = prompt;
-    const response = await createPrompt(data);
-
+    const response = await createPrompt(data, navigate);
     const promptId = response.data.id;
 
     console.log("FORM", form);
@@ -125,6 +125,7 @@ const PromptMakePage = () => {
       console.log("inputResponse", inputResponse);
     }
     console.log("RESPONSE", response);
+    window.location.href = "/";
   };
 
   return (
