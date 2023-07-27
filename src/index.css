@@ -16,9 +16,12 @@
   font-family: "Noto Sans KR", sans-serif;
 }
 
-/* smallPost 안에 있는 tag */
+/* 사이드바 안에 있는 tag */
 .tag {
-  @apply text-white bg-gpt-indigo py-2 my-2 px-4 font-notosanskr;
+  @apply bg-gpt-indigo text-white font-bold py-1.5 mb-3 px-4 font-notosanskr;
+}
+.tag-b {
+  @apply bg-white border-2 rounded-2xl border-gpt-indigo text-gpt-indigo font-bold px-6 pb-4 pt-3;
 }
 .tag.active {
   @apply bg-white text-black;
@@ -267,6 +270,20 @@ body {
 .section-d::-webkit-scrollbar-thumb {
   background: #6fcacd;
   border-radius: 15px 15px 15px 15px;
+}
+
+/*사이드바 댓글창 스크롤바 디자인*/
+.section-c::-webkit-scrollbar {
+  width: 6px;
+}
+.section-c::-webkit-scrollbar-track {
+  background-color: white;
+  border: 1px solid lightgray;
+  border-radius: 20px 20px 20px 20px;
+}
+.section-c::-webkit-scrollbar-thumb {
+  background: #5082a5;
+  border-radius: 20px 20px 20px 20px;
 }
 
 /*회원가입 비밀번호 확인용 체크*/

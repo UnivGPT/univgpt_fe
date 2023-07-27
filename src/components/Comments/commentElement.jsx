@@ -28,11 +28,11 @@ const CommentElement = (props) => {
   // }, []);
 
   return (
-    <div className="w-full flex justify-between gap-1 mb-2 ">
+    <div className="w-full flex flex-row justify-items-start mb-2 ">
       <div className="flex flex-row w-full space-x-2 items-center pl-2">
-        <HiUserCircle className="w-10 h-10 mr-2" />
+        <HiUserCircle className="w-10 h-10 mr-1 profile" />
         <div className="commentbubble">
-          <p className="text-xs mr-5 pt-1 pl-3 align-middle">
+          <p className="text-xs mr-3 pt-1 pl-3 align-middle font-semibold">
             {comment.content}
           </p>
           {/* <span className="text-base mr-1 text-gray-300">
@@ -41,7 +41,7 @@ const CommentElement = (props) => {
         </div>
       </div>
       {user?.id === comment.author ? (
-        <div className="w-1/4 flex flex-row-reverse items-center">
+        <div className="w-1/4 flex items-center">
           <>
             <button onClick={() => handleCommentDelete(comment.id)}>
               <TiDelete className="w-5 h-5 comment-x" />
