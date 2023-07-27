@@ -347,7 +347,7 @@ const PromptMakePage = () => {
             카테고리는 중복 선택이 가능합니다.
           </h2>
         </div>
-        <div className="flex justify-items ml-14 mt-4">
+        <div className="flex flex-row justify-items ml-14 mt-4 overflow-x-scroll">
           {/* categories.data.map((category) => {
         return category.name;
       }); */}
