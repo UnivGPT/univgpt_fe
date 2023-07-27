@@ -340,7 +340,7 @@ const PromptMakePage = () => {
         <div className="rounded-3xl bg-gray-200  mx-6 h-1/2 w-full flex flex-col">
           <Mentions content={content} setContent={setContent} form={form} />
           <div className="self-end">
-            <button className="button-b  m-8" onClick={showModal}>
+            <button className="button-b mr-7" onClick={showModal}>
               미리보기
             </button>
             {modalOpen && (
