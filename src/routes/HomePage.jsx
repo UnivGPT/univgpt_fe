@@ -22,6 +22,7 @@ const HomePage = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedSort, setSelectedSort] = useState("");
   const [sortPromptList, setSortPromptList] = useState([]);
+  const [smallPromptList, setSmallPromptList] = useState([]);
   const [defaultValue, setdefaultValue] = useState({
     label: "전체",
     value: "전체",
@@ -41,6 +42,7 @@ const HomePage = () => {
       const prompts = await getPromptList();
       setPromptList(prompts);
       setSortPromptList(prompts);
+      setSmallPromptList(prompts)
     };
     getPromptListAPI();
 
@@ -151,13 +153,26 @@ const HomePage = () => {
     }
   }, [selectedSort]);
 
+  useEffect(()=>{
+    const sortedList = [...smallPromptList].sort((a, b) => {
+      if (a.view > b.view) {
+        return -1;
+      } else if (a.view < b.view) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+    setSmallPromptList(sortedList);
+  }, [smallPromptList])
+
   // console.log(prompts);
   // console.log(promptList);
 
   return (
     <div className="w-screen h-screen flex flex-row ">
       <div className="w-60">
-        <HomeSideBar key={profile.id} user={profile} prompt={promptList} />
+        <HomeSideBar key={profile.id} user={profile} prompt={smallPromptList} />
       </div>
 
       <div className="w-full bg-white text-black p-11 rounded-lg">
@@ -183,7 +198,7 @@ const HomePage = () => {
           </div> */}
         </div>
 
-        <div className="rounded-3xl border-solid border-slate-300 border-2 m-5 px-5 pb-5 w-11/12 h-3/4 self-center">
+        <div className="rounded-3xl border-solid border-slate-300 border-2 m-5 px-5 pb-5 w-11/12 h-3/4 min-h-max self-center">
           <div className="flex flex-row w-full justify-between mt-5 p-5">
             <div className="rounded-xl p-3.5 text-center font-bold text-xl text-white bg-gpt-green px-14">
               프롬프트 목록
