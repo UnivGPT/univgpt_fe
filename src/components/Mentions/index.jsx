@@ -20,7 +20,7 @@ const customRenderSuggestion = (suggestion, search, highlightedDisplay) => {
 };
 
 const customDisplayTransform = (id, display) => {
-  console.log("CUSTOM DISPLAY TRANSFORM", id, display);
+  // console.log("CUSTOM DISPLAY TRANSFORM", id, display);
   return `#${display}`; // Add '#' symbol to the display text
 };
 
