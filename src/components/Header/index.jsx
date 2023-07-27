@@ -2,6 +2,7 @@ import logo from "../../assets/images/logo_horizontal.png";
 import "./Header.css";
 import { Link } from "react-router-dom";
 import { getCookie, removeCookie } from "../../utils/cookie";
+import { logOut } from "../../api/api";
 import { useState, useEffect } from "react";
 // import users from "../../data/users";
 
@@ -15,9 +16,8 @@ const Header = () => {
   }, []);
 
   const handleLogout = () => {
-    removeCookie("access_token");
-    removeCookie("refresh_token");
-    window.location.href = "/";
+    const token = getCookie("refresh_token");
+    logOut(token);
   };
 
   return (
