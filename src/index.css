@@ -174,9 +174,7 @@ body {
 /*오른쪽에 팔이 있는 말풍선*/
 .bubble-a {
   position: relative;
-  width: 750px;
   height: 170px;
-  padding: 5px;
   margin: 0px;
   background: #ffffff;
   overflow-y: auto;
