@@ -73,7 +73,7 @@ export const checkPassword = async (data) => {
   } catch (error) {
     if (error.response.status === 400) {
       alert("비밀번호가 일치하지 않습니다.");
-    } else if (error.response.status === 401) {
+    } else if (error.response.status === 406) {
       alert("소셜 간편 로그인은 회원 정보를 변경할 수 없습니다.");
     }
     console.error(error);
