@@ -1,6 +1,4 @@
 import { HomeSideBar } from "../components/SideBar";
-import users from "../data/users";
-// import prompts from "../data/prompts";
 import { useState, useEffect } from "react";
 import { order } from "../data/category";
 import Select from "react-select";
