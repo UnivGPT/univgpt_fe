@@ -72,9 +72,9 @@ export const MidPrompt = ({ prompt }) => {
   };
 
   return (
-    <div className="flex flex-col w-72 h-60 space-y-8 p-5 shadow-xl m-3 mx-6 rounded-3xl border-gray-300 border bg-white">
-      <div className="font-semibold text-lg">{prompt.title}</div>
-      <div className="font-medium h-1/3">{prompt.description}</div>
+    <div className="flex flex-col w-80 h-64 space-y-8 p-5 shadow m-3 mx-6 rounded-3xl border-gpt-blue border-2 bg-white">
+      <div className="font-bold text-lg h-1/6">{prompt.title}</div>
+      <div className="font-medium h-1/3 mb-2">{prompt.description}</div>
       <div className="flex flex-row justify-between">
         <div className="flex flex-row space-x-2">
           <div className="flex flex-row font-bold">
@@ -83,7 +83,7 @@ export const MidPrompt = ({ prompt }) => {
                 <Link to={`/promptedit/${prompt.id}`}>
                   <img
                     src={pencil}
-                    className="cursor-pointer mr-1"
+                    className="cursor-pointer mr-1.5"
                     alt="edit"
                   />
                 </Link>
@@ -92,7 +92,7 @@ export const MidPrompt = ({ prompt }) => {
           </div>
           <div className="flex flex-row font-bold">
             {isLike ? (
-              <div className="w-5 h-5 mr-1">
+              <div className="w-5 h-5 mr-1.5">
                 <img
                   src={redheart}
                   onClick={onClickLike}
@@ -100,7 +100,7 @@ export const MidPrompt = ({ prompt }) => {
                 ></img>
               </div>
             ) : (
-              <div className="w-5 h-5 mr-1">
+              <div className="w-5 h-5 mr-1.5">
                 <img
                   src={emptyheart}
                   onClick={onClickLike}
@@ -172,14 +172,14 @@ export const MyPagePrompt = ({ prompt }) => {
   };
 
   return (
-    <div className="flex flex-col w-72 h-60 space-y-8 p-5 shadow-xl m-3 rounded-3xl border-gray-300 border bg-white">
-      <div className="font-semibold text-lg">{prompt.title}</div>
+    <div className="flex flex-col w-80 h-60 space-y-8 p-5 shadow m-3 rounded-3xl border-gpt-blue border-2 bg-white">
+      <div className="font-bold text-lg h-1/6">{prompt.title}</div>
       <div className="font-medium h-1/3">{prompt.description}</div>
       <div className="flex flex-row justify-between">
         <div className="flex flex-row space-x-2">
           <div className="flex flex-row font-bold">
             {isAuthor && (
-              <div className="w-5 h-5">
+              <div className="w-5 h-5 mr-1">
                 <Link to={`/promptedit/${prompt.id}`}>
                   <img
                     src={pencil}

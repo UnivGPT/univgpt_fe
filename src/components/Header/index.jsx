@@ -29,29 +29,25 @@ const Header = () => {
       </div>
       <div className="flex flex-row space-x-5 m-5 mx-8">
         {/* {isUser ? ( */}
-        {isLoggedIn ? (
-          <>
-            <Link to="/mypage" className="text-lg font-semibold mr-2">
-              마이페이지
-            </Link>
-            <Link
-              to="/"
-              onClick={handleLogout}
-              className="text-lg font-semibold"
-            >
-              로그아웃
-            </Link>
-          </>
-        ) : (
-          <>
-            <Link to="/signup" className="text-lg font-semibold mr-2">
-              회원가입
-            </Link>
-            <Link to="/signin" className="text-lg font-semibold">
-              로그인
-            </Link>
-          </>
-        )}
+        {/* {isLoggedIn ? ( */}
+        <>
+          <Link to="/mypage" className="text-lg font-semibold mr-2">
+            마이페이지
+          </Link>
+          <Link to="/" onClick={handleLogout} className="text-lg font-semibold">
+            로그아웃
+          </Link>
+        </>
+        {/*  ) : ( */}
+        <>
+          <Link to="/signup" className="text-lg font-semibold mr-2">
+            회원가입
+          </Link>
+          <Link to="/signin" className="text-lg font-semibold">
+            로그인
+          </Link>
+        </>
+        {/*  )} */}
       </div>
     </div>
   );

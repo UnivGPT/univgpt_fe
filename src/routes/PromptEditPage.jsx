@@ -238,7 +238,6 @@ const PromptEditPage = () => {
             type="text"
             className="input-d"
             maxLength={20}
-            //   placeholder="제작하실 프롬프트의 제목을 20자 이내로 입력해주세요."
             defaultValue={formData.title}
             onChange={(e) => {
               setTitle(e.target.value);
@@ -423,7 +422,7 @@ const PromptEditPage = () => {
                         const newForm = [...form];
                         newForm.splice(idx, 1, deletedOptionForm);
                         setForm(newForm);
-                        // console.log(newForm);
+                    
                       }}
                     >
                       -
@@ -476,15 +475,6 @@ const PromptEditPage = () => {
               })}
             </div>
 
-            {/*내가 볼라고 만든 기능
-            <div><h3>선택된 카테고리</h3>
-            <ul>
-              {selectedCategories.map((category) => (
-                <li key={category}>{category}</li>
-              ))}
-            </ul>
-              </div>*/}
-
             {/*삭제&게시 버튼*/}
             <div className="mt-20 flex flex-row justify-center">
               <button className="button-bt mx-4" onClick={showModal}>
@@ -506,9 +496,6 @@ const PromptEditPage = () => {
                   handleUpdate(formData);
                   window.alert("프롬프트가 성공적으로 수정되었습니다!");
                 }}
-                //axios 통해 서버로 프롬프트 덩어리를 보내는 함수가 있어야!
-                //지금은 잘 들어왔는지 확인하기 위해 콘솔로그 찍는 기능 넣어놨어유
-                //공란이 있을 시 'ㅇㅇ을 입력해주세요' alert가 뜨고 프롬프트 저장이 안되는 기능도 있어야
               >
                 수정하기
               </button>
