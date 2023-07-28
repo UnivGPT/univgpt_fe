@@ -9,7 +9,7 @@ import {
 import { LuSend } from "react-icons/lu";
 import { getCookie } from "../../utils/cookie";
 
-const Comment = ({ promptId }) => {
+const Comment = ({ promptId, resultPage }) => {
   const [commentList, setCommentList] = useState([]); // state for comments
   const [newContent, setNewContent] = useState(""); // state for new comment
   const [user, setUser] = useState(null);
@@ -52,8 +52,12 @@ const Comment = ({ promptId }) => {
   };
 
   const handleCommentDelete = (targetId) => {
-    if (window.confirm("정말 삭제하시겠습니까?")) {
-      deleteComment(targetId);
+    if (resultPage) {
+      alert("응답을 받는 중에는 댓글을 삭제하실 수 없습니다.");
+    } else {
+      if (window.confirm("정말 삭제하시겠습니까?")) {
+        deleteComment(targetId);
+      }
     }
   };
 

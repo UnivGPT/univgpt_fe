@@ -27,7 +27,7 @@ const CommentElement = (props) => {
   //     getUserAPI();
   //   }
   // }, []);
-  console.log(comment);
+  // console.log(comment);
 
   const colors = [
     "#BACDFF",
