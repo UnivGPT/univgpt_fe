@@ -1,8 +1,6 @@
 import { HomeSideBar } from "../components/SideBar";
-import users from "../data/users";
-// import prompts from "../data/prompts";
 import { useState, useEffect } from "react";
-import { order } from "../data/category";
+// import { order } from "../data/category";
 import Select from "react-select";
 import { MidPrompt } from "../components/Prompts";
 import { getCategoryList, getPromptList, getSecureUser } from "../api/api";
@@ -28,6 +26,19 @@ const HomePage = () => {
     label: "전체",
     value: "전체",
   });
+  const [defaultValue2, setdefaultValue2] = useState({
+    label: "최신순",
+    value: "latest",
+  });
+  const [order, setOrder] = useState([
+    { value: "view", label: "뷰순" },
+    { value: "like", label: "좋아요순" },
+    { value: "latest", label: "최신순" },
+  ]);
+
+  useEffect(() => {
+    setSelectedSort(defaultValue2);
+  }, []);
 
   // useEffect(() => {
   //   const getPromptListAPI = async () => {
@@ -44,15 +55,7 @@ const HomePage = () => {
       setPromptList(prompts);
       setSortPromptList(prompts);
       setSmallPromptList(
-        prompts.sort((a, b) => {
-          if (a.view > b.view) {
-            return -1;
-          } else if (a.view < b.view) {
-            return 1;
-          } else {
-            return 0;
-          }
-        })
+        prompts.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
       );
     };
     getPromptListAPI();
@@ -68,7 +71,7 @@ const HomePage = () => {
     };
     getCategoryListAPI();
   }, []);
-  console.log(smallPromptList);
+  // console.log(smallPromptList);
 
   useEffect(() => {
     if (getCookie("access_token")) {
@@ -115,7 +118,7 @@ const HomePage = () => {
 
   const handleCategoryChange = (e) => {
     setSelectedCategory(e.label);
-    console.log(selectedCategory);
+    // console.log(selectedCategory);
   };
 
   const changeLikeOrder = () => {
@@ -218,10 +221,14 @@ const HomePage = () => {
             <div className="rounded-xl p-3.5 text-center font-bold text-xl text-white bg-gpt-green px-14">
               프롬프트 목록
             </div>
-            <Select options={order} onChange={handleSortChange} />
+            <Select
+              options={order}
+              defaultValue={defaultValue2}
+              onChange={handleSortChange}
+            />
           </div>
-          <div className="h-4/6 min-h-[350px] flex justify-center overflow-y-auto overflow-x-hidden">
-            <div className="flex flex-wrap section-b">
+          <div className="h-4/6 min-h-[350px] flex justify-center overflow-y-auto overflow-x-hidden section-b">
+            <div className="grid grid-cols-3 ">
               {sortPromptList
                 .filter((prompt) =>
                   searchValue
