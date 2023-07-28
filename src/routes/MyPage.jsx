@@ -46,6 +46,7 @@ const MyPage = () => {
     };
     fetchData();
   }, []);
+  console.log(scrapPromptList);
 
   useEffect(() => {
     const newUserName = profile.profile.socials_username || profile.username;
@@ -67,7 +68,8 @@ const MyPage = () => {
                 "#9EDF8E",
               ])}
               name={userName}
-              className="rounded-full mb-7 mt-3 font-bold text-2xl"
+              className="rounded-full mb-7 font-bold text-2xl"
+              size={130}
             />
             <div className="flex flex-col justify-between mx-10">
               <div className="text-3xl font-semibold">
@@ -75,10 +77,22 @@ const MyPage = () => {
               </div>
               <div className="flex flex-row space-x-5 text-center">
                 <div className="button-a-3 hover:!text-white">
-                  나의 프롬프트 {authorPromptList.length}개
+                  나의 프롬프트{" "}
+                  {
+                    promptList.filter(
+                      (prompt) => prompt.author.id === profile.id
+                    ).length
+                  }
+                  개
                 </div>
                 <div className="button-a-3 hover:!text-white">
-                  스크랩한 프롬프트 {scrapPromptList.length}개
+                  스크랩한 프롬프트{" "}
+                  {
+                    promptList.filter((prompt) =>
+                      prompt.like_users.includes(profile.id)
+                    ).length
+                  }
+                  개
                 </div>
               </div>
             </div>
@@ -113,7 +127,7 @@ const MyPage = () => {
             </div>
             <br></br>
             <div className="w-full h-80 flex flex-wrap overflow-y-auto section-b">
-              {sortPromptList
+              {promptList
                 .filter((prompt) => prompt.like_users.includes(profile.id))
                 .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
                 .map((prompt) => (

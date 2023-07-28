@@ -17,7 +17,7 @@ export const HomeSideBar = ({ user, prompt }) => {
   }, [user]);
 
   return (
-    <div className="flex flex-col h-screen items-center">
+    <div className="flex flex-col h-screen justify-items-center">
       <div className="flex flex-col space-y-4 align-middle items-center m-4">
         <Link
           to="/promptmake"
@@ -27,7 +27,7 @@ export const HomeSideBar = ({ user, prompt }) => {
         </Link>
         <div>
           {user.id ? (
-            <>
+            <div className="flex flex-col">
               <Avatar
                 color={Avatar.getRandomColor("sitebase", [
                   "#BACDFF",
@@ -41,7 +41,7 @@ export const HomeSideBar = ({ user, prompt }) => {
                 className="rounded-full mb-7 mt-3 self-center font-bold text-2xl"
               />
               <div className="font-semibold">{userName}님 반갑습니다!</div>
-            </>
+            </div>
           ) : (
             <>
               <HiUserCircle size={150} />
@@ -115,7 +115,7 @@ export const PromptSideBar = ({ prompt }) => {
       >
         내 프롬프트 만들기
       </Link>
-      <div>
+      <div className="flex flex-col items-center justify-center">
         {/*이 얼굴,,,, 글자로 바꿔야,,,,*/}
         <Avatar
           color={Avatar.getRandomColor("sitebase", [
