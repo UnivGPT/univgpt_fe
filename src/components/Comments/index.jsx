@@ -75,17 +75,19 @@ const Comment = ({ promptId }) => {
       </form>
       {/*댓글 목록*/}
       <div className="h-48 flex-grow-1 overflow-y-auto overflow-x-hidden section-c">
-        {commentList.map((comment) => {
-          return (
-            <div className="flex flex-row ml-3" key={comment.id}>
-              <CommentElement
-                comment={comment}
-                handleCommentDelete={handleCommentDelete}
-                user={user}
-              />
-            </div>
-          );
-        })}
+        {commentList
+          .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+          .map((comment) => {
+            return (
+              <div className="flex flex-row ml-3" key={comment.id}>
+                <CommentElement
+                  comment={comment}
+                  handleCommentDelete={handleCommentDelete}
+                  user={user}
+                />
+              </div>
+            );
+          })}
       </div>
     </div>
   );
