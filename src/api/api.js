@@ -165,14 +165,22 @@ export const getCommentList = async (promptId) => {
 };
 
 export const createComment = async (data) => {
-  const response = await instanceWithToken.post("/comment/", data);
-  if (response.status === 201) {
-    console.log("COMMENT SUCCESS");
-    // window.location.reload(); // 새로운 코멘트 생성시 새로고침으로 반영
-  } else {
-    console.log("[ERROR] error while creating comment");
+  if (data) {
+    let response;
+    try {
+      response = await instanceWithToken.post("/comment/", data);
+      if (response && response.status === 201) {
+        return response;
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        alert("내용을 작성해 주세요.");
+      } else {
+        alert("로그인 후 다시 시도해 주세요.");
+        window.location.href = "/signin/";
+      }
+    }
   }
-  return response;
 };
 
 export const deleteComment = async (id) => {
