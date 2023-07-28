@@ -56,7 +56,7 @@ export const HomeSideBar = ({ user, prompt }) => {
             </>
           )}
         </div>
-        <div className="w-52 h-2/3 bg-slate-100 rounded-3xl text-black p-3 !mt-4 ml-2 space-y-2 section-c overflow-y-auto overflow-x-hidden">
+        <div className="w-52 h-2/3 bg-slate-100 rounded-3xl text-black p-3 !mt-6 ml-2 space-y-2 section-a overflow-y-auto overflow-x-hidden">
           <div className="rounded-xl p-3.5 mb-3 text-center font-bold text-lg text-white bg-gpt-blue">
             오늘의 프롬프트
           </div>

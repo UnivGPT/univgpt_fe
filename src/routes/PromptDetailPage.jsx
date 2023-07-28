@@ -185,7 +185,7 @@ const PromptDetailPage = () => {
               <Avatar
                 color={colors[userName.length % colors.length]}
                 name={userName}
-                className="rounded-full mb-7 mt-1 self-center font-bold text-2xl"
+                className="rounded-full mb-7 mt-1 self-center font-bold !text-4xl !h-40 !w-40"
               />
             </div>
 
