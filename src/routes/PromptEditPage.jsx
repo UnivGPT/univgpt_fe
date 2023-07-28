@@ -11,7 +11,6 @@ import {
   updatePrompt,
   deletePrompt,
 } from "../api/api";
-import { BsQuestionCircle } from "react-icons/bs";
 import { PromptMakeModal } from "../components/Modal";
 import { Mentions } from "../components/Mentions";
 import { type } from "@testing-library/user-event/dist/type";
@@ -448,7 +447,6 @@ const PromptEditPage = () => {
         <div className="bg-white text-black w-1/2 h-full p-8 pl-10 pr-20 min-w-[500px] min-h-[800px]">
           <div className="flex justify-between mt-4">
             <h1 className="text-5xl font-bold mx-6 mb-8 ">프롬프트</h1>
-            <BsQuestionCircle size={45} className="qmark ml-4" />
           </div>
           <div className="rounded-3xl bg-gray-200 mx-6 h-2/5 w-full flex flex-col">
             <Mentions content={content} setContent={setContent} form={form} />
