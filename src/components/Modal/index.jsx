@@ -202,7 +202,6 @@ export const PromptMakeModal = ({ modalOpen, setModalOpen, prompt }) => {
             </button>
           </form>
         )}
-        ;
       </div>
     </div>
   );
