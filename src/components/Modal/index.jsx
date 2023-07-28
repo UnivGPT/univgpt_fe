@@ -3,8 +3,7 @@ import { getPromptDetail, getOptionList } from "../../api/api";
 import users from "../../data/users";
 import Select from "react-select";
 import { useParams } from "react-router-dom";
-import emptyheart from "../../assets/images/emptyheart.png";
-import redheart from "../../assets/images/redheart.png";
+import { MdOutlineCancel } from "react-icons/md";
 import { HiUserCircle } from "react-icons/hi";
 import gpt_logo from "../../assets/images/logo_gpt.png";
 
@@ -102,9 +101,9 @@ export const PromptMakeModal = ({ setModalOpen, prompt }) => {
   // console.log(prompt);
 
   return (
-    <div className="modalContainer w-screen h-screen">
-      <button className="closeButton" onClick={closeModal}>
-        X
+    <div className="modalContainer w-screen h-screen ">
+      <button className="closeButton !mr-4" onClick={closeModal}>
+        <MdOutlineCancel size={50} />
       </button>
       <div>
         {resultPage ? (
@@ -161,7 +160,7 @@ export const PromptMakeModal = ({ setModalOpen, prompt }) => {
             </form>
           </div>
         ) : (
-          <form className="flex-grow flex flex-col items-center justify-center w-4/5 h-3/4 bg-white text-black p-11 mx-20 rounded-3xl">
+          <form className="flex-grow flex flex-col items-center justify-center w-4/5 h-3/4 shadow-3xl bg-white border-2 border-gpt-green border-solid text-black p-11 mx-20 rounded-3xl">
             <h1 className="font-bold text-7xl text-gpt-indigo">
               {prompt.title}
             </h1>

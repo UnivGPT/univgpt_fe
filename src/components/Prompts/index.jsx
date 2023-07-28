@@ -115,9 +115,9 @@ export const MidPrompt = ({ prompt }) => {
         <div>
           <Link
             to={`/promptdetail/${prompt.id}`}
-            className="rounded-xl p-3 mb-3 font-semibold text-center text-sm text-white bg-gpt-blue"
+            className="rounded-xl p-3 px-5 mb-3 font-semibold text-center text-sm text-white bg-gpt-blue"
           >
-            프롬프트 사용하기
+            사용하기
           </Link>
         </div>
       </div>

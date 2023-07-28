@@ -44,6 +44,10 @@
   @apply bg-gpt-green text-white font-semibold font-notosanskr hover:text-black rounded-xl text-lg py-3.5 px-2;
 }
 
+.button-bt {
+  @apply bg-gpt-green text-white font-semibold font-notosanskr hover:text-black rounded-2xl text-xl py-3.5 px-16 shadow-xl;
+}
+
 /* 태그 */
 .button-c {
   @apply bg-gpt-green text-white font-semibold font-notosanskr rounded-xl text-lg p-3.5 relative;
@@ -90,7 +94,7 @@
 
 /*PromptMake Category*/
 .button-check {
-  @apply bg-gray-300 text-zinc-500 font-semibold font-notosanskr active:bg-gpt-green active:text-white rounded-xl shadow p-3.5 px-5 mr-9;
+  @apply bg-gray-300 text-zinc-500 font-semibold font-notosanskr active:bg-gpt-green active:text-white rounded-xl shadow p-3.5 px-5 mx-4;
 }
 
 /* form-a: 로그인, 회원가입, 회원정보 수정에 쓰이는 폼 */
