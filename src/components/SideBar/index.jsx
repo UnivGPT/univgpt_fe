@@ -27,11 +27,27 @@ export const HomeSideBar = ({ user, prompt }) => {
           내 프롬프트 만들기
         </Link>
         <div>
-          <HiUserCircle size="150" />
           {user.id ? (
-            <div className="font-semibold">{userName}님 반갑습니다!</div>
+            <>
+              <Avatar
+                color={Avatar.getRandomColor("sitebase", [
+                  "#BACDFF",
+                  "#EFB4ED",
+                  "#E1BAFF",
+                  "#FFBEBA",
+                  "#FED4AD",
+                  "#9EDF8E",
+                ])}
+                name={userName}
+                className="rounded-full mb-7 mt-3 self-center font-bold text-2xl"
+              />
+              <div className="font-semibold">{userName}님 반갑습니다!</div>
+            </>
           ) : (
-            <div className="font-semibold">로그인이 필요합니다</div>
+            <>
+              <HiUserCircle size={150} />
+              <div className="font-semibold">로그인이 필요합니다</div>
+            </>
           )}
         </div>
         <div className="w-52 h-2/3 bg-slate-100 rounded-3xl text-black p-3 !mt-4 ml-2 space-y-2 section-c overflow-y-auto overflow-x-hidden">
@@ -102,7 +118,18 @@ export const PromptSideBar = ({ prompt }) => {
       </Link>
       <div>
         {/*이 얼굴,,,, 글자로 바꿔야,,,,*/}
-        <HiUserCircle size="150" className="self-center profile" />
+        <Avatar
+          color={Avatar.getRandomColor("sitebase", [
+            "#BACDFF",
+            "#EFB4ED",
+            "#E1BAFF",
+            "#FFBEBA",
+            "#FED4AD",
+            "#9EDF8E",
+          ])}
+          name={userName}
+          className="rounded-full mb-7 mt-3 text-2xl font-bold"
+        />
         <div className="font-semibold text-lg text-center">
           {userName}님에 의해<br></br>
           생성된 프롬프트
