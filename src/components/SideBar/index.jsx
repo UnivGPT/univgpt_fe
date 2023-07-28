@@ -37,7 +37,7 @@ export const HomeSideBar = ({ user, prompt }) => {
         </Link>
         <div>
           {user.id ? (
-            <div className="flex flex-col">
+            <div className="flex flex-col items-center">
               <Avatar
                 color={colors[userName.length % colors.length]}
                 name={userName}
@@ -48,7 +48,9 @@ export const HomeSideBar = ({ user, prompt }) => {
           ) : (
             <>
               <HiUserCircle size={150} />
-              <div className="font-semibold">로그인이 필요합니다</div>
+              <div className="font-semibold flex flex-col items-center">
+                로그인이 필요합니다
+              </div>
             </>
           )}
         </div>
