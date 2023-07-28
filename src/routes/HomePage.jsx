@@ -6,7 +6,6 @@ import { MidPrompt } from "../components/Prompts";
 import { getCategoryList, getPromptList, getSecureUser } from "../api/api";
 import { getCookie } from "../utils/cookie";
 
-
 const HomePage = () => {
   const [profile, setProfile] = useState({
     profile: { id: "", socials_username: "" },
@@ -55,7 +54,15 @@ const HomePage = () => {
       setPromptList(prompts);
       setSortPromptList(prompts);
       setSmallPromptList(
-        prompts.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+        prompts.sort((a, b) => {
+          if (a.view > b.view) {
+            return -1;
+          } else if (a.view < b.view) {
+            return 1;
+          } else {
+            return 0;
+          }
+        })
       );
     };
     getPromptListAPI();
