@@ -4,6 +4,7 @@ import { HiUserCircle } from "react-icons/hi";
 import { getUserProfile, editUserProfile } from "../api/api";
 import { getCookie, removeCookie } from "../utils/cookie";
 import { BsCheckAll } from "react-icons/bs";
+import Avatar from "react-avatar";
 
 const InfoEditPage = () => {
   const [formData, setFormData] = useState({
@@ -54,7 +55,19 @@ const InfoEditPage = () => {
       <h3 className="font-semibold text-5xl">회원정보 수정</h3>
       <br></br>
       {/*일단은 사이즈 보려고 이미지로 넣어놨으! 근데 사람 이름 이니셜로 아이콘 만드는 법 못 찾으면 계속 이미지 써야할지도ㅠㅠ*/}
-      <HiUserCircle size="150" />
+      <Avatar
+        color={Avatar.getRandomColor("sitebase", [
+          "#BACDFF",
+          "#EFB4ED",
+          "#E1BAFF",
+          "#FFBEBA",
+          "#FED4AD",
+          "#9EDF8E",
+        ])}
+        name={formData.username}
+        className="rounded-full mb-1 font-bold text-2xl"
+        size={130}
+      />
       <form className="form-a" onSubmit={handleChangeInfoSubmit}>
         {/*이메일은 수정 안되게 바꿔야*/}
         <label className="label font-bold text-l" htmlFor="email">
