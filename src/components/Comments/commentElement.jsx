@@ -42,7 +42,12 @@ const CommentElement = (props) => {
     <div className="w-40 flex justify-between gap-1 mb-2 ">
       <div className="flex flex-row w-full space-x-4 items-center pl-2">
         <Avatar
-          color={colors[comment.author.username.length % colors.length]}
+          color={
+            colors[
+              comment.author.socials_username.length % colors.length ||
+                comment.author.username.length % colors.length
+            ]
+          }
           name={comment.author.socials_username || comment.author.username}
           className="userCircle rounded-full mb-7 mt-3 font-bold text-lg"
           size="30"

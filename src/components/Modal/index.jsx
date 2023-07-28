@@ -4,8 +4,9 @@ import Select from "react-select";
 import { MdOutlineCancel } from "react-icons/md";
 import { HiUserCircle } from "react-icons/hi";
 import gpt_logo from "../../assets/images/logo_gpt.png";
+import Avatar from "react-avatar";
 
-export const PromptMakeModal = ({ modalOpen, setModalOpen, prompt }) => {
+export const PromptMakeModal = ({ modalOpen, setModalOpen, prompt, user }) => {
   const [input, setInput] = useState([]);
   const [option, setOption] = useState([]);
   const [resultPage, setResultPage] = useState(false);
@@ -13,6 +14,12 @@ export const PromptMakeModal = ({ modalOpen, setModalOpen, prompt }) => {
   const [resultArray, setResultArray] = useState([]);
   const [message, setMessage] = useState("");
   const [answer, setAnswer] = useState("응답을 불러오는 중입니다...");
+  const [userName, setUserName] = useState("");
+
+  useEffect(() => {
+    const newUserName = user.profile.socials_username || user.username;
+    setUserName(newUserName);
+  }, [user]);
 
   const closeModal = () => {
     setModalOpen(false);
@@ -68,6 +75,15 @@ export const PromptMakeModal = ({ modalOpen, setModalOpen, prompt }) => {
     return resultArray2;
   }
 
+  const colors = [
+    "#BACDFF",
+    "#EFB4ED",
+    "#E1BAFF",
+    "#FFBEBA",
+    "#FED4AD",
+    "#9EDF8E",
+  ];
+
   return (
     <div className="modalContainer w-screen h-screen ">
       <button className="closeButton !mr-4" onClick={closeModal}>
@@ -88,7 +104,12 @@ export const PromptMakeModal = ({ modalOpen, setModalOpen, prompt }) => {
                   </div>
                   <div className="bubble-a-after mt-14"></div>
                 </div>
-                <HiUserCircle className="profile flex flex-col !h-60 !w-60" />
+                {/* <HiUserCircle className="profile flex flex-col !h-60 !w-60" /> */}
+                <Avatar
+                  color={colors[userName.length % colors.length]}
+                  name={userName}
+                  className="rounded-full mb-7 mt-1 self-center font-bold text-2xl"
+                />
               </div>
 
               {/*GPT 답변*/}
@@ -202,7 +223,6 @@ export const PromptMakeModal = ({ modalOpen, setModalOpen, prompt }) => {
             </button>
           </form>
         )}
-        ;
       </div>
     </div>
   );
