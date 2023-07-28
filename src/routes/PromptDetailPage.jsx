@@ -122,7 +122,7 @@ const PromptDetailPage = () => {
       {resultPage ? (
         <div className="flex-grow flex flex-col justify-center items-center h-4/5 w-2/3 bg-gray-200 text-black mx-20 mt-6 rounded-3xl">
           {/*질문답변*/}
-          <div className="rounded-3xl bg-gray-200 px-8 pb-5 mr-8 mx-6 h-4/5 w-5/6 overflow-y-auto section-d">
+          <div className="rounded-3xl bg-gray-200 px-8 pb-5 mr-8 mx-6 h-4/5 w-5/6 section-d">
             {/*프롬프트 통한 질문*/}
             <div className="flex justify-center items-center mt-2 w-full h-1/3">
               <div className="flex justify-start w-full h-full">
