@@ -194,6 +194,8 @@ const HomePage = () => {
   // console.log(prompts);
   // console.log(promptList);
 
+  
+
   return (
     <div className="w-screen h-screen flex flex-row">
       <div className="w-60">

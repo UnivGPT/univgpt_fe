@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import {
+  getSecureUser,
   getPromptDetail,
   getOptionList,
   getCommentList,
@@ -14,6 +15,8 @@ import Select from "react-select";
 import { useParams } from "react-router-dom";
 import { HiUserCircle } from "react-icons/hi";
 import gpt_logo from "../assets/images/logo_gpt.png";
+import { getCookie } from "../utils/cookie";
+import Avatar from "react-avatar";
 
 const PromptDetailPage = () => {
   const { promptId } = useParams();
@@ -25,7 +28,32 @@ const PromptDetailPage = () => {
   const [inputArray, setInputArray] = useState([]);
   const [message, setMessage] = useState("");
   const [answer, setAnswer] = useState("응답을 불러오는 중입니다...");
+  const [profile, setProfile] = useState({
+    profile: { id: "", socials_username: "" },
+    username: "",
+    id: "",
+  });
+  const [userName, setUserName] = useState("");
   //const navigate = useNavigate();
+
+  useEffect(() => {
+    if (getCookie("access_token")) {
+      const getUserProfileAPI = async () => {
+        const response = await getSecureUser();
+        setProfile({
+          profile: {
+            id: response.profile.id,
+            socials_username: response.profile.socials_username,
+          },
+          username: response.username,
+          id: response.id,
+        });
+      };
+      getUserProfileAPI();
+    }
+  }, []);
+
+  console.log(profile.username);
 
   useEffect(() => {
     const result = resultArray.map((item) => {
@@ -114,6 +142,21 @@ const PromptDetailPage = () => {
     return resultArray2;
   }
 
+  useEffect(() => {
+    const newUserName = profile.profile.socials_username || profile.username;
+    setUserName(newUserName);
+  }, [profile]);
+
+  const colors = [
+    "#BACDFF",
+    "#EFB4ED",
+    "#E1BAFF",
+    "#FFBEBA",
+    "#FED4AD",
+    "#9EDF8E",
+  ];
+
+  console.log(userName);
   return (
     <div className="w-screen h-screen flex flex-row">
       <div className="w-60">
@@ -138,7 +181,12 @@ const PromptDetailPage = () => {
                 </div>
                 <div className="bubble-a-after mt-14"></div>
               </div>
-              <HiUserCircle className="profile flex flex-col !h-60 !w-60" />
+              {/* <HiUserCircle className="profile flex flex-col !h-60 !w-60" /> */}
+              <Avatar
+                color={colors[userName.length % colors.length]}
+                name={userName}
+                className="rounded-full mb-7 mt-1 self-center font-bold text-2xl"
+              />
             </div>
 
             {/*GPT 답변*/}

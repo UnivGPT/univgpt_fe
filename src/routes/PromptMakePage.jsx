@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import trashBin from "../assets/images/trashbin.png";
 import {
+  getSecureUser,
   createPrompt,
   createInput,
   createOption,
@@ -11,6 +12,7 @@ import { PromptMakeModal } from "../components/Modal";
 import { Mentions } from "../components/Mentions";
 import { type } from "@testing-library/user-event/dist/type";
 import { useNavigate } from "react-router-dom";
+import { getCookie } from "../utils/cookie";
 
 const PromptMakePage = () => {
   const [title, setTitle] = useState("");
@@ -30,6 +32,11 @@ const PromptMakePage = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
   const [inputId, setInputId] = useState(1);
+  const [profile, setProfile] = useState({
+    profile: { id: "", socials_username: "" },
+    username: "",
+    id: "",
+  });
 
   // useEffect
 
@@ -49,6 +56,23 @@ const PromptMakePage = () => {
     //console.log("TYPEOF", typeof categoryList);
     //console.log(Array.isArray(categoryList));
   }, [categoryList]);
+
+  useEffect(() => {
+    if (getCookie("access_token")) {
+      const getUserProfileAPI = async () => {
+        const response = await getSecureUser();
+        setProfile({
+          profile: {
+            id: response.profile.id,
+            socials_username: response.profile.socials_username,
+          },
+          username: response.username,
+          id: response.id,
+        });
+      };
+      getUserProfileAPI();
+    }
+  }, []);
 
   //미리보기 모달 노출 여부
 
@@ -132,6 +156,7 @@ const PromptMakePage = () => {
             modalOpen={modalOpen}
             setModalOpen={setModalOpen}
             prompt={prompt}
+            user={profile}
           />
         </>
       )}

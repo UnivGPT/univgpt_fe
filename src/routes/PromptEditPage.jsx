@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import trashBin from "../assets/images/trashbin.png";
 import {
+  getSecureUser,
   createPrompt,
   createInput,
   createOption,
@@ -15,6 +16,7 @@ import { PromptMakeModal } from "../components/Modal";
 import { Mentions } from "../components/Mentions";
 import { type } from "@testing-library/user-event/dist/type";
 import { useNavigate, useParams } from "react-router-dom";
+import { getCookie } from "../utils/cookie";
 
 const PromptEditPage = () => {
   const { promptId } = useParams();
@@ -36,6 +38,28 @@ const PromptEditPage = () => {
     form: [],
     category: "",
   });
+  const [profile, setProfile] = useState({
+    profile: { id: "", socials_username: "" },
+    username: "",
+    id: "",
+  });
+
+  useEffect(() => {
+    if (getCookie("access_token")) {
+      const getUserProfileAPI = async () => {
+        const response = await getSecureUser();
+        setProfile({
+          profile: {
+            id: response.profile.id,
+            socials_username: response.profile.socials_username,
+          },
+          username: response.username,
+          id: response.id,
+        });
+      };
+      getUserProfileAPI();
+    }
+  }, []);
 
   useEffect(() => {
     console.log("자고 싶어요", formData);
@@ -201,6 +225,7 @@ const PromptEditPage = () => {
             modalOpen={modalOpen}
             setModalOpen={setModalOpen}
             prompt={formData}
+            user={profile}
           />
         </>
       )}
