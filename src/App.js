@@ -12,7 +12,6 @@ import KakaoCallback from "./routes/KakaoCallBack";
 import InfoCheck from "./routes/InfoCheck";
 import NaverCallBack from "./routes/NaverCallBack";
 import GoogleCallBack from "./routes/GoogleCallBack";
-import PromptResult from "./routes/PromptResultPage";
 
 import "./App.css";
 
@@ -33,7 +32,7 @@ function App() {
           />
           <Route path="/promptedit/:promptId" element={<PromptEditPage />} />
           <Route path="/promptmake" element={<PromptMakePage />} />
-          <Route path="/promptresult" element={<PromptResult />} />
+
           <Route path="/infocheck" element={<InfoCheck />} />
           <Route path="api/auth/callback/naver" element={<NaverCallBack />} />
           <Route path="api/auth/callback/google" element={<GoogleCallBack />} />
