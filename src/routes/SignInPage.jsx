@@ -88,7 +88,12 @@ const SignInPage = () => {
         <br></br>
         <div className="flex flex-row items-center space-x-14">
           <RiKakaoTalkFill size="60" onClick={KakaoLogin} />
-          <SiNaver size="50" onClick={NaverLogin} />
+          <SiNaver
+            size="50"
+            onClick={() => {
+              alert("네이버 로그인은 추후 제공될 예정입니다.");
+            }}
+          />
           <AiOutlineGoogle size="70" onClick={GoogleLogin} />
         </div>
         <br></br>
