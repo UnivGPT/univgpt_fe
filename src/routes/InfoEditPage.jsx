@@ -46,7 +46,16 @@ const InfoEditPage = () => {
     alert("정보 수정이 완료되었습니다.");
   };
 
-  console.log(formData.confirm_password);
+  // console.log(formData.confirm_password);
+
+  const colors = [
+    "#BACDFF",
+    "#EFB4ED",
+    "#E1BAFF",
+    "#FFBEBA",
+    "#FED4AD",
+    "#9EDF8E",
+  ];
 
   return (
     <div className="flex flex-col items-center h-screen w-1/2">
@@ -56,14 +65,7 @@ const InfoEditPage = () => {
       <br></br>
       {/*일단은 사이즈 보려고 이미지로 넣어놨으! 근데 사람 이름 이니셜로 아이콘 만드는 법 못 찾으면 계속 이미지 써야할지도ㅠㅠ*/}
       <Avatar
-        color={Avatar.getRandomColor("sitebase", [
-          "#BACDFF",
-          "#EFB4ED",
-          "#E1BAFF",
-          "#FFBEBA",
-          "#FED4AD",
-          "#9EDF8E",
-        ])}
+        color={colors[formData.username.length % colors.length]}
         name={formData.username}
         className="rounded-full mb-1 font-bold text-2xl"
         size={130}

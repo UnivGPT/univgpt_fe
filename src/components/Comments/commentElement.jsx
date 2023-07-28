@@ -29,18 +29,20 @@ const CommentElement = (props) => {
   // }, []);
   console.log(comment);
 
+  const colors = [
+    "#BACDFF",
+    "#EFB4ED",
+    "#E1BAFF",
+    "#FFBEBA",
+    "#FED4AD",
+    "#9EDF8E",
+  ];
+
   return (
     <div className="w-40 flex justify-between gap-1 mb-2 ">
       <div className="flex flex-row w-full space-x-4 items-center pl-2">
         <Avatar
-          color={Avatar.getRandomColor("sitebase", [
-            "#BACDFF",
-            "#EFB4ED",
-            "#E1BAFF",
-            "#FFBEBA",
-            "#FED4AD",
-            "#9EDF8E",
-          ])}
+          color={colors[comment.author.username.length % colors.length]}
           name={comment.author.username || comment.author.socials_username}
           className="userCircle rounded-full mb-7 mt-3 font-bold text-lg"
           size="30"
