@@ -7,7 +7,6 @@ import redheart from "../../assets/images/redheart.png";
 import { likePrompt, getSecureUser } from "../../api/api";
 import { useState, useEffect } from "react";
 import { getCookie } from "../../utils/cookie";
-import Avatar from "react-avatar";
 
 export const HomeSideBar = ({ user, prompt }) => {
   const [userName, setUserName] = useState("");

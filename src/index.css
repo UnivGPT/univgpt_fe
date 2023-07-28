@@ -194,7 +194,7 @@ body {
   width: 750px;
   height: 170px;
   margin: 0px;
-  background: #ffffff;
+  background: #afdbdd;
   overflow-y: auto;
   -webkit-border-radius: 27px;
   -moz-border-radius: 27px;
@@ -204,9 +204,10 @@ body {
 .bubble-a-after {
   width: 0;
   height: 0;
+
   border-bottom: 25px solid transparent;
   border-top: 25px solid transparent;
-  border-left: 45px solid white;
+  border-left: 45px solid #afdbdd;
   border-right: 45px solid transparent;
 }
 

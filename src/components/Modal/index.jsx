@@ -74,45 +74,55 @@ export const PromptMakeModal = ({ modalOpen, setModalOpen, prompt }) => {
       </button>
       <div>
         {resultPage ? (
-          <div className="w-screen h-screen flex flex-col items-center">
-            <form className="w-4/5 h-3/4 flex flex-col items-center bg-gray-200 text-black p-11 rounded-3xl mx-20">
-              {/*사용자 측 프롬프트 질문*/}
-              <div className="flex justify-between mx-20">
-                <div className="bubble-a font-medium overflow-x-hidden items-center overflow-y-auto ">
-                  {message}
+          <div className="flex-grow flex flex-col justify-center items-center h-3/5 w-4/5 bg-gray-200 border-gpt-green border-solid border-2 text-black mx-20 p-11 rounded-3xl">
+            {/*질문답변*/}
+            <div className="rounded-3xl bg-blue-200 px-8 pb-5 mr-8 mx-6 h-1/2 w-5/6 section-d">
+              {/*프롬프트 통한 질문*/}
+              <div className="flex justify-center items-center mt-2 w-full h-1/3">
+                <div className="flex justify-start w-full h-full">
+                  <div className="flex bubble-a section-a items-center overflow-y-auto overflow-x-hidden w-3/4 h-1/3">
+                    <div className="inline-block align-middle whitespace-pre-line !my-auto p-4 pl-8">
+                      {message}
+                    </div>
+                  </div>
+                  <div className="bubble-a-after mt-14"></div>
                 </div>
-                <div className="bubble-a:left" />
-                <HiUserCircle
-                  size="150"
-                  className="flex flex-col items-center ml-10"
-                />
+                <HiUserCircle className="profile flex flex-col !h-60 !w-60" />
               </div>
-              <br></br>
+
               {/*GPT 답변*/}
-              <div className="flex justify-between mx-20">
-                <img
-                  id="gpt-logo"
-                  src={gpt_logo}
-                  alt="gpt_logo"
-                  className="flex flex-col items-center mr-10 w-28 h-28"
-                />
-                <div className="bubble-b font-medium overscroll-y-auto line-clamp-4">
-                  {answer}
+              <div className="flex justify-center items-center mt-6 w-full h-2/5">
+                <div className="flex justify-start mt-2 w-full h-full">
+                  <div className="flex flex-col justify-center items-center w-1/4 h-auto">
+                    <img
+                      id="gpt-logo"
+                      src={gpt_logo}
+                      alt="gpt_logo"
+                      className="h-40 w-40"
+                    />
+                  </div>
+                  <div className="bubble-b-after mt-28"></div>
+                  <div className="flex bubble-b section-a items-center overflow-y-auto overflow-x-hidden w-full">
+                    <div className="font-medium p-6 pl-8 inline-block align-middle whitespace-pre-line !my-auto">
+                      {answer}
+                    </div>
+                  </div>
                 </div>
-                <div className="bubble-b:right" />
               </div>
-              {/*버튼*/}
-              <button
-                type="button"
-                onClick={() => {
-                  setResultPage(false);
-                  // console.log(resultPage);
-                }}
-                className=" bg-gpt-green text-white font-bold hover:text-black rounded-3xl text-lg py-3.5 px-20 shadow-xl"
-              >
-                나가기
-              </button>
-            </form>
+            </div>
+
+            {/*버튼*/}
+            <button
+              type="button"
+              onClick={() => {
+                setResultPage(false);
+                // console.log(resultPage);
+              }}
+              className=" bg-gpt-green text-white font-bold hover:text-black rounded-3xl text-lg py-3.5 px-20 
+             shadow-xl"
+            >
+              나가기
+            </button>
           </div>
         ) : (
           <form

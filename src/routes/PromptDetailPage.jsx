@@ -114,7 +114,7 @@ const PromptDetailPage = () => {
   }
 
   return (
-    <div className="w-screen h-screen flex flex-row ">
+    <div className="w-screen h-screen flex flex-row">
       <div className="w-60">
         {prompt.id ? <PromptSideBar prompt={prompt} /> : <div></div>}
       </div>
@@ -122,36 +122,35 @@ const PromptDetailPage = () => {
       {resultPage ? (
         <div className="flex-grow flex flex-col justify-center items-center h-4/5 w-2/3 bg-gray-200 text-black mx-20 mt-6 rounded-3xl">
           {/*질문답변*/}
-          <div className="rounded-3xl bg-gray-200 px-8 pb-5 mr-8 mx-6 h-4/5 w-5/6 section-d">
+          <div className="rounded-3xl bg-gray-200 px-8 pb-5 mr-8 mx-6 h-4/5 w-5/6 ">
             {/*프롬프트 통한 질문*/}
             <div className="flex justify-center items-center mt-2 w-full h-1/3">
               <div className="flex justify-start w-full h-full">
                 <div className="flex bubble-a section-a items-center overflow-y-auto overflow-x-hidden w-3/4 h-1/3">
-                  <div className="inline-block align-middle whitespace-pre-line !font-bold !my-auto p-4 pl-8">
+                  <div className="inline-block align-middle whitespace-pre-line !my-auto p-4 pl-8">
                     {message}
                   </div>
                 </div>
                 <div className="bubble-a-after mt-14"></div>
               </div>
-              <HiUserCircle size="300" className="profile flex flex-col mr-6" />
+              <HiUserCircle className="profile flex flex-col !h-60 !w-60" />
             </div>
 
             {/*GPT 답변*/}
             <div className="flex justify-center items-center mt-6 w-full h-1/2">
-              <img
-                id="gpt-logo"
-                src={gpt_logo}
-                alt="gpt_logo"
-                className="flex flex-col items-center w-1/6 mb-4"
-                size="200"
-              />
-              <div className="flex justify-center items-center mt-2 w-full h-full">
-                <div className="flex justify-start w-full h-full">
-                  <div className="bubble-b-after mt-28"></div>
-                  <div className="flex bubble-b section-a items-center overflow-y-auto overflow-x-hidden w-3/4 h-2/3 ">
-                    <div className="font-medium p-6 pl-8 inline-block align-middle whitespace-pre-line !my-auto">
-                      {answer}
-                    </div>
+              <div className="flex justify-start mt-2 w-full h-full">
+                <div className="flex flex-col justify-center items-center w-1/4 h-auto">
+                  <img
+                    id="gpt-logo"
+                    src={gpt_logo}
+                    alt="gpt_logo"
+                    className="h-40 w-40"
+                  />
+                </div>
+                <div className="bubble-b-after mt-28"></div>
+                <div className="flex bubble-b section-a items-center overflow-y-auto overflow-x-hidden w-full h-2/3 ">
+                  <div className="font-medium p-6 pl-8 inline-block align-middle whitespace-pre-line !my-auto">
+                    {answer}
                   </div>
                 </div>
               </div>
