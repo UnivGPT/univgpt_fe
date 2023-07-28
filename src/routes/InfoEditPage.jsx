@@ -45,6 +45,8 @@ const InfoEditPage = () => {
     alert("정보 수정이 완료되었습니다.");
   };
 
+  console.log(formData.confirm_password);
+
   return (
     <div className="flex flex-col items-center h-screen w-1/2">
       <br></br>
@@ -123,14 +125,14 @@ const InfoEditPage = () => {
         <div className="flex flex-row items-center space-x-14">
           <button
             type="submit"
-            className="button-a mt-7"
+            className="button-a-4 mt-7"
             onClick={handleChangeInfoSubmit}
           >
             저장하기
           </button>
           <button
             type="button"
-            className="button-a mt-7"
+            className="button-a-4 mt-7"
             onClick={navigateMypage}
           >
             취소하기
