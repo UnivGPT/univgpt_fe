@@ -53,6 +53,7 @@ const PromptDetailPage = () => {
 
   const handlegptCall = async (e) => {
     e.preventDefault();
+    setAnswer("응답을 불러오는 중입니다...");
     setResultPage(true);
     const data = { content: message };
     const response = await gptCallBack(data);
