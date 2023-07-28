@@ -398,15 +398,59 @@ const PromptEditPage = () => {
       </div>
 
       {/*오른쪽 절반*/}
-      <div className="bg-white text-black w-1/2 h-full p-8 pl-10 pr-20">
+      <div className="bg-white text-black w-1/2 h-full p-8 pl-10 pr-20 min-w-[500px] min-h-[800px]">
         <div className="flex justify-between mt-4">
-          <h1 className="text-5xl font-bold mx-6 mb-6 ">프롬프트</h1>
+          <h1 className="text-5xl font-bold mx-6 mb-8 ">프롬프트</h1>
           <BsQuestionCircle size={45} className="qmark ml-4" />
         </div>
-        <div className="rounded-3xl bg-gray-200  mx-6 h-1/2 w-full flex flex-col">
+        <div className="rounded-3xl bg-gray-200 mx-6 h-2/5 w-full flex flex-col">
           <Mentions content={content} setContent={setContent} form={form} />
-          <div className="self-end">
-            <button className="button-b  m-8" onClick={showModal}>
+
+        </div>
+        <div className="min-w-[800px]">
+          {/*카테고리*/}
+          <div className=" mx-6 mt-10 ml-8 flex justify-start items-baseline">
+            <h1 className="text-2xl font-bold">카테고리</h1>
+            <h2 className="flex font-semibold text-sm text-gray-700 ml-1">
+              카테고리는 중복 선택이 가능합니다.
+            </h2>
+          </div>
+          <div className="min-w-fit flex flex-row justify-center mt-4 ">
+            {/* categories.data.map((category) => {
+        return category.name;
+      }); */}
+            {categoryList.map((category) => {
+              return (
+                <label
+                  className={`button-checkbox ${
+                    selectedCategories.includes(category) ? "active" : ""
+                  } button-check`}
+                >
+                  {category}
+                  <input
+                    type="checkbox"
+                    value={category}
+                    checked={selectedCategories.includes(category)}
+                    onChange={handleCategoryChange}
+                    style={{ display: "none" }}
+                  />
+                </label>
+              );
+            })}
+          </div>
+
+          {/*내가 볼라고 만든 기능
+          <div><h3>선택된 카테고리</h3>
+          <ul>
+            {selectedCategories.map((category) => (
+              <li key={category}>{category}</li>
+            ))}
+          </ul>
+            </div>*/}
+
+          {/*삭제&게시 버튼*/}
+          <div className="mt-20 flex flex-row justify-center">
+            <button className="button-bt mx-4" onClick={showModal}>
               미리보기
             </button>
             {modalOpen && (
@@ -416,72 +460,29 @@ const PromptEditPage = () => {
                 prompt={formData}
               />
             )}
+
+            <button
+              className="button-et ml-4 mx-4"
+              type="reset"
+              onClick={() => {
+                handleDelete();
+              }}
+            >
+              삭제하기
+            </button>
+            <button
+              className="button-dt mx-4"
+              onClick={() => {
+                handleUpdate(formData);
+                window.alert("프롬프트가 성공적으로 수정되었습니다!");
+              }}
+              //axios 통해 서버로 프롬프트 덩어리를 보내는 함수가 있어야!
+              //지금은 잘 들어왔는지 확인하기 위해 콘솔로그 찍는 기능 넣어놨어유
+              //공란이 있을 시 'ㅇㅇ을 입력해주세요' alert가 뜨고 프롬프트 저장이 안되는 기능도 있어야
+            >
+              수정하기
+            </button>
           </div>
-        </div>
-
-        {/*카테고리*/}
-        <div className="mx-6 mt-6 ml-8 flex justify-start items-baseline">
-          <h1 className="text-2xl font-bold">카테고리</h1>
-          <h2 className="flex font-semibold text-sm text-gray-700 ml-1">
-            카테고리는 중복 선택이 가능합니다.
-          </h2>
-        </div>
-        <div className="flex justify-items ml-14 mt-4">
-          {/* categories.data.map((category) => {
-        return category.name;
-      }); */}
-          {categoryList.map((category) => {
-            return (
-              <label
-                className={`button-checkbox ${
-                  selectedCategories.includes(category) ? "active" : ""
-                } button-check`}
-              >
-                {category}
-                <input
-                  type="checkbox"
-                  value={category}
-                  checked={selectedCategories.includes(category)}
-                  onChange={handleCategoryChange}
-                  style={{ display: "none" }}
-                />
-              </label>
-            );
-          })}
-        </div>
-
-        {/*내가 볼라고 만든 기능
-          <div><h3>선택된 카테고리</h3>
-          <ul>
-            {selectedCategories.map((category) => (
-              <li key={category}>{category}</li>
-            ))}
-          </ul>
-            </div>*/}
-
-        {/*삭제&게시 버튼*/}
-        <div className="mt-12 flex justify-center">
-          <button
-            className="button-et ml-4 mr-16"
-            type="reset"
-            onClick={() => {
-              handleDelete();
-            }}
-          >
-            삭제하기
-          </button>
-          <button
-            className="button-dt ml-16"
-            onClick={() => {
-              handleUpdate(formData);
-              window.alert("프롬프트가 성공적으로 수정되었습니다!");
-            }}
-            //axios 통해 서버로 프롬프트 덩어리를 보내는 함수가 있어야!
-            //지금은 잘 들어왔는지 확인하기 위해 콘솔로그 찍는 기능 넣어놨어유
-            //공란이 있을 시 'ㅇㅇ을 입력해주세요' alert가 뜨고 프롬프트 저장이 안되는 기능도 있어야
-          >
-            수정하기
-          </button>
         </div>
       </div>
     </div>
