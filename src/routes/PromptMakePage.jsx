@@ -13,6 +13,13 @@ import { Mentions } from "../components/Mentions";
 import { type } from "@testing-library/user-event/dist/type";
 import { useNavigate } from "react-router-dom";
 import { getCookie } from "../utils/cookie";
+import firstHelpModal from "../assets/images/helpModal(1).png";
+import secondHelpModal from "../assets/images/helpModal(2).png";
+import {
+  MdOutlineCancel,
+  MdNavigateNext,
+  MdNavigateBefore,
+} from "react-icons/md";
 
 const PromptMakePage = () => {
   const [title, setTitle] = useState("");
@@ -30,6 +37,8 @@ const PromptMakePage = () => {
   });
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
+  const [helpOpen, setHelpOpen] = useState(false);
+  const [nextHelp, setNextHelp] = useState(false);
   const navigate = useNavigate();
   const [inputId, setInputId] = useState(1);
   const [profile, setProfile] = useState({
@@ -78,6 +87,23 @@ const PromptMakePage = () => {
 
   const showModal = () => {
     setModalOpen(true);
+  };
+
+  const showHelpModal = () => {
+    setHelpOpen(true);
+  };
+
+  const closeHelpModal = () => {
+    setHelpOpen(false);
+    setNextHelp(false);
+  };
+
+  const showNextHelp = () => {
+    setNextHelp(true);
+  };
+
+  const closeNextHelp = () => {
+    setNextHelp(false);
   };
 
   const handleCategoryChange = (e) => {
@@ -157,6 +183,48 @@ const PromptMakePage = () => {
             setModalOpen={setModalOpen}
             prompt={prompt}
             user={profile}
+          />
+        </>
+      )}
+
+      {helpOpen && !nextHelp && (
+        <>
+          <button
+            className="closeButton !right-12 !mt-32 z-20"
+            onClick={closeHelpModal}
+          >
+            <MdOutlineCancel size={50} />
+          </button>
+          <button
+            className="closeButton !right-[35px] !mt-[450px] z-20"
+            onClick={showNextHelp}
+          >
+            <MdNavigateNext size={50} />
+          </button>
+          <img
+            src={firstHelpModal}
+            className="modalContaine absolute left-0 top-110 z-10 w-[1600px]"
+          />
+        </>
+      )}
+
+      {helpOpen && nextHelp && (
+        <>
+          <button
+            className="closeButton !right-12 !mt-32 z-20"
+            onClick={closeHelpModal}
+          >
+            <MdOutlineCancel size={50} />
+          </button>
+          <button
+            className="closeButton !left-[35px] !mt-[450px] z-20"
+            onClick={closeNextHelp}
+          >
+            <MdNavigateBefore size={50} />
+          </button>
+          <img
+            src={secondHelpModal}
+            className="modalContaine absolute left-0 top-110 z-10 w-[1600px]"
           />
         </>
       )}
@@ -380,7 +448,11 @@ const PromptMakePage = () => {
         <div className="bg-white text-black w-1/2 h-full p-8 pl-10 pr-20 min-w-[500px] min-h-[800px]">
           <div className="flex justify-between mt-4">
             <h1 className="text-5xl font-bold mx-6 mb-8 ">프롬프트</h1>
-            <BsQuestionCircle size={45} className="qmark ml-4" />
+            <BsQuestionCircle
+              size={45}
+              className="qmark ml-4"
+              onClick={showHelpModal}
+            />
           </div>
           <div className="rounded-3xl bg-gray-200 mx-6 h-2/5 w-full flex flex-col">
             <Mentions content={content} setContent={setContent} form={form} />
