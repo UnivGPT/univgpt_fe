@@ -43,10 +43,12 @@ const Comment = ({ promptId }) => {
     setNewContent("");
     const response = await createComment({
       prompt: promptId,
-      content: newContent,
+      content: newContent ? newContent : "",
     });
-    const newComment = response.data;
-    setCommentList((prevCommentList) => [...prevCommentList, newComment]);
+    try {
+      const newComment = response.data;
+      setCommentList((prevCommentList) => [...prevCommentList, newComment]);
+    } catch (error) {}
   };
 
   const handleCommentDelete = (targetId) => {
