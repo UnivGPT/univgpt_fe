@@ -53,20 +53,24 @@ const MyPage = () => {
     setUserName(newUserName);
   }, [profile]);
 
+  const colors = [
+    "#BACDFF",
+    "#EFB4ED",
+    "#E1BAFF",
+    "#FFBEBA",
+    "#FED4AD",
+    "#9EDF8E",
+  ];
+
+  // console.log(userName.length % colors.length);
+
   return (
     <div className="h-screen w-screen">
       <div className="flex flex-col w-full mt-8">
         <div className="h-48 flex flex-row bg-white rounded-3xl mb-5 mx-20 p-8 text-black align-middle justify-between">
           <div className="flex flex-row">
             <Avatar
-              color={Avatar.getRandomColor("sitebase", [
-                "#BACDFF",
-                "#EFB4ED",
-                "#E1BAFF",
-                "#FFBEBA",
-                "#FED4AD",
-                "#9EDF8E",
-              ])}
+              color={colors[userName.length % colors.length]}
               name={userName}
               className="rounded-full mb-7 font-bold text-2xl"
               size={130}

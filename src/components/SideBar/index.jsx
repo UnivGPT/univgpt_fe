@@ -7,6 +7,7 @@ import redheart from "../../assets/images/redheart.png";
 import { likePrompt, getSecureUser } from "../../api/api";
 import { useState, useEffect } from "react";
 import { getCookie } from "../../utils/cookie";
+import Avatar from "react-avatar";
 
 export const HomeSideBar = ({ user, prompt }) => {
   const [userName, setUserName] = useState("");
@@ -15,6 +16,15 @@ export const HomeSideBar = ({ user, prompt }) => {
     const newUserName = user.profile.socials_username || user.username;
     setUserName(newUserName);
   }, [user]);
+
+  const colors = [
+    "#BACDFF",
+    "#EFB4ED",
+    "#E1BAFF",
+    "#FFBEBA",
+    "#FED4AD",
+    "#9EDF8E",
+  ];
 
   return (
     <div className="flex flex-col h-screen justify-items-center">
@@ -29,14 +39,7 @@ export const HomeSideBar = ({ user, prompt }) => {
           {user.id ? (
             <div className="flex flex-col">
               <Avatar
-                color={Avatar.getRandomColor("sitebase", [
-                  "#BACDFF",
-                  "#EFB4ED",
-                  "#E1BAFF",
-                  "#FFBEBA",
-                  "#FED4AD",
-                  "#9EDF8E",
-                ])}
+                color={colors[userName.length % colors.length]}
                 name={userName}
                 className="rounded-full mb-7 mt-3 self-center font-bold text-2xl"
               />
@@ -107,6 +110,15 @@ export const PromptSideBar = ({ prompt }) => {
     }
   };
 
+  const colors = [
+    "#BACDFF",
+    "#EFB4ED",
+    "#E1BAFF",
+    "#FFBEBA",
+    "#FED4AD",
+    "#9EDF8E",
+  ];
+
   return (
     <div className="h-full flex flex-col items-center space-y-5 px-8 my-5 bg-white text-black rounded-tr-3xl py-5">
       <Link
@@ -118,14 +130,7 @@ export const PromptSideBar = ({ prompt }) => {
       <div className="flex flex-col items-center justify-center">
         {/*이 얼굴,,,, 글자로 바꿔야,,,,*/}
         <Avatar
-          color={Avatar.getRandomColor("sitebase", [
-            "#BACDFF",
-            "#EFB4ED",
-            "#E1BAFF",
-            "#FFBEBA",
-            "#FED4AD",
-            "#9EDF8E",
-          ])}
+          color={colors[userName.length % colors.length]}
           name={userName}
           className="rounded-full mb-7 mt-3 text-2xl font-bold"
         />
