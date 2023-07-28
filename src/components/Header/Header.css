@@ -1,13 +1,13 @@
-#header-wrapper{
-    width : 100%;
-    height : 110px;
-    padding : 40px 10px;
-    display : flex;
-    align-items: center;
-    gap : 50px;
-    background-color : #48466D;
+#header-wrapper {
+  width: 100%;
+  height: 110px;
+  padding: 40px 12px;
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  background-color: #48466d;
 }
 
-#header-logo{
-    max-width : 250px;
+#header-logo {
+  max-width: 250px;
 }

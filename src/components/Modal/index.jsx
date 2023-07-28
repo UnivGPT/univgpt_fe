@@ -91,9 +91,9 @@ export const PromptMakeModal = ({ modalOpen, setModalOpen, prompt, user }) => {
       </button>
       <div>
         {resultPage ? (
-          <div className="flex-grow flex flex-col justify-center items-center h-3/5 w-4/5 bg-gray-200 border-gpt-green border-solid border-2 text-black mx-20 p-11 rounded-3xl">
+          <div className="flex-grow flex flex-col justify-center items-center h-3/5 w-4/5 bg-gray-200 border-gpt-green border-solid border-2 text-black mx-20 p-10 rounded-3xl">
             {/*질문답변*/}
-            <div className="rounded-3xl bg-blue-200 px-8 pb-5 mr-8 mx-6 h-1/2 w-5/6 section-d">
+            <div className="rounded-3xl px-8 pb-7 mr-8 mx-6 h-1/2 w-5/6 section-d">
               {/*프롬프트 통한 질문*/}
               <div className="flex justify-center items-center mt-2 w-full h-1/3">
                 <div className="flex justify-start w-full h-full">
@@ -108,7 +108,7 @@ export const PromptMakeModal = ({ modalOpen, setModalOpen, prompt, user }) => {
                 <Avatar
                   color={colors[userName.length % colors.length]}
                   name={userName}
-                  className="rounded-full mb-7 mt-1 self-center font-bold text-2xl"
+                  className="rounded-full mb-7 mt-1 self-center font-bold text-2xl !h-40 !w-40"
                 />
               </div>
 

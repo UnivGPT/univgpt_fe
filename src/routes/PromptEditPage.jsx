@@ -29,6 +29,7 @@ const PromptEditPage = () => {
   const [categoryList, setCategoryList] = useState([]);
   const [content, setContent] = useState("");
   const navigate = useNavigate();
+  const [inputId, setInputId] = useState(1);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [formData, setFormData] = useState({
@@ -277,15 +278,17 @@ const PromptEditPage = () => {
                     type: "단문형",
                     placeholding: "",
                     options: [""],
+                    id: { inputId },
                   },
                 ]);
+                setInputId(inputId + 1);
               }}
             >
               입력값 추가
             </button>
           </div>
 
-          <div className="h-96 flex flex-col items-center overflow-y-auto">
+          <div className="h-96 flex flex-col items-center pr-4 overflow-y-auto section-cc">
             {form.map((el, idx) => (
               <>
                 <div className="w-full flex flex-row justify-between items-stretch mt-4">
@@ -293,6 +296,7 @@ const PromptEditPage = () => {
                     key={"name" + idx}
                     id={"name" + idx}
                     className="input-b mb-2"
+                    maxLength={10}
                     onChange={(e) => {
                       const editedForm = [...form][idx];
                       editedForm["name"] = e.target.value;
@@ -300,14 +304,13 @@ const PromptEditPage = () => {
                       newForm.splice(idx, 1, editedForm);
                       setForm(newForm);
                     }}
-                    //   placeholder="입력값 명칭"
+                    placeholder="입력값 명칭"
                     value={el.name}
                   ></input>
                   <select
                     className="text-black w-28 h-13 mx-2 mb-2 rounded-xl font-medium text-center shadow"
                     key={"type" + idx}
                     id={"type" + idx}
-                    value={el.type}
                     onChange={(e) => {
                       const editedForm = [...form][idx];
                       editedForm["type"] = e.target.value;
@@ -315,12 +318,18 @@ const PromptEditPage = () => {
                       newForm.splice(idx, 1, editedForm);
                       setForm(newForm);
                       if (e.target.value === "객관식") {
-                        setActivatedChoices([...activatedChoices, idx]);
+                        setActivatedChoices([...activatedChoices, el.id]);
                       } else {
-                        const idxIndex = activatedChoices.indexOf(idx);
-                        const deletedAcitvatedChocies = [...activatedChoices];
-                        deletedAcitvatedChocies.splice(idxIndex, 1);
-                        setActivatedChoices(deletedAcitvatedChocies);
+                        if (activatedChoices.includes(el.id)) {
+                          const idDeletedActivatedChoices = [
+                            ...activatedChoices,
+                          ];
+                          idDeletedActivatedChoices.splice(
+                            activatedChoices.indexOf(el.id),
+                            1
+                          );
+                          setActivatedChoices(idDeletedActivatedChoices);
+                        }
                       }
                     }}
                   >
@@ -349,11 +358,10 @@ const PromptEditPage = () => {
                     className="input-b-1 mb-2 justify-self-center"
                     placeholder="이용자가 입력값 내용을 어떻게 작성하면 좋을지 설명해주세요."
                     style={{
-                      display: activatedChoices.includes(idx)
+                      display: activatedChoices.includes(el.id)
                         ? "none"
                         : "block",
                     }}
-                    value={el.placeholding}
                     onChange={(e) => {
                       const editedForm = [...form][idx];
                       editedForm["placeholding"] = e.target.value;
@@ -369,7 +377,9 @@ const PromptEditPage = () => {
                   <div
                     className="flex flex-row justify-around mb-2"
                     style={{
-                      display: activatedChoices.includes(idx) ? "flex" : "none",
+                      display: activatedChoices.includes(el.id)
+                        ? "flex"
+                        : "none",
                     }}
                   >
                     <input
@@ -422,7 +432,7 @@ const PromptEditPage = () => {
                         const newForm = [...form];
                         newForm.splice(idx, 1, deletedOptionForm);
                         setForm(newForm);
-                    
+                        // console.log(newForm);
                       }}
                     >
                       -

@@ -194,16 +194,14 @@ const HomePage = () => {
   // console.log(prompts);
   // console.log(promptList);
 
-  
-
   return (
     <div className="w-screen h-screen flex flex-row">
       <div className="w-60">
         <HomeSideBar key={profile.id} user={profile} prompt={smallPromptList} />
       </div>
 
-      <div className="w-full bg-white text-black p-11 rounded-lg min-h-[700px]">
-        <div className="flex flex-row justify-around space-x-5 p-5">
+      <div className="w-full bg-white text-black py-16 px-2 rounded-lg min-h-[700px] ">
+        <div className="flex flex-row justify-evenly space-x-8 pt-5 pb-7">
           <Select
             options={categoryList}
             className="w-5/12"
@@ -214,7 +212,7 @@ const HomePage = () => {
             type="text"
             placeholder="검색어를 입력해주세요"
             onChange={handleChange}
-            className="w-6/12 h-11 rounded-full border bg-slate-200 pl-5 mr-4"
+            className="w-4/12 h-11 rounded-full border bg-slate-200 pl-5 mr-4"
             value={searchValue}
           />
 
@@ -224,40 +222,41 @@ const HomePage = () => {
             ))}
           </div> */}
         </div>
-
-        <div className="rounded-3xl border-solid border-slate-300 border-2 m-5 px-5 pb-5 w-11/12 h-3/4 min-h-[500px] self-center">
-          <div className="flex flex-row min-w-full justify-between mt-5 p-5">
-            <div className="rounded-xl p-3.5 text-center font-bold text-xl text-white bg-gpt-green px-14">
-              프롬프트 목록
+        <div className="flex flex-col items-center w-full h-3/4">
+          <div className="rounded-3xl border-solid border-gpt-blue border-2 m-5 px-5 pb-12 min-h-[500px] self-center">
+            <div className="flex flex-row min-w-full justify-between mt-5 p-5">
+              <div className="rounded-xl p-3.5 text-center font-bold text-xl text-white bg-gpt-blue px-14">
+                프롬프트 목록
+              </div>
+              <Select
+                options={order}
+                defaultValue={defaultValue2}
+                onChange={handleSortChange}
+              />
             </div>
-            <Select
-              options={order}
-              defaultValue={defaultValue2}
-              onChange={handleSortChange}
-            />
-          </div>
-          <div className="h-4/6 min-h-[350px] flex justify-center overflow-y-auto overflow-x-hidden section-b">
-            <div className="grid grid-cols-3 ">
-              {sortPromptList
-                .filter((prompt) =>
-                  searchValue
-                    ? prompt.title
-                        .toLowerCase()
-                        .includes(searchValue.toLowerCase())
-                    : prompt
-                )
-                .filter((prompt) =>
-                  selectedCategory === "전체"
-                    ? prompt
-                    : selectedCategory === ""
-                    ? prompt
-                    : prompt.category.find((category) =>
-                        category.name.includes(selectedCategory)
-                      )
-                )
-                .map((prompt) => (
-                  <MidPrompt key={prompt.id} prompt={prompt} />
-                ))}
+            <div className="h-5/6 min-h-[350px] flex justify-center overflow-y-auto overflow-x-hidden section-b">
+              <div className="grid grid-cols-3 ">
+                {sortPromptList
+                  .filter((prompt) =>
+                    searchValue
+                      ? prompt.title
+                          .toLowerCase()
+                          .includes(searchValue.toLowerCase())
+                      : prompt
+                  )
+                  .filter((prompt) =>
+                    selectedCategory === "전체"
+                      ? prompt
+                      : selectedCategory === ""
+                      ? prompt
+                      : prompt.category.find((category) =>
+                          category.name.includes(selectedCategory)
+                        )
+                  )
+                  .map((prompt) => (
+                    <MidPrompt key={prompt.id} prompt={prompt} />
+                  ))}
+              </div>
             </div>
           </div>
         </div>
