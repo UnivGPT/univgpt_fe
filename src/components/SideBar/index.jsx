@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { HiUserCircle } from "react-icons/hi";
 import { SmallPrompt } from "../Prompts";
 import Comment from "../Comments";
-import comments from "../../data/comments";
 import emptyheart from "../../assets/images/emptyheart.png";
 import redheart from "../../assets/images/redheart.png";
 import { likePrompt, getSecureUser } from "../../api/api";
@@ -10,9 +9,7 @@ import { useState, useEffect } from "react";
 import { getCookie } from "../../utils/cookie";
 
 export const HomeSideBar = ({ user, prompt }) => {
-  //console.log("유저다 우하하하하하하", user);
   const [userName, setUserName] = useState("");
-  //console.log(prompt);
 
   useEffect(() => {
     const newUserName = user.profile.socials_username || user.username;
