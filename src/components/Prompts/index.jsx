@@ -15,12 +15,16 @@ import { useHistory } from "react-router-dom";
 export const SmallPrompt = ({ rank, prompt }) => {
   console.log(prompt);
   return (
-    <div className="flex flex-row w-full rounded-xl bg-white  border-gray-300 shadow p-3 m-1">
-      <div className="m-1 pt-2 pr-2">{rank}</div>
-      <div className="w-full flex flex-col">
-        <div className="text-sm font-semibold pl-2">{prompt.title}</div>
-        <div className="flex flex-ro text-sm justify-end pr-4">
-          <div className="font-bold">❤️ {prompt.like_users.length}</div>
+    <div className="flex flex-row w-full rounded-xl bg-white border-gray-300 shadow py-3 px-2 m-1">
+      <div className="m-1 pt-2 pr-1 font-extrabold text-gpt-indigo">{rank}</div>
+      <div className="w-full h-full flex flex-col pr-2">
+        <div className="font-bold font-notosanskr  text-gpt-blue px-2">
+          {prompt.title}
+        </div>
+        <div className="flex flex-row text-sm justify-end mr-1 flex-shrink-0">
+          <div className="font-bold text-gpt-red">
+            ❤️ {prompt.like_users.length}
+          </div>
           <div className="pl-2 font-bold">👀 {prompt.view}</div>
         </div>
       </div>
@@ -111,9 +115,9 @@ export const MidPrompt = ({ prompt }) => {
         <div>
           <Link
             to={`/promptdetail/${prompt.id}`}
-            className="rounded-xl p-3 mb-3 font-semibold text-center text-sm text-white bg-gpt-blue"
+            className="rounded-xl p-3 px-5 mb-3 font-semibold text-center text-sm text-white bg-gpt-blue"
           >
-            프롬프트 사용하기
+            사용하기
           </Link>
         </div>
       </div>
@@ -213,7 +217,7 @@ export const MyPagePrompt = ({ prompt }) => {
             to={`/promptdetail/${prompt.id}`}
             className="rounded-xl p-3 mb-3 font-semibold text-center text-sm text-white bg-gpt-blue"
           >
-            프롬프트 사용하기
+            사용하기
           </Link>
         </div>
       </div>

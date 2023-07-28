@@ -1,33 +1,37 @@
-import users from "../data/users";
-import prompts from "../data/prompts";
 import { HiUserCircle } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { MyPagePrompt } from "../components/Prompts";
-import { getPromptList, getUserProfile } from "../api/api";
+import { getPromptList, getSecureUser } from "../api/api";
 import { getCookie } from "../utils/cookie";
 
 const MyPage = () => {
   const [profile, setProfile] = useState({
-    id: "",
-    email: "",
+    profile: { id: "", socials_username: "" },
     username: "",
+    email: "",
+    id: "",
   });
   const [promptList, setPromptList] = useState([]);
   const [authorPromptList, setAuthorPromptList] = useState([]);
   const [scrapPromptList, setScrapPromptList] = useState([]);
   const [sortPromptList, setSortPromptList] = useState([]);
+  const [userName, setUserName] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
       if (getCookie("access_token")) {
-        const response = await getUserProfile();
-        const profile = response.data;
+        const response = await getSecureUser();
         setProfile({
-          id: profile.id,
-          email: profile.email,
-          username: profile.username,
+          profile: {
+            id: response.profile.id,
+            socials_username: response.profile.socials_username,
+          },
+          username: response.username,
+          email: response.email,
+          id: response.id,
         });
+
         const prompts = await getPromptList();
         setPromptList(prompts);
         setSortPromptList(prompts);
@@ -42,6 +46,11 @@ const MyPage = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const newUserName = profile.profile.socials_username || profile.username;
+    setUserName(newUserName);
+  }, [profile]);
+
   return (
     <div className="h-screen w-screen">
       <div className="flex flex-col w-full mt-8">
@@ -50,7 +59,7 @@ const MyPage = () => {
             <HiUserCircle size="150" />
             <div className="flex flex-col justify-between mx-10">
               <div className="text-3xl font-semibold">
-                {profile.username}님 반갑습니다!
+                {userName}님 반갑습니다!
               </div>
               <div className="flex flex-row space-x-5 text-center">
                 <div className="button-a-3 hover:!text-white">

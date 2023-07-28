@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { HiUserCircle } from "react-icons/hi";
 import { SmallPrompt } from "../Prompts";
 import Comment from "../Comments";
-import comments from "../../data/comments";
 import emptyheart from "../../assets/images/emptyheart.png";
 import redheart from "../../assets/images/redheart.png";
 import { likePrompt, getSecureUser } from "../../api/api";
@@ -11,10 +10,7 @@ import { getCookie } from "../../utils/cookie";
 import Avatar from "react-avatar";
 
 export const HomeSideBar = ({ user, prompt }) => {
-  console.log("유저다 우하하하하하하", user);
-  // console.log(user[0].username);
   const [userName, setUserName] = useState("");
-  console.log(prompt);
 
   useEffect(() => {
     const newUserName = user.profile.socials_username || user.username;
@@ -22,34 +18,36 @@ export const HomeSideBar = ({ user, prompt }) => {
   }, [user]);
 
   return (
-    <div className="flex flex-col space-y-4 align-middle items-center m-4">
-      <Link
-        to="/promptmake"
-        className="button-b w-11/12 flex flex-col items-center"
-      >
-        내 프롬프트 만들기
-      </Link>
-      <div>
-        {/* <Avatar color="Avatar.getRandomColor"/> */}
-        {user.id ? (
-          <div className="font-semibold">{userName}님 반갑습니다!</div>
-        ) : (
-          <div className="font-semibold">로그인이 필요합니다</div>
-        )}
-      </div>
-      <div className="w-52 bg-slate-100 rounded-3xl border-solid border-slate-300 border-2 text-black p-3 space-y-2">
-        <div className="rounded-xl p-3.5 mb-3 text-center font-bold text-lg text-white bg-gpt-blue">
-          오늘의 프롬프트
+    <div className="flex flex-col h-screen items-center">
+      <div className="flex flex-col space-y-4 align-middle items-center m-4">
+        <Link
+          to="/promptmake"
+          className="button-b w-11/12 flex flex-col items-center"
+        >
+          내 프롬프트 만들기
+        </Link>
+        <div>
+          <HiUserCircle size="150" />
+          {user.id ? (
+            <div className="font-semibold">{userName}님 반갑습니다!</div>
+          ) : (
+            <div className="font-semibold">로그인이 필요합니다</div>
+          )}
         </div>
-        {prompt.length !== 0 && (
-          <>
-            <SmallPrompt rank="1" prompt={prompt[0]} />
-            <SmallPrompt rank="2" prompt={prompt[1]} />
-            <SmallPrompt rank="3" prompt={prompt[2]} />
-            <SmallPrompt rank="4" prompt={prompt[3]} />
-            <SmallPrompt rank="5" prompt={prompt[4]} />
-          </>
-        )}
+        <div className="w-52 h-2/3 bg-slate-100 rounded-3xl text-black p-3 !mt-4 ml-2 space-y-2 section-c overflow-y-auto overflow-x-hidden">
+          <div className="rounded-xl p-3.5 mb-3 text-center font-bold text-lg text-white bg-gpt-blue">
+            오늘의 프롬프트
+          </div>
+          {prompt.length !== 0 && (
+            <>
+              <SmallPrompt rank="1" prompt={prompt[0]} />
+              <SmallPrompt rank="2" prompt={prompt[1]} />
+              <SmallPrompt rank="3" prompt={prompt[2]} />
+              <SmallPrompt rank="4" prompt={prompt[3]} />
+              <SmallPrompt rank="5" prompt={prompt[4]} />
+            </>
+          )}
+        </div>
       </div>
     </div>
   );
