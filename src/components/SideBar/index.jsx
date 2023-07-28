@@ -8,6 +8,7 @@ import redheart from "../../assets/images/redheart.png";
 import { likePrompt, getSecureUser } from "../../api/api";
 import { useState, useEffect } from "react";
 import { getCookie } from "../../utils/cookie";
+import Avatar from "react-avatar";
 
 export const HomeSideBar = ({ user, prompt }) => {
   console.log("유저다 우하하하하하하", user);
@@ -29,7 +30,7 @@ export const HomeSideBar = ({ user, prompt }) => {
         내 프롬프트 만들기
       </Link>
       <div>
-        <HiUserCircle size="150" />
+        {/* <Avatar color="Avatar.getRandomColor"/> */}
         {user.id ? (
           <div className="font-semibold">{userName}님 반갑습니다!</div>
         ) : (
