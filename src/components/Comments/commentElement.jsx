@@ -43,7 +43,7 @@ const CommentElement = (props) => {
       <div className="flex flex-row w-full space-x-4 items-center pl-2">
         <Avatar
           color={colors[comment.author.username.length % colors.length]}
-          name={comment.author.username || comment.author.socials_username}
+          name={comment.author.socials_username || comment.author.username}
           className="userCircle rounded-full mb-7 mt-3 font-bold text-lg"
           size="30"
         />

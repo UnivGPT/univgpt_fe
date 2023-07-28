@@ -41,7 +41,7 @@ export const HomeSideBar = ({ user, prompt }) => {
               <Avatar
                 color={colors[userName.length % colors.length]}
                 name={userName}
-                className="rounded-full mb-7 mt-3 self-center font-bold text-2xl"
+                className="rounded-full mb-7 mt-1 self-center font-bold text-2xl"
               />
               <div className="font-semibold">{userName}님 반갑습니다!</div>
             </div>
