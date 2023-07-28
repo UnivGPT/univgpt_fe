@@ -78,14 +78,14 @@ export const PromptSideBar = ({ prompt }) => {
   const [userName, setUserName] = useState("");
 
   useEffect(() => {
+    const newUserName =
+      prompt.author.socials_username || prompt.author.username;
+    setUserName(newUserName);
     // access_token이 있으면 유저 정보 가져옴
     if (getCookie("access_token")) {
       const getSecureUserAPI = async () => {
         const like_list = prompt.like_users;
         const user = await getSecureUser();
-        const newUserName =
-          prompt.author.socials_username || prompt.author.username;
-        setUserName(newUserName);
 
         if (like_list.includes(user.id)) {
           setIsLike(true);
