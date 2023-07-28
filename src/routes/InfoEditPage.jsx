@@ -46,7 +46,7 @@ const InfoEditPage = () => {
     alert("정보 수정이 완료되었습니다.");
   };
 
-  // console.log(formData.confirm_password);
+  console.log(formData.confirm_password);
 
   const colors = [
     "#BACDFF",
@@ -118,12 +118,9 @@ const InfoEditPage = () => {
             onChange={handleFormData}
             value={formData.confirm_password || ""}
           />
-          {formData.confirm_password === "" ? (
-            <>
-              <br></br>
-              <br></br>
-            </>
-          ) : formData.confirm_password === formData.password ? (
+          {formData.password !== "" &&
+          formData.confirm_password !== undefined &&
+          formData.confirm_password === formData.password ? (
             <BsCheckAll
               className="checkIcon justify-self-end ml-14"
               size={25}

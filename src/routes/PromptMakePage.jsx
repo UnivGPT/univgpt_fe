@@ -31,6 +31,8 @@ const PromptMakePage = () => {
   const navigate = useNavigate();
   const [inputId, setInputId] = useState(1);
 
+  // useEffect
+
   useEffect(() => {
     const getCategoryListAPI = async () => {
       const categories = await getCategoryList();
@@ -123,6 +125,17 @@ const PromptMakePage = () => {
 
   return (
     <div className="min-w-[1000px] min-h-[800px]">
+      {modalOpen && (
+        <>
+          <div className="w-screen h-[910px] absolute left-0 top-0 bg-black opacity-70 z-10"></div>
+          <PromptMakeModal
+            modalOpen={modalOpen}
+            setModalOpen={setModalOpen}
+            prompt={prompt}
+          />
+        </>
+      )}
+
       <div className="w-screen h-screen flex justify-evenly">
         {/*왼쪽 절반*/}
         <div className="bg-gpt-indigo w-1/2 h-full pl-20 pr-20 pb-6 pt-8">
@@ -393,13 +406,13 @@ const PromptMakePage = () => {
               <button className="button-bt mx-4" onClick={showModal}>
                 미리보기
               </button>
-              {modalOpen && (
+              {/* {modalOpen && (
                 <PromptMakeModal
                   modalOpen={modalOpen}
                   setModalOpen={setModalOpen}
                   prompt={prompt}
                 />
-              )}
+              )} */}
 
               <button
                 className="button-et mx-4 "
