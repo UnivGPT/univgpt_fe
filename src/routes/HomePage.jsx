@@ -6,6 +6,7 @@ import { MidPrompt } from "../components/Prompts";
 import { getCategoryList, getPromptList, getSecureUser } from "../api/api";
 import { getCookie } from "../utils/cookie";
 
+
 const HomePage = () => {
   const [profile, setProfile] = useState({
     profile: { id: "", socials_username: "" },
