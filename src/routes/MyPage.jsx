@@ -87,6 +87,7 @@ const MyPage = () => {
             </div>
             <br></br>
             <div className="w-full h-80 flex flex-wrap overflow-y-auto section-b">
+              
               {promptList
                 .filter((prompt) => prompt.author.id === profile.id)
                 .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
