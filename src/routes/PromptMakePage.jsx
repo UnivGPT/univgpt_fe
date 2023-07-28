@@ -334,7 +334,7 @@ const PromptMakePage = () => {
       </div>
 
       {/*오른쪽 절반*/}
-      <div className="bg-white text-black w-1/2 h-full p-8 pl-10 pr-20 min-w-[600px] min-h-[800px]">
+      <div className="bg-white text-black w-1/2 h-full p-8 pl-10 pr-20 min-w-[500px] min-h-[800px]">
         <div className="flex justify-between mt-4">
           <h1 className="text-5xl font-bold mx-6 mb-8 ">프롬프트</h1>
           <BsQuestionCircle size={45} className="qmark ml-4" />

@@ -120,39 +120,44 @@ const PromptDetailPage = () => {
       </div>
       {/*PromptResult 모달*/}
       {resultPage ? (
-        <div className="flex-grow flex flex-col justify-center items-center h-4/5 w-2/3 bg-gray-200 text-black mx-20 mt-8 rounded-3xl">
-          {/*프롬프트 통한 질문*/}
-          <div className="flex justify-center items-center mx-24 mt-2 w-full h-full">
-            <div className="flex justify-start w-full h-full">
-              <div className="flex bubble-a section-a items-center overflow-y-auto w-3/4 h-1/3">
-                <div className=" inline-block align-middle whitespace-pre-line !font-bold !my-auto">
-                  {message}
+        <div className="flex-grow flex flex-col justify-center items-center h-4/5 w-2/3 bg-gray-200 text-black mx-20 mt-6 rounded-3xl">
+          {/*질문답변*/}
+          <div className="rounded-3xl bg-gray-200 px-8 pb-5 mr-8 mx-6 h-4/5 w-5/6 overflow-y-auto section-d">
+            {/*프롬프트 통한 질문*/}
+            <div className="flex justify-center items-center mt-2 w-full h-1/3">
+              <div className="flex justify-start w-full h-full">
+                <div className="flex bubble-a section-a items-center overflow-y-auto overflow-x-hidden w-3/4 h-1/3">
+                  <div className="inline-block align-middle whitespace-pre-line !font-bold !my-auto p-4 pl-8">
+                    {message}
+                  </div>
+                </div>
+                <div className="bubble-a-after mt-14"></div>
+              </div>
+              <HiUserCircle size="300" className="profile flex flex-col mr-6" />
+            </div>
+
+            {/*GPT 답변*/}
+            <div className="flex justify-center items-center mt-6 w-full h-1/2">
+              <img
+                id="gpt-logo"
+                src={gpt_logo}
+                alt="gpt_logo"
+                className="flex flex-col items-center w-1/6 mb-4"
+                size="200"
+              />
+              <div className="flex justify-center items-center mt-2 w-full h-full">
+                <div className="flex justify-start w-full h-full">
+                  <div className="bubble-b-after mt-28"></div>
+                  <div className="flex bubble-b section-a items-center overflow-y-auto overflow-x-hidden w-3/4 h-2/3 ">
+                    <div className="font-medium p-6 pl-8 inline-block align-middle whitespace-pre-line !my-auto">
+                      {answer}
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className="bubble-a-after mt-14"></div>
             </div>
-            <HiUserCircle size="200" className="profile flex flex-col mr-6" />
           </div>
 
-          {/*GPT 답변*/}
-          <div className="flex justify-center items-center mx-24 mt-6">
-            <img
-              id="gpt-logo"
-              src={gpt_logo}
-              alt="gpt_logo"
-              className="flex flex-col items-center w-36 h-36 mb-4"
-            />
-            <div className="flex justify-start">
-              <div className="bubble-b-after mt-28"></div>
-              <div className="flex bubble-b section-a items-center overflow-y-auto">
-                <div className="font-medium p-4 pl-6 inline-block align-middle whitespace-pre-line !my-auto">
-                  {answer}
-                </div>
-              </div>
-            </div>
-          </div>
-          <br></br>
-          <br></br>
           {/*버튼*/}
           <button
             type="button"
@@ -161,7 +166,7 @@ const PromptDetailPage = () => {
               // console.log(resultPage);
             }}
             className=" bg-gpt-green text-white font-bold hover:text-black rounded-3xl text-lg py-3.5 px-20 
-            !mt-7 shadow-xl"
+             shadow-xl"
           >
             나가기
           </button>

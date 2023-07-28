@@ -187,6 +187,7 @@ body {
 /*오른쪽에 팔이 있는 말풍선*/
 .bubble-a {
   position: relative;
+  width: 750px;
   height: 170px;
   margin: 0px;
   background: #ffffff;
@@ -209,15 +210,13 @@ body {
 .bubble-b {
   position: relative;
   width: 750px;
-  height: 260px;
-  max-height: 400px;
-  padding: 5px;
+  height: 320px;
   margin: 0px;
   background: #ffffff;
   overflow-y: auto;
   -webkit-border-radius: 27px;
   -moz-border-radius: 27px;
-  border-radius: 27px;
+  border-radius: 40px;
 }
 .bubble-b-after {
   width: 0;
