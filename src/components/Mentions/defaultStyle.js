@@ -1,15 +1,15 @@
 export default {
   control: {
     backgroundColor: "#e5e7eb",
-    fontSize: 14,
+    fontSize: 18,
     fontWeight: "normal",
     borderRadius: "1.5rem",
     border: "2px solid transparent",
   },
   "&multiLine": {
     control: {
-      fontSize: 16,
-      minHeight: 270,
+      fontSize: 18,
+      minHeight: 300,
     },
     // highlighter: {
     //   padding: 9,
