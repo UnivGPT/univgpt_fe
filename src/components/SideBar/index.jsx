@@ -43,7 +43,9 @@ export const HomeSideBar = ({ user, prompt }) => {
                 name={userName}
                 className="rounded-full mb-7 mt-1 self-center font-bold text-2xl"
               />
-              <div className="font-semibold">{userName}님 반갑습니다!</div>
+              <div className="font-semibold tracking-wide">
+                {userName}님 반갑습니다!
+              </div>
             </div>
           ) : (
             <>
@@ -122,7 +124,7 @@ export const PromptSideBar = ({ prompt, resultPage }) => {
   ];
 
   return (
-    <div className="h-full flex flex-col items-center space-y-5 px-8 my-5 bg-white text-black rounded-tr-3xl py-5">
+    <div className="h-full flex flex-col items-center space-y-5 px-8 my-5 bg-white text-black rounded-tr-3xl py-5 ">
       <Link
         to="/promptmake"
         className="w-full button-b flex flex-col items-center"
@@ -130,11 +132,10 @@ export const PromptSideBar = ({ prompt, resultPage }) => {
         내 프롬프트 만들기
       </Link>
       <div className="flex flex-col items-center justify-center">
-        {/*이 얼굴,,,, 글자로 바꿔야,,,,*/}
         <Avatar
           color={colors[userName.length % colors.length]}
           name={userName}
-          className="rounded-full mb-7 mt-3 text-2xl font-bold"
+          className="rounded-full mb-7 text-2xl font-bold"
         />
         <div className="font-semibold text-lg text-center">
           {userName}님에 의해<br></br>

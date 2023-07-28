@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { HiUserCircle } from "react-icons/hi";
 import { TiDelete } from "react-icons/ti";
 import Avatar from "react-avatar";
 //import { getCookie } from "../../utils/cookie";
@@ -40,7 +39,7 @@ const CommentElement = (props) => {
 
   return (
     <div className="w-40 flex justify-between gap-1 mb-2 ">
-      <div className="flex flex-row w-full space-x-4 items-center pl-2">
+      <div className="flex flex-row w-full space-x-4 items-center pl-1">
         <Avatar
           color={
             colors[
@@ -49,11 +48,11 @@ const CommentElement = (props) => {
             ]
           }
           name={comment.author.socials_username || comment.author.username}
-          className="userCircle rounded-full mb-7 mt-3 font-bold text-lg"
+          className="userCircle rounded-full mb-4 mt-3 font-bold text-lg"
           size="30"
         />
         <div className="commentbubble">
-          <p className="text-xs mr-3 pt-1 pl-3 align-middle font-semibold">
+          <p className="text-xs pt-1 pl-3 align-middle font-semibold">
             {comment.content}
           </p>
           {/* <span className="text-base mr-1 text-gray-300">

@@ -67,7 +67,7 @@ const MyPage = () => {
   return (
     <div className="h-screen w-screen">
       <div className="flex flex-col w-full mt-8">
-        <div className="h-48 flex flex-row bg-white rounded-3xl mb-5 mx-20 p-8 text-black align-middle justify-between">
+        <div className="h-48 flex flex-row bg-white rounded-3xl mb-5 mx-20 py-8 px-14 text-black align-middle justify-between">
           <div className="flex flex-row">
             <Avatar
               color={colors[userName.length % colors.length]}
@@ -75,13 +75,13 @@ const MyPage = () => {
               className="rounded-full mb-7 font-bold text-2xl"
               size={130}
             />
-            <div className="flex flex-col justify-between mx-10">
-              <div className="text-3xl font-semibold">
-                {userName}님 반갑습니다!
+            <div className="flex flex-col justify-between mx-12">
+              <div className="text-3xl font-semibold mt-1">
+                {userName} 님 반갑습니다!
               </div>
-              <div className="flex flex-row space-x-5 text-center">
-                <div className="button-a-3 hover:!text-white">
-                  나의 프롬프트{" "}
+              <div className="flex flex-row space-x-8 text-center">
+                <div className="button-a-3 hover:!text-white !py-2 !px-16 !mt-1 !shadow-lg">
+                  나의 프롬프트<br></br>{" "}
                   {
                     promptList.filter(
                       (prompt) => prompt.author.id === profile.id
@@ -89,8 +89,8 @@ const MyPage = () => {
                   }
                   개
                 </div>
-                <div className="button-a-3 hover:!text-white">
-                  스크랩한 프롬프트{" "}
+                <div className="button-a-3 hover:!text-white !py-2 !px-12 !mt-1 !shadow-lg">
+                  스크랩한 프롬프트<br></br>{" "}
                   {
                     promptList.filter((prompt) =>
                       prompt.like_users.includes(profile.id)
@@ -102,35 +102,49 @@ const MyPage = () => {
             </div>
           </div>
           <div className="flex flex-col space-y-5 text-center justify-self-end justify-center">
-            <Link to="/" className="button-d-1">
-              로그아웃
-            </Link>
-            <Link to="/infocheck" className="button-d-1">
-              회원정보 수정
+            <Link
+              to="/infocheck"
+              className="button-d-1 !px-10 !py-4 !rounded-2xl !shadow-lg"
+            >
+              비밀번호 변경
             </Link>
           </div>
         </div>
         <div className="flex flex-row space-x-5 mx-20 justify-between">
-          <div className="w-6/12 h-3/4 bg-slate-200 text-black rounded-3xl p-5 ">
+          <div className="w-6/12 h-11/12 bg-slate-200 text-black rounded-3xl p-5 ">
             <div className="button-d text-center font-bold text-2xl hover:!text-white">
               나의 프롬프트
             </div>
             <br></br>
-            <div className="w-full h-80 flex flex-wrap overflow-y-auto section-b">
+
+            <div className="w-full h-96 flex flex-col  overflow-y-auto section-b">
               {promptList
                 .filter((prompt) => prompt.author.id === profile.id)
                 .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
-                .map((prompt) => (
-                  <MyPagePrompt key={prompt.id} prompt={prompt} />
+                .reduce((pairs, prompt, index) => {
+                  // Group prompts into pairs (two prompts in each sub-array)
+                  if (index % 2 === 0) {
+                    pairs.push([prompt]);
+                  } else {
+                    pairs[pairs.length - 1].push(prompt);
+                  }
+                  return pairs;
+                }, [])
+                .map((pair, pairIndex) => (
+                  <div key={pairIndex} className="flex">
+                    {pair.map((prompt) => (
+                      <MyPagePrompt key={prompt.id} prompt={prompt} />
+                    ))}
+                  </div>
                 ))}
             </div>
           </div>
-          <div className="w-6/12 h-3/4 bg-slate-200 text-black rounded-3xl p-5">
+          <div className="w-6/12 h-11/12 bg-slate-200 text-black rounded-3xl p-5">
             <div className="button-d text-center font-bold text-2xl hover:!text-white">
               스크랩한 프롬프트
             </div>
             <br></br>
-            <div className="w-full h-80 flex flex-wrap overflow-y-auto section-b">
+            <div className="w-full h-96 flex flex-wrap overflow-y-auto section-b">
               {promptList
                 .filter((prompt) => prompt.like_users.includes(profile.id))
                 .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
