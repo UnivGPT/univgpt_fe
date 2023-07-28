@@ -353,3 +353,9 @@ body {
   font-weight: 900;
   font-size: 30px;
 }
+
+/*유저 동그라미*/
+.userCircle {
+  width: 500px;
+  height: 500spx;
+}

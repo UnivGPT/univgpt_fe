@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { HiUserCircle } from "react-icons/hi";
 import { TiDelete } from "react-icons/ti";
+import Avatar from "react-avatar";
 //import { getCookie } from "../../utils/cookie";
 
 const CommentElement = (props) => {
@@ -26,13 +27,24 @@ const CommentElement = (props) => {
   //     getUserAPI();
   //   }
   // }, []);
+  console.log(comment);
 
   return (
-
     <div className="w-40 flex justify-between gap-1 mb-2 ">
-
-      <div className="flex flex-row w-full space-x-2 items-center pl-2">
-        <HiUserCircle className="w-10 h-10 mr-1 profile" />
+      <div className="flex flex-row w-full space-x-4 items-center pl-2">
+        <Avatar
+          color={Avatar.getRandomColor("sitebase", [
+            "#BACDFF",
+            "#EFB4ED",
+            "#E1BAFF",
+            "#FFBEBA",
+            "#FED4AD",
+            "#9EDF8E",
+          ])}
+          name={comment.author.username || comment.author.socials_username}
+          className="userCircle rounded-full mb-7 mt-3 font-bold text-lg"
+          size="30"
+        />
         <div className="commentbubble">
           <p className="text-xs mr-3 pt-1 pl-3 align-middle font-semibold">
             {comment.content}
@@ -42,7 +54,7 @@ const CommentElement = (props) => {
         </span> */}
         </div>
       </div>
-      {user?.id === comment.author ? (
+      {user?.id === comment.author.id ? (
         <div className="w-1/4 flex items-center">
           <>
             <button onClick={() => handleCommentDelete(comment.id)}>

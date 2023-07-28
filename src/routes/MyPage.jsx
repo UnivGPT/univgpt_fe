@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { MyPagePrompt } from "../components/Prompts";
 import { getPromptList, getSecureUser } from "../api/api";
 import { getCookie } from "../utils/cookie";
+import Avatar from "react-avatar";
 
 const MyPage = () => {
   const [profile, setProfile] = useState({
@@ -56,7 +57,18 @@ const MyPage = () => {
       <div className="flex flex-col w-full mt-8">
         <div className="h-48 flex flex-row bg-white rounded-3xl mb-5 mx-20 p-8 text-black align-middle justify-between">
           <div className="flex flex-row">
-            <HiUserCircle size="150" />
+            <Avatar
+              color={Avatar.getRandomColor("sitebase", [
+                "#BACDFF",
+                "#EFB4ED",
+                "#E1BAFF",
+                "#FFBEBA",
+                "#FED4AD",
+                "#9EDF8E",
+              ])}
+              name={userName}
+              className="rounded-full mb-7 mt-3 font-bold text-2xl"
+            />
             <div className="flex flex-col justify-between mx-10">
               <div className="text-3xl font-semibold">
                 {userName}님 반갑습니다!
@@ -87,7 +99,6 @@ const MyPage = () => {
             </div>
             <br></br>
             <div className="w-full h-80 flex flex-wrap overflow-y-auto section-b">
-              
               {promptList
                 .filter((prompt) => prompt.author.id === profile.id)
                 .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
