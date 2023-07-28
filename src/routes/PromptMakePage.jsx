@@ -389,7 +389,11 @@ const PromptMakePage = () => {
               미리보기
             </button>
             {modalOpen && (
-              <PromptMakeModal setModalOpen={setModalOpen} prompt={prompt} />
+              <PromptMakeModal
+                modalOpen={modalOpen}
+                setModalOpen={setModalOpen}
+                prompt={prompt}
+              />
             )}
 
             <button

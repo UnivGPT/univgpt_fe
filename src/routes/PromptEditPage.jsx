@@ -405,6 +405,7 @@ const PromptEditPage = () => {
         </div>
         <div className="rounded-3xl bg-gray-200 mx-6 h-2/5 w-full flex flex-col">
           <Mentions content={content} setContent={setContent} form={form} />
+
         </div>
         <div className="min-w-[800px]">
           {/*카테고리*/}
