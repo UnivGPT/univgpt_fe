@@ -117,7 +117,11 @@ const PromptDetailPage = () => {
   return (
     <div className="w-screen h-screen flex flex-row">
       <div className="w-60">
-        {prompt.id ? <PromptSideBar prompt={prompt} /> : <div></div>}
+        {prompt.id ? (
+          <PromptSideBar resultPage={resultPage} prompt={prompt} />
+        ) : (
+          <div></div>
+        )}
       </div>
       {/*PromptResult 모달*/}
       {resultPage ? (

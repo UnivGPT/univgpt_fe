@@ -71,7 +71,7 @@ export const HomeSideBar = ({ user, prompt }) => {
   );
 };
 
-export const PromptSideBar = ({ prompt }) => {
+export const PromptSideBar = ({ prompt, resultPage }) => {
   const [likeCount, setLikeCount] = useState(0);
   const [isLike, setIsLike] = useState(false);
   const [user, setUser] = useState();
@@ -162,7 +162,7 @@ export const PromptSideBar = ({ prompt }) => {
         </div>
       </div>
       <div className="h-full">
-        <Comment promptId={prompt.id} />
+        <Comment promptId={prompt.id} resultPage={resultPage} />
       </div>
     </div>
   );
