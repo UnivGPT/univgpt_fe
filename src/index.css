@@ -39,6 +39,10 @@
   @apply bg-gpt-green text-white font-semibold font-notosanskr rounded-xl text-lg py-3.5 px-3;
 }
 
+.button-a-4 {
+  @apply bg-gpt-green text-white font-semibold font-notosanskr hover:text-black rounded-xl text-lg py-3.5 px-3;
+}
+
 /* 홀쭉이 기본 버튼 */
 .button-b {
   @apply bg-gpt-green text-white font-semibold font-notosanskr hover:text-black rounded-xl text-lg py-3.5 px-2;
