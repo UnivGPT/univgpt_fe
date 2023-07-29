@@ -3,7 +3,7 @@ import { getCookie } from "../utils/cookie";
 import { refreshToken } from "./api";
 
 // baseURL, credential, 헤더 세팅
-axios.defaults.baseURL = "http://localhost:8000/api";
+axios.defaults.baseURL = "https://port-0-univgpt-be-rt92alkmbg4m8.sel4.cloudtype.app/api";
 axios.defaults.withCredentials = true;
 axios.defaults.headers.post["Content-Type"] = "application/json";
 axios.defaults.headers.common["X-CSRFToken"] = getCookie("csrftoken");
