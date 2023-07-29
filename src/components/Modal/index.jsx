@@ -98,7 +98,7 @@ export const PromptMakeModal = ({ modalOpen, setModalOpen, prompt, user }) => {
               <div className="flex justify-center items-center mt-2 w-full h-1/3">
                 <div className="flex justify-start w-full h-full">
                   <div className="flex bubble-a section-a items-center overflow-y-auto overflow-x-hidden w-3/4 h-1/3">
-                    <div className="inline-block align-middle whitespace-pre-line !my-auto p-4 pl-8">
+                    <div className="inline-block align-middle whitespace-pre-line !my-auto p-4 pl-12 font-notosanskr">
                       {message}
                     </div>
                   </div>
@@ -125,7 +125,7 @@ export const PromptMakeModal = ({ modalOpen, setModalOpen, prompt, user }) => {
                   </div>
                   <div className="bubble-b-after mt-28"></div>
                   <div className="flex bubble-b section-a items-center overflow-y-auto overflow-x-hidden w-full">
-                    <div className="font-medium p-6 pl-8 inline-block align-middle whitespace-pre-line !my-auto">
+                    <div className="font-medium p-6 pl-12 inline-block font-notosanskr align-middle whitespace-pre-line !my-auto">
                       {answer}
                     </div>
                   </div>
@@ -178,7 +178,7 @@ export const PromptMakeModal = ({ modalOpen, setModalOpen, prompt, user }) => {
                     // 객관식
                     return (
                       <div key={index}>
-                        <div className="button-f">{item.name}</div>
+                        <div className="button-f mb-1">{item.name}</div>
                         <Select
                           key={index}
                           options={options}

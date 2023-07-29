@@ -200,11 +200,11 @@ const HomePage = () => {
         <HomeSideBar key={profile.id} user={profile} prompt={smallPromptList} />
       </div>
 
-      <div className="w-full bg-white text-black py-16 px-2 rounded-lg min-h-[700px] ">
-        <div className="flex flex-row justify-evenly space-x-8 pt-5 pb-7">
+      <div className="w-full bg-white text-black pt-8 pb-4 px-2 mx-2 rounded-lg min-h-[700px] ">
+        <div className="flex flex-row justify-center space-x-16 pt-14 pb-6">
           <Select
             options={categoryList}
-            className="w-5/12"
+            className="w-4/12 border-2 border-slate-300 rounded-md"
             onChange={handleCategoryChange}
             defaultValue={defaultValue}
           />
@@ -212,7 +212,7 @@ const HomePage = () => {
             type="text"
             placeholder="검색어를 입력해주세요"
             onChange={handleChange}
-            className="w-4/12 h-11 rounded-full border bg-slate-200 pl-5 mr-4"
+            className="w-5/12 h-10 rounded-full border bg-slate-200 pl-7 mr-6"
             value={searchValue}
           />
 
@@ -223,8 +223,8 @@ const HomePage = () => {
           </div> */}
         </div>
         <div className="flex flex-col items-center w-full h-3/4">
-          <div className="rounded-3xl border-solid border-gpt-blue border-2 m-5 px-5 pb-12 min-h-[500px] self-center">
-            <div className="flex flex-row min-w-full justify-between mt-5 p-5">
+          <div className="w-5/6 rounded-3xl border-solid border-gpt-blue border-2 m-5 px-5 pb-12 min-h-[500px] self-center">
+            <div className="flex flex-row w-8/10 justify-between mt-5 p-5">
               <div className="rounded-xl p-3.5 text-center font-bold text-xl text-white bg-gpt-blue px-14">
                 프롬프트 목록
               </div>

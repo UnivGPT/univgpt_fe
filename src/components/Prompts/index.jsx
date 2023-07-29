@@ -16,7 +16,9 @@ export const SmallPrompt = ({ rank, prompt }) => {
   console.log(prompt);
   return (
     <div className="flex flex-row w-full rounded-xl bg-white border-gray-300 shadow py-3 px-2 m-1">
-      <div className="m-1 pt-2 pr-1 font-extrabold text-gpt-indigo">{rank}</div>
+      <div className="m-1 ml-2 pt-2 pr-1 font-extrabold text-gpt-indigo">
+        {rank}
+      </div>
       <div className="w-full h-full flex flex-col pr-2">
         <div className="font-bold font-notosanskr  text-gpt-blue px-2">
           {prompt.title}
@@ -72,9 +74,13 @@ export const MidPrompt = ({ prompt }) => {
   };
 
   return (
-    <div className="flex flex-col w-80 h-64 space-y-8 p-5 shadow m-3 mx-6 rounded-3xl border-gpt-blue border-2 bg-white">
-      <div className="font-bold text-lg h-1/6">{prompt.title}</div>
-      <div className="font-medium h-1/3 mb-2">{prompt.description}</div>
+    <div className="flex flex-col w-80 h-64 space-y-8 p-6 shadow-lg m-3 mx-6 rounded-3xl border-gpt-blue border-2 bg-slate-100">
+      <div className="font-bold text-xl h-1/6 font-notosanskr">
+        {prompt.title}
+      </div>
+      <div className="font-medium h-1/3 mb-2 font-notosanskr">
+        {prompt.description}
+      </div>
       <div className="flex flex-row justify-between">
         <div className="flex flex-row space-x-2">
           <div className="flex flex-row font-bold">
