@@ -85,7 +85,7 @@
 
 /*프롬프트 생성기 내의 태그*/
 .button-f {
-  @apply rounded-l py-2 px-6 mt-6 text-center font-semibold font-notosanskr text-lg text-white bg-gpt-green w-32 mx-1;
+  @apply rounded-l py-2 px-14 mt-6 text-center font-semibold font-notosanskr text-lg text-white bg-gpt-green w-32 mx-1;
 }
 
 .button-plus-blue {
