@@ -148,8 +148,21 @@ const MyPage = () => {
               {promptList
                 .filter((prompt) => prompt.like_users.includes(profile.id))
                 .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
-                .map((prompt) => (
-                  <MyPagePrompt key={prompt.id} prompt={prompt} />
+                .reduce((pairs, prompt, index) => {
+                  // Group prompts into pairs (two prompts in each sub-array)
+                  if (index % 2 === 0) {
+                    pairs.push([prompt]);
+                  } else {
+                    pairs[pairs.length - 1].push(prompt);
+                  }
+                  return pairs;
+                }, [])
+                .map((pair, pairIndex) => (
+                  <div key={pairIndex} className="flex">
+                    {pair.map((prompt) => (
+                      <MyPagePrompt key={prompt.id} prompt={prompt} />
+                    ))}
+                  </div>
                 ))}
             </div>
           </div>
