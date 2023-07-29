@@ -165,7 +165,7 @@ const PromptDetailPage = () => {
             <div className="flex justify-center items-center mt-2 w-full h-1/3">
               <div className="flex justify-start w-full h-full">
                 <div className="flex bubble-a section-a items-center overflow-y-auto overflow-x-hidden w-3/4 h-1/3">
-                  <div className="inline-block align-middle whitespace-pre-line font-notosanskr !my-auto p-4 pl-6">
+                  <div className="inline-block align-middle whitespace-pre-line font-notosanskr !my-auto p-4 px-4">
                     {message}
                   </div>
                 </div>
@@ -191,7 +191,7 @@ const PromptDetailPage = () => {
                 </div>
                 <div className="bubble-b-after mt-28"></div>
                 <div className="flex bubble-b section-a items-center overflow-y-auto overflow-x-hidden w-full h-2/3">
-                  <div className="font-medium p-6 pl-9 font-notosanskr inline-block align-middle whitespace-pre-line !my-auto">
+                  <div className="font-medium p-6 pl-7 font-notosanskr inline-block align-middle whitespace-pre-line !my-auto">
                     {answer}
                   </div>
                 </div>
