@@ -28,7 +28,7 @@ export const HomeSideBar = ({ user, prompt }) => {
 
   return (
     <div className="flex flex-col h-screen justify-items-center">
-      <div className="flex flex-col space-y-4 align-middle items-center m-4">
+      <div className="flex flex-col space-y-4 mt-6 align-middle items-center m-4">
         <Link
           to="/promptmake"
           className="button-b w-11/12 flex flex-col items-center"

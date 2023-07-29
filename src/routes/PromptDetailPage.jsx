@@ -168,14 +168,14 @@ const PromptDetailPage = () => {
       </div>
       {/*PromptResult 모달*/}
       {resultPage ? (
-        <div className="flex-grow flex flex-col justify-center items-center h-4/5 w-2/3 bg-gray-200 text-black mx-20 mt-6 rounded-3xl">
+        <div className="flex-grow flex flex-col justify-center items-center h-4/5 w-2/3 bg-gray-200 text-black mx-20 mt-8 rounded-3xl">
           {/*질문답변*/}
-          <div className="rounded-3xl bg-gray-200 px-8 pb-5 mr-8 mx-6 h-4/5 w-5/6 ">
+          <div className="rounded-3xl bg-gray-200 px-8 pb-3 mr-8 mx-6 h-4/5 w-5/6 ">
             {/*프롬프트 통한 질문*/}
             <div className="flex justify-center items-center mt-2 w-full h-1/3">
               <div className="flex justify-start w-full h-full">
                 <div className="flex bubble-a section-a items-center overflow-y-auto overflow-x-hidden w-3/4 h-1/3">
-                  <div className="inline-block align-middle whitespace-pre-line !my-auto p-4 pl-8">
+                  <div className="inline-block align-middle whitespace-pre-line font-notosanskr !my-auto p-4 pl-12">
                     {message}
                   </div>
                 </div>
@@ -190,8 +190,8 @@ const PromptDetailPage = () => {
             </div>
 
             {/*GPT 답변*/}
-            <div className="flex justify-center items-center mt-6 w-full h-1/2">
-              <div className="flex justify-start mt-2 w-full h-full">
+            <div className="flex justify-center items-center mt-5 w-full h-1/2">
+              <div className="flex justify-start w-full h-full">
                 <div className="flex flex-col justify-center items-center w-1/4 h-auto">
                   <img
                     id="gpt-logo"
@@ -202,7 +202,7 @@ const PromptDetailPage = () => {
                 </div>
                 <div className="bubble-b-after mt-28"></div>
                 <div className="flex bubble-b section-a items-center overflow-y-auto overflow-x-hidden w-full h-2/3 ">
-                  <div className="font-medium p-6 pl-8 inline-block align-middle whitespace-pre-line !my-auto">
+                  <div className="font-medium p-6 pl-12 font-notosanskr inline-block align-middle whitespace-pre-line !my-auto">
                     {answer}
                   </div>
                 </div>
@@ -217,7 +217,7 @@ const PromptDetailPage = () => {
               setResultPage(false);
               // console.log(resultPage);
             }}
-            className=" bg-gpt-green text-white font-bold hover:text-black rounded-3xl text-lg py-3.5 px-20 
+            className=" bg-gpt-green text-white font-bold hover:text-black rounded-3xl text-lg py-3.5 px-20 !mb-2
              shadow-xl"
           >
             나가기
@@ -252,7 +252,7 @@ const PromptDetailPage = () => {
                   // 객관식
                   return (
                     <div key={index}>
-                      <div className="button-f">{item.name}</div>
+                      <div className="button-f mb-1">{item.name}</div>
                       <Select
                         key={index}
                         options={options}

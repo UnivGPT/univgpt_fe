@@ -67,7 +67,7 @@ const MyPage = () => {
   return (
     <div className="h-screen w-screen">
       <div className="flex flex-col w-full mt-8">
-        <div className="h-48 flex flex-row bg-white rounded-3xl mb-5 mx-20 py-8 px-14 text-black align-middle justify-between">
+        <div className="h-48 flex flex-row bg-white rounded-3xl mb-5 mx-20 py-8 px-16 text-black align-middle justify-between">
           <div className="flex flex-row">
             <Avatar
               color={colors[userName.length % colors.length]}
@@ -75,7 +75,7 @@ const MyPage = () => {
               className="rounded-full mb-7 font-bold text-2xl"
               size={130}
             />
-            <div className="flex flex-col justify-between mx-12">
+            <div className="flex flex-col justify-between pl-6 mx-12">
               <div className="text-3xl font-semibold mt-1">
                 {userName} 님 반갑습니다!
               </div>

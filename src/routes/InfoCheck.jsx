@@ -43,8 +43,11 @@ const InfoCheck = () => {
                 onChange={handlePasswordChange}
               />
               <div className="flex flex-col items-center w=1/2">
-                <button type="submit" className="items-center button-b mt-7">
-                  회원정보 수정
+                <button
+                  type="submit"
+                  className="items-center button-b !px-8 !py-3 mt-7"
+                >
+                  확인
                 </button>
               </div>
             </form>

@@ -190,7 +190,7 @@ const PromptMakePage = () => {
       {helpOpen && !nextHelp && (
         <>
           <button
-            className="closeButton !right-12 !mt-32 z-20"
+            className="closeButton !right-[63px] !mt-[146px] z-20"
             onClick={closeHelpModal}
           >
             <MdOutlineCancel size={50} />
@@ -203,7 +203,7 @@ const PromptMakePage = () => {
           </button>
           <img
             src={firstHelpModal}
-            className="modalContaine absolute left-0 top-110 z-10 w-[1600px]"
+            className="absolute left-0 top-110 z-10 w-[1800px]"
           />
         </>
       )}
@@ -211,7 +211,7 @@ const PromptMakePage = () => {
       {helpOpen && nextHelp && (
         <>
           <button
-            className="closeButton !right-12 !mt-32 z-20"
+            className="closeButton !right-[63px] !mt-[150px] z-20"
             onClick={closeHelpModal}
           >
             <MdOutlineCancel size={50} />
@@ -224,7 +224,7 @@ const PromptMakePage = () => {
           </button>
           <img
             src={secondHelpModal}
-            className="modalContaine absolute left-0 top-110 z-10 w-[1600px]"
+            className="absolute left-0 top-[110px] z-10 w-[1800px]"
           />
         </>
       )}
