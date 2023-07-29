@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { HiUserCircle } from "react-icons/hi";
-import { getUserProfile, editUserProfile } from "../api/api";
+import { getUserProfile, editUserProfile, logOut } from "../api/api";
 import { getCookie, removeCookie } from "../utils/cookie";
 import { BsCheckAll } from "react-icons/bs";
 import Avatar from "react-avatar";
@@ -44,6 +44,8 @@ const InfoEditPage = () => {
     e.preventDefault();
     editUserProfile(formData);
     alert("정보 수정이 완료되었습니다.");
+    const token = getCookie("refresh_token");
+    logOut(token);
   };
 
   console.log(formData.confirm_password);
