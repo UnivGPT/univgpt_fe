@@ -54,15 +54,7 @@ const HomePage = () => {
       setPromptList(prompts);
       setSortPromptList(prompts);
       setSmallPromptList(
-        prompts.sort((a, b) => {
-          if (a.view > b.view) {
-            return -1;
-          } else if (a.view < b.view) {
-            return 1;
-          } else {
-            return 0;
-          }
-        })
+        prompts.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
       );
     };
     getPromptListAPI();
