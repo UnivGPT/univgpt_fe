@@ -165,7 +165,7 @@ const PromptDetailPage = () => {
             <div className="flex justify-center items-center mt-2 w-full h-1/3">
               <div className="flex justify-start w-full h-full">
                 <div className="flex bubble-a section-a items-center overflow-y-auto overflow-x-hidden w-3/4 h-1/3">
-                  <div className="inline-block align-middle whitespace-pre-line font-notosanskr !my-auto p-4 px-4">
+                  <div className="inline-block align-middle whitespace-pre-line font-notosanskr !my-auto p-4 px-6">
                     {message}
                   </div>
                 </div>
