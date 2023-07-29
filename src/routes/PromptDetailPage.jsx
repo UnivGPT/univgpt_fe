@@ -276,7 +276,7 @@ const PromptDetailPage = () => {
                       <textarea
                         required
                         placeholder={item.placeholding}
-                        className="input-c"
+                        className="input-c !placeholder:self-center"
                         onChange={(e) => {
                           const newArray = [...inputArray];
                           newArray[index] = e.target.value;
