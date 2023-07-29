@@ -318,14 +318,14 @@ const PromptEditPage = () => {
                       newForm.splice(idx, 1, editedForm);
                       setForm(newForm);
                       if (e.target.value === "객관식") {
-                        setActivatedChoices([...activatedChoices, el.id]);
+                        setActivatedChoices([...activatedChoices, idx]);
                       } else {
-                        if (activatedChoices.includes(el.id)) {
+                        if (activatedChoices.includes(idx)) {
                           const idDeletedActivatedChoices = [
                             ...activatedChoices,
                           ];
                           idDeletedActivatedChoices.splice(
-                            activatedChoices.indexOf(el.id),
+                            activatedChoices.indexOf(idx),
                             1
                           );
                           setActivatedChoices(idDeletedActivatedChoices);
@@ -358,7 +358,7 @@ const PromptEditPage = () => {
                     className="input-b-1 mb-2 justify-self-center"
                     placeholder="이용자가 입력값 내용을 어떻게 작성하면 좋을지 설명해주세요."
                     style={{
-                      display: activatedChoices.includes(el.id)
+                      display: activatedChoices.includes(idx)
                         ? "none"
                         : "block",
                     }}
@@ -378,9 +378,7 @@ const PromptEditPage = () => {
                   <div
                     className="flex flex-row justify-around mb-2"
                     style={{
-                      display: activatedChoices.includes(el.id)
-                        ? "flex"
-                        : "none",
+                      display: activatedChoices.includes(idx) ? "flex" : "none",
                     }}
                   >
                     <input
