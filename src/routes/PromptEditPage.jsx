@@ -310,6 +310,7 @@ const PromptEditPage = () => {
                     className="text-black w-28 h-13 mx-2 mb-2 rounded-xl font-medium text-center shadow"
                     key={"type" + idx}
                     id={"type" + idx}
+                    value={el.type}
                     onChange={(e) => {
                       const editedForm = [...form][idx];
                       editedForm["type"] = e.target.value;
@@ -361,6 +362,7 @@ const PromptEditPage = () => {
                         ? "none"
                         : "block",
                     }}
+                    value={el.placeholding}
                     onChange={(e) => {
                       const editedForm = [...form][idx];
                       editedForm["placeholding"] = e.target.value;
