@@ -62,11 +62,11 @@ export const HomeSideBar = ({ user, prompt }) => {
           </div>
           {prompt.length !== 0 && (
             <>
-              <SmallPrompt rank="1" prompt={prompt[0]} />
+              {/* <SmallPrompt rank="1" prompt={prompt[0]} />
               <SmallPrompt rank="2" prompt={prompt[1]} />
               <SmallPrompt rank="3" prompt={prompt[2]} />
               <SmallPrompt rank="4" prompt={prompt[3]} />
-              <SmallPrompt rank="5" prompt={prompt[4]} />
+              <SmallPrompt rank="5" prompt={prompt[4]} /> */}
             </>
           )}
         </div>
