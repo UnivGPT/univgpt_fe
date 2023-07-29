@@ -270,7 +270,7 @@ export const getSecureUser = async () => {
       return response.data;
     }
   } catch (error) {
-    if (error.response.status === 401) {
+    if (error.response.status === 406) {
       return;
     }
   }
