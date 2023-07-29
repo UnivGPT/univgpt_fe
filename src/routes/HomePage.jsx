@@ -204,7 +204,7 @@ const HomePage = () => {
             type="text"
             placeholder="검색어를 입력해주세요"
             onChange={handleChange}
-            className="w-5/12 h-10 rounded-full border bg-slate-200 pl-7 mr-6"
+            className="w-5/12 h-10 rounded-full hover:border-white bg-slate-200  pl-7 mr-6"
             value={searchValue}
           />
 
