@@ -117,7 +117,7 @@ const MyPage = () => {
             </div>
             <br></br>
 
-            <div className="w-full h-96 flex flex-col  overflow-y-auto section-b">
+            <div className="w-full h-96 flex flex-col overflow-x-hidden overflow-y-auto section-b">
               {promptList
                 .filter((prompt) => prompt.author.id === profile.id)
                 .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
@@ -144,12 +144,25 @@ const MyPage = () => {
               스크랩한 프롬프트
             </div>
             <br></br>
-            <div className="w-full h-96 flex flex-wrap overflow-y-auto section-b">
+            <div className="w-full h-96 flex flex-col overflow-y-auto overflow-x-hidden section-b">
               {promptList
                 .filter((prompt) => prompt.like_users.includes(profile.id))
                 .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
-                .map((prompt) => (
-                  <MyPagePrompt key={prompt.id} prompt={prompt} />
+                .reduce((pairs, prompt, index) => {
+                  // Group prompts into pairs (two prompts in each sub-array)
+                  if (index % 2 === 0) {
+                    pairs.push([prompt]);
+                  } else {
+                    pairs[pairs.length - 1].push(prompt);
+                  }
+                  return pairs;
+                }, [])
+                .map((pair, pairIndex) => (
+                  <div key={pairIndex} className="flex">
+                    {pair.map((prompt) => (
+                      <MyPagePrompt key={prompt.id} prompt={prompt} />
+                    ))}
+                  </div>
                 ))}
             </div>
           </div>

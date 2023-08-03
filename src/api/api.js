@@ -262,13 +262,18 @@ export const getUser = async () => {
 };
 
 export const getSecureUser = async () => {
-  const response = await instanceWithToken.get("/account/secureinfo/");
-  if (response.status === 200) {
-    console.log("GET SECUREUSER SUCCESS");
-  } else {
-    console.log("[ERROR] error while getting secureuser");
+  let response;
+  try {
+    response = await instanceWithToken.get("/account/secureinfo/");
+    if (response.status === 200) {
+      console.log("GET SECUREUSER SUCCESS");
+      return response.data;
+    }
+  } catch (error) {
+    if (error.response.status === 406) {
+      return;
+    }
   }
-  return response.data;
 };
 
 export const gptCallBack = async (data) => {

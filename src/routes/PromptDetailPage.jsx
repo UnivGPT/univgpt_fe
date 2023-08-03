@@ -8,9 +8,6 @@ import {
   gptCallBack,
 } from "../api/api";
 import { PromptSideBar } from "../components/SideBar";
-// import comments from "../data/comments";
-// import prompts from "../data/prompts";
-// import users from "../data/users";
 import Select from "react-select";
 import { useParams } from "react-router-dom";
 import { HiUserCircle } from "react-icons/hi";
@@ -34,7 +31,6 @@ const PromptDetailPage = () => {
     id: "",
   });
   const [userName, setUserName] = useState("");
-  //const navigate = useNavigate();
 
   useEffect(() => {
     if (getCookie("access_token")) {
@@ -65,11 +61,6 @@ const PromptDetailPage = () => {
     });
     setMessage(result.join(" "));
   }, [inputArray]);
-
-  // useEffect(() => {
-  //   console.log("INPUT ARRAY", inputArray);
-  //   console.log("RESULT ARRAY", resultArray);
-  // }, [inputArray]);
 
   function createArrayOfEmptyStrings(count) {
     if (count <= 0) {
@@ -116,9 +107,8 @@ const PromptDetailPage = () => {
         })
       );
       console.log(results.flat());
-      // const OptionResult = results.flat();
+
       setOption(results.flat());
-      // setOption(results);
     };
 
     getPromptDetailAPI();
@@ -166,22 +156,21 @@ const PromptDetailPage = () => {
           <div></div>
         )}
       </div>
-      {/*PromptResult 모달*/}
+      {/* PromptResult 모달 */}
       {resultPage ? (
         <div className="flex-grow flex flex-col justify-center items-center h-4/5 w-2/3 bg-gray-200 text-black mx-20 mt-8 rounded-3xl">
-          {/*질문답변*/}
-          <div className="rounded-3xl bg-gray-200 px-8 pb-3 mr-8 mx-6 h-4/5 w-5/6 ">
-            {/*프롬프트 통한 질문*/}
+          {/* 질문답변 */}
+          <div className="rounded-3xl bg-gray-200 px-8 pb-3 mr-8 mx-6 h-4/5 w-5/6">
+            {/* 프롬프트 통한 질문 */}
             <div className="flex justify-center items-center mt-2 w-full h-1/3">
               <div className="flex justify-start w-full h-full">
                 <div className="flex bubble-a section-a items-center overflow-y-auto overflow-x-hidden w-3/4 h-1/3">
-                  <div className="inline-block align-middle whitespace-pre-line font-notosanskr !my-auto p-4 pl-12">
+                  <div className="inline-block align-middle whitespace-pre-line font-notosanskr !my-auto p-4 px-6">
                     {message}
                   </div>
                 </div>
                 <div className="bubble-a-after mt-14"></div>
               </div>
-              {/* <HiUserCircle className="profile flex flex-col !h-60 !w-60" /> */}
               <Avatar
                 color={colors[userName.length % colors.length]}
                 name={userName}
@@ -189,7 +178,7 @@ const PromptDetailPage = () => {
               />
             </div>
 
-            {/*GPT 답변*/}
+            {/* GPT 답변 */}
             <div className="flex justify-center items-center mt-5 w-full h-1/2">
               <div className="flex justify-start w-full h-full">
                 <div className="flex flex-col justify-center items-center w-1/4 h-auto">
@@ -201,8 +190,8 @@ const PromptDetailPage = () => {
                   />
                 </div>
                 <div className="bubble-b-after mt-28"></div>
-                <div className="flex bubble-b section-a items-center overflow-y-auto overflow-x-hidden w-full h-2/3 ">
-                  <div className="font-medium p-6 pl-12 font-notosanskr inline-block align-middle whitespace-pre-line !my-auto">
+                <div className="flex bubble-b section-a items-center overflow-y-auto overflow-x-hidden w-full h-2/3">
+                  <div className="font-medium p-6 pl-7 font-notosanskr inline-block align-middle whitespace-pre-line !my-auto">
                     {answer}
                   </div>
                 </div>
@@ -210,21 +199,20 @@ const PromptDetailPage = () => {
             </div>
           </div>
 
-          {/*버튼*/}
+          {/* 버튼 */}
           <button
             type="button"
             onClick={() => {
               setResultPage(false);
               // console.log(resultPage);
             }}
-            className=" bg-gpt-green text-white font-bold hover:text-black rounded-3xl text-lg py-3.5 px-20 !mb-2
-             shadow-xl"
+            className="bg-gpt-green text-white font-bold hover:text-black rounded-3xl text-lg py-3.5 px-20 !mb-2 shadow-xl"
           >
             나가기
           </button>
         </div>
       ) : (
-        /*프롬프트 작성 폼*/
+        /* 프롬프트 작성 폼 */
         <form
           onSubmit={handlegptCall}
           className="flex-grow flex flex-col items-center justify-center h-4/5 w-2/3 bg-white text-black p-11 mx-20 mt-8 rounded-3xl"
@@ -264,8 +252,7 @@ const PromptDetailPage = () => {
                       />
                     </div>
                   );
-                  // 주관식
-                } else {
+                } else if (item.type === 1) {
                   return (
                     <div key={index}>
                       <div className="button-f">{item.name}</div>
@@ -282,16 +269,32 @@ const PromptDetailPage = () => {
                       />
                     </div>
                   );
+                } else {
+                  return (
+                    <div key={index}>
+                      <div className="button-f">{item.name}</div>
+                      <textarea
+                        required
+                        placeholder={item.placeholding}
+                        className="input-c !placeholder:self-center"
+                        onChange={(e) => {
+                          const newArray = [...inputArray];
+                          newArray[index] = e.target.value;
+                          setInputArray(newArray);
+                        }}
+                      />
+                    </div>
+                  );
                 }
               })}
             </div>
           </div>
           <br></br>
           <br></br>
-          {/*버튼*/}
+          {/* 버튼 */}
           <button
             type="submit"
-            className=" bg-gpt-green text-white font-bold hover:text-black rounded-3xl text-lg py-3.5 px-20 shadow-xl"
+            className="bg-gpt-green text-white font-bold hover:text-black rounded-3xl text-lg py-3.5 px-20 shadow-xl"
           >
             보내기
           </button>

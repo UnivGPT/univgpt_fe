@@ -54,15 +54,7 @@ const HomePage = () => {
       setPromptList(prompts);
       setSortPromptList(prompts);
       setSmallPromptList(
-        prompts.sort((a, b) => {
-          if (a.view > b.view) {
-            return -1;
-          } else if (a.view < b.view) {
-            return 1;
-          } else {
-            return 0;
-          }
-        })
+        prompts.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
       );
     };
     getPromptListAPI();
@@ -212,7 +204,7 @@ const HomePage = () => {
             type="text"
             placeholder="검색어를 입력해주세요"
             onChange={handleChange}
-            className="w-5/12 h-10 rounded-full border bg-slate-200 pl-7 mr-6"
+            className="w-5/12 h-10 rounded-full hover:border-white bg-slate-200  pl-7 mr-6"
             value={searchValue}
           />
 
